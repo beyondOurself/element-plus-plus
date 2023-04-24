@@ -1,0 +1,215 @@
+<!--
+ * @Author: canlong.shen
+ * @Date: 2023-04-21 08:43:33
+ * @LastEditors: canlong.shen
+ * @LastEditTime: 2023-04-21 18:04:30
+ * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
+ * @Description: 虚拟化树型结构 公共组件
+ * 
+-->
+<script>
+export default {
+  name: 'BsgoalBaseTree'
+}
+</script>
+<script setup>
+/* setup模板
+---------------------------------------------------------------- */
+import { ref, watch } from 'vue'
+import directiveBase from '../../directives/directiveBase.js'
+import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
+import BsgoalBaseTreeFold from '../bsgoal-base-tree-fold/index.vue'
+// props
+const props = defineProps({
+  /**
+   * 树结构 的下边距
+   */
+  gasket: {
+    type: [String, Number],
+    default: 10
+  },
+  /**
+   * 数据
+   */
+  data: {
+    type: [Object, Array],
+    default: () => []
+  },
+  /**
+   * 配置
+   */
+  treeProps: {
+    type: [Object],
+    default: () => ({
+      label: 'label',
+      children: 'children',
+      disabled: 'disabled',
+      isLeaf: 'isLeaf',
+      class: 'class'
+    })
+  },
+  /**
+   * 懒加载数据方法
+   * () => {
+   *   return Promise(resolve =>  resolve([]))
+   * }
+   */
+  lazyLoad: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 初始化树节点
+   * () => {
+   *   return Promise(resolve =>  resolve([]))
+   * }
+   */
+  initNode: {
+    type: [Function],
+    default: () => {}
+  }
+})
+
+const emits = defineEmits(['on-click'])
+
+// 计算高度的指令
+const vHeight = directiveBase.height
+
+const filterText = ref('')
+const EL_TREE_REF = ref(null)
+
+watch(filterText, (val) => {
+  EL_TREE_REF.value.filter(val)
+})
+
+/**
+ * @Author: canlong.shen
+ * @description: 过滤节点
+ * @param {*} value
+ * @param {*} data
+ * @default:
+ * @return {*}
+ */
+const filterNode = (value, data) => {
+  if (!value) return true
+  return data.label.includes(value)
+}
+// 折叠的状态
+const foldStatus = ref(true)
+/**
+ * @Author: canlong.shen
+ * @description: 当节点被点击的时候触发
+ * @param {*} value 节点点击的节点对象
+ * @param {*} node TreeNode 的 node 属性
+ * @param {*} TreeNode TreeNode
+ * @param {*} event 事件对象
+ * @default:
+ * @return {*}
+ */
+const clickNodeTree = (value, node, treeNode, event) => {
+  emits('on-click', value, node, treeNode, event)
+}
+/**
+ * @Author: canlong.shen
+ * @description:  懒加载数据
+ * @param {*} node
+ * @param {*} resolve
+ * @default:
+ * @return {*}
+ */
+const loadNode = async (node, resolve ,props) => {
+  // console.log('props',props);
+  if (node.level === 0) {
+    const initNodeData = await props.initNode(node)
+    // console.log('initNodeData',initNodeData);
+    return resolve(initNodeData || [])
+  } else {
+    const lazyNodeData = await props.lazyLoad(node)
+    // console.log('lazyNodeData',lazyNodeData);
+    resolve(lazyNodeData || [])
+  }
+}
+</script>
+<template>
+  <div class="bsgoal-base-tree">
+    <div class="base_tree" v-height="gasket">
+      <div v-show="foldStatus" class="base_tree_main">
+        <!-- S 查询 -->
+        <el-input v-model="filterText" class="base_tree_main_input" placeholder="输入关键字过滤" />
+        <!-- E 查询 -->
+        <!-- S 树结构 -->
+        <el-tree
+          ref="EL_TREE_REF"
+          lazy
+          highlight-current
+          empty-text="暂无数据"
+          :load="(node, resolve) => loadNode(node, resolve,props)"
+          :expand-on-click-node="false"
+          :props="treeProps"
+          :filter-node-method="filterNode"
+          @node-click="clickNodeTree"
+        />
+        <!-- E 树结构 -->
+      </div>
+      <!-- S 横线 -->
+      <BsgoalBaseLine vertical v-show="foldStatus" />
+      <!-- E 横线 -->
+      <!-- S 折叠按钮 -->
+      <BsgoalBaseTreeFold v-model="foldStatus" />
+      <!-- E 折叠按钮 -->
+    </div>
+  </div>
+</template>
+<style lang="scss" scoped>
+/* 自定义样式
+---------------------------------------------------------------- */
+.bsgoal-base-tree {
+  display: inline-block;
+}
+.base_tree {
+  display: flex;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 14px;
+}
+.base_tree_main {
+  width: 221px;
+  padding: 16px;
+
+  // 隐藏掉滚动条
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+  overflow-y: auto;
+  /*滚动条样式*/
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+    width: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    // border-radius: 0;
+    // background: rgba(0, 0, 0, 0.1);
+    // opacity: 0.1;
+    background-color: #fff;
+  }
+}
+.base_tree_main_input {
+  margin-bottom: 10px;
+}
+</style>
+<style lang="scss">
+/* 覆盖样式
+---------------------------------------------------------------- */
+.base_tree .el-tree-node__content > i.el-tree-node__expand-icon {
+  padding-left: 0px;
+}
+</style>
