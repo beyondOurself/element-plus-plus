@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-20 14:39:10
+ * @LastEditTime: 2023-04-25 16:37:27
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -21,6 +21,7 @@ import EnumType from '../../enums/enumType.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
+import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 
 // props
 const props = defineProps({
@@ -53,6 +54,13 @@ const props = defineProps({
   medium: {
     type: [Number, String],
     default: 6
+  },
+  /**
+   * 绑定的值
+   */
+  modelValue: {
+    type: [Object],
+    default: () => ({})
   }
 })
 
@@ -124,6 +132,7 @@ const placeholderSet = (type = '', label = '', placeholder = '') => {
       case EnumType.YEAR:
       case EnumType.DATE_TIME:
       case EnumType.TIME:
+      case EnumType.CASCADER:
         return `请选择${label}`
       case EnumType.DATE_RANGE:
       case EnumType.DATE_TIME_RANGE:
@@ -196,6 +205,7 @@ const triggerOperationSearch = () => {
     }
   }
   emits('on-search', modelValue)
+  emits('update:modelValue', modelValue)
 }
 // 默认查询一次
 nextTick(() => {
@@ -267,7 +277,7 @@ const triggerValueChange = (type, prop) => {
                 min = 1,
                 max = 10,
                 range = [],
-                format = ''
+                format = '',
               } = {},
               index
             ) of configOptionsGet"
@@ -430,6 +440,16 @@ const triggerValueChange = (type, prop) => {
                     </el-checkbox-group>
                   </template>
                   <!-- / 复选框 -->
+                  <!-- / 级联选择器 -->
+                  <template v-if="[EnumType.CASCADER].includes(type)">
+                    <BsgoalBaseCascader
+                      v-model="model[prop]"
+                      :data-options="range"
+                      :placeholder="placeholderSet(type, label, placeholder)"
+                      @on-change="triggerValueChange(type, prop)"
+                    />
+                  </template>
+                  <!-- / 级联选择器 -->
                   <!-- / 模板 -->
                   <template v-if="[].includes(type)"> </template>
                   <!-- / 模板 -->

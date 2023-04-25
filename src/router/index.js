@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-23 17:07:26
+ * @LastEditTime: 2023-04-25 15:44:05
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -57,6 +57,11 @@ const router = createRouter({
           path: '/bsgoal-base-dialog-demo',
           name: '弹窗公共组件',
           component: import('@/components/bsgoal-base-dialog/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-cascader-demo',
+          name: '级联选择公共组件',
+          component: import('@/components/bsgoal-base-cascader/demo.vue')
         },
       ]
     }
