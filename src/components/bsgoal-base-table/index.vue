@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 11:03:36
+ * @LastEditTime: 2023-04-25 11:41:09
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -136,8 +136,8 @@ const EL_TABLE_WRAP_REF = ref(null)
 const transferFoldStatus = inject('transferFoldStatus')
 watchEffect(() => {
   const status = transferFoldStatus ? transferFoldStatus.value : false
-  const expression = unref(props.expression)
-  useAutoHeight(EL_TABLE_WRAP_REF, { arg: status, expression })
+  const expressionVal = unref(props.expression)
+  useAutoHeight(EL_TABLE_WRAP_REF, { arg: status, expression:expressionVal })
 })
 
 // 触发搜索
