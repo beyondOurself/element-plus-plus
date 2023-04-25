@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 16:34:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 09:09:18
+ * @LastEditTime: 2023-04-25 13:50:40
  * @FilePath: \common\src\components\bsgoal-base-table-pagination\index.vue
  * @Description: 表格的分页按钮
  * 
@@ -98,9 +98,7 @@ const page = ref(1)
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-table-pagination {
-  .bsgoal-base-table-pagination {
-    text-align: right;
-  }
+  text-align: right;
   .base_table_pagination {
     display: inline-block;
     margin-top: 16px;

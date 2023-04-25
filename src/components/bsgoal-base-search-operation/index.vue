@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 18:09:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-15 11:04:58
+ * @LastEditTime: 2023-04-25 13:49:56
  * @FilePath: \common\src\components\bsgoal-base-search-operation\index.vue
  * @Description:  表格查询操作项 组件
  * 
@@ -57,20 +57,18 @@ const handleFold = () => {
       </el-icon> </div>
   </div>
 </template>
-<style lang="scss" scoped>
-/* 自定义样式
+<style lang="scss">
+/* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-search-operation {
   display: flex;
   align-items: center;
-}
-.operation_fold {
+
+  .operation_fold {
   margin-left: 12px;
   cursor: pointer;
   min-width: 3em;
 }
-</style>
-<style lang="scss">
-/* 覆盖样式
----------------------------------------------------------------- */
+}
+
 </style>

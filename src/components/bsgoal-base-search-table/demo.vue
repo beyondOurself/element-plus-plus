@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 11:28:19
+ * @LastEditTime: 2023-04-25 13:48:29
  * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -641,7 +641,7 @@ const fetch = (params) => {
         :call="call"
         :fetch="fetch"
         :config-options="configOptions"
-        :expression="200" 
+        :expression="75" 
         @on-search="triggerSearch"
       >
         <template v-slot:menu>
