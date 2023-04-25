@@ -25,7 +25,7 @@ export default defineConfig({
         },
       }
     },
-    outDir: 'lib',
+    outDir: 'dist',
     lib: {
       entry: './src/entry.js',
       name: 'bsgoal-common',
