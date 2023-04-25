@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-21 18:04:30
+ * @LastEditTime: 2023-04-25 09:10:35
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -117,7 +117,7 @@ const clickNodeTree = (value, node, treeNode, event) => {
  * @default:
  * @return {*}
  */
-const loadNode = async (node, resolve ,props) => {
+const loadNode = async (node, resolve, props) => {
   // console.log('props',props);
   if (node.level === 0) {
     const initNodeData = await props.initNode(node)
@@ -143,7 +143,7 @@ const loadNode = async (node, resolve ,props) => {
           lazy
           highlight-current
           empty-text="暂无数据"
-          :load="(node, resolve) => loadNode(node, resolve,props)"
+          :load="(node, resolve) => loadNode(node, resolve, props)"
           :expand-on-click-node="false"
           :props="treeProps"
           :filter-node-method="filterNode"
@@ -160,56 +160,54 @@ const loadNode = async (node, resolve ,props) => {
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-/* 自定义样式
----------------------------------------------------------------- */
-.bsgoal-base-tree {
-  display: inline-block;
-}
-.base_tree {
-  display: flex;
-  box-sizing: border-box;
-  position: relative;
-  min-width: 14px;
-}
-.base_tree_main {
-  width: 221px;
-  padding: 16px;
-
-  // 隐藏掉滚动条
-  scrollbar-width: none; /* firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-  overflow-x: hidden;
-  overflow-y: auto;
-  /*滚动条样式*/
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    background: rgba(0, 0, 0, 0.2);
-    width: 20px;
-  }
-  &::-webkit-scrollbar-track {
-    // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    // border-radius: 0;
-    // background: rgba(0, 0, 0, 0.1);
-    // opacity: 0.1;
-    background-color: #fff;
-  }
-}
-.base_tree_main_input {
-  margin-bottom: 10px;
-}
-</style>
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
-.base_tree .el-tree-node__content > i.el-tree-node__expand-icon {
-  padding-left: 0px;
+
+.bsgoal-base-tree {
+  display: inline-block;
+  .base_tree {
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+    min-width: 14px;
+  }
+  .base_tree_main {
+    width: 221px;
+    padding: 16px;
+
+    // 隐藏掉滚动条
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    overflow-x: hidden;
+    overflow-y: auto;
+    /*滚动条样式*/
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.2);
+      width: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      // border-radius: 0;
+      // background: rgba(0, 0, 0, 0.1);
+      // opacity: 0.1;
+      background-color: #fff;
+    }
+  }
+  .base_tree_main_input {
+    margin-bottom: 10px;
+  }
+
+  .base_tree .el-tree-node__content > i.el-tree-node__expand-icon {
+    padding-left: 0px;
+  }
 }
 </style>

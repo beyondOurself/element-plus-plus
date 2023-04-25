@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-20 11:55:52
+ * @LastEditTime: 2023-04-25 09:08:19
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -167,7 +167,6 @@ const refreshList = (params = {}) => {
   searchParams.value = params
   currentPage.value = 1
   ping()
-
 }
 // 改变当前页
 const triggerPaginationCurrentChange = (current = 1) => {
@@ -257,17 +256,15 @@ defineExpose({
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-/* 自定义样式
----------------------------------------------------------------- */
-.base_table {
-  padding: 16px;
-}
-.base_table_menu {
-  margin-bottom: 8px;
-}
-</style>
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
+.bsgoal-base-table {
+  .base_table {
+    padding: 16px;
+  }
+  .base_table_menu {
+    margin-bottom: 8px;
+  }
+}
 </style>

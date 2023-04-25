@@ -23,10 +23,6 @@ export default {
 import { ref, computed, toRefs, watch, unref
 } from 'vue';
 </script>
-<style lang="scss" scoped>
-/* 自定义样式
----------------------------------------------------------------- */
-</style>
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */

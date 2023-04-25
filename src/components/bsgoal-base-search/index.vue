@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, watchEffect, inject ,nextTick } from 'vue'
+import { ref, computed, unref, watchEffect, inject, nextTick } from 'vue'
 import EnumType from '../../enums/enumType.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
@@ -465,24 +465,22 @@ const triggerValueChange = (type, prop) => {
     <!-- / 分割线 -->
   </div>
 </template>
-<style lang="scss" scoped>
-/* 自定义样式
----------------------------------------------------------------- */
-</style>
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
-.base_search {
-  padding: 16px 6px 8px 16px;
+.bsgoal-base-search {
+  .base_search {
+    padding: 16px 6px 8px 16px;
 
-  .el-form-item {
-    margin-bottom: 8px;
-    margin-right: 10px;
-  }
+    .el-form-item {
+      margin-bottom: 8px;
+      margin-right: 10px;
+    }
 
-  div.el-input,
-  div.el-select {
-    width: 100%;
+    div.el-input,
+    div.el-select {
+      width: 100%;
+    }
   }
 }
 </style>

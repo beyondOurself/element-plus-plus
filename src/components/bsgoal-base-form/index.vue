@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-21 08:37:46
+ * @LastEditTime: 2023-04-25 09:06:35
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -478,24 +478,22 @@ defineExpose({
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-/* 自定义样式
----------------------------------------------------------------- */
-</style>
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
-.base_form {
-  padding: 16px 6px 8px 16px;
+.bsgoal-base-form {
+  .base_form {
+    padding: 16px 6px 8px 16px;
 
-  .el-form-item {
-    // margin-bottom: 8px;
-    margin-right: 10px;
-  }
+    .el-form-item {
+      // margin-bottom: 8px;
+      margin-right: 10px;
+    }
 
-  div.el-input,
-  div.el-select {
-    width: 100%;
+    div.el-input,
+    div.el-select {
+      width: 100%;
+    }
   }
 }
 </style>

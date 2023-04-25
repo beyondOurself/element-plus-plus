@@ -13,6 +13,7 @@
       "require": "./lib/index.umd.js"
     }
   },
+  "style": "lib/style.css",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

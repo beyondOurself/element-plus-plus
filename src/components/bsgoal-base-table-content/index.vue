@@ -32,12 +32,11 @@ const props = defineProps({
         </div>
     </div>
 </template>
-<style lang="scss" scoped>
-/* 自定义样式
----------------------------------------------------------------- */
-</style>
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
+.bsgoal-base-table-content {
+    
+}
 </style>
 

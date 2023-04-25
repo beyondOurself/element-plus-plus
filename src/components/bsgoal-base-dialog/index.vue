@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-24 09:58:36
+ * @LastEditTime: 2023-04-25 09:12:42
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -36,21 +36,20 @@ const props = defineProps({
   /**
    * 取消的文本
    */
-  cancelTxt:{
-    type:[String],
-    default:'取消'
+  cancelTxt: {
+    type: [String],
+    default: '取消'
   },
   /**
    * 确定的文本
    */
-  confirmTxt:{
-    type:[String],
-    default:'确定'
-  },
-
+  confirmTxt: {
+    type: [String],
+    default: '确定'
+  }
 })
 
-const emits = defineEmits(['update:modelValue','on-confirm'])
+const emits = defineEmits(['update:modelValue', 'on-confirm'])
 const dialogVisible = ref(props.modelValue.value)
 
 /**
@@ -69,7 +68,6 @@ const cancel = () => {
  * @return {*}
  */
 const confirm = () => {
-   
   dialogVisible.value = false
   emits('on-confirm')
 }
@@ -107,30 +105,29 @@ watch(dialogVisible, (v) => {
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-/* 自定义样式
----------------------------------------------------------------- */
-.base_dialog_header {
-  font-weight: 500;
-  color: #303133;
-  font-size: 16px;
-}
-</style>
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
-.bsgoal_base_dialog_main {
-  .el-dialog__header {
-    padding: 16px 30px;
-    margin-right: 0px;
-    background-color: #F5F7FA;
-    .el-dialog__headerbtn {
-        top:0px;
-        right: 8px;
-    }
+.bsgoal-base-dialog {
+  .base_dialog_header {
+    font-weight: 500;
+    color: #303133;
+    font-size: 16px;
   }
-  .el-dialog__body{
-    padding: 0px 0px 30px 30px;
+
+  .bsgoal_base_dialog_main {
+    .el-dialog__header {
+      padding: 16px 30px;
+      margin-right: 0px;
+      background-color: #f5f7fa;
+      .el-dialog__headerbtn {
+        top: 0px;
+        right: 8px;
+      }
+    }
+    .el-dialog__body {
+      padding: 0px 0px 30px 30px;
+    }
   }
 }
 </style>
