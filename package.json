@@ -22,7 +22,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "bootstrap": "yarn"
+    "bootstrap": "yarn",
+    "issue": "npm run  build && npm publish"
   },
   "dependencies": {
     "element-plus": "^2.3.3",
