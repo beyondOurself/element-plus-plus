@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 13:45:45
+ * @LastEditTime: 2023-04-26 17:33:56
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -275,7 +275,7 @@ defineExpose({
     margin-bottom: 8px;
   }
   .el-table__inner-wrapper{
-    overflow: hidden;
+    overflow-y: hidden !important;
   }
 }
 </style>
