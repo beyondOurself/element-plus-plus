@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-26 17:59:27
+ * @LastEditTime: 2023-04-27 18:02:13
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, inject, watchEffect, watch, toRaw } from 'vue'
+import { ref, computed, unref, inject, watchEffect, watch } from 'vue'
 import BsgoalBaseTableContent from '../bsgoal-base-table-content/index.vue'
 import BsgoalBaseTablePagination from '../bsgoal-base-table-pagination/index.vue'
 import { useAutoHeight } from '../../combines/useComs.js'

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 15:22:24
+ * @LastEditTime: 2023-04-27 17:56:16
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, watchEffect, inject, nextTick, toRaw } from 'vue'
+import { ref, computed, unref, watchEffect, inject, nextTick, toRaw, isProxy } from 'vue'
 import EnumType from '../../enums/enumType.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
@@ -197,9 +197,21 @@ const triggerOperationSearch = () => {
   const options = unref(configOptions)
   const shadowModel = {}
   for (const option of options) {
-    const { type = '', range = [], prop = '' } = option
+    const { type = '', range = [], prop = '', single = false } = option
     const value = modelValue[prop]
-    shadowModel[prop] = toRaw(value)
+    if ([EnumType.CASCADER].includes(type) && Array.isArray(value) && single) {
+      const rangeLength = value.length
+      if (rangeLength) {
+        shadowModel[prop] = value[rangeLength - 1]
+      } else {
+        shadowModel[prop] = value
+      }
+    } else if (isProxy(value)) {
+      shadowModel[prop] = toRaw(value)
+    } else {
+      shadowModel[prop] = value
+    }
+
     if (type.endsWith('range') && range && range.length === 2) {
       const { 0: startValue = '', 1: endValue = '' } = value
       const { 0: startProp = '', 1: endProp = '' } = range

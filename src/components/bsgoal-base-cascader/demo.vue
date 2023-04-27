@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 15:01:42
+ * @LastEditTime: 2023-04-27 16:05:33
  * @FilePath: \common\src\components\bsgoal-base-cascader\demo.vue
  * @Description: 级联选择公共组件 演示
  * 
@@ -16,292 +16,104 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref ,watch } from 'vue';
+import { ref ,watch ,toRaw} from 'vue';
 import  BsgoalBaseCascader from './index.vue'
 // props
  const props = defineProps({
 
 })
 
-const  cascaderValue = ref(['component','form'])
+const  cascaderValue = ref([])
 
 watch(cascaderValue,(val) => {
-  console.log('cascaderValue >>',val);
+  console.log('cascaderValue >>', toRaw(val) );
 })
 
 const  cascaderData = ref([
-  {
-    value: 'guide',
-    label: 'Guide',
-    children: [
-      {
-        value: 'disciplines',
-        label: 'Disciplines',
-        children: [
-          {
-            value: 'consistency',
-            label: 'Consistency',
-          },
-          {
-            value: 'feedback',
-            label: 'Feedback',
-          },
-          {
-            value: 'efficiency',
-            label: 'Efficiency',
-          },
-          {
-            value: 'controllability',
-            label: 'Controllability',
-          },
+    {
+        "id": 354,
+        "institutionName": "深圳市博思高科技有限公司",
+        "parentInstitutionId": 354,
+        "parentId": 2,
+        "userName": "卢阳万",
+        "phone": "13249398733",
+        "province": null,
+        "city": "深圳市",
+        "district": "光明区",
+        "detailsAddress": "百艺盛大厦9楼",
+        "provinceCode": null,
+        "cityCode": "430200",
+        "districtCode": null,
+        "systemAccount": null,
+        "children": [
+            {
+                "id": 2831,
+                "institutionName": "子机构",
+                "parentInstitutionId": 354,
+                "parentId": 3,
+                "userName": "成都",
+                "phone": "14548454545",
+                "province": null,
+                "city": "",
+                "district": "",
+                "detailsAddress": "",
+                "provinceCode": "",
+                "cityCode": "",
+                "districtCode": "",
+                "systemAccount": "479502",
+                "children": [],
+                "label": "子机构",
+                "value": 2831
+            },
+            {
+                "id": 3302,
+                "institutionName": "新权限机构",
+                "parentInstitutionId": 354,
+                "parentId": 3,
+                "userName": "孙先生",
+                "phone": "18851450010",
+                "province": null,
+                "city": "",
+                "district": "",
+                "detailsAddress": "",
+                "provinceCode": "",
+                "cityCode": "",
+                "districtCode": "",
+                "systemAccount": "479608",
+                "children": [],
+                "label": "新权限机构",
+                "value": 3302
+            },
+            {
+                "id": 3307,
+                "institutionName": "测试机构-shencanlong",
+                "parentInstitutionId": 354,
+                "parentId": 3,
+                "userName": "沈灿龙",
+                "phone": "15099836861",
+                "province": null,
+                "city": "深圳市",
+                "district": "光明区",
+                "detailsAddress": "xxx",
+                "provinceCode": "440000",
+                "cityCode": "440300",
+                "districtCode": "440311",
+                "systemAccount": "370259",
+                "children": [],
+                "label": "测试机构-shencanlong",
+                "value": 3307
+            }
         ],
-      },
-      {
-        value: 'navigation',
-        label: 'Navigation',
-        children: [
-          {
-            value: 'side nav',
-            label: 'Side Navigation',
-          },
-          {
-            value: 'top nav',
-            label: 'Top Navigation',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'component',
-    label: 'Component',
-    children: [
-      {
-        value: 'basic',
-        label: 'Basic',
-        children: [
-          {
-            value: 'layout',
-            label: 'Layout',
-          },
-          {
-            value: 'color',
-            label: 'Color',
-          },
-          {
-            value: 'typography',
-            label: 'Typography',
-          },
-          {
-            value: 'icon',
-            label: 'Icon',
-          },
-          {
-            value: 'button',
-            label: 'Button',
-          },
-        ],
-      },
-      {
-        value: 'form',
-        label: 'Form',
-        children: [
-          {
-            value: 'radio',
-            label: 'Radio',
-          },
-          {
-            value: 'checkbox',
-            label: 'Checkbox',
-          },
-          {
-            value: 'input',
-            label: 'Input',
-          },
-          {
-            value: 'input-number',
-            label: 'InputNumber',
-          },
-          {
-            value: 'select',
-            label: 'Select',
-          },
-          {
-            value: 'cascader',
-            label: 'Cascader',
-          },
-          {
-            value: 'switch',
-            label: 'Switch',
-          },
-          {
-            value: 'slider',
-            label: 'Slider',
-          },
-          {
-            value: 'time-picker',
-            label: 'TimePicker',
-          },
-          {
-            value: 'date-picker',
-            label: 'DatePicker',
-          },
-          {
-            value: 'datetime-picker',
-            label: 'DateTimePicker',
-          },
-          {
-            value: 'upload',
-            label: 'Upload',
-          },
-          {
-            value: 'rate',
-            label: 'Rate',
-          },
-          {
-            value: 'form',
-            label: 'Form',
-          },
-        ],
-      },
-      {
-        value: 'data',
-        label: 'Data',
-        children: [
-          {
-            value: 'table',
-            label: 'Table',
-          },
-          {
-            value: 'tag',
-            label: 'Tag',
-          },
-          {
-            value: 'progress',
-            label: 'Progress',
-          },
-          {
-            value: 'tree',
-            label: 'Tree',
-          },
-          {
-            value: 'pagination',
-            label: 'Pagination',
-          },
-          {
-            value: 'badge',
-            label: 'Badge',
-          },
-        ],
-      },
-      {
-        value: 'notice',
-        label: 'Notice',
-        children: [
-          {
-            value: 'alert',
-            label: 'Alert',
-          },
-          {
-            value: 'loading',
-            label: 'Loading',
-          },
-          {
-            value: 'message',
-            label: 'Message',
-          },
-          {
-            value: 'message-box',
-            label: 'MessageBox',
-          },
-          {
-            value: 'notification',
-            label: 'Notification',
-          },
-        ],
-      },
-      {
-        value: 'navigation',
-        label: 'Navigation',
-        children: [
-          {
-            value: 'menu',
-            label: 'Menu',
-          },
-          {
-            value: 'tabs',
-            label: 'Tabs',
-          },
-          {
-            value: 'breadcrumb',
-            label: 'Breadcrumb',
-          },
-          {
-            value: 'dropdown',
-            label: 'Dropdown',
-          },
-          {
-            value: 'steps',
-            label: 'Steps',
-          },
-        ],
-      },
-      {
-        value: 'others',
-        label: 'Others',
-        children: [
-          {
-            value: 'dialog',
-            label: 'Dialog',
-          },
-          {
-            value: 'tooltip',
-            label: 'Tooltip',
-          },
-          {
-            value: 'popover',
-            label: 'Popover',
-          },
-          {
-            value: 'card',
-            label: 'Card',
-          },
-          {
-            value: 'carousel',
-            label: 'Carousel',
-          },
-          {
-            value: 'collapse',
-            label: 'Collapse',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'resource',
-    label: 'Resource',
-    children: [
-      {
-        value: 'axure',
-        label: 'Axure Components',
-      },
-      {
-        value: 'sketch',
-        label: 'Sketch Templates',
-      },
-      {
-        value: 'docs',
-        label: 'Design Documentation',
-      },
-    ],
-  },
+        "label": "深圳市博思高科技有限公司",
+        "value": 354
+    }
 ])
 
 </script>
 <template>
   <div class="bsgoal-base-cascader-demo"> 
-    <BsgoalBaseCascader v-model="cascaderValue" :data-options="cascaderData" />
+    {{ cascaderValue }}
+    <BsgoalBaseCascader v-model="cascaderValue" :data-options="cascaderData"  />
   </div>
 </template>
 <style lang="scss" scoped>

@@ -17,7 +17,12 @@ import { ref } from 'vue'
  * @default:
  * @return {*}
  */
-export const useFetch = (request = Promise.resolve(), call = null, loading = ref(false) ,data = ref(null) ) => {
+export const useFetch = (
+  request = Promise.resolve(),
+  call = null,
+  loading = ref(false),
+  data = ref(null)
+) => {
   const message = ref('')
   loading.value = true
   request
@@ -37,7 +42,9 @@ export const useFetch = (request = Promise.resolve(), call = null, loading = ref
       } else {
         message.value = err
       }
-      call(false, err)
+      if (call) {
+        call(false, err)
+      }
       loading.value = false
     })
     .finally(() => {

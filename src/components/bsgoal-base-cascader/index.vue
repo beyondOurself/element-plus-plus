@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:27
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 15:05:22
+ * @LastEditTime: 2023-04-27 16:59:13
  * @FilePath: \common\src\components\bsgoal-base-cascader\index.vue
  * @Description: 级联选择 公共组件
  * 
@@ -15,7 +15,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref  ,toRaw} from 'vue'
+import { ref, toRaw } from 'vue'
 // props
 const props = defineProps({
   /**
@@ -72,6 +72,7 @@ const changeCascaderValue = (val) => {
     <el-cascader
       clearable
       class="base_cascader"
+      :show-all-levels="false"
       :model-value="modelValue"
       :options="dataOptions"
       :props="configProps"

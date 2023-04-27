@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 16:31:56
+ * @LastEditTime: 2023-04-27 17:44:25
  * @FilePath: \common\src\components\bsgoal-base-search\demo.vue
  * @Description: 表格查询组件演示
  * 
@@ -166,6 +166,7 @@ let curLocalOptions = ref([
     label: 'prop17',
     type: EnumType.CASCADER,
     prop: 'prop17',
+    single:true,
     range: [
       {
         label: 'value1',
