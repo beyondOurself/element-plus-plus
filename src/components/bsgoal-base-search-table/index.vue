@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 11:05:09
+ * @LastEditTime: 2023-04-27 14:16:07
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -106,12 +106,18 @@ const options = unref(props.configOptions)
 
 // 查询 配置项
 const searchOptions = computed(() => {
-  return options
+  return options.filter(fi => {
+      const  {type = '' } =  fi
+      return !!type
+  })
 })
 
 // 表格 配置项
 const tableOptions = computed(() => {
-  return options
+  return options.filter(fi => {
+       const { item = false } = fi
+       return !item
+  })
 })
 
 // 注入插槽列表

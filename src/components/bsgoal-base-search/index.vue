@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 16:37:27
+ * @LastEditTime: 2023-04-27 11:51:17
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -87,11 +87,11 @@ watchEffect(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   options.forEach((fei) => {
-    const { value = '', prop = '', type = '' } = fei
+    const { value , prop = '', type = '' } = fei
     if (![EnumType.INPUT, EnumType.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
-    model.value[prop] = value
+    model.value[prop] = [0,false].includes(value) ?  value:  ''
   })
 })
 
@@ -196,7 +196,7 @@ const triggerOperationSearch = () => {
   const { configOptions } = props
   const options = unref(configOptions)
   for (const option of options) {
-    const { type = '', range = [], prop = '' } = option
+    const { type = '', range = [], prop = '' ,  } = option
     if (type.endsWith('range') && range && range.length === 2) {
       const { 0: startValue = '', 1: endValue = '' } = modelValue[prop]
       const { 0: startProp = '', 1: endProp = '' } = range
