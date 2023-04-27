@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 11:51:17
+ * @LastEditTime: 2023-04-27 15:22:24
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, watchEffect, inject, nextTick } from 'vue'
+import { ref, computed, unref, watchEffect, inject, nextTick, toRaw } from 'vue'
 import EnumType from '../../enums/enumType.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
@@ -87,11 +87,11 @@ watchEffect(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   options.forEach((fei) => {
-    const { value , prop = '', type = '' } = fei
+    const { value, prop = '', type = '' } = fei
     if (![EnumType.INPUT, EnumType.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
-    model.value[prop] = [0,false].includes(value) ?  value:  ''
+    model.value[prop] = [0, false].includes(value) ? value : ''
   })
 })
 
@@ -192,20 +192,23 @@ const formatSet = (type = '', format = '') => {
  * @return {*}
  */
 const triggerOperationSearch = () => {
-  const modelValue = unref(model)
   const { configOptions } = props
+  const modelValue = unref(model)
   const options = unref(configOptions)
+  const shadowModel = {}
   for (const option of options) {
-    const { type = '', range = [], prop = '' ,  } = option
+    const { type = '', range = [], prop = '' } = option
+    const value = modelValue[prop]
+    shadowModel[prop] = toRaw(value)
     if (type.endsWith('range') && range && range.length === 2) {
-      const { 0: startValue = '', 1: endValue = '' } = modelValue[prop]
+      const { 0: startValue = '', 1: endValue = '' } = value
       const { 0: startProp = '', 1: endProp = '' } = range
-      modelValue[startProp] = startValue
-      modelValue[endProp] = endValue
+      shadowModel[startProp] = startValue
+      shadowModel[endProp] = endValue
     }
   }
-  emits('on-search', modelValue)
-  emits('update:modelValue', modelValue)
+  emits('on-search', shadowModel)
+  emits('update:modelValue', shadowModel)
 }
 // 默认查询一次
 nextTick(() => {
@@ -277,7 +280,7 @@ const triggerValueChange = (type, prop) => {
                 min = 1,
                 max = 10,
                 range = [],
-                format = '',
+                format = ''
               } = {},
               index
             ) of configOptionsGet"

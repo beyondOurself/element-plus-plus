@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 16:01:05
+ * @LastEditTime: 2023-04-27 15:01:42
  * @FilePath: \common\src\components\bsgoal-base-cascader\demo.vue
  * @Description: 级联选择公共组件 演示
  * 
@@ -26,7 +26,7 @@ import  BsgoalBaseCascader from './index.vue'
 const  cascaderValue = ref(['component','form'])
 
 watch(cascaderValue,(val) => {
-  console.log('cascaderValue',val);
+  console.log('cascaderValue >>',val);
 })
 
 const  cascaderData = ref([
