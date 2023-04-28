@@ -20,47 +20,52 @@ const router = createRouter({
       children: [
         {
           path: '/bsgoal-base-table-demo',
-          name: '表格公共组件',
+          name: '表格',
           component: import('@/components/bsgoal-base-table/demo.vue')
         },
         {
+          path: '/bsgoal-base-table-empty-demo',
+          name: '表格空内容',
+          component: import('@/components/bsgoal-base-table-empty/demo.vue')
+        },
+        {
           path: '/bsgoal-base-search-demo',
-          name: '查询公共组件',
+          name: '查询',
           component: import('@/components/bsgoal-base-search/demo.vue')
         },
         {
           path: '/bsgoal-base-search-table-demo',
-          name: '查询+表格公共组件',
+          name: '查询+表格',
           component: import('@/components/bsgoal-base-search-table/demo.vue')
         },
         {
           path: '/bsgoal-base-form-demo',
-          name: '表单公共组件',
+          name: '表单',
           component: import('@/components/bsgoal-base-form/demo.vue')
         },
         {
           path: '/bsgoal-base-frame-demo',
-          name: '内容框架公共组件',
+          name: '内容框架',
           component: import('@/components/bsgoal-base-frame/demo.vue')
         },
         {
           path: '/bsgoal-base-line-demo',
-          name: '分割线公共组件',
+          name: '分割线',
           component: import('@/components/bsgoal-base-line/demo.vue')
         },
         {
           path: '/bsgoal-base-tree-demo',
-          name: '虚拟结构树公共组件',
+          name: '虚拟结构树',
           component: import('@/components/bsgoal-base-tree/demo.vue')
         },
         {
           path: '/bsgoal-base-dialog-demo',
-          name: '弹窗公共组件',
+          name: '弹窗',
           component: import('@/components/bsgoal-base-dialog/demo.vue')
         },
         {
           path: '/bsgoal-base-cascader-demo',
-          name: '级联选择公共组件',
+          name: '级联选择',
           component: import('@/components/bsgoal-base-cascader/demo.vue')
         },
       ]

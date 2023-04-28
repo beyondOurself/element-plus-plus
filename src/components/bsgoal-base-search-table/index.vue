@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 14:16:07
+ * @LastEditTime: 2023-04-28 08:46:38
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -31,6 +31,8 @@ const props = defineProps({
    *
    *  value: '' // 初始值 (查询)
    *  type : '' // 查询组件的类型 (查询)
+   *  item : false // 只为查询项
+   *  single : false // 机构选择器配置为单个值输出
    *
    *
    *  width: 0  // 列宽度 (表格)
