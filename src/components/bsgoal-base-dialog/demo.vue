@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-24 14:36:55
+ * @LastEditTime: 2023-04-28 14:43:37
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -35,7 +35,7 @@ const test = () => {
 <template>
   <div class="bsgoal-base-dialog-demo">
     <div class="base_dialog_demo">
-      <BsgoalBaseDialog v-model="dialogVisible" />
+      <BsgoalBaseDialog v-model="dialogVisible" width="600" />
      <el-button type="primary" @click="test">打开弹窗22</el-button>
     </div>
   </div>

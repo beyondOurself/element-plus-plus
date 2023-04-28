@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 09:12:42
+ * @LastEditTime: 2023-04-28 14:40:14
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -46,7 +46,14 @@ const props = defineProps({
   confirmTxt: {
     type: [String],
     default: '确定'
+  }, 
+ /**
+   * 宽度
+   */
+  width:{
+    type:[String,Number]
   }
+
 })
 
 const emits = defineEmits(['update:modelValue', 'on-confirm'])
@@ -87,7 +94,7 @@ watch(dialogVisible, (v) => {
   <div class="bsgoal-base-dialog">
     <div class="base_dialog">
       <!-- S 组件实体 -->
-      <el-dialog v-model="dialogVisible" custom-class="bsgoal_base_dialog_main">
+      <el-dialog v-model="dialogVisible" custom-class="bsgoal_base_dialog_main" :width="width">
         <template #header>
           <div class="base_dialog_header">{{ title }}</div>
         </template>
