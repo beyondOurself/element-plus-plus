@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 11:06:42
+ * @LastEditTime: 2023-04-28 09:36:18
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -246,17 +246,27 @@ const options = ref([
     prop: 'prop6'
   },
 ])
+
+const clearData = () => {
+
+    data.value =  []
+}
+
+
+
 </script>
 <template>
   <div class="bsgoal-base-table-demo">
     <!-- <BsgoalBaseSearch  :config-options="searchOptions" /> -->
-    <BsgoalBaseTable operation  operationWidth="200" selection :config-options="options" :data="data" >
+    <el-button type="primary" @click="clearData">设置为空数据</el-button>
+    <BsgoalBaseTable operation  operationWidth="200" selection :config-options="options" :data="[]" >
          <template v-slot:operation="{ row }">
           <div>
             <el-button type="primary" >操作按钮</el-button>
           </div>
          </template>
     </BsgoalBaseTable>
+    <hr />
     
   </div>
 </template>

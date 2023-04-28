@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 18:02:13
+ * @LastEditTime: 2023-04-28 09:27:13
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -19,6 +19,7 @@ export default {
 import { ref, computed, unref, inject, watchEffect, watch } from 'vue'
 import BsgoalBaseTableContent from '../bsgoal-base-table-content/index.vue'
 import BsgoalBaseTablePagination from '../bsgoal-base-table-pagination/index.vue'
+import BsgoalBaseTableEmpty from '../bsgoal-base-table-empty/index.vue'
 import { useAutoHeight } from '../../combines/useComs.js'
 import { useFetch } from '../../combines/useFetchs.js'
 
@@ -103,8 +104,8 @@ const props = defineProps({
   /**
    * 表格高度 下边距值
    */
-  expression:{
-    type:[Number],
+  expression: {
+    type: [Number],
     default: 75
   }
 })
@@ -137,7 +138,7 @@ const transferFoldStatus = inject('transferFoldStatus')
 watchEffect(() => {
   const status = transferFoldStatus ? transferFoldStatus.value : false
   const expressionVal = unref(props.expression)
-  useAutoHeight(EL_TABLE_WRAP_REF, { arg: status, expression:expressionVal })
+  useAutoHeight(EL_TABLE_WRAP_REF, { arg: status, expression: expressionVal })
 })
 
 // 触发搜索
@@ -221,7 +222,7 @@ defineExpose({
         >
           <!-- / 无数据展示内容 -->
           <template #empty>
-            <!-- <BsgBaseTableEmpty /> -->
+            <BsgoalBaseTableEmpty />
           </template>
           <!-- / 无数据展示内容 -->
           <!-- / 多选 -->
@@ -275,7 +276,11 @@ defineExpose({
     margin-bottom: 8px;
   }
   .el-table__body-wrapper {
-     overflow-y: hidden !important;
+    overflow-y: hidden !important;
+  }
+
+  .el-scrollbar__view {
+    height: 100%;
   }
 }
 </style>
