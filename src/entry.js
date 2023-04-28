@@ -4,6 +4,7 @@ import BsgoalBaseLine from '@/components/bsgoal-base-line/index.vue'
 import BsgoalBaseSearchTable from '@/components/bsgoal-base-search-table/index.vue'
 import BsgoalBaseTree from '@/components/bsgoal-base-tree/index.vue'
 import BsgoalBaseDialog from '@/components/bsgoal-base-dialog/index.vue'
+import BsgoalBaseTabs from '@/components/bsgoal-base-tabs/index.vue'
 import enumType from '@/enums/enumType.js'
 import { useFetch } from '@/combines/useFetchs.js'
 
@@ -21,7 +22,8 @@ export default {
       BsgoalBaseLine,
       BsgoalBaseSearchTable,
       BsgoalBaseTree,
-      BsgoalBaseDialog
+      BsgoalBaseDialog,
+      BsgoalBaseTabs
     }
 
     for (const [name, component] of Object.entries(componentsMap)) {
