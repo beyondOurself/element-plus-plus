@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 15:44:05
+ * @LastEditTime: 2023-04-28 16:17:42
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -67,6 +67,11 @@ const router = createRouter({
           path: '/bsgoal-base-cascader-demo',
           name: '级联选择',
           component: import('@/components/bsgoal-base-cascader/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-tabs-demo',
+          name: 'tabs标签',
+          component: import('@/components/bsgoal-base-tabs/demo.vue')
         },
       ]
     }
