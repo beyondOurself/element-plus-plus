@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 09:41:26
+ * @LastEditTime: 2023-05-04 10:07:14
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -59,7 +59,15 @@ const props = defineProps({
   type: {
     type: [String],
     default: 'default',
-    validator: (v) => ['default', 'form','blank'].includes(v)
+    validator: (v) => ['default', 'form', 'blank'].includes(v)
+  },
+  /**
+   * 弹窗大小
+   */
+  size: {
+    type: [String, Number],
+    default: 'medium',
+    validator: (v) => ['small', 'medium', 'lagre', 'max', 'dnymic'].includes(v)
   }
 })
 
@@ -97,31 +105,40 @@ watch(dialogVisible, (v) => {
   emits('update:modelValue', v)
 })
 
-const customClassGet = computed(() => {
-  let classBox = 'bsgoal_base_dialog_main'
+//  设置不同尺寸
 
-  const { type = '' } = props
+const widthGet = computed(() => {
+  const { width, size } = props
 
-  if (type === 'form') {
-    classBox += ` bsgoal_base_dialog_main--form`
+  if (width) {
+    return width
   }
 
-  if (type === 'blank') {
-    classBox += ` bsgoal_base_dialog_main--blank`
+  switch (size) {
+    case 'small':
+      return '480px'
+    case 'medium':
+      return '720px'
+    case 'lagre':
+      return '960px'
+    case 'max':
+      return '1232px'
+    case 'dnymic':
+      return '80%'
+    default:
+      return width
   }
-
-  return classBox
 })
 </script>
 <template>
   <div class="bsgoal-base-dialog">
     <div class="base_dialog">
       <!-- S 组件实体 -->
-      <el-dialog v-model="dialogVisible" :custom-class="customClassGet" :width="width">
+      <el-dialog v-model="dialogVisible" custom-class="bsgoal_base_dialog_main" :width="widthGet">
         <template #header>
           <div class="base_dialog_header">{{ title }}</div>
         </template>
-        <div class="base_dialog_content">
+        <div :class="['base_dialog_content', { 'base_dialog_content--form': type === 'form' }]">
           <slot></slot>
         </div>
         <template #footer>
@@ -156,18 +173,15 @@ const customClassGet = computed(() => {
       }
     }
     .el-dialog__body {
+      padding: 0px;
+    }
+
+    .base_dialog_content {
       padding: 30px;
     }
-  }
 
-  .bsgoal_base_dialog_main--form {
-    .el-dialog__body {
-      padding: 0 0 30px 30px;
-    }
-  }
-  .bsgoal_base_dialog_main--blank {
-    .el-dialog__body {
-      padding: 0px;
+    .base_dialog_content--form {
+      padding: 0px 0px 30px 30px;
     }
   }
 }

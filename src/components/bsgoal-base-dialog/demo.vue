@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 09:38:07
+ * @LastEditTime: 2023-05-04 10:08:13
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -59,7 +59,7 @@ const tabsConfigOptions = ref([
       <BsgoalBaseDialog v-model="dialogVisible" width="600">
         <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
       </BsgoalBaseDialog>
-      <BsgoalBaseDialog v-model="dialogVisible2" width="600" type="form">
+      <BsgoalBaseDialog v-model="dialogVisible2" size="max" type="form">
         <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
       </BsgoalBaseDialog>
       <el-button type="primary" @click="test">打开弹窗</el-button>
