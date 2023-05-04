@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-28 14:40:14
+ * @LastEditTime: 2023-05-04 09:41:26
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 // props
 const props = defineProps({
   /**
@@ -46,14 +46,21 @@ const props = defineProps({
   confirmTxt: {
     type: [String],
     default: '确定'
-  }, 
- /**
+  },
+  /**
    * 宽度
    */
-  width:{
-    type:[String,Number]
+  width: {
+    type: [String, Number]
+  },
+  /**
+   * 弹窗类型
+   */
+  type: {
+    type: [String],
+    default: 'default',
+    validator: (v) => ['default', 'form','blank'].includes(v)
   }
-
 })
 
 const emits = defineEmits(['update:modelValue', 'on-confirm'])
@@ -89,12 +96,28 @@ watch(
 watch(dialogVisible, (v) => {
   emits('update:modelValue', v)
 })
+
+const customClassGet = computed(() => {
+  let classBox = 'bsgoal_base_dialog_main'
+
+  const { type = '' } = props
+
+  if (type === 'form') {
+    classBox += ` bsgoal_base_dialog_main--form`
+  }
+
+  if (type === 'blank') {
+    classBox += ` bsgoal_base_dialog_main--blank`
+  }
+
+  return classBox
+})
 </script>
 <template>
   <div class="bsgoal-base-dialog">
     <div class="base_dialog">
       <!-- S 组件实体 -->
-      <el-dialog v-model="dialogVisible" custom-class="bsgoal_base_dialog_main" :width="width">
+      <el-dialog v-model="dialogVisible" :custom-class="customClassGet" :width="width">
         <template #header>
           <div class="base_dialog_header">{{ title }}</div>
         </template>
@@ -133,7 +156,18 @@ watch(dialogVisible, (v) => {
       }
     }
     .el-dialog__body {
-      padding: 0px 0px 30px 30px;
+      padding: 30px;
+    }
+  }
+
+  .bsgoal_base_dialog_main--form {
+    .el-dialog__body {
+      padding: 0 0 30px 30px;
+    }
+  }
+  .bsgoal_base_dialog_main--blank {
+    .el-dialog__body {
+      padding: 0px;
     }
   }
 }

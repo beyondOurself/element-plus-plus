@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-28 14:43:37
+ * @LastEditTime: 2023-05-04 09:38:07
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -18,25 +18,52 @@ export default {
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseDialog from './index.vue'
-
+import BsgoalBaseTabs from '../bsgoal-base-tabs/index.vue'
 
 // props
 const props = defineProps({})
 
 const dialogVisible = ref(false)
+const dialogVisible2 = ref(false)
 
 const test = () => {
-   console.log('点击了');
-    dialogVisible.value = true
-
+  dialogVisible.value = true
+}
+const test2 = () => {
+  dialogVisible2.value = true
 }
 
+const activeTabName = ref('tab1')
+const tabsConfigOptions = ref([
+  {
+    label: 'tab1',
+    value: 'tab1'
+  },
+  {
+    label: 'tab2',
+    value: 'tab2'
+  },
+  {
+    label: 'tab3',
+    value: 'tab3'
+  },
+  {
+    label: 'tab4',
+    value: 'tab4'
+  }
+])
 </script>
 <template>
   <div class="bsgoal-base-dialog-demo">
     <div class="base_dialog_demo">
-      <BsgoalBaseDialog v-model="dialogVisible" width="600" />
-     <el-button type="primary" @click="test">打开弹窗22</el-button>
+      <BsgoalBaseDialog v-model="dialogVisible" width="600">
+        <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
+      </BsgoalBaseDialog>
+      <BsgoalBaseDialog v-model="dialogVisible2" width="600" type="form">
+        <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
+      </BsgoalBaseDialog>
+      <el-button type="primary" @click="test">打开弹窗</el-button>
+      <el-button type="primary" @click="test2">打开弹窗2</el-button>
     </div>
   </div>
 </template>
