@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-20 17:47:40
+ * @LastEditTime: 2023-05-04 14:20:32
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -10,7 +10,7 @@
 
 <template>
   <div class="bsgoal-base-form-demo">
-    <BsgoalBaseForm ref="BSGOAL_BASE_FORM_REF" :config-options="configOptions" :values="values" />
+    <BsgoalBaseForm readonly ref="BSGOAL_BASE_FORM_REF" :limits="10" :config-options="configOptions" :values="values" />
     <el-button type="primary" @click="confirm">提交</el-button>
   </div>
 </template>
@@ -27,7 +27,8 @@ import { ref, computed, toRefs, watch, unref } from 'vue'
 import EnumType from '../../enums/enumType.js'
 
 const values = ref({
-   prop1:'6666'
+   prop1:'66111111111111166',
+   prop2:'select1'
 })
 
 const BSGOAL_BASE_FORM_REF = ref(null)
@@ -49,7 +50,8 @@ const configOptions = ref([
     prop: 'prop1',
     type: EnumType.INPUT,
     width: '100px',
-    rules:true
+    rules:true,
+    readonly:true
   },
   {
     label: 'prop2',
@@ -73,7 +75,9 @@ const configOptions = ref([
         label: 'select4',
         value: 'select5'
       }
-    ]
+    ],
+    readonly:true
+
   },
   {
     label: 'prop3',

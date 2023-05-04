@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 09:06:35
+ * @LastEditTime: 2023-05-04 14:21:33
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -16,10 +16,11 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, watchEffect, nextTick } from 'vue'
+import { ref, computed, unref, watchEffect } from 'vue'
 import EnumType from '../../enums/enumType.js'
 import baseDirective from '../../directives/directiveBase.js'
 import { ElMessage } from 'element-plus'
+import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
 // props
 const props = defineProps({
   /**
@@ -58,6 +59,20 @@ const props = defineProps({
   values: {
     type: [Object],
     default: () => ({})
+  },
+  /**
+   * 全局字数限制
+   */
+  limits: {
+    type: [Number],
+    default: 0
+  },
+  /**
+   * 全局只读
+   */
+  readonlys: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -260,7 +275,6 @@ const validateForm = (callback = () => {}) => {
     } else {
       callback(false)
 
-      console.log('field', field)
       const firstProp = Object.keys(field)[0]
       const {
         [firstProp]: {
@@ -291,14 +305,15 @@ defineExpose({
                 prop = '',
                 type = 'text',
                 placeholder = '',
-                readonly = false,
+                readonly = readonlys,
                 clearable = true,
                 rows = 2,
                 min = 1,
                 max = 10,
                 range = [],
                 format = '',
-                rules = []
+                rules = [],
+                limit = limits
               } = {},
               index
             ) of configOptionsGet"
@@ -465,7 +480,7 @@ defineExpose({
                 <!-- S 文本内容 -->
                 <template v-else>
                   <div>
-                    {{ model[prop] }}
+                    <BsgoalBaseTooltip :content="model[prop]" :limit="limit" />
                   </div>
                 </template>
                 <!-- E 文本内容 -->

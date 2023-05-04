@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-04 10:59:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 11:21:59
+ * @LastEditTime: 2023-05-04 14:17:17
  * @FilePath: \common\src\components\bsgoal-base-tooltip\index.vue
  * @Description:  文字提示公共组件 
  * 
@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed } from 'vue'
+import { ref, computed, unref } from 'vue'
 // props
 const props = defineProps({
   /**
@@ -55,12 +55,19 @@ const contentGet = computed(() => {
   const { content = '', limit = 0 } = props
   let contentString = content
   const contentLength = content.length
-  if (contentLength > limit) {
-    contentString = `${contentString.substring(0, limit)}...`
+  if ( limit && contentLength > limit) {
+    contentString = `${content.substring(0, limit)}...`
   }
   return contentString
 })
 // ---> E 字符数限制 <---
+
+// ---> S 禁用tooltip <---
+const disabledGet = computed(() => {
+  const { content = '', limit = 0 } = props
+  return content.length < limit || !limit
+})
+// ---> E 禁用tooltip <---
 </script>
 <template>
   <div class="bsgoal-base-tooltip">
@@ -70,6 +77,7 @@ const contentGet = computed(() => {
       popper-class="base_tooltip_popper"
       placement="top-start"
       :content="content"
+      :disabled="disabledGet"
     >
       <slot>
         {{ contentGet }}
