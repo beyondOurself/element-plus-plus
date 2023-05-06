@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 14:20:32
+ * @LastEditTime: 2023-05-06 11:33:21
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -27,8 +27,9 @@ import { ref, computed, toRefs, watch, unref } from 'vue'
 import EnumType from '../../enums/enumType.js'
 
 const values = ref({
-   prop1:'66111111111111166',
-   prop2:'select1'
+   prop1:'112123123123123123',
+   prop2:'select1',
+   prop20:''
 })
 
 const BSGOAL_BASE_FORM_REF = ref(null)
@@ -48,6 +49,15 @@ const configOptions = ref([
     label: 'prop1',
     // value: '111',
     prop: 'prop1',
+    type: EnumType.INPUT,
+    width: '100px',
+    rules:true,
+    readonly:true
+  },
+  {
+    label: 'prop20',
+    // value: '111',
+    prop: 'prop20',
     type: EnumType.INPUT,
     width: '100px',
     rules:true,

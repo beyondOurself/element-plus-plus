@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 14:21:33
+ * @LastEditTime: 2023-05-06 11:28:13
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -71,8 +71,15 @@ const props = defineProps({
    * 全局只读
    */
   readonlys: {
-    type: Boolean,
+    type: [Boolean],
     default: false
+  },
+  /**
+   * 空字段 默认值
+   */
+  none: {
+    type: [String],
+    default: '无'
   }
 })
 
@@ -96,7 +103,7 @@ const watchPropList = []
  * @return {*} model
  */
 watchEffect(() => {
-  const { configOptions, values } = props
+  const { configOptions, values, none = '' } = props
   const options = unref(configOptions)
   const valuesModel = unref(values)
   options.forEach((fei) => {
@@ -104,7 +111,7 @@ watchEffect(() => {
     if (![EnumType.INPUT, EnumType.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
-    model.value[prop] = valuesModel[prop] || value
+    model.value[prop] = valuesModel[prop] || value || none
   })
 })
 
