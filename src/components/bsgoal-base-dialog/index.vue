@@ -68,6 +68,13 @@ const props = defineProps({
     type: [String, Number],
     default: 'medium',
     validator: (v) => ['small', 'medium', 'lagre', 'max', 'dnymic'].includes(v)
+  },
+  /**
+   * 是否显示 底部 内容
+   */
+  footer: {
+    type: [Boolean],
+    default: true
   }
 })
 
@@ -142,10 +149,12 @@ const widthGet = computed(() => {
           <slot></slot>
         </div>
         <template #footer>
-          <span class="base_dialog_footer">
-            <el-button @click="cancel">{{ cancelTxt }}</el-button>
-            <el-button type="primary" @click="confirm"> {{ confirmTxt }} </el-button>
-          </span>
+          <slot name="footer" v-if="footer">
+            <span class="base_dialog_footer">
+              <el-button @click="cancel">{{ cancelTxt }}</el-button>
+              <el-button type="primary" @click="confirm"> {{ confirmTxt }} </el-button>
+            </span>
+          </slot>
         </template>
       </el-dialog>
       <!-- E 组件实体 -->

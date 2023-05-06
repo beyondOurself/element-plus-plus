@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 10:08:13
+ * @LastEditTime: 2023-05-06 14:53:11
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -56,8 +56,11 @@ const tabsConfigOptions = ref([
 <template>
   <div class="bsgoal-base-dialog-demo">
     <div class="base_dialog_demo">
-      <BsgoalBaseDialog v-model="dialogVisible" width="600">
-        <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
+      <BsgoalBaseDialog v-model="dialogVisible" width="600" :footer="false">
+        <BsgoalBaseTabs v-memo="activeTabName"  :config-options="tabsConfigOptions" />
+        <template #footer>
+          <el-button type="primary">底部按钮</el-button>
+        </template>
       </BsgoalBaseDialog>
       <BsgoalBaseDialog v-model="dialogVisible2" size="max" type="form">
         <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
