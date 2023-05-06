@@ -10,7 +10,7 @@
 
 <template>
   <div class="bsgoal-base-form-demo">
-    <BsgoalBaseForm readonly ref="BSGOAL_BASE_FORM_REF" :limits="10" :config-options="configOptions" :values="values" />
+    <BsgoalBaseForm readonly ref="BSGOAL_BASE_FORM_REF" :limits="10" :config-options="configOptions" :values="values" none="--" />
     <el-button type="primary" @click="confirm">提交</el-button>
   </div>
 </template>

@@ -103,7 +103,7 @@ const watchPropList = []
  * @return {*} model
  */
 watchEffect(() => {
-  const { configOptions, values, none = '' } = props
+  const { configOptions, values } = props
   const options = unref(configOptions)
   const valuesModel = unref(values)
   options.forEach((fei) => {
@@ -111,7 +111,7 @@ watchEffect(() => {
     if (![EnumType.INPUT, EnumType.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
-    model.value[prop] = valuesModel[prop] || value || none
+    model.value[prop] = valuesModel[prop] || value 
   })
 })
 
@@ -487,7 +487,7 @@ defineExpose({
                 <!-- S 文本内容 -->
                 <template v-else>
                   <div>
-                    <BsgoalBaseTooltip :content="model[prop]" :limit="limit" />
+                    <BsgoalBaseTooltip :content="model[prop]" :limit="limit" :none="none" />
                   </div>
                 </template>
                 <!-- E 文本内容 -->

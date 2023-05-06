@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-04 10:59:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 14:17:17
+ * @LastEditTime: 2023-05-06 11:47:17
  * @FilePath: \common\src\components\bsgoal-base-tooltip\index.vue
  * @Description:  文字提示公共组件 
  * 
@@ -47,18 +47,25 @@ const props = defineProps({
   max: {
     type: [Number, String],
     default: '10em'
+  },
+  /**
+   * 空字段 默认值
+   */
+  none: {
+    type: [String],
+    default: '无'
   }
 })
 
 // ---> S 字符数限制 <---
 const contentGet = computed(() => {
-  const { content = '', limit = 0 } = props
+  const { content = '', limit = 0 , none =''} = props
   let contentString = content
   const contentLength = content.length
   if ( limit && contentLength > limit) {
     contentString = `${content.substring(0, limit)}...`
   }
-  return contentString
+  return contentString || none
 })
 // ---> E 字符数限制 <---
 
