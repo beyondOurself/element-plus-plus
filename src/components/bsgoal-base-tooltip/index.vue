@@ -54,15 +54,15 @@ const props = defineProps({
   none: {
     type: [String],
     default: '无'
-  }
+  },
 })
 
 // ---> S 字符数限制 <---
 const contentGet = computed(() => {
-  const { content = '', limit = 0 , none =''} = props
+  const { content = '', limit = 0, none = '' } = props
   let contentString = content
   const contentLength = content.length
-  if ( limit && contentLength > limit) {
+  if (limit && contentLength > limit) {
     contentString = `${content.substring(0, limit)}...`
   }
   return contentString || none

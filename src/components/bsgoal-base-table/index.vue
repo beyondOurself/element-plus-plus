@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-28 09:27:13
+ * @LastEditTime: 2023-05-08 15:19:02
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -22,6 +22,7 @@ import BsgoalBaseTablePagination from '../bsgoal-base-table-pagination/index.vue
 import BsgoalBaseTableEmpty from '../bsgoal-base-table-empty/index.vue'
 import { useAutoHeight } from '../../combines/useComs.js'
 import { useFetch } from '../../combines/useFetchs.js'
+import { isBoolean } from '@/utils/common.js'
 
 const props = defineProps({
   /**
@@ -107,6 +108,18 @@ const props = defineProps({
   expression: {
     type: [Number],
     default: 75
+  },
+  /**
+   * 表格高度
+   * 
+   *  默认 : 自动计算
+   *  布尔值 : 默认表格高度
+   *  字符串 : 直接赋值给 height
+   *  数字   : 直接赋值给 height + 'px'
+   */
+  height: {
+    type: [Number, String, Boolean],
+    default: ''
   }
 })
 
@@ -136,9 +149,13 @@ const EL_TABLE_WRAP_REF = ref(null)
 // 折叠状态响应值
 const transferFoldStatus = inject('transferFoldStatus')
 watchEffect(() => {
+  const { height } = props
   const status = transferFoldStatus ? transferFoldStatus.value : false
   const expressionVal = unref(props.expression)
-  useAutoHeight(EL_TABLE_WRAP_REF, { arg: status, expression: expressionVal })
+  // 默认是打开表格高度自动计算的
+  if (!isBoolean(height)) {
+    useAutoHeight(EL_TABLE_WRAP_REF, { arg: status, expression: expressionVal, height })
+  }
 })
 
 // 触发搜索
