@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 11:12:13
+ * @LastEditTime: 2023-05-10 13:54:41
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -77,6 +77,11 @@ const router = createRouter({
           path: '/bsgoal-base-tooltip-demo',
           name: '文字提示',
           component: import('@/components/bsgoal-base-tooltip/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-link-demo',
+          name: '链接公共组件',
+          component: import('@/components/bsgoal-base-link/demo.vue')
         },
       ]
     }
