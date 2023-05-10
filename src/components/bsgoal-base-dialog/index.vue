@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-04 10:07:14
+ * @LastEditTime: 2023-05-10 11:56:01
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -141,7 +141,8 @@ const widthGet = computed(() => {
   <div class="bsgoal-base-dialog">
     <div class="base_dialog">
       <!-- S 组件实体 -->
-      <el-dialog v-model="dialogVisible" custom-class="bsgoal_base_dialog_main" :width="widthGet">
+      <el-dialog v-model="dialogVisible" custom-class="bsgoal_base_dialog_main"
+        :class="{ 'bsgoal-dialog__footer--conceal': !footer }" :width="widthGet">
         <template #header>
           <div class="base_dialog_header">{{ title }}</div>
         </template>
@@ -171,16 +172,22 @@ const widthGet = computed(() => {
     font-size: 16px;
   }
 
+  .bsgoal-dialog__footer--conceal .el-dialog__footer {
+    display: none;
+  }
+
   .bsgoal_base_dialog_main {
     .el-dialog__header {
       padding: 16px 30px;
       margin-right: 0px;
       background-color: #f5f7fa;
+
       .el-dialog__headerbtn {
         top: 0px;
         right: 8px;
       }
     }
+
     .el-dialog__body {
       padding: 0px;
     }
@@ -193,5 +200,4 @@ const widthGet = computed(() => {
       padding: 0px 0px 30px 30px;
     }
   }
-}
-</style>
+}</style>
