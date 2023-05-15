@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-15 14:27:23
+ * @LastEditTime: 2023-05-15 14:50:49
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -214,8 +214,8 @@ const options = ref([
   {
     label: '列列列列列列列列列1',
     prop: 'prop1',
-    tooltip:true,
-    limit:3
+    tooltip: true,
+    limit: 3
   },
   {
     label: '列列列列列列列列列2',
@@ -247,21 +247,14 @@ const clearData = () => {
   <div class="bsgoal-base-table-demo">
     <!-- <BsgoalBaseSearch  :config-options="searchOptions" /> -->
     <el-button type="primary" @click="clearData">设置为空数据</el-button>
-    <BsgoalBaseTable
-      operation
-      operation-width="200"
-      selection
-      :config-options="options"
-      :data="data"
-      :auto-height="false"
-    >
+    <BsgoalBaseTable operation-width="200" operation selection :page="false" :config-options="options" :data="data"
+      :auto-height="false">
       <template v-slot:operation="{ row }">
         <div>
           <el-button type="primary">操作按钮</el-button>
         </div>
       </template>
     </BsgoalBaseTable>
-    <hr />
   </div>
 </template>
 <style lang="scss" scoped>

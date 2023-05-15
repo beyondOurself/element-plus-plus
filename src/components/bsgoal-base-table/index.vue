@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-15 14:20:46
+ * @LastEditTime: 2023-05-15 14:50:19
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -120,6 +120,13 @@ const props = defineProps({
   height: {
     type: [Number, String, Boolean],
     default: ''
+  },
+  /**
+   * 是否显示分页
+   */
+  page: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -172,7 +179,7 @@ const ping = () => {
   const currentPageVal = currentPage.value
   const pageSizeVal = pageSize.value
   const fetchParams = { ...searchParamsVal }
-const mapPropsVal = unref(mapProps)
+  const mapPropsVal = unref(mapProps)
 
   fetchParams[mapPropsVal.currentPage] = currentPageVal
   fetchParams[mapPropsVal.pageSize] = pageSizeVal
@@ -223,20 +230,13 @@ defineExpose({
       <!-- E 表头操作区域 -->
       <!-- S 表格区域 -->
       <div ref="EL_TABLE_WRAP_REF">
-        <el-table
-          stripe
-          border
-          highlight-current-row
-          style="width: 100%"
-          v-loading="tableLoading"
-          :data="tableData"
+        <el-table stripe border highlight-current-row style="width: 100%" v-loading="tableLoading" :data="tableData"
           :header-cell-style="{
             fontWeight: 'bold',
             backgroundColor: '#EBEEF5',
             color: 'rgba(0,0,0,.85)',
             fontSize: '14px'
-          }"
-        >
+          }">
           <!-- / 无数据展示内容 -->
           <template #empty>
             <BsgoalBaseTableEmpty />
@@ -246,22 +246,14 @@ defineExpose({
           <el-table-column v-if="selection" fixed="left" type="selection" width="40" />
           <!-- / 多选 -->
           <!-- / 表格内容 -->
-          <template
-            v-for="(
-              { prop = '', label = '', align = 'center', width = '', fixed = false , tooltip = false , limit = 0} = {}, index
-            ) of configOptionsGet"
-            :key="index"
-          >
-            <el-table-column
-              :label="label"
-              :align="align"
-              :width="width"
-              :fixed="fixed"
-              :min-width="`${label.length * 14 + 24}px`"
-            >
+          <template v-for="(
+              { prop = '', label = '', align = 'center', width = '', fixed = false, tooltip = false, limit = 0 } = {}, index
+            ) of configOptionsGet" :key="index">
+            <el-table-column :label="label" :align="align" :width="width" :fixed="fixed"
+              :min-width="`${label.length * 14 + 24}px`">
               <template v-slot:default="{ row }">
                 <slot :name="prop" :row="row">
-                  <BsgoalBaseTableContent  :limit="limit" :tooltip="tooltip" :data="row[prop]" />
+                  <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" />
                 </slot>
               </template>
             </el-table-column>
@@ -273,11 +265,8 @@ defineExpose({
       <!-- E 表格区域 -->
 
       <!-- S 分页 -->
-      <BsgoalBaseTablePagination
-        :total="total"
-        @on-current-change="triggerPaginationCurrentChange"
-        @on-size-change="triggerPaginationSizeChange"
-      />
+      <BsgoalBaseTablePagination v-if="page" :total="total" @on-current-change="triggerPaginationCurrentChange"
+        @on-size-change="triggerPaginationSizeChange" />
       <!-- E 分页 -->
     </div>
   </div>
@@ -289,9 +278,11 @@ defineExpose({
   .base_table {
     padding: 16px;
   }
+
   .base_table_menu {
     margin-bottom: 8px;
   }
+
   .el-table__body-wrapper {
     overflow-y: hidden !important;
   }
