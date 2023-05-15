@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-08 15:15:07
+ * @LastEditTime: 2023-05-15 14:27:23
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -213,7 +213,9 @@ const data = ref([
 const options = ref([
   {
     label: '列列列列列列列列列1',
-    prop: 'prop1'
+    prop: 'prop1',
+    tooltip:true,
+    limit:3
   },
   {
     label: '列列列列列列列列列2',

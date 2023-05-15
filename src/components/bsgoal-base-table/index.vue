@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-08 15:19:02
+ * @LastEditTime: 2023-05-15 14:20:46
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -172,7 +172,7 @@ const ping = () => {
   const currentPageVal = currentPage.value
   const pageSizeVal = pageSize.value
   const fetchParams = { ...searchParamsVal }
-  const mapPropsVal = unref(mapProps)
+const mapPropsVal = unref(mapProps)
 
   fetchParams[mapPropsVal.currentPage] = currentPageVal
   fetchParams[mapPropsVal.pageSize] = pageSizeVal
@@ -248,7 +248,7 @@ defineExpose({
           <!-- / 表格内容 -->
           <template
             v-for="(
-              { prop = '', label = '', align = 'center', width = '', fixed = false } = {}, index
+              { prop = '', label = '', align = 'center', width = '', fixed = false , tooltip = false , limit = 0} = {}, index
             ) of configOptionsGet"
             :key="index"
           >
@@ -261,7 +261,7 @@ defineExpose({
             >
               <template v-slot:default="{ row }">
                 <slot :name="prop" :row="row">
-                  <BsgoalBaseTableContent :data="row[prop]" />
+                  <BsgoalBaseTableContent  :limit="limit" :tooltip="tooltip" :data="row[prop]" />
                 </slot>
               </template>
             </el-table-column>
