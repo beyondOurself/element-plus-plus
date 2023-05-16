@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-28 08:46:38
+ * @LastEditTime: 2023-05-16 17:29:15
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -92,13 +92,25 @@ const props = defineProps({
     type: [Object, Function],
     default: null
   },
-   /**
-   * 表格高度 下边距值
-   */
-  expression:{
-    type:[Number],
+  /**
+  * 表格高度 下边距值
+  */
+  expression: {
+    type: [Number],
     default: 75
-  }
+  },
+  /**
+   * 映射字段
+  */
+  mapProps: {
+    type: [Object],
+    default: () => ({
+      currentPage: 'currentPage',
+      pageSize: 'pageSize',
+      rows: 'rows',
+      total: 'total'
+    })
+  },
 })
 
 const transferFoldStatus = ref(false)
@@ -109,16 +121,16 @@ const options = unref(props.configOptions)
 // 查询 配置项
 const searchOptions = computed(() => {
   return options.filter(fi => {
-      const  {type = '' } =  fi
-      return !!type
+    const { type = '' } = fi
+    return !!type
   })
 })
 
 // 表格 配置项
 const tableOptions = computed(() => {
   return options.filter(fi => {
-       const { item = false } = fi
-       return !item
+    const { item = false } = fi
+    return !item
   })
 })
 
@@ -139,17 +151,9 @@ const triggerSearch = (searchParams) => {
       <BsgoalBaseSearch :config-options="searchOptions" @on-search="triggerSearch" @on-clear="triggerSearch" />
       <!-- E 查询 -->
       <!-- S 表格 -->
-      <BsgoalBaseTable
-        ref="BSGOAL_BASE_TABLE_REF"
-        :operationWidth="operationWidth"
-        :config-options="tableOptions"
-        :data="tableData"
-        :selection="selection"
-        :operation="operation"
-        :expression="expression"
-        :fetch="fetch"
-        :call="call"
-      >
+      <BsgoalBaseTable ref="BSGOAL_BASE_TABLE_REF" :map-props="mapProps" :operationWidth="operationWidth" :config-options="tableOptions"
+        :data="tableData" :selection="selection" :operation="operation" :expression="expression" :fetch="fetch"
+        :call="call">
         <!-- S 顶部菜单 -->
 
         <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">

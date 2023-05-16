@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 17:45:41
+ * @LastEditTime: 2023-05-16 17:33:49
  * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -725,6 +725,9 @@ const fetch = (params) => {
       <BsgoalBaseSearchTable
         selection
         operation
+        :map-props="{
+           currentPage:'pageIndex'
+        }"
         :call="call"
         :fetch="fetch"
         :config-options="configOptions"

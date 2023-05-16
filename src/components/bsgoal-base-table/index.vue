@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-15 14:50:19
+ * @LastEditTime: 2023-05-16 17:45:01
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -166,6 +166,15 @@ watchEffect(() => {
 })
 
 // 触发搜索
+const mapPropsVal = unref(props.mapProps)
+const mapPropsFuse = {
+  currentPage: 'currentPage',
+  pageSize: 'pageSize',
+  rows: 'rows',
+  total: 'total',
+  ...mapPropsVal
+}
+
 const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
@@ -174,25 +183,21 @@ const tableLoading = ref(props.loading)
 const tableData = ref(props.data)
 const resData = ref({})
 const ping = () => {
-  const { fetch, call, mapProps } = props
+  const { fetch, call } = props
   const searchParamsVal = searchParams.value
   const currentPageVal = currentPage.value
   const pageSizeVal = pageSize.value
   const fetchParams = { ...searchParamsVal }
-  const mapPropsVal = unref(mapProps)
 
-  fetchParams[mapPropsVal.currentPage] = currentPageVal
-  fetchParams[mapPropsVal.pageSize] = pageSizeVal
+  fetchParams[mapPropsFuse.currentPage] = currentPageVal
+  fetchParams[mapPropsFuse.pageSize] = pageSizeVal
 
   useFetch(fetch(fetchParams), call, tableLoading, resData)
 }
 
 watch(resData, (data) => {
-  const { mapProps } = props
-  const mapPropsVal = unref(mapProps)
-
-  tableData.value = data[mapPropsVal.rows]
-  total.value = data[mapPropsVal.total]
+  tableData.value = data[mapPropsFuse.rows]
+  total.value = data[mapPropsFuse.total]
 })
 
 // 查询
