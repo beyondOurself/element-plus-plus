@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 16:54:41
+ * @LastEditTime: 2023-05-18 17:29:13
  * @FilePath: \common\src\components\bsgoal-base-button\demo.vue
  * @Description:  按钮 演示
  * 
@@ -31,7 +31,8 @@ export default {
 </script>
 <template>
   <div class="bsgoal-base-button-demo">
-    <BsgoalBaseButton :task="task"> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="add"> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="delete"> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" #default="{ loading }">
       <div>
         {{ loading }}
