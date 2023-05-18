@@ -8,17 +8,6 @@
  * 
 -->
 
-<template>
-  <div class="bsgoal-base-form-demo">
-    <BsgoalBaseForm readonly ref="BSGOAL_BASE_FORM_REF" :limits="10" :config-options="configOptions" :values="values" none="--" />
-    <el-button type="primary" @click="confirm">提交</el-button>
-  </div>
-</template>
-<script>
-export default {
-  name: 'BsgoalBaseFormDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
@@ -27,20 +16,17 @@ import { ref, computed, toRefs, watch, unref } from 'vue'
 import EnumType from '../../enums/enumType.js'
 
 const values = ref({
-   prop1:'112123123123123123',
-   prop2:'select1',
-   prop20:''
+  prop1: '112123123123123123',
+  prop2: 'select1',
+  prop20: ''
 })
 
 const BSGOAL_BASE_FORM_REF = ref(null)
 
-const confirm =  () => {
-    BSGOAL_BASE_FORM_REF.value.validateForm( (res) => {
-     
-       console.log('res',res);
-
-    } )
-  
+const confirm = () => {
+  BSGOAL_BASE_FORM_REF.value.validateForm((res) => {
+    console.log('res', res)
+  })
 }
 
 // 配置项
@@ -51,8 +37,8 @@ const configOptions = ref([
     prop: 'prop1',
     type: EnumType.INPUT,
     width: '100px',
-    rules:true,
-    readonly:true
+    rules: true,
+    readonly: true
   },
   {
     label: 'prop20',
@@ -60,8 +46,8 @@ const configOptions = ref([
     prop: 'prop20',
     type: EnumType.INPUT,
     width: '100px',
-    rules:true,
-    readonly:true
+    rules: true,
+    readonly: true
   },
   {
     label: 'prop2',
@@ -86,8 +72,7 @@ const configOptions = ref([
         value: 'select5'
       }
     ],
-    readonly:true
-
+    readonly: true
   },
   {
     label: 'prop3',
@@ -191,6 +176,24 @@ const configOptions = ref([
   }
 ])
 </script>
+<script>
+export default {
+  name: 'BsgoalBaseFormDemo'
+}
+</script>
+<template>
+  <div class="bsgoal-base-form-demo">
+    <BsgoalBaseForm
+      readonly
+      ref="BSGOAL_BASE_FORM_REF"
+      :limits="10"
+      :config-options="configOptions"
+      :values="values"
+      none="--"
+    />
+    <el-button type="primary" @click="confirm">提交</el-button>
+  </div>
+</template>
 <style lang="scss" scoped>
 /* 自定义样式
 ---------------------------------------------------------------- */

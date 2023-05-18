@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-10 11:56:01
+ * @LastEditTime: 2023-05-18 14:54:15
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -97,8 +97,9 @@ const cancel = () => {
  * @return {*}
  */
 const confirm = () => {
-  dialogVisible.value = false
-  emits('on-confirm')
+  emits('on-confirm', () => {
+    dialogVisible.value = false
+  })
 }
 
 watch(
@@ -141,8 +142,12 @@ const widthGet = computed(() => {
   <div class="bsgoal-base-dialog">
     <div class="base_dialog">
       <!-- S 组件实体 -->
-      <el-dialog v-model="dialogVisible" custom-class="bsgoal_base_dialog_main"
-        :class="{ 'bsgoal-dialog__footer--conceal': !footer }" :width="widthGet">
+      <el-dialog
+        v-model="dialogVisible"
+        custom-class="bsgoal_base_dialog_main"
+        :class="{ 'bsgoal-dialog__footer--conceal': !footer }"
+        :width="widthGet"
+      >
         <template #header>
           <div class="base_dialog_header">{{ title }}</div>
         </template>
@@ -200,4 +205,5 @@ const widthGet = computed(() => {
       padding: 0px 0px 30px 30px;
     }
   }
-}</style>
+}
+</style>

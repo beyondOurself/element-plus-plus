@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-06 14:53:11
+ * @LastEditTime: 2023-05-18 14:56:57
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -52,6 +52,11 @@ const tabsConfigOptions = ref([
     value: 'tab4'
   }
 ])
+
+const triggerConfirm = (done) => {
+   console.log('关闭前');
+   done()
+}
 </script>
 <template>
   <div class="bsgoal-base-dialog-demo">
@@ -61,10 +66,10 @@ const tabsConfigOptions = ref([
         <template #footer>
           <el-button type="primary">底部按钮</el-button>
         </template>
-      </BsgoalBaseDialog>
-      <BsgoalBaseDialog v-model="dialogVisible2" size="max" type="form">
-        <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
-      </BsgoalBaseDialog>
+      </BsgoalBaseDialog  >
+      <BsgoalBaseDialog v-model="dialogVisible2" size="max" type="form" @on-confirm="triggerConfirm">
+        <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions"   />
+      </BsgoalBaseDialog >
       <el-button type="primary" @click="test">打开弹窗</el-button>
       <el-button type="primary" @click="test2">打开弹窗2</el-button>
     </div>
