@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 17:29:13
+ * @LastEditTime: 2023-05-18 18:13:42
  * @FilePath: \common\src\components\bsgoal-base-button\demo.vue
  * @Description:  按钮 演示
  * 
@@ -16,12 +16,10 @@ import BsgoalBaseButton from './index.vue'
 // props
 const props = defineProps({})
 
-const task = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve()
-    }, 3000)
-  })
+const task = (done) => {
+  setTimeout(() => {
+    done()
+  }, 3000)
 }
 </script>
 <script>

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 15:56:29
+ * @LastEditTime: 2023-05-18 18:15:00
  * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -20,6 +20,8 @@ import { ref, unref } from 'vue'
 import EnumType from '../../enums/enumType.js'
 import BsgoalBaseSearchTable from './index.vue'
 import DemoTable from './demo-table.vue'
+import BsgoalBaseButton from '../bsgoal-base-button/index.vue'
+
 // props
 const props = defineProps({})
 
@@ -728,6 +730,15 @@ const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
 const test = () => {
   BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()
 }
+
+const tasks = (row) => {
+  console.log('row', row)
+  return (done = () => {}) => {
+      setTimeout(() => {
+        done()
+      }, 3000)
+  }
+}
 </script>
 <template>
   <div class="bsgoal-search-table-demo">
@@ -758,8 +769,10 @@ const test = () => {
         <template v-slot:menu>
           <el-button type="primary" @click="test">操作按钮</el-button>
         </template>
-        <template v-slot:operation>
-          <el-button type="primary">编辑</el-button>
+        <template v-slot:operation="{ row }">
+          <div>
+            <BsgoalBaseButton :task="tasks(row)" />
+          </div>
         </template>
       </BsgoalBaseSearchTable>
     </div>

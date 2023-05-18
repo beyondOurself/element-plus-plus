@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 17:28:21
+ * @LastEditTime: 2023-05-18 18:13:00
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -48,11 +48,9 @@ const triggerClick = () => {
   loading.value = true
   const { task } = props
   const taskValue = unref(task)
-  taskValue()
-    .then()
-    .finally(() => {
-      loading.value = false
-    })
+  taskValue(() => {
+    loading.value = false
+  })
 }
 // ---> E 触发按钮 <---
 
