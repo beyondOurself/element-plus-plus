@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 17:56:16
+ * @LastEditTime: 2023-05-18 11:25:14
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -263,8 +263,9 @@ const triggerOperationFold = (status = false) => {
  * @return {*}
  */
 const triggerValueChange = (type, prop) => {
+
   // 触发查询
-  triggerOperationSearch()
+   triggerOperationSearch()
   const emitValue = {
     type,
     prop,
@@ -314,7 +315,6 @@ const triggerValueChange = (type, prop) => {
                       v-model="model[prop]"
                       :placeholder="placeholderSet(type, label, placeholder)"
                       :clearable="clearable"
-                      @change="triggerValueChange(type, prop)"
                     />
                   </template>
                   <!-- / input 输入框组件 -->
