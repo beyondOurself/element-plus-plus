@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-16 17:33:49
+ * @LastEditTime: 2023-05-18 10:12:16
  * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -705,8 +705,9 @@ const tableDataVal = unref(tableData)
 
 const fetch = (params) => {
   console.log('params >>>', params)
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
+      // 存在分页
       resolve({
         data: {
           rows: tableDataVal,
@@ -714,6 +715,11 @@ const fetch = (params) => {
         },
         message: '获取数据成功'
       })
+      // 不存在分页
+      // resolve({
+      //   data: tableDataVal,
+      //   message: '获取数据成功'
+      // })
     }, 3000)
   })
 }
@@ -725,15 +731,24 @@ const fetch = (params) => {
       <BsgoalBaseSearchTable
         selection
         operation
-        :map-props="{
-           currentPage:'pageIndex'
-        }"
         :call="call"
         :fetch="fetch"
         :config-options="configOptions"
         :expression="75"
         @on-search="triggerSearch"
       >
+        <!-- 
+        <BsgoalBaseSearchTable
+        selection
+        operation
+        :has-search="false"
+        :has-page="false"
+        :call="call"
+        :fetch="fetch"
+        :config-options="configOptions"
+        :expression="75"
+        @on-search="triggerSearch"
+      > -->
         <template v-slot:menu>
           <el-button type="primary">操作按钮</el-button>
         </template>

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-16 17:29:15
+ * @LastEditTime: 2023-05-18 10:13:34
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -93,15 +93,15 @@ const props = defineProps({
     default: null
   },
   /**
-  * 表格高度 下边距值
-  */
+   * 表格高度 下边距值
+   */
   expression: {
     type: [Number],
     default: 75
   },
   /**
    * 映射字段
-  */
+   */
   mapProps: {
     type: [Object],
     default: () => ({
@@ -111,6 +111,20 @@ const props = defineProps({
       total: 'total'
     })
   },
+  /**
+   * 是否显示分页
+   */
+  hasPage: {
+    type: Boolean,
+    default: true
+  },
+  /**
+   * 是否显示查询
+   */
+  hasSearch: {
+    type: Boolean,
+    default: true
+  }
 })
 
 const transferFoldStatus = ref(false)
@@ -120,7 +134,7 @@ const options = unref(props.configOptions)
 
 // 查询 配置项
 const searchOptions = computed(() => {
-  return options.filter(fi => {
+  return options.filter((fi) => {
     const { type = '' } = fi
     return !!type
   })
@@ -128,7 +142,7 @@ const searchOptions = computed(() => {
 
 // 表格 配置项
 const tableOptions = computed(() => {
-  return options.filter(fi => {
+  return options.filter((fi) => {
     const { item = false } = fi
     return !item
   })
@@ -143,17 +157,42 @@ const BSGOAL_BASE_TABLE_REF = ref(null)
 const triggerSearch = (searchParams) => {
   BSGOAL_BASE_TABLE_REF.value.refreshList(searchParams)
 }
+
+// ---> S 计算expression <---
+const expresionGet = computed(() => {
+  const { expression, hasPage } = props
+  if (hasPage === false) {
+    return 25
+  }
+  return expression
+})
+// ---> E 计算expression <---
 </script>
 <template>
   <div class="bsgoal-base-search-table">
     <div class="base_search_table">
       <!-- S 查询 -->
-      <BsgoalBaseSearch :config-options="searchOptions" @on-search="triggerSearch" @on-clear="triggerSearch" />
+      <BsgoalBaseSearch
+        v-show="hasSearch"
+        :config-options="searchOptions"
+        @on-search="triggerSearch"
+        @on-clear="triggerSearch"
+      />
       <!-- E 查询 -->
       <!-- S 表格 -->
-      <BsgoalBaseTable ref="BSGOAL_BASE_TABLE_REF" :map-props="mapProps" :operationWidth="operationWidth" :config-options="tableOptions"
-        :data="tableData" :selection="selection" :operation="operation" :expression="expression" :fetch="fetch"
-        :call="call">
+      <BsgoalBaseTable
+        ref="BSGOAL_BASE_TABLE_REF"
+        :map-props="mapProps"
+        :operationWidth="operationWidth"
+        :config-options="tableOptions"
+        :data="tableData"
+        :selection="selection"
+        :operation="operation"
+        :expression="expresionGet"
+        :fetch="fetch"
+        :call="call"
+        :has-page="hasPage"
+      >
         <!-- S 顶部菜单 -->
 
         <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">

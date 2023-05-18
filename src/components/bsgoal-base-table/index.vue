@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-16 17:45:01
+ * @LastEditTime: 2023-05-18 10:05:33
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -111,7 +111,7 @@ const props = defineProps({
   },
   /**
    * 表格高度
-   * 
+   *
    *  默认 : 自动计算
    *  布尔值 : 默认表格高度
    *  字符串 : 直接赋值给 height
@@ -124,7 +124,7 @@ const props = defineProps({
   /**
    * 是否显示分页
    */
-  page: {
+  hasPage: {
     type: Boolean,
     default: true
   }
@@ -183,21 +183,28 @@ const tableLoading = ref(props.loading)
 const tableData = ref(props.data)
 const resData = ref({})
 const ping = () => {
-  const { fetch, call } = props
+  const { fetch, call, hasPage } = props
   const searchParamsVal = searchParams.value
   const currentPageVal = currentPage.value
   const pageSizeVal = pageSize.value
   const fetchParams = { ...searchParamsVal }
-
-  fetchParams[mapPropsFuse.currentPage] = currentPageVal
-  fetchParams[mapPropsFuse.pageSize] = pageSizeVal
+  // 显示分页的注入分页参数
+  if (hasPage) {
+    fetchParams[mapPropsFuse.currentPage] = currentPageVal
+    fetchParams[mapPropsFuse.pageSize] = pageSizeVal
+  }
 
   useFetch(fetch(fetchParams), call, tableLoading, resData)
 }
 
 watch(resData, (data) => {
-  tableData.value = data[mapPropsFuse.rows]
-  total.value = data[mapPropsFuse.total]
+  // 存在分页才注入
+  if (props.hasPage) {
+    tableData.value = data[mapPropsFuse.rows]
+    total.value = data[mapPropsFuse.total]
+  } else {
+    tableData.value = data
+  }
 })
 
 // 查询
@@ -235,13 +242,20 @@ defineExpose({
       <!-- E 表头操作区域 -->
       <!-- S 表格区域 -->
       <div ref="EL_TABLE_WRAP_REF">
-        <el-table stripe border highlight-current-row style="width: 100%" v-loading="tableLoading" :data="tableData"
+        <el-table
+          stripe
+          border
+          highlight-current-row
+          style="width: 100%"
+          v-loading="tableLoading"
+          :data="tableData"
           :header-cell-style="{
             fontWeight: 'bold',
             backgroundColor: '#EBEEF5',
             color: 'rgba(0,0,0,.85)',
             fontSize: '14px'
-          }">
+          }"
+        >
           <!-- / 无数据展示内容 -->
           <template #empty>
             <BsgoalBaseTableEmpty />
@@ -251,11 +265,28 @@ defineExpose({
           <el-table-column v-if="selection" fixed="left" type="selection" width="40" />
           <!-- / 多选 -->
           <!-- / 表格内容 -->
-          <template v-for="(
-              { prop = '', label = '', align = 'center', width = '', fixed = false, tooltip = false, limit = 0 } = {}, index
-            ) of configOptionsGet" :key="index">
-            <el-table-column :label="label" :align="align" :width="width" :fixed="fixed"
-              :min-width="`${label.length * 14 + 24}px`">
+          <template
+            v-for="(
+              {
+                prop = '',
+                label = '',
+                align = 'center',
+                width = '',
+                fixed = false,
+                tooltip = false,
+                limit = 0
+              } = {},
+              index
+            ) of configOptionsGet"
+            :key="index"
+          >
+            <el-table-column
+              :label="label"
+              :align="align"
+              :width="width"
+              :fixed="fixed"
+              :min-width="`${label.length * 14 + 24}px`"
+            >
               <template v-slot:default="{ row }">
                 <slot :name="prop" :row="row">
                   <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" />
@@ -270,8 +301,12 @@ defineExpose({
       <!-- E 表格区域 -->
 
       <!-- S 分页 -->
-      <BsgoalBaseTablePagination v-if="page" :total="total" @on-current-change="triggerPaginationCurrentChange"
-        @on-size-change="triggerPaginationSizeChange" />
+      <BsgoalBaseTablePagination
+        v-if="hasPage"
+        :total="total"
+        @on-current-change="triggerPaginationCurrentChange"
+        @on-size-change="triggerPaginationSizeChange"
+      />
       <!-- E 分页 -->
     </div>
   </div>
