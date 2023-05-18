@@ -17,7 +17,7 @@ export default defineConfig({
     target: ['edge80', 'firefox78', 'chrome60', 'safari11'],
     // 自定义底层的 Rollup 打包配置
     rollupOptions: {
-       external: ['element-plus','vue','@element-plus/icons-vue'],
+       external: ['element-plus','vue',],
       output: {
          globals: {
           vue: 'Vue',
