@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 18:13:00
+ * @LastEditTime: 2023-05-18 18:25:55
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -13,6 +13,7 @@
 ---------------------------------------------------------------- */
 import { ref, unref, computed } from 'vue'
 import { Delete, Plus } from '@element-plus/icons-vue'
+import { values } from 'lodash';
 
 // props
 const props = defineProps({
@@ -39,6 +40,10 @@ const props = defineProps({
     type: [String],
     default: 'add',
     validator: (v) => ['add', 'delete', 'edit', 'detail'].includes(v)
+  },
+  values: {
+    type: [Array, Object],
+    default: () => ({})
   }
 })
 
@@ -50,7 +55,7 @@ const triggerClick = () => {
   const taskValue = unref(task)
   taskValue(() => {
     loading.value = false
-  })
+  },props.values)
 }
 // ---> E 触发按钮 <---
 
