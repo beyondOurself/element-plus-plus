@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 10:13:34
+ * @LastEditTime: 2023-05-18 15:59:09
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, provide, useSlots, watch, watchEffect } from 'vue'
+import { ref, computed, unref, provide, useSlots } from 'vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import BsgoalBaseTable from '../bsgoal-base-table/index.vue'
 // props
@@ -167,12 +167,30 @@ const expresionGet = computed(() => {
   return expression
 })
 // ---> E 计算expression <---
+
+// ---> S 刷新 <---
+const BSGOAL_BASE_SEARCH_REF = ref(null)
+const refresh = () => {
+  const { hasSearch } = props
+  if (unref(hasSearch)) {
+    BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
+  }
+}
+// ---> E 刷新 <---
+
+// ---> S 暴露 <---
+
+defineExpose({
+  refresh
+})
+// ---> E 暴露 <---
 </script>
 <template>
   <div class="bsgoal-base-search-table">
     <div class="base_search_table">
       <!-- S 查询 -->
       <BsgoalBaseSearch
+        ref="BSGOAL_BASE_SEARCH_REF"
         v-show="hasSearch"
         :config-options="searchOptions"
         @on-search="triggerSearch"

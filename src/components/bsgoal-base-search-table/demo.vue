@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 10:12:16
+ * @LastEditTime: 2023-05-18 15:56:29
  * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -723,12 +723,18 @@ const fetch = (params) => {
     }, 3000)
   })
 }
+
+const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
+const test = () => {
+  BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()
+}
 </script>
 <template>
   <div class="bsgoal-search-table-demo">
     <div class="search_table_demo">
       <!-- <DemoTable /> -->
       <BsgoalBaseSearchTable
+        ref="BSGOAL_BASE_SEARCH_TABLE_REF"
         selection
         operation
         :call="call"
@@ -750,7 +756,7 @@ const fetch = (params) => {
         @on-search="triggerSearch"
       > -->
         <template v-slot:menu>
-          <el-button type="primary">操作按钮</el-button>
+          <el-button type="primary" @click="test">操作按钮</el-button>
         </template>
         <template v-slot:operation>
           <el-button type="primary">编辑</el-button>
