@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-06 11:33:21
+ * @LastEditTime: 2023-05-19 11:48:29
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -190,7 +190,11 @@ export default {
       :config-options="configOptions"
       :values="values"
       none="--"
-    />
+    >
+     <template #prop1="{option}">
+         <div>666 {{ option }}</div>
+     </template>
+    </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
   </div>
 </template>
