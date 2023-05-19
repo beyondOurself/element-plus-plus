@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-19 11:55:00
+ * @LastEditTime: 2023-05-19 14:00:05
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -328,7 +328,7 @@ defineExpose({
           >
             <el-col :xs="24" :sm="24" :md="medium">
               <el-form-item :label="label" :prop="prop" :rules="rules">
-                <slot :name="[prop]" :option="{ readonly, value: model[prop] }">
+                <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">
                   <!-- S 内容组件 -->
                   <template v-if="!readonly">
                     <!-- / input 输入框组件 -->
