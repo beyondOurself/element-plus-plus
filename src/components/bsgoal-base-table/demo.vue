@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-15 14:50:49
+ * @LastEditTime: 2023-05-19 14:39:05
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -159,56 +159,60 @@ let searchOptions = ref([
     prop: 'prop16'
   }
 ])
-const data = ref([
-  {
-    prop1: 'prop1',
-    prop2: 'prop2',
-    prop3: 'prop3',
-    prop4: 'prop4',
-    prop5: 'prop5',
-    prop6: 'prop6'
-  },
-  {
-    prop1: 'prop1',
-    prop2: 'prop2',
-    prop3: 'prop3',
-    prop4: 'prop4',
-    prop5: 'prop5',
-    prop6: 'prop6'
-  },
-  {
-    prop1: 'prop1',
-    prop2: 'prop2',
-    prop3: 'prop3',
-    prop4: 'prop4',
-    prop5: 'prop5',
-    prop6: 'prop6'
-  },
-  {
-    prop1: 'prop1',
-    prop2: 'prop2',
-    prop3: 'prop3',
-    prop4: 'prop4',
-    prop5: 'prop5',
-    prop6: 'prop6'
-  },
-  {
-    prop1: 'prop1',
-    prop2: 'prop2',
-    prop3: 'prop3',
-    prop4: 'prop4',
-    prop5: 'prop5',
-    prop6: 'prop6'
-  },
-  {
-    prop1: 'prop1',
-    prop2: 'prop2',
-    prop3: 'prop3',
-    prop4: 'prop4',
-    prop5: 'prop5',
-    prop6: 'prop6'
-  }
-])
+const data = ref([])
+
+setTimeout(() => {
+  data.value = [
+    {
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
+    },
+    {
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
+    },
+    {
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
+    },
+    {
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
+    },
+    {
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
+    },
+    {
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
+    }
+  ]
+}, 3000)
 
 const options = ref([
   {
@@ -247,8 +251,15 @@ const clearData = () => {
   <div class="bsgoal-base-table-demo">
     <!-- <BsgoalBaseSearch  :config-options="searchOptions" /> -->
     <el-button type="primary" @click="clearData">设置为空数据</el-button>
-    <BsgoalBaseTable operation-width="200" operation selection :page="false" :config-options="options" :data="data"
-      :auto-height="false">
+    <BsgoalBaseTable
+      operation-width="200"
+      operation
+      selection
+      :has-page="false"
+      :config-options="options"
+      :data="data"
+      :auto-height="false"
+    >
       <template v-slot:operation="{ row }">
         <div>
           <el-button type="primary">操作按钮</el-button>

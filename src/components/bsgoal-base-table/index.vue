@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 10:05:33
+ * @LastEditTime: 2023-05-19 14:44:28
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -180,7 +180,7 @@ const pageSize = ref(10)
 const total = ref(0)
 const searchParams = ref({})
 const tableLoading = ref(props.loading)
-const tableData = ref(props.data)
+const tableData =  ref()
 const resData = ref({})
 const ping = () => {
   const { fetch, call, hasPage } = props
@@ -196,6 +196,11 @@ const ping = () => {
 
   useFetch(fetch(fetchParams), call, tableLoading, resData)
 }
+
+
+watchEffect(() => {
+     tableData.value = props.data
+})
 
 watch(resData, (data) => {
   // 存在分页才注入
