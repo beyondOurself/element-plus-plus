@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-28 16:01:06
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-28 16:39:10
+ * @LastEditTime: 2023-05-19 17:52:36
  * @FilePath: \common\src\components\bsgoal-base-tabs\index.vue
  * @Description: tabs 标签页公共组件
  * 
@@ -47,9 +47,15 @@ const props = defineProps({
   modelValue: {
     type: [String],
     default: ''
+  },
+  /**
+   * 是否自动撑开
+   */
+  stretch: {
+    type: [Boolean],
+    default: false
   }
 })
-
 
 /**
  *  update:modelValue  // 更新 modelValue 的方法
@@ -65,7 +71,7 @@ const changeTab = (activeValue = '') => {
 <template>
   <div class="bsgoal-base-tabs">
     <el-tabs
-      stretch
+      :stretch="stretch"
       class="bsgoal_base_tabs"
       :type="type"
       :model-value="modelValue"
