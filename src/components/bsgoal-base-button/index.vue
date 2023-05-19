@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 18:25:55
+ * @LastEditTime: 2023-05-19 13:40:52
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -13,7 +13,6 @@
 ---------------------------------------------------------------- */
 import { ref, unref, computed } from 'vue'
 import { Delete, Plus } from '@element-plus/icons-vue'
-import { values } from 'lodash';
 
 // props
 const props = defineProps({
@@ -30,7 +29,7 @@ const props = defineProps({
   },
   icon: {
     type: [String, Object],
-    default: Plus
+    default: ''
   },
   content: {
     type: [String],
@@ -38,12 +37,16 @@ const props = defineProps({
   },
   mode: {
     type: [String],
-    default: 'add',
-    validator: (v) => ['add', 'delete', 'edit', 'detail'].includes(v)
+    default: 'default',
+    validator: (v) => ['add', 'delete', 'edit', 'detail','default'].includes(v)
   },
   values: {
     type: [Array, Object],
     default: () => ({})
+  },
+  plain: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -55,7 +58,7 @@ const triggerClick = () => {
   const taskValue = unref(task)
   taskValue(() => {
     loading.value = false
-  },props.values)
+  }, props.values)
 }
 // ---> E 触发按钮 <---
 
@@ -76,6 +79,8 @@ const iconGet = computed(() => {
   switch (mode) {
     case 'delete':
       return Delete
+    case 'add':
+      return Plus
   }
   return icon
 })
@@ -91,7 +96,9 @@ export default {
   <div class="bsgoal-base-button">
     <div class="base_button" @click="triggerClick">
       <slot :loading="loading">
-        <el-button :type="typeGet" :icon="iconGet" :loading="loading">{{ content }}</el-button>
+        <el-button :type="typeGet" :icon="iconGet" :loading="loading" :plain="plain">{{
+          content
+        }}</el-button>
       </slot>
     </div>
   </div>
