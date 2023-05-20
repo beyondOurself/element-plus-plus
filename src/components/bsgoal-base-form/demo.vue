@@ -29,6 +29,10 @@ const confirm = () => {
   })
 }
 
+
+
+
+
 // 配置项
 const configOptions = ref([
   {
@@ -191,9 +195,9 @@ export default {
       :values="values"
       none="--"
     >
-     <template #prop1="{option}">
+     <!-- <template #prop1="{option}">
          <div>666 {{ option }} </div>
-     </template>
+     </template> -->
     </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
   </div>

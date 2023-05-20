@@ -214,12 +214,12 @@ setTimeout(() => {
   ]
 }, 3000)
 
-const options = ref([
+const configOptionsTable = ref([
   {
     label: '列列列列列列列列列1',
     prop: 'prop1',
-    tooltip: true,
-    limit: 3
+    // tooltip: true,
+    // limit: 3
   },
   {
     label: '列列列列列列列列列2',
@@ -256,15 +256,17 @@ const clearData = () => {
       operation
       selection
       :has-page="false"
-      :config-options="options"
+      :config-options="configOptionsTable"
       :data="data"
       :auto-height="false"
     >
+      <!-- S 操作项 -->
       <template v-slot:operation="{ row }">
         <div>
-          <el-button type="primary">操作按钮</el-button>
+          {{ row }}
         </div>
       </template>
+      <!-- E 操作项 -->
     </BsgoalBaseTable>
   </div>
 </template>
