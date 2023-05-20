@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-28 16:01:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-20 15:51:07
+ * @LastEditTime: 2023-05-20 16:08:59
  * @FilePath: \common\src\components\bsgoal-base-tabs\demo.vue
  * @Description: tabs 标签切页 公共组件演示
 -->
@@ -42,7 +42,6 @@ const  config = ref([
 <template>
   <div class="bsgoal-base-tabs-demo">
     <div class="base_tabs_demo">
-      {{ activeTabName }}
       <BsgoalBaseTabs :config-options="config" > 
         <template #tab1>
           <div>

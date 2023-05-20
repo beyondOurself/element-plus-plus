@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-28 16:01:06
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-20 15:50:39
+ * @LastEditTime: 2023-05-20 16:12:26
  * @FilePath: \common\src\components\bsgoal-base-tabs\index.vue
  * @Description: tabs 标签页公共组件
  * 
@@ -16,7 +16,7 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref } from 'vue'
+import { ref, unref, computed } from 'vue'
 const props = defineProps({
   /**
    * 配置项
@@ -39,7 +39,7 @@ const props = defineProps({
   type: {
     type: [String],
     default: '',
-    validator: (v) => ['card', 'border-card'].includes(v)
+    validator: (v) => ['card', 'border-card', ''].includes(v)
   },
   /**
    * 组件绑定的值
@@ -65,12 +65,12 @@ const emits = defineEmits(['update:modelValue'])
 // ---> S modelValue Get <---
 
 // ---> E modelValue Get <---
-const modelValueGet = () => {
+const modelValueGet = computed(() => {
   const { modelValue = '', configOptions = [] } = props
   const nameList = unref(configOptions).map((mi) => mi.value)
-  const actionName = unref(modelValue) 
+  const actionName = unref(modelValue)
   return actionName || nameList[0]
-}
+})
 // ---> S tab的切换 <---
 const changeTab = (activeValue = '') => {
   emits('update:modelValue', activeValue)
