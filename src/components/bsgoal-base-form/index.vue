@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-19 14:00:05
+ * @LastEditTime: 2023-05-20 17:51:39
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -80,6 +80,13 @@ const props = defineProps({
   none: {
     type: [String],
     default: '无'
+  },
+  /**
+   * 绑定的 mdel
+   */
+  bindModel: {
+    type: [Object],
+    default: () => ({})
   }
 })
 
@@ -92,7 +99,7 @@ const EL_FORM_REF = ref(null)
 // 自定义指令
 const vAlign = baseDirective.align
 
-const model = ref({})
+const model = ref(props.bindModel)
 const watchPropList = []
 
 /**
@@ -111,7 +118,10 @@ watchEffect(() => {
     if (![EnumType.INPUT, EnumType.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
-    model.value[prop] = valuesModel[prop] || value
+    const bindValue = unref(model)[prop]
+    console.log('bindValue',bindValue);
+    console.log('valuesModel[prop]',valuesModel[prop]);
+    model.value[prop] = bindValue || valuesModel[prop] || value
   })
 })
 

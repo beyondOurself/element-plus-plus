@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-19 14:00:24
+ * @LastEditTime: 2023-05-20 17:54:12
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -16,7 +16,7 @@ import { ref, computed, toRefs, watch, unref } from 'vue'
 import EnumType from '../../enums/enumType.js'
 
 const values = ref({
-  prop1: '112123123123123123',
+  prop1:'222',
   prop2: 'select1',
   prop20: ''
 })
@@ -29,7 +29,7 @@ const confirm = () => {
   })
 }
 
-
+const bindModel = ref({prop1:'111'})
 
 
 
@@ -188,12 +188,12 @@ export default {
 <template>
   <div class="bsgoal-base-form-demo">
     <BsgoalBaseForm
-      readonly
       ref="BSGOAL_BASE_FORM_REF"
+      readonly
+      none="--"
       :limits="10"
       :config-options="configOptions"
       :values="values"
-      none="--"
     >
      <!-- <template #prop1="{option}">
          <div>666 {{ option }} </div>
