@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-14 10:50:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 15:34:10
+ * @LastEditTime: 2023-05-22 15:43:38
  * @FilePath: \common\src\directives\directiveBase.js
  * @Description: 常用的公共指令
  *
@@ -21,6 +21,7 @@ const autoAlign = (el) => {
    * 计算lable长度
    */
   const calcLabelWidth = (elInfoList = []) => {
+    console.log('elInfoList',elInfoList);
     const widthList = elInfoList.map((mi) => mi.width)
     const maxWidth = Math.max(...widthList)
     elInfoList.forEach((fi) => {
@@ -62,7 +63,7 @@ const autoAlign = (el) => {
     sortingLabelEl()
     calcLabelWidth(labelElLeftList)
     calcLabelWidth(labelElRightList)
-  }, 500)
+  }, 1000)
 }
 
 export default {
