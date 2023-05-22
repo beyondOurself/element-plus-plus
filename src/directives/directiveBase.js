@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-14 10:50:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-21 09:33:00
+ * @LastEditTime: 2023-05-22 15:34:10
  * @FilePath: \common\src\directives\directiveBase.js
  * @Description: 常用的公共指令
  *
@@ -62,7 +62,7 @@ const autoAlign = (el) => {
     sortingLabelEl()
     calcLabelWidth(labelElLeftList)
     calcLabelWidth(labelElRightList)
-  }, 50)
+  }, 500)
 }
 
 export default {
@@ -71,6 +71,7 @@ export default {
    */
   align: {
     created(el) {
+      console.log('el',el);
       window.addEventListener('resize', () => {
         autoAlign(el)
       })

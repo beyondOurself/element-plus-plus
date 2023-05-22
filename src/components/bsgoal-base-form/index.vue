@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 14:18:39
+ * @LastEditTime: 2023-05-22 15:37:49
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -87,6 +87,14 @@ const props = defineProps({
   bindModel: {
     type: [Object],
     default: () => ({})
+  },
+  /**
+   * label 位置
+   */
+  labelPosition: {
+    type: [String],
+    default: 'right',
+    validator: (v) => ['left', 'rightn', 'top'].includes(v)
   }
 })
 
@@ -343,7 +351,13 @@ defineExpose({
   <div class="bsgoal-base-form">
     <div class="base_form">
       <!-- / 表单内容 -->
-      <el-form ref="EL_FORM_REF" label-suffix=":" :model="model" v-align>
+      <el-form
+        ref="EL_FORM_REF"
+        label-suffix=":"
+        :label-position="labelPosition"
+        :model="model"
+        v-align
+      >
         <el-row>
           <template
             v-for="(
