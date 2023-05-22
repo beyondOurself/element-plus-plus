@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-20 17:54:12
+ * @LastEditTime: 2023-05-22 11:00:54
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -16,7 +16,7 @@ import { ref, computed, toRefs, watch, unref } from 'vue'
 import EnumType from '../../enums/enumType.js'
 
 const values = ref({
-  prop1:'222',
+  prop1: '222',
   prop2: 'select1',
   prop20: ''
 })
@@ -29,12 +29,17 @@ const confirm = () => {
   })
 }
 
-const bindModel = ref({prop1:'111'})
-
-
+const bindModel = ref({ prop1: '111' })
 
 // 配置项
 const configOptions = ref([
+  {
+    label: 'prop99',
+    prop: 'prop99',
+    value: 0,
+    type: EnumType.INPUT_NUMBER,
+    max: '10'
+  },
   {
     label: 'prop1',
     // value: '111',
@@ -88,7 +93,11 @@ const configOptions = ref([
     label: 'prop4',
     // value: '111',
     type: EnumType.SWITCH,
-    prop: 'prop4'
+    prop: 'prop4',
+    range: [
+      { label: '是', value: 1 },
+      { label: '否', value: 0 }
+    ]
   },
   {
     label: 'prop5',
@@ -195,7 +204,7 @@ export default {
       :config-options="configOptions"
       :values="values"
     >
-     <!-- <template #prop1="{option}">
+      <!-- <template #prop1="{option}">
          <div>666 {{ option }} </div>
      </template> -->
     </BsgoalBaseForm>

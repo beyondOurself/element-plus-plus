@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-20 17:51:39
+ * @LastEditTime: 2023-05-22 10:59:06
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -119,8 +119,8 @@ watchEffect(() => {
       watchPropList.push(prop)
     }
     const bindValue = unref(model)[prop]
-    console.log('bindValue',bindValue);
-    console.log('valuesModel[prop]',valuesModel[prop]);
+    console.log('bindValue', bindValue)
+    console.log('valuesModel[prop]', valuesModel[prop])
     model.value[prop] = bindValue || valuesModel[prop] || value
   })
 })
@@ -303,6 +303,37 @@ const validateForm = (callback = () => {}) => {
   })
 }
 
+// ---> S switch active/inactive 的设置 <---
+
+/**
+ * @Author: canlong.shen
+ * @description: 设置 active 值
+ * @param {*} range 入参
+ * @param {*} type  'active' / 'inactive'
+ * @default:
+ * @return {*}
+ */
+const setActiveValueText = (range = [], type = '') => {
+  const { 0: startOption = {}, 1: endOption = {} } = range
+  const { value: startValue = false, label: startText = '' } = startOption
+  const { value: endValue = false, label: endText = '' } = endOption
+
+  switch (type) {
+    case 'active-value':
+      return startValue
+    case 'inactive-value':
+      return endValue
+    case 'active-text':
+      return startText
+    case 'inactive-text':
+      return endText
+    default:
+      break
+  }
+}
+
+// ---> E switch active/inactive 的设置 <---
+
 defineExpose({
   triggerOperationClear,
   triggerOperationForm,
@@ -412,8 +443,10 @@ defineExpose({
                     <template v-if="type === EnumType.SWITCH">
                       <el-switch
                         v-model="model[prop]"
-                        :active-value="range[0] || true"
-                        :inactive-value="range[1] || false"
+                        :active-value="setActiveValueText(range, 'active-value')"
+                        :inactive-value="setActiveValueText(range, 'inactive-value')"
+                        :active-text="setActiveValueText(range, 'active-text')"
+                        :inactive-text="setActiveValueText(range, 'inactive-text')"
                         @change="triggerValueChange(type, prop)"
                       />
                     </template>
