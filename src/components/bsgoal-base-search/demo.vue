@@ -18,7 +18,7 @@ export default {
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseSearch from './index.vue'
-import EnumType from '../../enums/enumType.js'
+import EnumType from '../../enums/componentTypeEnums.js'
 
  const searchModelValue = ref({})
 

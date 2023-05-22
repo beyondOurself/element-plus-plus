@@ -19,7 +19,7 @@ import { ref, computed, toRefs, watch, unref } from 'vue'
 
 import BsgoalBaseTable from './index.vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
-import EnumType from '../../enums/enumType.js'
+import EnumType from '../../enums/componentTypeEnums.js'
 let searchOptions = ref([
   {
     label: 'prop1',

@@ -17,7 +17,7 @@ export default {
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, unref } from 'vue'
-import EnumType from '../../enums/enumType.js'
+import EnumType from '../../enums/componentTypeEnums.js'
 import BsgoalBaseSearchTable from './index.vue'
 import DemoTable from './demo-table.vue'
 import BsgoalBaseButton from '../bsgoal-base-button/index.vue'

@@ -17,7 +17,7 @@ export default {
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, computed, unref, watchEffect } from 'vue'
-import EnumType from '../../enums/enumType.js'
+import EnumType from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
 import { ElMessage } from 'element-plus'
 import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
@@ -29,7 +29,7 @@ const props = defineProps({
    *      label:'' //  名称
    *      value:'' //  值
    *      prop:''  //  绑定字段
-   *      type:'text'  //  内容组件的类型 : 参照 enumType
+   *      type:'text'  //  内容组件的类型 : 参照 compoentTypeEnums
    *      placeholder:''  // placeholder 提示文本
    *      readonly: false  // 是否为只读文本
    *      clearable:  true  //是否为可清空

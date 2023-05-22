@@ -13,7 +13,7 @@
 ---------------------------------------------------------------- */
 import BsgoalBaseForm from './index.vue'
 import { ref, computed, toRefs, watch, unref } from 'vue'
-import EnumType from '../../enums/enumType.js'
+import EnumType from '../../enums/componentTypeEnums.js'
 
 const values = ref({
   prop1: '222',
