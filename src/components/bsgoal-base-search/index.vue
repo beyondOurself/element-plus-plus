@@ -31,7 +31,7 @@ const props = defineProps({
    *      label:'' //  名称
    *      value:'' //  值
    *      prop:''  //  绑定字段
-   *      type:'text'  //  内容组件的类型 : 参照 compoentTypeEnums
+   *      type:'text'  //  内容组件的类型 : 参照 componentTypeEnums
    *      placeholder:''  // placeholder 提示文本
    *      readonly: false  // 是否为只读文本
    *      clearable:  true  //是否为可清空

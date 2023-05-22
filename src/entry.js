@@ -8,11 +8,11 @@ import BsgoalBaseTabs from '@/components/bsgoal-base-tabs/index.vue'
 import BsgoalBaseLink from '@/components/bsgoal-base-link/index.vue'
 import BsgoalBaseButton from '@/components/bsgoal-base-button/index.vue'
 import BsgoalBaseLayout from '@/components/bsgoal-base-layout/index.vue'
-import compoentTypeEnums from '@/enums/compoentTypeEnums.js'
+import componentTypeEnums from '@/enums/componentTypeEnums.js'
 import { useFetch } from '@/combines/useFetchs.js'
 
 
-export const CompoentTypeEnums = compoentTypeEnums
+export const ComponentTypeEnums = componentTypeEnums
 export const useFetchApi = useFetch
 
 export default {
@@ -38,6 +38,6 @@ export default {
       }
     }
   },
-  CompoentTypeEnums,
+  ComponentTypeEnums,
   useFetch
 }
