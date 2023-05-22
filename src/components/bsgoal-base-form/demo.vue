@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 11:00:54
+ * @LastEditTime: 2023-05-22 11:21:29
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -29,7 +29,7 @@ const confirm = () => {
   })
 }
 
-const bindModel = ref({ prop1: '111' })
+const bindModel = ref({ prop1: '111',prop99:1 })
 
 // 配置项
 const configOptions = ref([
@@ -38,7 +38,7 @@ const configOptions = ref([
     prop: 'prop99',
     value: 0,
     type: EnumType.INPUT_NUMBER,
-    max: '10'
+    max: 'max'
   },
   {
     label: 'prop1',
@@ -202,7 +202,7 @@ export default {
       none="--"
       :limits="10"
       :config-options="configOptions"
-      :values="values"
+      :bind-model="bindModel"
     >
       <!-- <template #prop1="{option}">
          <div>666 {{ option }} </div>

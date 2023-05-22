@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 10:59:06
+ * @LastEditTime: 2023-05-22 11:23:57
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -119,8 +119,7 @@ watchEffect(() => {
       watchPropList.push(prop)
     }
     const bindValue = unref(model)[prop]
-    console.log('bindValue', bindValue)
-    console.log('valuesModel[prop]', valuesModel[prop])
+    // console.log(prop,'valuesModel[prop]',bindValue)
     model.value[prop] = bindValue || valuesModel[prop] || value
   })
 })
@@ -344,7 +343,7 @@ defineExpose({
   <div class="bsgoal-base-form">
     <div class="base_form">
       <!-- / 表单内容 -->
-      <el-form ref="EL_FORM_REF" label-suffix=":" :model="model" v-align>
+      <el-form ref="EL_FORM_REF" label-suffix=":" :model="model" v-align >
         <el-row>
           <template
             v-for="(
@@ -396,7 +395,8 @@ defineExpose({
                     <!-- / textarea 输入框组件 -->
                     <template v-if="type === EnumType.INPUT_NUMBER">
                       <el-input-number
-                        v-model="num"
+                        v-model="model[prop]"
+                        controls-position="right"
                         :min="min"
                         :max="max"
                         @change="triggerValueChange"
