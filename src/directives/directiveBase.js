@@ -2,14 +2,14 @@
  * @Author: canlong.shen
  * @Date: 2023-04-14 10:50:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 15:43:38
+ * @LastEditTime: 2023-05-22 15:55:30
  * @FilePath: \common\src\directives\directiveBase.js
  * @Description: 常用的公共指令
  *
  */
 
-let timeoutID = null
 const autoAlign = (el) => {
+   let timeoutID = null
   //指令所在组件的 VNode 及其子 VNode 全部更新后调用。
   /**
    * label集合
@@ -21,7 +21,6 @@ const autoAlign = (el) => {
    * 计算lable长度
    */
   const calcLabelWidth = (elInfoList = []) => {
-    console.log('elInfoList',elInfoList);
     const widthList = elInfoList.map((mi) => mi.width)
     const maxWidth = Math.max(...widthList)
     elInfoList.forEach((fi) => {
@@ -59,11 +58,11 @@ const autoAlign = (el) => {
     clearTimeout(timeoutID)
   }
   // 开始计算
-  timeoutID = setTimeout(() => {
+   timeoutID = setTimeout(() => {
     sortingLabelEl()
     calcLabelWidth(labelElLeftList)
     calcLabelWidth(labelElRightList)
-  }, 1000)
+  }, 50)
 }
 
 export default {
@@ -72,7 +71,6 @@ export default {
    */
   align: {
     created(el) {
-      console.log('el',el);
       window.addEventListener('resize', () => {
         autoAlign(el)
       })
