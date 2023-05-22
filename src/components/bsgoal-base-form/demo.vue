@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 17:56:31
+ * @LastEditTime: 2023-05-22 18:30:34
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -29,12 +29,12 @@ const confirm = () => {
   })
 }
 
-const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '1' })
+const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0' })
 
 // 配置项
 const configOptions = ref([
   {
-    label: 'prop1011111111111111',
+    label: '11',
     prop: 'prop101',
     type: EnumType.CHECKBOX_SINGLE,
     show: { prop102: ['1'] },

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 18:18:44
+ * @LastEditTime: 2023-05-22 18:46:18
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -413,7 +413,7 @@ defineExpose({
             ) of configOptionsGet"
             :key="key"
           >
-            <el-col v-show="visible" :xs="24" :sm="24" :md="medium">
+            <el-col :class="{ 'base_form--visible': !visible }" :xs="24" :sm="24" :md="medium">
               <el-form-item :label="label" :prop="prop" :rules="rules">
                 <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">
                   <!-- S 内容组件 -->
@@ -622,6 +622,11 @@ defineExpose({
     div.el-select {
       width: 100%;
     }
+  }
+  .base_form--visible {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
   }
 }
 </style>
