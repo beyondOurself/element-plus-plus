@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 11:23:57
+ * @LastEditTime: 2023-05-22 11:46:09
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -360,11 +360,12 @@ defineExpose({
                 range = [],
                 format = '',
                 rules = [],
-                limit = limits
+                limit = limits,
+                length = 255
               } = {},
-              index
+              key
             ) of configOptionsGet"
-            :key="index"
+            :key="key"
           >
             <el-col :xs="24" :sm="24" :md="medium">
               <el-form-item :label="label" :prop="prop" :rules="rules">
@@ -385,8 +386,10 @@ defineExpose({
                     <template v-if="type === EnumType.INPUT_TEXT_AREA">
                       <el-input
                         v-model="model[prop]"
+                        show-word-limit
                         type="textarea"
-                        :rows="rows"
+                        :autosize="{ minRows: rows }"
+                        :maxlength="length"
                         :clearable="clearable"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
