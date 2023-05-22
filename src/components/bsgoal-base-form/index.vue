@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 15:37:49
+ * @LastEditTime: 2023-05-22 18:18:44
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -16,11 +16,13 @@ export default {
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, watchEffect } from 'vue'
+import { ref, computed, unref, watchEffect, watch } from 'vue'
 import EnumType from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
-import { ElMessage } from 'element-plus'
 import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
+import { ElMessage } from 'element-plus'
+import { isObject } from '../../utils/common.js'
+import { isBoolean } from 'lodash'
 // props
 const props = defineProps({
   /**
@@ -110,6 +112,31 @@ const vAlign = baseDirective.align
 const model = ref(props.bindModel)
 const watchPropList = []
 
+// ---> S 初始值 <---
+/**
+ * @Author: canlong.shen
+ * @description:
+ * @default:
+ * @return {*}
+ */
+const watchPropsForShow = (show = {}, model = {}, prop = '') => {
+  // { prop1:[1,2,3] , prop2: [4,5,6] }
+  watchEffect(() => {
+    const resultList = []
+    for (const [name = '', values = []] of Object.entries(show)) {
+      resultList.push(values.includes(`${model[name]}`))
+    }
+    const { configOptions } = props
+    const options = unref(configOptions)
+    const findProp = options.find((fi) => fi.prop === prop)
+    if (resultList.every((ei) => !!ei)) {
+      findProp.visible = true
+    } else {
+      findProp.visible = false
+    }
+  })
+}
+
 /**
  * @Author: canlong.shen
  * @description: 绑定的对象
@@ -122,15 +149,21 @@ watchEffect(() => {
   const options = unref(configOptions)
   const valuesModel = unref(values)
   options.forEach((fei) => {
-    const { value = '', prop = '', type = '' } = fei
+    const { value = '', prop = '', type = '', show = null } = fei
     if (![EnumType.INPUT, EnumType.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
     const bindValue = unref(model)[prop]
-    // console.log(prop,'valuesModel[prop]',bindValue)
+
     model.value[prop] = bindValue || valuesModel[prop] || value
+
+    if (isObject(show)) {
+      watchPropsForShow(show, unref(model), prop)
+    }
   })
 })
+
+// ---> E 初始值 <---
 
 /**
  * @Author: canlong.shen
@@ -143,16 +176,14 @@ const configOptionsGet = computed(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   const reOptions = options.map((option) => {
-    let { rules = false, label = '' } = option
+    let { rules = [], label = '' } = option
     const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
-    if (rules) {
-      if (typeof rules === 'boolean') {
-        rules = [requiredRule]
-      } else if (Array.isArray(rules)) {
-        rules = [requiredRule, ...rules]
-      } else {
-        rules = [requiredRule, rules]
-      }
+    if (isBoolean(rules) && rules) {
+      rules = [requiredRule]
+    } else if (Array.isArray(rules) && !!rules.length) {
+      rules = [requiredRule, ...rules]
+    } else {
+      rules = []
     }
     option.rules = rules
     return option
@@ -375,13 +406,14 @@ defineExpose({
                 format = '',
                 rules = [],
                 limit = limits,
-                length = 255
+                length = 255,
+                visible = true
               } = {},
               key
             ) of configOptionsGet"
             :key="key"
           >
-            <el-col :xs="24" :sm="24" :md="medium">
+            <el-col v-show="visible" :xs="24" :sm="24" :md="medium">
               <el-form-item :label="label" :prop="prop" :rules="rules">
                 <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">
                   <!-- S 内容组件 -->

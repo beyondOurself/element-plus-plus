@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 15:56:58
+ * @LastEditTime: 2023-05-22 17:56:31
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -29,7 +29,7 @@ const confirm = () => {
   })
 }
 
-const bindModel = ref({ prop1: '111', prop99: 1 ,prop101:'否'})
+const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '1' })
 
 // 配置项
 const configOptions = ref([
@@ -37,13 +37,23 @@ const configOptions = ref([
     label: 'prop1011111111111111',
     prop: 'prop101',
     type: EnumType.CHECKBOX_SINGLE,
+    show: { prop102: ['1'] },
     range: [
       {
         value: '是'
       },
       {
         value: '否'
-      },
+      }
+    ]
+  },
+  {
+    type: EnumType.SWITCH,
+    label:'prop102',
+    prop: 'prop102',
+    range: [
+      { label: '是', value: '1' },
+      { label: '否', value: '0' }
     ]
   },
   {
@@ -66,7 +76,7 @@ const configOptions = ref([
     prop: 'prop1',
     type: EnumType.INPUT,
     width: '100px',
-    rules: true,
+    rules: [],
     readonly: true
   },
   {
@@ -75,7 +85,7 @@ const configOptions = ref([
     prop: 'prop20',
     type: EnumType.INPUT,
     width: '100px',
-    rules: true,
+    rules: [],
     readonly: true
   },
   {
