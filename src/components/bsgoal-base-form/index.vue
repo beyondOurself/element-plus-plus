@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 11:46:09
+ * @LastEditTime: 2023-05-22 14:00:52
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -343,7 +343,7 @@ defineExpose({
   <div class="bsgoal-base-form">
     <div class="base_form">
       <!-- / 表单内容 -->
-      <el-form ref="EL_FORM_REF" label-suffix=":" :model="model" v-align >
+      <el-form ref="EL_FORM_REF" label-suffix=":" :model="model" v-align>
         <el-row>
           <template
             v-for="(
@@ -527,6 +527,17 @@ defineExpose({
                       </el-checkbox-group>
                     </template>
                     <!-- / 复选框 -->
+                    <!-- / 复选框单选 -->
+                    <template v-if="[EnumType.CHECKBOX_SINGLE].includes(type)">
+                      <el-checkbox
+                        v-model="model[prop]"
+                        :label="label"
+                        :true-label="range[0] ? range[0].value : '1'"
+                        :false-label="range[1] ? range[1].value : '0'"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / 复选框单选 -->
                     <!-- / 模板 -->
                     <template v-if="[].includes(type)"> </template>
                     <!-- / 模板 -->

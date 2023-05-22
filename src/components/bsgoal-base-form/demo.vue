@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 11:47:01
+ * @LastEditTime: 2023-05-22 14:03:09
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -29,15 +29,28 @@ const confirm = () => {
   })
 }
 
-const bindModel = ref({ prop1: '111', prop99: 1 })
+const bindModel = ref({ prop1: '111', prop99: 1 ,prop101:'否'})
 
 // 配置项
 const configOptions = ref([
   {
+    label: 'prop101',
+    prop: 'prop101',
+    type: EnumType.CHECKBOX_SINGLE,
+    range: [
+      {
+        value: '是'
+      },
+      {
+        value: '否'
+      },
+    ]
+  },
+  {
     label: 'prop100',
     prop: 'prop100',
-    rows:4,
-    length:1000,
+    rows: 4,
+    length: 1000,
     type: EnumType.INPUT_TEXT_AREA
   },
   {
@@ -203,6 +216,7 @@ export default {
 </script>
 <template>
   <div class="bsgoal-base-form-demo">
+    {{ bindModel }}
     <BsgoalBaseForm
       ref="BSGOAL_BASE_FORM_REF"
       readonly

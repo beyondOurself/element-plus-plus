@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 16:20:09
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 16:05:15
+ * @LastEditTime: 2023-05-22 13:48:05
  * @FilePath: \common\src\enums\enumType.js
  * @Description: 组件类型 枚举
  * 
@@ -29,4 +29,5 @@ export default {
   DATE_TIME_RANGE: 'datetimerange',
   OPERATION: 'operation',
   CASCADER: 'cascader',
+  CHECKBOX_SINGLE: 'checkboxsingle',
 }
