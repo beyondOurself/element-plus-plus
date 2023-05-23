@@ -19,18 +19,18 @@ import { ref, computed, toRefs, watch, unref } from 'vue'
 
 import BsgoalBaseTable from './index.vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
-import EnumType from '../../enums/componentTypeEnums.js'
+import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 let searchOptions = ref([
   {
     label: 'prop1',
     // value: '111',
     prop: 'prop1',
-    type: EnumType.INPUT
+    type: ComponentTypeEnums.INPUT
   },
   {
     label: 'prop2',
     value: 'select2',
-    type: EnumType.SELECT,
+    type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
     range: [
       {
@@ -54,19 +54,19 @@ let searchOptions = ref([
   {
     label: 'prop3',
     // value: '111',
-    type: EnumType.SLIDER,
+    type: ComponentTypeEnums.SLIDER,
     prop: 'prop3'
   },
   {
     label: 'prop4',
     // value: '111',
-    type: EnumType.SWITCH,
+    type: ComponentTypeEnums.SWITCH,
     prop: 'prop4'
   },
   {
     label: 'prop5',
     // value: '111',
-    type: EnumType.RADIO,
+    type: ComponentTypeEnums.RADIO,
     prop: 'prop5',
     range: [
       {
@@ -82,7 +82,7 @@ let searchOptions = ref([
   {
     label: 'prop6',
     value: [],
-    type: EnumType.CHECKBOX,
+    type: ComponentTypeEnums.CHECKBOX,
     prop: 'prop6',
     range: [
       {
@@ -98,64 +98,64 @@ let searchOptions = ref([
   {
     label: 'prop7',
     // value: '111',
-    type: EnumType.DATE,
+    type: ComponentTypeEnums.DATE,
     prop: 'prop7',
     format: 'YYYY-MM-DD'
   },
   // {
   //     label: 'prop8',
   //     // value: '111',
-  //     type: EnumType.WEEK,
+  //     type: ComponentTypeEnums.WEEK,
   //     prop: 'prop8'
 
   // },
   {
     label: 'prop9',
     // value: '111',
-    type: EnumType.MONTH,
+    type: ComponentTypeEnums.MONTH,
     prop: 'prop9'
   },
   {
     label: 'prop10',
     // value: '111',
-    type: EnumType.YEAR,
+    type: ComponentTypeEnums.YEAR,
     prop: 'prop10'
   },
   {
     label: 'prop11',
     // value: '111',
-    type: EnumType.DATE_RANGE,
+    type: ComponentTypeEnums.DATE_RANGE,
     prop: 'prop11',
     range: ['startDate', 'endDate']
   },
   {
     label: 'prop12',
     // value: '111',
-    type: EnumType.MONTH_RANGE,
+    type: ComponentTypeEnums.MONTH_RANGE,
     prop: 'prop12'
   },
   {
     label: 'prop13',
     // value: '111',
-    type: EnumType.TIME,
+    type: ComponentTypeEnums.TIME,
     prop: 'prop13'
   },
   {
     label: 'prop14',
     // value: '111',
-    type: EnumType.TIME_RANGE,
+    type: ComponentTypeEnums.TIME_RANGE,
     prop: 'prop14'
   },
   {
     label: 'prop15',
     // value: '111',
-    type: EnumType.DATE_TIME,
+    type: ComponentTypeEnums.DATE_TIME,
     prop: 'prop15'
   },
   {
     label: 'prop16',
     // value: '111',
-    type: EnumType.DATE_TIME_RANGE,
+    type: ComponentTypeEnums.DATE_TIME_RANGE,
     prop: 'prop16'
   }
 ])

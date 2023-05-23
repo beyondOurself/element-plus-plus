@@ -17,7 +17,7 @@ export default {
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, computed, unref, watchEffect, inject, nextTick, toRaw, isProxy } from 'vue'
-import EnumType from '../../enums/componentTypeEnums.js'
+import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
@@ -88,7 +88,7 @@ watchEffect(() => {
   const options = unref(configOptions)
   options.forEach((fei) => {
     const { value, prop = '', type = '' } = fei
-    if (![EnumType.INPUT, EnumType.INPUT_TEXT_AREA].includes(type)) {
+    if (![ComponentTypeEnums.INPUT, ComponentTypeEnums.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
     model.value[prop] = [0, false].includes(value) ? value : ''
@@ -106,7 +106,7 @@ const configOptionsGet = computed(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   const operationItemOption = {
-    type: EnumType.OPERATION
+    type: ComponentTypeEnums.OPERATION
   }
   return [...options, operationItemOption]
 })
@@ -122,24 +122,24 @@ const configOptionsGet = computed(() => {
 const placeholderSet = (type = '', label = '', placeholder = '') => {
   if (!placeholder) {
     switch (type) {
-      case EnumType.INPUT:
-      case EnumType.INPUT_TEXT_AREA:
+      case ComponentTypeEnums.INPUT:
+      case ComponentTypeEnums.INPUT_TEXT_AREA:
         return `请输入${label}`
-      case EnumType.SELECT:
-      case EnumType.DATE:
-      case EnumType.WEEK:
-      case EnumType.MONTH:
-      case EnumType.YEAR:
-      case EnumType.DATE_TIME:
-      case EnumType.TIME:
-      case EnumType.CASCADER:
+      case ComponentTypeEnums.SELECT:
+      case ComponentTypeEnums.DATE:
+      case ComponentTypeEnums.WEEK:
+      case ComponentTypeEnums.MONTH:
+      case ComponentTypeEnums.YEAR:
+      case ComponentTypeEnums.DATE_TIME:
+      case ComponentTypeEnums.TIME:
+      case ComponentTypeEnums.CASCADER:
         return `请选择${label}`
-      case EnumType.DATE_RANGE:
-      case EnumType.DATE_TIME_RANGE:
+      case ComponentTypeEnums.DATE_RANGE:
+      case ComponentTypeEnums.DATE_TIME_RANGE:
         return ['开始日期', '结束日期']
-      case EnumType.TIME_RANGE:
+      case ComponentTypeEnums.TIME_RANGE:
         return ['开始时间', '结束时间']
-      case EnumType.MONTH_RANGE:
+      case ComponentTypeEnums.MONTH_RANGE:
         return ['开始月份', '结束月份']
       default:
         break
@@ -160,22 +160,22 @@ const placeholderSet = (type = '', label = '', placeholder = '') => {
 const formatSet = (type = '', format = '') => {
   if (!format) {
     switch (type) {
-      case EnumType.WEEK:
+      case ComponentTypeEnums.WEEK:
         return 'ww'
-      case EnumType.DATE:
-      case EnumType.DATE_RANGE:
+      case ComponentTypeEnums.DATE:
+      case ComponentTypeEnums.DATE_RANGE:
         return 'YYYY-MM-DD'
-      case EnumType.MONTH:
+      case ComponentTypeEnums.MONTH:
         return 'MM'
-      case EnumType.YEAR:
+      case ComponentTypeEnums.YEAR:
         return 'YYYY'
-      case EnumType.MONTH_RANGE:
+      case ComponentTypeEnums.MONTH_RANGE:
         return 'YYYY-MM'
-      case EnumType.TIME:
-      case EnumType.TIME_RANGE:
+      case ComponentTypeEnums.TIME:
+      case ComponentTypeEnums.TIME_RANGE:
         return 'HH:mm:ss'
-      case EnumType.DATE_TIME:
-      case EnumType.DATE_TIME_RANGE:
+      case ComponentTypeEnums.DATE_TIME:
+      case ComponentTypeEnums.DATE_TIME_RANGE:
         return 'YYYY-MM-DD HH:mm:ss'
       default:
         break
@@ -199,7 +199,7 @@ const triggerOperationSearch = () => {
   for (const option of options) {
     const { type = '', range = [], prop = '', single = false } = option
     const value = modelValue[prop]
-    if ([EnumType.CASCADER].includes(type) && Array.isArray(value) && single) {
+    if ([ComponentTypeEnums.CASCADER].includes(type) && Array.isArray(value) && single) {
       const rangeLength = value.length
       if (rangeLength) {
         shadowModel[prop] = value[rangeLength - 1]
@@ -305,7 +305,7 @@ defineExpose({
             :key="index"
           >
             <el-col
-              v-show="index < 7 || type === EnumType.OPERATION || (index >= 7 && foldStatus)"
+              v-show="index < 7 || type === ComponentTypeEnums.OPERATION || (index >= 7 && foldStatus)"
               :xs="24"
               :sm="12"
               :md="medium"
@@ -315,7 +315,7 @@ defineExpose({
 
                 <template v-if="!readonly">
                   <!-- / input 输入框组件 -->
-                  <template v-if="type === EnumType.INPUT">
+                  <template v-if="type === ComponentTypeEnums.INPUT">
                     <el-input
                       v-model="model[prop]"
                       :placeholder="placeholderSet(type, label, placeholder)"
@@ -324,7 +324,7 @@ defineExpose({
                   </template>
                   <!-- / input 输入框组件 -->
                   <!-- / textarea 输入框组件 -->
-                  <template v-if="type === EnumType.INPUT_TEXT_AREA">
+                  <template v-if="type === ComponentTypeEnums.INPUT_TEXT_AREA">
                     <el-input
                       v-model="model[prop]"
                       type="textarea"
@@ -335,7 +335,7 @@ defineExpose({
                     />
                   </template>
                   <!-- / textarea 输入框组件 -->
-                  <template v-if="type === EnumType.INPUT_NUMBER">
+                  <template v-if="type === ComponentTypeEnums.INPUT_NUMBER">
                     <el-input-number
                       v-model="num"
                       :min="min"
@@ -346,7 +346,7 @@ defineExpose({
                   <!-- / 数字输入框 -->
 
                   <!-- / 单选框 -->
-                  <template v-if="type === EnumType.RADIO">
+                  <template v-if="type === ComponentTypeEnums.RADIO">
                     <el-radio-group v-model="model[prop]" @change="triggerValueChange(type, prop)">
                       <template v-for="(item, itemIndex) of range" :key="itemIndex">
                         <el-radio :label="item.value">{{ item.label }}</el-radio>
@@ -355,7 +355,7 @@ defineExpose({
                   </template>
                   <!-- / 单选框 -->
                   <!-- / select 选择器 -->
-                  <template v-if="type === EnumType.SELECT">
+                  <template v-if="type === ComponentTypeEnums.SELECT">
                     <el-select
                       v-model="model[prop]"
                       :placeholder="placeholderSet(type, label, placeholder)"
@@ -368,7 +368,7 @@ defineExpose({
                   </template>
                   <!-- / select 选择器 -->
                   <!-- / 滑块 -->
-                  <template v-if="type === EnumType.SLIDER">
+                  <template v-if="type === ComponentTypeEnums.SLIDER">
                     <el-slider
                       v-model="model[prop]"
                       :min="min"
@@ -378,7 +378,7 @@ defineExpose({
                   </template>
                   <!-- / 滑块 -->
                   <!-- / Switch 开关 -->
-                  <template v-if="type === EnumType.SWITCH">
+                  <template v-if="type === ComponentTypeEnums.SWITCH">
                     <el-switch
                       v-model="model[prop]"
                       :active-value="range[0] || true"
@@ -390,7 +390,7 @@ defineExpose({
                   <!-- / 日期选择器 -->
                   <template
                     v-if="
-                      [EnumType.DATE, EnumType.MONTH, EnumType.YEAR, EnumType.DATE_TIME].includes(
+                      [ComponentTypeEnums.DATE, ComponentTypeEnums.MONTH, ComponentTypeEnums.YEAR, ComponentTypeEnums.DATE_TIME].includes(
                         type
                       )
                     "
@@ -409,9 +409,9 @@ defineExpose({
                   <template
                     v-if="
                       [
-                        EnumType.DATE_RANGE,
-                        EnumType.MONTH_RANGE,
-                        EnumType.DATE_TIME_RANGE
+                        ComponentTypeEnums.DATE_RANGE,
+                        ComponentTypeEnums.MONTH_RANGE,
+                        ComponentTypeEnums.DATE_TIME_RANGE
                       ].includes(type)
                     "
                   >
@@ -426,7 +426,7 @@ defineExpose({
                   </template>
                   <!-- / 日期时间区域选择器 -->
                   <!-- / 时间选择器 -->
-                  <template v-if="[EnumType.TIME].includes(type)">
+                  <template v-if="[ComponentTypeEnums.TIME].includes(type)">
                     <el-time-picker
                       v-model="model[prop]"
                       arrow-control
@@ -437,7 +437,7 @@ defineExpose({
                   </template>
                   <!-- / 时间选择器 -->
                   <!-- / 时间区域选择器 -->
-                  <template v-if="[EnumType.TIME_RANGE].includes(type)">
+                  <template v-if="[ComponentTypeEnums.TIME_RANGE].includes(type)">
                     <el-time-picker
                       v-model="model[prop]"
                       is-range
@@ -449,7 +449,7 @@ defineExpose({
                   </template>
                   <!-- / 时间区域选择器 -->
                   <!-- / 复选框 -->
-                  <template v-if="[EnumType.CHECKBOX].includes(type)">
+                  <template v-if="[ComponentTypeEnums.CHECKBOX].includes(type)">
                     <el-checkbox-group
                       v-model="model[prop]"
                       @change="triggerValueChange(type, prop)"
@@ -461,7 +461,7 @@ defineExpose({
                   </template>
                   <!-- / 复选框 -->
                   <!-- / 级联选择器 -->
-                  <template v-if="[EnumType.CASCADER].includes(type)">
+                  <template v-if="[ComponentTypeEnums.CASCADER].includes(type)">
                     <BsgoalBaseCascader
                       v-model="model[prop]"
                       :data-options="range"
@@ -474,7 +474,7 @@ defineExpose({
                   <template v-if="[].includes(type)"> </template>
                   <!-- / 模板 -->
                   <!-- / 操作组件 -->
-                  <template v-if="[EnumType.OPERATION].includes(type)">
+                  <template v-if="[ComponentTypeEnums.OPERATION].includes(type)">
                     <BsgoalBaseSearchOperation
                       :fold="index >= 7"
                       @on-search="triggerOperationSearch"

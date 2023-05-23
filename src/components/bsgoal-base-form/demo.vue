@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 18:30:34
+ * @LastEditTime: 2023-05-23 10:46:14
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -13,7 +13,7 @@
 ---------------------------------------------------------------- */
 import BsgoalBaseForm from './index.vue'
 import { ref, computed, toRefs, watch, unref } from 'vue'
-import EnumType from '../../enums/componentTypeEnums.js'
+import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 
 const values = ref({
   prop1: '222',
@@ -34,9 +34,19 @@ const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0' })
 // 配置项
 const configOptions = ref([
   {
+    label: 'prop103',
+    prop: 'prop103',
+    type: ComponentTypeEnums.INPUT,
+    formatter: (value = '') => {
+      return `${value}`.match(/^\d{1,}$/) ? value : ''
+    },
+    placeholder: ''
+  },
+
+  {
     label: '11',
     prop: 'prop101',
-    type: EnumType.CHECKBOX_SINGLE,
+    type: ComponentTypeEnums.CHECKBOX_SINGLE,
     show: { prop102: ['1'] },
     range: [
       {
@@ -48,8 +58,8 @@ const configOptions = ref([
     ]
   },
   {
-    type: EnumType.SWITCH,
-    label:'prop102',
+    type: ComponentTypeEnums.SWITCH,
+    label: 'prop102',
     prop: 'prop102',
     range: [
       { label: '是', value: '1' },
@@ -61,20 +71,20 @@ const configOptions = ref([
     prop: 'prop100',
     rows: 4,
     length: 1000,
-    type: EnumType.INPUT_TEXT_AREA
+    type: ComponentTypeEnums.INPUT_TEXT_AREA
   },
   {
     label: 'prop99',
     prop: 'prop99',
     value: 0,
-    type: EnumType.INPUT_NUMBER,
+    type: ComponentTypeEnums.INPUT_NUMBER,
     max: 'max'
   },
   {
     label: 'prop1',
     // value: '111',
     prop: 'prop1',
-    type: EnumType.INPUT,
+    type: ComponentTypeEnums.INPUT,
     width: '100px',
     rules: [],
     readonly: true
@@ -83,7 +93,7 @@ const configOptions = ref([
     label: 'prop20',
     // value: '111',
     prop: 'prop20',
-    type: EnumType.INPUT,
+    type: ComponentTypeEnums.INPUT,
     width: '100px',
     rules: [],
     readonly: true
@@ -91,7 +101,7 @@ const configOptions = ref([
   {
     label: 'prop2',
     value: 'select2',
-    type: EnumType.SELECT,
+    type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
     range: [
       {
@@ -116,13 +126,13 @@ const configOptions = ref([
   {
     label: 'prop3',
     // value: '111',
-    type: EnumType.SLIDER,
+    type: ComponentTypeEnums.SLIDER,
     prop: 'prop3'
   },
   {
     label: 'prop4',
     // value: '111',
-    type: EnumType.SWITCH,
+    type: ComponentTypeEnums.SWITCH,
     prop: 'prop4',
     range: [
       { label: '是', value: 1 },
@@ -132,7 +142,7 @@ const configOptions = ref([
   {
     label: 'prop5',
     // value: '111',
-    type: EnumType.RADIO,
+    type: ComponentTypeEnums.RADIO,
     prop: 'prop5',
     range: [
       {
@@ -148,7 +158,7 @@ const configOptions = ref([
   {
     label: 'prop6',
     value: [],
-    type: EnumType.CHECKBOX,
+    type: ComponentTypeEnums.CHECKBOX,
     prop: 'prop6',
     range: [
       {
@@ -164,57 +174,57 @@ const configOptions = ref([
   {
     label: 'prop7',
     // value: '111',
-    type: EnumType.DATE,
+    type: ComponentTypeEnums.DATE,
     prop: 'prop7',
     format: 'YYYY-MM-DD'
   },
   {
     label: 'prop9',
     // value: '111',
-    type: EnumType.MONTH,
+    type: ComponentTypeEnums.MONTH,
     prop: 'prop9'
   },
   {
     label: 'prop10',
     // value: '111',
-    type: EnumType.YEAR,
+    type: ComponentTypeEnums.YEAR,
     prop: 'prop10'
   },
   {
     label: 'prop11',
     // value: '111',
-    type: EnumType.DATE_RANGE,
+    type: ComponentTypeEnums.DATE_RANGE,
     prop: 'prop11',
     range: ['startDate', 'endDate']
   },
   {
     label: 'prop12',
     // value: '111',
-    type: EnumType.MONTH_RANGE,
+    type: ComponentTypeEnums.MONTH_RANGE,
     prop: 'prop12'
   },
   {
     label: 'prop13',
     // value: '111',
-    type: EnumType.TIME,
+    type: ComponentTypeEnums.TIME,
     prop: 'prop13'
   },
   {
     label: 'prop14',
     // value: '111',
-    type: EnumType.TIME_RANGE,
+    type: ComponentTypeEnums.TIME_RANGE,
     prop: 'prop14'
   },
   {
     label: 'prop15',
     // value: '111',
-    type: EnumType.DATE_TIME,
+    type: ComponentTypeEnums.DATE_TIME,
     prop: 'prop15'
   },
   {
     label: 'prop16',
     // value: '111',
-    type: EnumType.DATE_TIME_RANGE,
+    type: ComponentTypeEnums.DATE_TIME_RANGE,
     prop: 'prop16'
   }
 ])
