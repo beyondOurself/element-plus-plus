@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-23 10:46:14
+ * @LastEditTime: 2023-05-23 15:31:46
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -33,6 +33,10 @@ const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0' })
 
 // 配置项
 const configOptions = ref([
+   {
+    label: 'prop104',
+    prop: '_prop104',
+  },
   {
     label: 'prop103',
     prop: 'prop103',
@@ -245,9 +249,9 @@ export default {
       :config-options="configOptions"
       :bind-model="bindModel"
     >
-      <!-- <template #prop1="{option}">
-         <div>666 {{ option }} </div>
-     </template> -->
+      <template #_prop104="{option}">
+         <div>666  </div>
+     </template>
     </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
   </div>

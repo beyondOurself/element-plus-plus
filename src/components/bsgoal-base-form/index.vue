@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-23 10:29:09
+ * @LastEditTime: 2023-05-23 15:37:32
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -154,11 +154,13 @@ watchEffect(() => {
       watchPropList.push(prop)
     }
     const bindValue = unref(model)[prop]
+    // '_xxx 开头都是内容插槽'
+    if (!prop.startsWith('_')) {
+      model.value[prop] = bindValue || valuesModel[prop] || value
 
-    model.value[prop] = bindValue || valuesModel[prop] || value
-
-    if (isObject(show)) {
-      watchPropsForShow(show, unref(model), prop)
+      if (isObject(show)) {
+        watchPropsForShow(show, unref(model), prop)
+      }
     }
   })
 })
@@ -407,9 +409,13 @@ defineExpose({
                 rules = [],
                 limit = limits,
                 length = 255,
-                visible = true, 
-                formatter = (v) => { return v },
-                parser = (v) => { return v }
+                visible = true,
+                formatter = (v) => {
+                  return v
+                },
+                parser = (v) => {
+                  return v
+                }
               } = {},
               key
             ) of configOptionsGet"
@@ -507,9 +513,12 @@ defineExpose({
                     <!-- / 日期选择器 -->
                     <template
                       v-if="
-                        [ComponentTypeEnums.DATE, ComponentTypeEnums.MONTH, ComponentTypeEnums.YEAR, ComponentTypeEnums.DATE_TIME].includes(
-                          type
-                        )
+                        [
+                          ComponentTypeEnums.DATE,
+                          ComponentTypeEnums.MONTH,
+                          ComponentTypeEnums.YEAR,
+                          ComponentTypeEnums.DATE_TIME
+                        ].includes(type)
                       "
                     >
                       <el-date-picker
