@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-19 13:40:52
+ * @LastEditTime: 2023-05-23 16:58:12
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -12,7 +12,7 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, unref, computed } from 'vue'
-import { Delete, Plus } from '@element-plus/icons-vue'
+import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
 
 // props
 const props = defineProps({
@@ -24,7 +24,7 @@ const props = defineProps({
   },
   type: {
     type: [String],
-    default: 'primary',
+    default: '',
     validator: (v) => ['primary', 'success', 'warning', 'danger', 'info'].includes(v)
   },
   icon: {
@@ -38,7 +38,7 @@ const props = defineProps({
   mode: {
     type: [String],
     default: 'default',
-    validator: (v) => ['add', 'delete', 'edit', 'detail','default'].includes(v)
+    validator: (v) => ['add', 'delete', 'edit', 'detail', 'default', 'cancel'].includes(v)
   },
   values: {
     type: [Array, Object],
@@ -70,6 +70,10 @@ const typeGet = computed(() => {
   switch (mode) {
     case 'delete':
       return 'danger'
+    case 'cancel':
+      return ''
+    case 'confirm':
+      return 'primary'
   }
   return type
 })
@@ -81,8 +85,25 @@ const iconGet = computed(() => {
       return Delete
     case 'add':
       return Plus
+    case 'cancel':
+      return CloseBold
+    case 'confirm':
+      return Select
   }
   return icon
+})
+const contentGet = computed(() => {
+  const { mode = '', content = '' } = props
+
+  switch (mode) {
+    case 'cancel':
+      return '取消'
+    case 'confirm':
+      return '确认'
+    case 'add':
+      return '新增'
+  }
+  return content
 })
 
 // ---> E 模式 <---
@@ -97,7 +118,7 @@ export default {
     <div class="base_button" @click="triggerClick">
       <slot :loading="loading">
         <el-button :type="typeGet" :icon="iconGet" :loading="loading" :plain="plain">{{
-          content
+          contentGet
         }}</el-button>
       </slot>
     </div>
