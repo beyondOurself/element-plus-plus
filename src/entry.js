@@ -9,6 +9,7 @@ import BsgoalBaseLink from '@/components/bsgoal-base-link/index.vue'
 import BsgoalBaseButton from '@/components/bsgoal-base-button/index.vue'
 import BsgoalBaseLayout from '@/components/bsgoal-base-layout/index.vue'
 import BsgoalBaseAlert from '@/components/bsgoal-base-alert/index.vue'
+import BsgoalBaseSelect from '@/components/bsgoal-base-select/index.vue'
 import BsgoalBaseTime from '@/components/bsgoal-base-time/index.vue'
 import BsgoalBaseTimeRange from '@/components/bsgoal-base-time-range/index.vue'
 import componentTypeEnums from '@/enums/componentTypeEnums.js'
@@ -34,6 +35,7 @@ export default {
       BsgoalBaseButton,
       BsgoalBaseLayout,
       BsgoalBaseAlert,
+      BsgoalBaseSelect,
       BsgoalBaseTime,
       BsgoalBaseTimeRange,
     }
