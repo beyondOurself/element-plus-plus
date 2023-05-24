@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-20 14:37:30
+ * @LastEditTime: 2023-05-24 09:56:01
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -92,6 +92,11 @@ const router = createRouter({
           path: 'bsgoal-base-layout-demo',
           name: '布局',
           component: import('@/components/bsgoal-base-layout/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-alert-demo',
+          name: 'alert提示',
+          component: import('@/components/bsgoal-base-alert/demo.vue')
         },
       ]
     }
