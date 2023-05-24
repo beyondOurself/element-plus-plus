@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 09:56:01
+ * @LastEditTime: 2023-05-24 15:06:30
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -97,6 +97,21 @@ const router = createRouter({
           path: 'bsgoal-base-alert-demo',
           name: 'alert提示',
           component: import('@/components/bsgoal-base-alert/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-select-demo',
+          name: '下拉选择器',
+          component: import('@/components/bsgoal-base-select/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-time-range-demo',
+          name: '时间范围选择器',
+          component: import('@/components/bsgoal-base-time-range/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-time-demo',
+          name: '时间选择器',
+          component: import('@/components/bsgoal-base-time/demo.vue')
         },
       ]
     }

@@ -9,6 +9,8 @@ import BsgoalBaseLink from '@/components/bsgoal-base-link/index.vue'
 import BsgoalBaseButton from '@/components/bsgoal-base-button/index.vue'
 import BsgoalBaseLayout from '@/components/bsgoal-base-layout/index.vue'
 import BsgoalBaseAlert from '@/components/bsgoal-base-alert/index.vue'
+import BsgoalBaseTime from '@/components/bsgoal-base-time/index.vue'
+import BsgoalBaseTimeRange from '@/components/bsgoal-base-time-range/index.vue'
 import componentTypeEnums from '@/enums/componentTypeEnums.js'
 import { useFetch } from '@/combines/useFetchs.js'
 
@@ -31,7 +33,9 @@ export default {
       BsgoalBaseLink,
       BsgoalBaseButton,
       BsgoalBaseLayout,
-      BsgoalBaseAlert
+      BsgoalBaseAlert,
+      BsgoalBaseTime,
+      BsgoalBaseTimeRange,
     }
 
     for (const [name, component] of Object.entries(componentsMap)) {
