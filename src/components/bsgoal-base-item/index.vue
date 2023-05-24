@@ -18,6 +18,13 @@ const props = defineProps({
   suffix: {
     type: [String],
     default: ':'
+  },
+  /**
+   * label
+   */
+  label: {
+    type: [String],
+    default: ':'
   }
 })
 </script>
@@ -30,7 +37,7 @@ export default {
   <div class="bsgoal-base-item">
     <div class="base_item">
       <div class="base_item_label">
-        <slot name="label"> </slot> <span>{{ suffix }}</span>
+        <slot name="label">{{ label }}</slot> <span>{{ suffix }}</span>
       </div>
       <div class="base_item_contetn">
         <slot name="content"></slot>

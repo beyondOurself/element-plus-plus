@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 17:46:26
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 18:05:46
+ * @LastEditTime: 2023-05-24 18:31:39
  * @FilePath: \common\src\components\bsgoal-base-item\demo.vue
  * @Description: 表单项 演示
  * 
@@ -27,10 +27,7 @@ const switchModelValue = ref('0')
 <template>
   <div class="bsgoal-base-item-demo">
     <div class="base_item_demo">
-      <BsgoalBaseItem>
-        <template #label>
-          <div>是否开通接听值班表设置</div>
-        </template>
+      <BsgoalBaseItem label="是否开通接听值班表设置">
         <template #content>
           <div>
             <BsgoalBaseSwitch v-model="switchModelValue" />
