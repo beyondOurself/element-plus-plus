@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 17:46:21
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 18:08:53
+ * @LastEditTime: 2023-05-24 18:27:22
  * @FilePath: \common\src\components\bsgoal-base-item\index.vue
  * @Description: 表单项 
  * 
@@ -49,7 +49,7 @@ export default {
   .base_item_label {
     display: flex;
     align-items: center;
-    font-size: inherit;
+    font-size: 14px;
     color: #606266;
     height: 32px;
     line-height: 32px;
