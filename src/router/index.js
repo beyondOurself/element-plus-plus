@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 15:06:30
+ * @LastEditTime: 2023-05-24 17:43:27
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -112,6 +112,16 @@ const router = createRouter({
           path: 'bsgoal-base-time-demo',
           name: '时间选择器',
           component: import('@/components/bsgoal-base-time/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-switch-demo',
+          name: '开关',
+          component: import('@/components/bsgoal-base-switch/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-item-demo',
+          name: '表单项',
+          component: import('@/components/bsgoal-base-item/demo.vue')
         },
       ]
     }
