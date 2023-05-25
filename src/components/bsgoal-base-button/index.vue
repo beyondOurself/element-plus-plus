@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-23 16:58:12
+ * @LastEditTime: 2023-05-25 09:26:22
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -33,7 +33,7 @@ const props = defineProps({
   },
   content: {
     type: [String],
-    default: '新增'
+    default: ''
   },
   mode: {
     type: [String],
@@ -102,6 +102,8 @@ const contentGet = computed(() => {
       return '确认'
     case 'add':
       return '新增'
+    case 'delete':
+      return '删除'
   }
   return content
 })
