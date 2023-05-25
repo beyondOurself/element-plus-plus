@@ -18,22 +18,31 @@ const props = defineProps({})
 
 const selectValue = ref('11')
 const selectRange = ref([
-    {
-      label : '11' ,
-      value : '11'
-    },
-    {
-      label : '22' ,
-      value : '22'
-    },
-    {
-      label : '33' ,
-      value : '33'
-    },
+  {
+    label: '11',
+    value: '11',
+    data: { prop1: 'prop1', prop2: 'prop2' }
+  },
+  {
+    label: '22',
+    value: '22'
+  },
+  {
+    label: '33',
+    value: '33'
+  }
 ])
 
-
-
+/**
+ * @Author: canlong.shen
+ * @description: 触发 值变动
+ * @default:
+ * @return {*}
+ */
+const change = (value = '', data = {}) => {
+  console.log('value', value)
+  console.log('data', data)
+}
 </script>
 <script>
 export default {
@@ -43,8 +52,8 @@ export default {
 <template>
   <div class="bsgoal-base-select-demo">
     <div class="base_select_demo">
-        {{ selectValue }}
-        <BsgoalBaseSelect  v-model="selectValue" :range="selectRange" />
+      {{ selectValue }}
+      <BsgoalBaseSelect v-model="selectValue" :range="selectRange" @change="change" />
     </div>
   </div>
 </template>

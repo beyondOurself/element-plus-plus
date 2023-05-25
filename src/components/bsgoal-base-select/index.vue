@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:09:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 14:07:10
+ * @LastEditTime: 2023-05-25 10:25:51
  * @FilePath: \common\src\components\bsgoal-base-select\index.vue
  * @Description: Select 公共组件
  * 
@@ -43,7 +43,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue','change'])
 
 // ---> S 触发 方法 <---
 
@@ -54,7 +54,12 @@ const emits = defineEmits(['update:modelValue'])
  * @return {*}
  */
 const triggerChange = (value = '') => {
+  const { range = [] } = props
+  const finder = range.find((fi) => fi.value === value)
+  const data = finder ? finder.data : null
+
   emits('update:modelValue', value)
+  emits('change', value , data)
 }
 
 // ---> E 触发 方法 <---
