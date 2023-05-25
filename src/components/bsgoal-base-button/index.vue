@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-25 09:26:22
+ * @LastEditTime: 2023-05-25 09:49:24
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -73,6 +73,7 @@ const typeGet = computed(() => {
     case 'cancel':
       return ''
     case 'confirm':
+    case 'add':
       return 'primary'
   }
   return type
