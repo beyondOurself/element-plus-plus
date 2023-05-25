@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:09:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 16:54:26
+ * @LastEditTime: 2023-05-25 11:20:07
  * @FilePath: \common\src\components\bsgoal-base-time-range\index.vue
  * @Description: 时间选择 公共组件
  * 
@@ -96,7 +96,7 @@ watchEffect(() => {
  * @return {*}
  */
 const triggerChange = (range = []) => {
-  const { startTime = '', endTime = ''  } = props
+  const { startTime = '', endTime = '' } = props
 
   const { 0: startDate, 1: endDate } = range
   const startDateFormat = dateToString(startDate)
@@ -106,6 +106,18 @@ const triggerChange = (range = []) => {
     emits('update:endTime', endDateFormat)
   } else {
     emits('update:modelValue', [startDateFormat, endDateFormat])
+  }
+}
+
+/**
+ * @Author: canlong.shen
+ * @description: 触发 面板显隐事件
+ * @default:
+ * @return {*}
+ */
+const triggerVisibleChange = (visibility = false) => {
+  if (!visibility) {
+    triggerChange(unref(bindValue))
   }
 }
 
@@ -128,6 +140,7 @@ export default {
         start-placeholder="开始时间"
         end-placeholder="结束时间"
         @change="triggerChange"
+        @visible-change="triggerVisibleChange"
       />
     </el-config-provider>
   </div>
