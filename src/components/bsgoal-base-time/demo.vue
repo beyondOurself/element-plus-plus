@@ -12,18 +12,18 @@
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseTime from './index.vue'
+
+defineOptions({
+  name: 'BsgoalBaseTimeDemo'
+})
+
 const props = defineProps({})
 const time = ref('11:22')
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseTimeDemo'
-}
 </script>
 <template>
   <div class="bsgoal-base-time-demo">
     <div class="base_time_demo">
-        {{ time }}
+      {{ time }}
       <BsgoalBaseTime v-model="time" />
     </div>
   </div>

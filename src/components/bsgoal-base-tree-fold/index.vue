@@ -2,22 +2,21 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 14:30:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 09:11:19
+ * @LastEditTime: 2023-05-26 16:09:24
  * @FilePath: \common\src\components\bsgoal-base-tree-fold\index.vue
  * @Description:  树结构折叠按钮
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseTreeFold'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
+
+defineOptions({
+  name: 'BsgoalBaseTreeFold'
+})
 
 defineProps(['modelValue'])
 const emits = defineEmits(['update:modelValue'])

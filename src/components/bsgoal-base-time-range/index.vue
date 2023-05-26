@@ -14,6 +14,11 @@
 import { ref, unref, watch, watchEffect } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import { dayjs } from 'element-plus'
+
+defineOptions({
+  name: 'BsgoalBaseTimeRange'
+})
+
 const props = defineProps({
   /**
    * value
@@ -122,11 +127,6 @@ const triggerVisibleChange = (visibility = false) => {
 }
 
 // ---> E 值绑定 <---
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseTimeRange'
-}
 </script>
 <template>
   <div class="bsgoal-base-time-range">

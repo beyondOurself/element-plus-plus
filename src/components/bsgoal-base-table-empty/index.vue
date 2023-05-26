@@ -8,10 +8,10 @@
  * 
 -->
 
-<script>
-export default {
+<script setup>
+defineOptions({
   name: 'BsgoalBaseTableEmpty'
-}
+})
 </script>
 
 <template>

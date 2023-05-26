@@ -8,11 +8,6 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseTable'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
@@ -23,6 +18,10 @@ import BsgoalBaseTableEmpty from '../bsgoal-base-table-empty/index.vue'
 import { useAutoHeight } from '../../combines/useComs.js'
 import { useFetch } from '../../combines/useFetchs.js'
 import { isBoolean } from '@/utils/common.js'
+
+defineOptions({
+  name: 'BsgoalBaseTable'
+})
 
 const props = defineProps({
   /**

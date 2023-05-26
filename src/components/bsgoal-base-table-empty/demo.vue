@@ -8,17 +8,16 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseTableEmptyDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseTableEmpty from './index.vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTableEmptyDemo'
+})
+
 const props = defineProps({})
 </script>
 <template>

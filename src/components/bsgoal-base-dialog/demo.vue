@@ -8,11 +8,6 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseDialogDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
@@ -20,7 +15,10 @@ import { ref } from 'vue'
 import BsgoalBaseDialog from './index.vue'
 import BsgoalBaseTabs from '../bsgoal-base-tabs/index.vue'
 
-// props
+defineOptions({
+  name: 'BsgoalBaseDialogDemo'
+})
+
 const props = defineProps({})
 
 const dialogVisible = ref(false)

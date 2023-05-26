@@ -14,6 +14,10 @@
 import { ref } from 'vue'
 import BsgoalBaseSelect from './index.vue'
 
+defineOptions({
+  name: 'BsgoalBaseSelectDemo'
+})
+
 const props = defineProps({})
 
 const selectValue = ref('11')
@@ -42,11 +46,6 @@ const selectRange = ref([
 const change = (value = '', data = {}) => {
   console.log('value', value)
   console.log('data', data)
-}
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseSelectDemo'
 }
 </script>
 <template>

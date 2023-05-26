@@ -13,17 +13,17 @@
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseTimeRange from './index.vue'
+
+defineOptions({
+  name: 'BsgoalBaseTimeDemoRange'
+})
+
 const props = defineProps({})
 
 const timeRange = ref(['11:00', '12:12'])
 
 const startTime = ref('12:11')
 const endTime = ref('13:55')
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseTimeDemoRange'
-}
 </script>
 <template>
   <div class="bsgoal-base-time-range-demo">

@@ -7,30 +7,25 @@
  * @Description: 链接公共组件 演示
  * 
 -->
-
-<script>
-export default {
-  name: "BsgoalBaseLinkDemo",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref } from 'vue';
-import  BsgoalBaseLink  from './index.vue'
-// props
- const props = defineProps({
+import { ref } from 'vue'
+import BsgoalBaseLink from './index.vue'
 
+defineOptions({
+  name: 'BsgoalBaseLinkDemo'
 })
+const props = defineProps({})
 
 const clickLink = () => {
-     console.log('点击链接了');
+  console.log('点击链接了')
 }
 </script>
 <template>
   <div class="bsgoal-base-link-demo">
-     <BsgoalBaseLink content="这是链接" @on-click="clickLink" />
-     <BsgoalBaseLink underline content="这是链接" @on-click="clickLink" />
+    <BsgoalBaseLink content="这是链接" @on-click="clickLink" />
+    <BsgoalBaseLink underline content="这是链接" @on-click="clickLink" />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -41,4 +36,3 @@ const clickLink = () => {
 /* 覆盖样式
 ---------------------------------------------------------------- */
 </style>
-

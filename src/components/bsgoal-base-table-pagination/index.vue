@@ -8,17 +8,16 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseTablePagination'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, computed } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTablePagination'
+})
+
 const props = defineProps({
   /**
    * 当前页数

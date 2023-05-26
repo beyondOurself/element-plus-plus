@@ -8,15 +8,15 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseTabs'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, unref, computed } from 'vue'
+
+defineOptions({
+  name: 'BsgoalBaseTabs'
+})
+
 const props = defineProps({
   /**
    * 配置项

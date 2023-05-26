@@ -13,13 +13,12 @@
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseLayout from './index.vue'
-// props
-const props = defineProps({})
-</script>
-<script>
-export default {
+
+defineOptions({
   name: 'BsgoalBaseLayoutDemo'
-}
+})
+
+const props = defineProps({})
 </script>
 <template>
   <div class="bsgoal-base-layout-demo">

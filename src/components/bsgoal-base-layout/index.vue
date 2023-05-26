@@ -12,7 +12,10 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, useSlots } from 'vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseLayout'
+})
 const props = defineProps({
   /**
    * 间隔
@@ -34,11 +37,6 @@ const props = defineProps({
 const slots = useSlots()
 const slotNames = ref(Object.keys(slots))
 // ---> E 插槽 <---
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseLayout'
-}
 </script>
 <template>
   <div class="bsgoal-base-layout">

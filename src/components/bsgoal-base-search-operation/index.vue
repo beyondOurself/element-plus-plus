@@ -2,22 +2,21 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 18:09:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 13:49:56
+ * @LastEditTime: 2023-05-26 16:01:16
  * @FilePath: \common\src\components\bsgoal-base-search-operation\index.vue
  * @Description:  表格查询操作项 组件
  * 
 -->
-
-<script>
-export default {
-  name: "BsgoalBaseSearchOperation",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { Delete, Search, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { ref, unref } from 'vue'
+
+defineOptions({
+  name: 'BsgoalBaseSearchOperation'
+})
+
 defineProps({
   /**
    * 是否显示折叠按钮

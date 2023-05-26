@@ -11,6 +11,11 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
+
+defineOptions({
+  name: 'BsgoalBaseItem'
+})
+
 const props = defineProps({
   /**
    * label 后缀
@@ -27,11 +32,6 @@ const props = defineProps({
     default: ':'
   }
 })
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseItem'
-}
 </script>
 <template>
   <div class="bsgoal-base-item">

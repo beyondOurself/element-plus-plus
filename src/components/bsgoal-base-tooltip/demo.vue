@@ -7,18 +7,16 @@
  * @Description: 文字提示公共组件演示
  * 
 -->
-
-<script>
-export default {
-  name: "BsgoalBaseTooltipDemo",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue';
 import  BsgoalBaseTooltip from './index.vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTooltipDemo'
+})
+
  const props = defineProps({
 
 })

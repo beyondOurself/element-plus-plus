@@ -2,11 +2,23 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 13:41:13
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-15 11:20:10
+ * @LastEditTime: 2023-05-26 16:09:56
  * @FilePath: \common\src\components\layout\layout-home.vue
  * @Description: 首页
  * 
 -->
+
+<script setup>
+/* setup模板
+---------------------------------------------------------------- */
+import LayoutLeftMenu from '@/components/layout/layout-left-menu.vue'
+import LayoutTopHeader from '@/components/layout/layout-top-header.vue'
+import LayoutRightContainer from '@/components/layout/layout-right-container.vue'
+
+defineOptions({
+  name: 'LayoutHome'
+})
+</script>
 
 <template>
   <div class="layout-home">
@@ -18,8 +30,8 @@
         <el-aside width="200px">
           <LayoutLeftMenu />
         </el-aside>
-        <el-main style="padding:10px; background-color:#f0f2f5 ;">
-          <LayoutRightContainer  style="background-color: #fff;">
+        <el-main style="padding: 10px; background-color: #f0f2f5">
+          <LayoutRightContainer style="background-color: #fff">
             <router-view />
           </LayoutRightContainer>
         </el-main>
@@ -27,18 +39,6 @@
     </el-container>
   </div>
 </template>
-<script>
-export default {
-  name: 'LayoutHome'
-}
-</script>
-<script setup>
-/* setup模板
----------------------------------------------------------------- */
-import LayoutLeftMenu from '@/components/layout/layout-left-menu.vue'
-import LayoutTopHeader from '@/components/layout/layout-top-header.vue'
-import LayoutRightContainer from '@/components/layout/layout-right-container.vue'
-</script>
 <style lang="scss" scoped>
 /* 自定义样式
 ---------------------------------------------------------------- */

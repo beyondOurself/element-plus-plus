@@ -8,11 +8,6 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseSearch'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
@@ -23,7 +18,10 @@ import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 
-// props
+defineOptions({
+  name: 'BsgoalBaseSearch'
+})
+
 const props = defineProps({
   /**
    * >----------props----------<

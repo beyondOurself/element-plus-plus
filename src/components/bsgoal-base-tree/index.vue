@@ -7,11 +7,6 @@
  * @Description: 虚拟化树型结构 公共组件
  * 
 -->
-<script>
-export default {
-  name: 'BsgoalBaseTree'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
@@ -19,7 +14,11 @@ import { ref, watch } from 'vue'
 import directiveBase from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseTreeFold from '../bsgoal-base-tree-fold/index.vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTree'
+})
+
 const props = defineProps({
   /**
    * 树结构 的下边距

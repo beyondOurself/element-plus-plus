@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-23 15:31:46
+ * @LastEditTime: 2023-05-26 15:55:40
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -14,6 +14,10 @@
 import BsgoalBaseForm from './index.vue'
 import { ref, computed, toRefs, watch, unref } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
+
+defineOptions({
+  name: 'BsgoalBaseFormDemo'
+})
 
 const values = ref({
   prop1: '222',
@@ -232,11 +236,6 @@ const configOptions = ref([
     prop: 'prop16'
   }
 ])
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseFormDemo'
-}
 </script>
 <template>
   <div class="bsgoal-base-form-demo">

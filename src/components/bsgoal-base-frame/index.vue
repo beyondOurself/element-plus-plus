@@ -12,16 +12,15 @@
       
   </div>
 </template>
-<script>
-export default {
-  name: "BsgoalBaseFrame",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, computed, toRefs, watch, unref
 } from 'vue';
+
+defineOptions({
+  name: 'BsgoalBaseFrame'
+})
 </script>
 <style lang="scss">
 /* 覆盖样式

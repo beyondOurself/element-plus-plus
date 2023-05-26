@@ -15,6 +15,11 @@ import { ref, unref, watchEffect } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import { dayjs } from 'element-plus'
 const emits = defineEmits(['update:modelValue'])
+
+defineOptions({
+  name: 'BsgoalBaseTime'
+})
+
 const props = defineProps({
   /**
    * 绑定的值
@@ -85,11 +90,6 @@ const triggerChange = (date = new Date()) => {
 // ---> E 绑定值 <---
 </script>
 
-<script>
-export default {
-  name: 'BsgoalBaseTime'
-}
-</script>
 <template>
   <div class="bsgoal-base-time">
     <el-config-provider :locale="zhCn">

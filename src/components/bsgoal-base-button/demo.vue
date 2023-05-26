@@ -13,26 +13,24 @@
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseButton from './index.vue'
-// props
-const props = defineProps({})
 
+defineOptions({
+  name: 'BsgoalBaseButtonDemo'
+})
+
+const props = defineProps({})
 const task = (done) => {
   setTimeout(() => {
     done()
   }, 3000)
 }
 </script>
-<script>
-export default {
-  name: 'BsgoalBaseButtonDemo'
-}
-</script>
 <template>
   <div class="bsgoal-base-button-demo">
-    <BsgoalBaseButton :task="task" mode="cancel"  content="取消" > </BsgoalBaseButton>
-    <BsgoalBaseButton :task="task" mode="confirm"  content="取消" > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="cancel" content="取消"> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="confirm" content="取消"> </BsgoalBaseButton>
 
-    <BsgoalBaseButton :task="task" plain > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" plain> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="add"> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="delete"> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" #default="{ loading }">

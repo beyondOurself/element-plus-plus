@@ -12,6 +12,11 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
+
+defineOptions({
+  name: 'BsgoalBaseSelect'
+})
+
 const props = defineProps({
   /**
    * 占位提示符
@@ -63,11 +68,6 @@ const triggerChange = (value = '') => {
 }
 
 // ---> E 触发 方法 <---
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseSelect'
-}
 </script>
 <template>
   <div class="bsgoal-base-select">

@@ -12,6 +12,11 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
+
+defineOptions({
+  name: 'BsgoalBaseSwitch'
+})
+
 const props = defineProps({
   /**
    *  text 配置 选项
@@ -48,11 +53,6 @@ const triggerChange = (value = '') => {
 }
 </script>
 
-<script>
-export default {
-  name: 'BsgoalBaseSwitch'
-}
-</script>
 <template>
   <div class="bsgoal-base-switch">
     <el-switch

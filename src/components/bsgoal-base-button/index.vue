@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-25 09:49:24
+ * @LastEditTime: 2023-05-26 15:53:36
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -14,7 +14,11 @@
 import { ref, unref, computed } from 'vue'
 import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
 
-// props
+
+defineOptions({
+  name: 'BsgoalBaseButton'
+})
+
 const props = defineProps({
   task: {
     type: [Object, Function],
@@ -110,11 +114,6 @@ const contentGet = computed(() => {
 })
 
 // ---> E 模式 <---
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseButton'
-}
 </script>
 <template>
   <div class="bsgoal-base-button">

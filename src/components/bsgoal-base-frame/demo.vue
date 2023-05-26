@@ -13,17 +13,17 @@
       <BsgoalBaseFrame />
   </div>
 </template>
-<script>
-export default {
-  name: "BsgoalBaseFrameDemo",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import BsgoalBaseFrame from './index.vue'
 import { ref, computed, toRefs, watch, unref
 } from 'vue';
+
+defineOptions({
+  name: 'BsgoalBaseFrameDemo'
+})
+
 </script>
 <style lang="scss" scoped>
 /* 自定义样式

@@ -8,16 +8,15 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseTooltip'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, computed, unref } from 'vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTooltip'
+})
+
 const props = defineProps({
   /**
    * 文字提示内容

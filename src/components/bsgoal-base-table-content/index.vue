@@ -8,17 +8,16 @@
  * 
 -->
 
-<script>
-export default {
-    name: "BsgoalBaseTableContent",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue';
 import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTableContent'
+})
+
 const props = defineProps({
     /**
      * 数据

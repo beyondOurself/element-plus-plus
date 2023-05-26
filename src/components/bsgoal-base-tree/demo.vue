@@ -8,18 +8,17 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseTreeDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import BsgoalBaseTree from './index.vue'
 
 import { ref } from 'vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTreeDemo'
+})
+
 const props = defineProps({})
 
 const treeData = ref([])

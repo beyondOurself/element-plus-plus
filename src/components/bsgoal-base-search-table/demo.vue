@@ -8,21 +8,18 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalSearchTableDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, unref } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import BsgoalBaseSearchTable from './index.vue'
-import DemoTable from './demo-table.vue'
 import BsgoalBaseButton from '../bsgoal-base-button/index.vue'
 
-// props
+defineOptions({
+  name: 'BsgoalSearchTableDemo'
+})
+
 const props = defineProps({})
 
 const configOptions = ref([

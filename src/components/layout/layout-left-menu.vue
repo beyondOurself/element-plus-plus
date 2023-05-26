@@ -8,6 +8,28 @@
  * 
 -->
 
+
+<script setup>
+/* setup模板
+---------------------------------------------------------------- */
+import { Menu as IconMenu } from '@element-plus/icons-vue'
+import { ref, computed, toRefs, watch, unref } from 'vue'
+import { useRouter } from 'vue-router'
+
+
+defineOptions({
+  name: 'LayoutLeftMenu'
+})
+
+const router = useRouter()
+const routes = router.getRoutes()
+const { children = [] } = routes.find((fi) => fi.name === 'home') || {}
+const menuList = ref(children)
+
+
+
+</script>
+
 <template>
   <div class="layout-left-menu">
     <el-menu default-active="0" style="height: calc(100vh - 60px) ;">
@@ -22,22 +44,6 @@
     </el-menu>
   </div>
 </template>
-<script>
-export default {
-  name: 'LayoutLeftMenu'
-}
-</script>
-<script setup>
-/* setup模板
----------------------------------------------------------------- */
-import { Menu as IconMenu } from '@element-plus/icons-vue'
-import { ref, computed, toRefs, watch, unref } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const routes = router.getRoutes()
-const { children = [] } = routes.find((fi) => fi.name === 'home') || {}
-const menuList = ref(children)
-</script>
 <style lang="scss" scoped>
 /* 自定义样式
 ---------------------------------------------------------------- */

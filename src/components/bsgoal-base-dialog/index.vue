@@ -8,16 +8,15 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseDialog'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, watch, computed } from 'vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseDialog'
+})
+
 const props = defineProps({
   /**
    * 弹窗状态

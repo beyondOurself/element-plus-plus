@@ -12,14 +12,14 @@
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseSwitch from './index.vue'
+
+defineOptions({
+  name: 'BsgoalBaseSwitchDemo'
+})
+
 const props = defineProps({})
 
 const modelValue = ref('0')
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseSwitchDemo'
-}
 </script>
 <template>
   <div class="bsgoal-base-switch-demo">

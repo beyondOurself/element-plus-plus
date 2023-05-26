@@ -8,17 +8,16 @@
  * 
 -->
 
-<script>
-export default {
-  name: "BsgoalBaseCascaderDemo",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref ,watch ,toRaw} from 'vue';
 import  BsgoalBaseCascader from './index.vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseCascaderDemo'
+})
+
  const props = defineProps({
 
 })

@@ -6,17 +6,16 @@
  * @FilePath: \common\src\components\bsgoal-base-tabs\demo.vue
  * @Description: tabs 标签切页 公共组件演示
 -->
-<script>
-export default {
-  name: 'BsgoalBaseTabsDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
 import BsgoalBaseTabs from './index.vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseTabsDemo'
+})
+
 const props = defineProps({})
 const activeTabName = ref('tab1')
 const  config = ref([

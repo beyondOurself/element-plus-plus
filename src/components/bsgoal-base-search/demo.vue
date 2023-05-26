@@ -8,11 +8,6 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseSearchDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
@@ -20,10 +15,12 @@ import { ref } from 'vue'
 import BsgoalBaseSearch from './index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 
- const searchModelValue = ref({})
-
+defineOptions({
+  name: 'BsgoalBaseSearchDemo'
+})
 // props
 const props = defineProps({})
+const searchModelValue = ref({})
 let curLocalOptions = ref([
   {
     label: 'prop1',
@@ -166,7 +163,7 @@ let curLocalOptions = ref([
     label: 'prop17',
     type: ComponentTypeEnums.CASCADER,
     prop: 'prop17',
-    single:true,
+    single: true,
     range: [
       {
         label: 'value1',
@@ -187,7 +184,7 @@ let curLocalOptions = ref([
           {
             label: 'value1-4',
             value: 'value1-5'
-          },
+          }
         ]
       }
     ]

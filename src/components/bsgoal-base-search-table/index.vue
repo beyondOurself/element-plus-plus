@@ -8,18 +8,17 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseSearchTable'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, computed, unref, provide, useSlots } from 'vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import BsgoalBaseTable from '../bsgoal-base-table/index.vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseSearchTable'
+})
+
 const props = defineProps({
   /**
    * >----------props----------<

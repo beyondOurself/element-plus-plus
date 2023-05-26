@@ -8,16 +8,15 @@
  * 
 -->
 
-<script>
-export default {
-    name: "BsgoalBaseLink",
-};
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue';
-// props
+
+defineOptions({
+  name: 'BsgoalBaseLink'
+})
+
 const props = defineProps({
     /**
      * 内容

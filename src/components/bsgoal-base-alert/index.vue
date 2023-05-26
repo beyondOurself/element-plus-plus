@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 09:12:54
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 10:06:36
+ * @LastEditTime: 2023-05-26 15:52:34
  * @FilePath: \common\src\components\bsgoal-base-alert\index.vue
  * @Description: alert 提示组件
  * 
@@ -12,7 +12,11 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseAlert'
+})
+
 const props = defineProps({
   /**
    * 类型
@@ -23,11 +27,6 @@ const props = defineProps({
     validator: (v) => ['success', 'warning', 'info', 'error'].includes(v)
   }
 })
-</script>
-<script>
-export default {
-  name: 'BsgoalBaseAlert'
-}
 </script>
 <template>
   <div class="bsgoal-base-alert">

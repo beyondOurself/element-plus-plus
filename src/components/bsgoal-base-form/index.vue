@@ -8,11 +8,6 @@
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseForm'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
@@ -23,7 +18,11 @@ import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
 import { ElMessage } from 'element-plus'
 import { isObject } from '../../utils/common.js'
 import { isBoolean } from 'lodash'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseForm'
+})
+
 const props = defineProps({
   /**
    * >----------props----------<

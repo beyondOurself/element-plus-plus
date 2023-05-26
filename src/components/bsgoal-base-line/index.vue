@@ -2,22 +2,21 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 17:12:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 09:07:18
+ * @LastEditTime: 2023-05-26 15:59:36
  * @FilePath: \common\src\components\bsgoal-base-line\index.vue
  * @Description: 分割线公共组件
  * 
 -->
 
-<script>
-export default {
-  name: 'BsgoalBaseLine'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseLine'
+})
+
 const props = defineProps({
   /**
    * 是否为垂直

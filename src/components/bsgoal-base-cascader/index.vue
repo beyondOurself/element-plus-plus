@@ -2,21 +2,20 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:27
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 16:59:13
+ * @LastEditTime: 2023-05-26 15:54:39
  * @FilePath: \common\src\components\bsgoal-base-cascader\index.vue
  * @Description: 级联选择 公共组件
  * 
 -->
-<script>
-export default {
-  name: 'BsgoalBaseCascader'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, toRaw } from 'vue'
-// props
+
+defineOptions({
+  name: 'BsgoalBaseCascader'
+})
+
 const props = defineProps({
   /**
    * 绑定的值
