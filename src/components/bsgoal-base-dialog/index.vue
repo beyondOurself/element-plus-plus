@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 14:54:15
+ * @LastEditTime: 2023-05-26 15:39:08
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -203,6 +203,11 @@ const widthGet = computed(() => {
 
     .base_dialog_content--form {
       padding: 0px 0px 30px 30px;
+
+      .bsgoal-base-form .base_form {
+        padding: initial;
+        padding-top: 16px;
+      }
     }
   }
 }

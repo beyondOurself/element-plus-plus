@@ -2,24 +2,23 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-19 14:39:05
+ * @LastEditTime: 2023-05-26 14:26:06
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
 -->
-<script>
-export default {
-  name: 'BsgoalBaseTableDemo'
-}
-</script>
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, computed, toRefs, watch, unref } from 'vue'
-
 import BsgoalBaseTable from './index.vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
+
+defineOptions({
+   name:'BsgoalBaseTableDemo111'
+})
+
 let searchOptions = ref([
   {
     label: 'prop1',
