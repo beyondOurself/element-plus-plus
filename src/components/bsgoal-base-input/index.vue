@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-29 09:38:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-29 11:41:48
+ * @LastEditTime: 2023-05-29 18:01:19
  * @FilePath: \common\src\components\bsgoal-base-input\index.vue
  * @Description:  Input 输入框
  * 
@@ -11,7 +11,8 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, watch } from 'vue'
+import { processSlotOutlet } from '@vue/compiler-core'
+import { ref, watch, watchEffect } from 'vue'
 
 defineOptions({
   name: 'BsgoalBaseInput'
@@ -63,9 +64,10 @@ const emits = defineEmits(['update:modelValue', 'change'])
 
 // ---> S 值绑定 <---
 
-const inputValue = ref(props.modelValue)
-watch(inputValue, (value = '') => {
-  emits('update:modelValue', value)
+const inputValue = ref('')
+
+watchEffect(() => {
+  inputValue.value = props.modelValue
 })
 
 // ---> E 值绑定 <---
@@ -74,12 +76,33 @@ watch(inputValue, (value = '') => {
 
 /**
  * @Author: canlong.shen
- * @description: 值变动
+ * @description: 触发 变动输入
  * @default:
  * @return {*}
  */
 const change = (value = '') => {
   emits('change', value)
+  emits('update:modelValue', value)
+}
+/**
+ * @Author: canlong.shen
+ * @description: 触发 清空输入
+ * @default:
+ * @return {*}
+ */
+const clear = (value = '') => {
+  emits('clear', value)
+  emits('update:modelValue', value)
+}
+/**
+ * @Author: canlong.shen
+ * @description: 触发 输入事件
+ * @default:
+ * @return {*}
+ */
+const input = (value = '') => {
+  emits('input', value)
+  emits('update:modelValue', value)
 }
 
 // ---> E 事件  <---
@@ -96,6 +119,8 @@ const change = (value = '') => {
       :formatter="formatter"
       :parser="parser"
       @change="change"
+      @clear="clear"
+      @input="input"
     />
   </div>
 </template>
