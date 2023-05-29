@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:09:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-25 10:25:51
+ * @LastEditTime: 2023-05-29 18:48:45
  * @FilePath: \common\src\components\bsgoal-base-select\index.vue
  * @Description: Select 公共组件
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 defineOptions({
   name: 'BsgoalBaseSelect'
@@ -48,7 +48,16 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['update:modelValue','change'])
+const emits = defineEmits(['update:modelValue', 'change'])
+
+// ---> S 值绑定 <---
+
+const selectValue = ref('')
+watchEffect(() => {
+  selectValue.value = props.modelValue
+})
+
+// ---> E 值绑定 <---
 
 // ---> S 触发 方法 <---
 
@@ -64,7 +73,7 @@ const triggerChange = (value = '') => {
   const data = finder ? finder.data : null
 
   emits('update:modelValue', value)
-  emits('change', value , data)
+  emits('change', value, data)
 }
 
 // ---> E 触发 方法 <---
@@ -74,7 +83,7 @@ const triggerChange = (value = '') => {
     <el-select
       clearable
       class="base_select"
-      :model-value="modelValue"
+      v-model="selectValue"
       :no-data-text="none"
       :placeholder="placeholder"
       @change="triggerChange"

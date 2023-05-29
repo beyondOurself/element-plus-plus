@@ -47,12 +47,17 @@ const change = (value = '', data = {}) => {
   console.log('value', value)
   console.log('data', data)
 }
+
+const test = (params = '') => {
+   selectValue.value = '444'
+}
 </script>
 <template>
   <div class="bsgoal-base-select-demo">
     <div class="base_select_demo">
       {{ selectValue }}
       <BsgoalBaseSelect v-model="selectValue" :range="selectRange" @change="change" />
+      <el-button type="primary" @click="test">test</el-button>
     </div>
   </div>
 </template>
