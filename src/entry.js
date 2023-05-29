@@ -1,3 +1,15 @@
+/*
+ * @Author: canlong.shen
+ * @Date: 2023-05-11 18:31:55
+ * @LastEditors: canlong.shen
+ * @LastEditTime: 2023-05-29 09:58:19
+ * @FilePath: \common\src\entry.js
+ * @Description: 打包 入口文件
+ * 
+ */
+
+
+
 import BsgoalBaseForm from '@/components/bsgoal-base-form/index.vue'
 import BsgoalBaseTable from '@/components/bsgoal-base-table/index.vue'
 import BsgoalBaseLine from '@/components/bsgoal-base-line/index.vue'
@@ -14,6 +26,7 @@ import BsgoalBaseTime from '@/components/bsgoal-base-time/index.vue'
 import BsgoalBaseTimeRange from '@/components/bsgoal-base-time-range/index.vue'
 import BsgoalBaseSwitch from '@/components/bsgoal-base-switch/index.vue'
 import BsgoalBaseItem from '@/components/bsgoal-base-item/index.vue'
+import BsgoalBaseInput from '@/components/bsgoal-base-input/index.vue'
 import componentTypeEnums from '@/enums/componentTypeEnums.js'
 import { useFetch } from '@/combines/useFetchs.js'
 
@@ -42,6 +55,7 @@ export default {
       BsgoalBaseTimeRange,
       BsgoalBaseSwitch,
       BsgoalBaseItem,
+      BsgoalBaseInput,
     }
 
     for (const [name, component] of Object.entries(componentsMap)) {

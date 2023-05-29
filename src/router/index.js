@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 17:43:27
+ * @LastEditTime: 2023-05-29 09:57:18
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: '/bsgoal-base-input-demo',
+          name: '输入框',
+          component: import('@/components/bsgoal-base-input/demo.vue')
+        },
         {
           path: '/bsgoal-base-table-demo',
           name: '表格',
