@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:09:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 10:21:15
+ * @LastEditTime: 2023-05-30 10:26:26
  * @FilePath: \common\src\components\bsgoal-base-select\index.vue
  * @Description: Select 公共组件
  * 
@@ -54,9 +54,7 @@ const emits = defineEmits(['update:modelValue', 'change'])
 // ---> S 值绑定 <---
 const selectValue = ref(props.modelValue)
 
-const rangeGet = computed(() => {
-   return unref(props.range)
-})
+
 // ---> E 值绑定 <---
 
 // ---> S 触发 方法 <---
@@ -88,7 +86,7 @@ const triggerChange = (value = '') => {
       :placeholder="placeholder"
       @change="triggerChange"
     >
-      <template v-for="({ label = '', value = '' }, key) of rangeGet" :key="key">
+      <template v-for="({ label = '', value = '' }, key) of range" :key="key">
         <el-option :label="label" :value="value"></el-option>
       </template>
     </el-select>
