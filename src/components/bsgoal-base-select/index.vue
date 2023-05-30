@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:09:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 11:01:00
+ * @LastEditTime: 2023-05-30 17:58:18
  * @FilePath: \common\src\components\bsgoal-base-select\index.vue
  * @Description: Select 公共组件
  * 
@@ -45,6 +45,13 @@ const props = defineProps({
   none: {
     type: [String],
     default: '暂无数据'
+  },
+  /**
+   * 是否可清空
+   */
+  clearable: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -81,9 +88,9 @@ const triggerChange = (value = '') => {
 <template>
   <div class="bsgoal-base-select">
     <el-select
-      clearable
       class="base_select"
       v-model="selectValue"
+      :clearable="clearable"
       :no-data-text="none"
       :placeholder="placeholder"
       @change="triggerChange"

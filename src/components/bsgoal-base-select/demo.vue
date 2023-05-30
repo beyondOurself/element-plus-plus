@@ -49,14 +49,14 @@ const change = (value = '', data = {}) => {
 }
 
 const test = (params = '') => {
-   selectValue.value = '444'
+   selectValue.value = ''
 }
 </script>
 <template>
   <div class="bsgoal-base-select-demo">
     <div class="base_select_demo">
       {{ selectValue }}
-      <BsgoalBaseSelect v-model="selectValue" :range="selectRange" @change="change" />
+      <BsgoalBaseSelect :model-value="selectValue" :range="selectRange" @change="change" />
       <el-button type="primary" @click="test">test</el-button>
     </div>
   </div>
