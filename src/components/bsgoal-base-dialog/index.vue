@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 15:39:08
+ * @LastEditTime: 2023-05-30 15:30:52
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -12,6 +12,7 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, watch, computed } from 'vue'
+import BsgoalBaseButton from '../bsgoal-base-button/index.vue'
 
 defineOptions({
   name: 'BsgoalBaseDialog'
@@ -95,9 +96,10 @@ const cancel = () => {
  * @default:
  * @return {*}
  */
-const confirm = () => {
+const confirm = (done = () => {}) => {
   emits('on-confirm', () => {
     dialogVisible.value = false
+    done()
   })
 }
 
@@ -156,8 +158,15 @@ const widthGet = computed(() => {
         <template #footer>
           <slot name="footer" v-if="footer">
             <span class="base_dialog_footer">
-              <el-button @click="cancel">{{ cancelTxt }}</el-button>
-              <el-button type="primary" @click="confirm"> {{ confirmTxt }} </el-button>
+              <BsgoalBaseButton
+                :task="cancel"
+                mode="cancel"
+                :content="cancelTxt"
+                :has-loading="false"
+              >
+              </BsgoalBaseButton>
+              <BsgoalBaseButton :task="confirm" mode="confirm" :content="confirmTxt">
+              </BsgoalBaseButton>
             </span>
           </slot>
         </template>

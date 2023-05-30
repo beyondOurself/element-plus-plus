@@ -14,7 +14,6 @@
 import { ref, unref, computed } from 'vue'
 import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
 
-
 defineOptions({
   name: 'BsgoalBaseButton'
 })
@@ -51,13 +50,23 @@ const props = defineProps({
   plain: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * 是否有 loading
+   */
+  hasLoading: {
+    type: [Boolean],
+    default: true
   }
 })
 
 // ---> S 触发按钮 <---
 const loading = ref(false)
 const triggerClick = () => {
+  // 默认 loading 是打开的 
+ if(props.hasLoading){
   loading.value = true
+ }
   const { task } = props
   const taskValue = unref(task)
   taskValue(() => {
