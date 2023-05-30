@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 11:40:16
+ * @LastEditTime: 2023-05-30 11:48:20
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -342,7 +342,6 @@ const validateForm = (callback = () => {}) => {
     if (valid) {
       const validModel = triggerOperationForm()
       const cleanModel = filterSlotProps(validModel)
-      console.log('cleanModel', cleanModel)
       callback(cleanModel)
     } else {
       callback(false)
