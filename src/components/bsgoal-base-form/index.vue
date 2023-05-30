@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 14:24:25
+ * @LastEditTime: 2023-05-30 14:52:13
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -153,8 +153,11 @@ watchEffect(() => {
       watchPropList.push(prop)
     }
     const bindValue = unref(model)[prop]
-    // '_xxx 开头都是内容插槽'
-    model.value[prop] = bindValue || valuesModel[prop] || value
+    if (prop.startsWith('_')) {
+      model.value[prop] = `${prop}`
+    } else {
+      model.value[prop] = bindValue || valuesModel[prop] || value
+    }
 
     if (isObject(show)) {
       watchPropsForShow(show, unref(model), prop)
@@ -175,13 +178,13 @@ const configOptionsGet = computed(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   const reOptions = options.map((option) => {
-    let { rules = [], label = '',  prop = ''} = option
+    let { rules = [], label = '', prop = '' } = option
     const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
     if (isBoolean(rules) && rules) {
       rules = [requiredRule]
-    } else if ( !prop.startsWith('_') && Array.isArray(rules) && !!rules.length ) {
-      rules = [ requiredRule ,...rules,]
-    } 
+    } else if (Array.isArray(rules) && !!rules.length) {
+      rules = [requiredRule, ...rules]
+    }
     option.rules = rules
     return option
   })
@@ -434,7 +437,7 @@ defineExpose({
             :key="key"
           >
             <el-col :class="{ 'base_form--visible': !visible }" :xs="24" :sm="24" :md="medium">
-              <el-form-item :label="label" :prop="prop" :rules="rules" :required="!!rules.length">
+              <el-form-item :label="label" :prop="prop" :rules="rules">
                 <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">
                   <!-- S 内容组件 -->
                   <template v-if="!readonly">

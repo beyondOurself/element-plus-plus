@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 14:07:00
+ * @LastEditTime: 2023-05-30 14:45:55
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -47,8 +47,10 @@ const configOptions = ref([
       {
         validator: (rule, value, callback) => {
           console.log('value', value)
-
-           return callback(new Error('Please input the age'))
+          
+          
+          //  return callback(new Error('Please input the age'))
+          return callback()
         },
         trigger: 'change'
       }
