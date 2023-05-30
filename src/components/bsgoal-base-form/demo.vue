@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 15:55:40
+ * @LastEditTime: 2023-05-30 11:44:19
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -33,13 +33,14 @@ const confirm = () => {
   })
 }
 
-const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0' })
+const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0' ,_prop104:'55'})
 
 // 配置项
 const configOptions = ref([
    {
     label: 'prop104',
     prop: '_prop104',
+    rules: true
   },
   {
     label: 'prop103',

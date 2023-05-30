@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-23 15:37:32
+ * @LastEditTime: 2023-05-30 11:40:16
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -154,12 +154,10 @@ watchEffect(() => {
     }
     const bindValue = unref(model)[prop]
     // '_xxx 开头都是内容插槽'
-    if (!prop.startsWith('_')) {
-      model.value[prop] = bindValue || valuesModel[prop] || value
+    model.value[prop] = bindValue || valuesModel[prop] || value
 
-      if (isObject(show)) {
-        watchPropsForShow(show, unref(model), prop)
-      }
+    if (isObject(show)) {
+      watchPropsForShow(show, unref(model), prop)
     }
   })
 })
@@ -319,6 +317,22 @@ const triggerValueChange = (type, prop) => {
 
 /**
  * @Author: canlong.shen
+ * @description: 过滤掉插槽字段
+ * @default:
+ * @return {*}
+ */
+const filterSlotProps = (model = {}) => {
+  const rebuildModel = {}
+  for (const prop of Object.keys(model)) {
+    if (!prop.startsWith('_')) {
+      rebuildModel[prop] = model[prop]
+    }
+  }
+  return rebuildModel
+}
+
+/**
+ * @Author: canlong.shen
  * @description: 表单校验
  * @default:
  * @return {*}
@@ -327,7 +341,9 @@ const validateForm = (callback = () => {}) => {
   EL_FORM_REF.value.validate((valid = false, field = {}) => {
     if (valid) {
       const validModel = triggerOperationForm()
-      callback(validModel)
+      const cleanModel = filterSlotProps(validModel)
+      console.log('cleanModel', cleanModel)
+      callback(cleanModel)
     } else {
       callback(false)
 
