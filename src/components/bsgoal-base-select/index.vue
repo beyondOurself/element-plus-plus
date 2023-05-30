@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:09:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 10:26:26
+ * @LastEditTime: 2023-05-30 11:01:00
  * @FilePath: \common\src\components\bsgoal-base-select\index.vue
  * @Description: Select 公共组件
  * 
@@ -11,8 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { computed } from '@vue/reactivity';
-import { ref, unref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 defineOptions({
   name: 'BsgoalBaseSelect'
@@ -52,8 +51,11 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue', 'change'])
 
 // ---> S 值绑定 <---
-const selectValue = ref(props.modelValue)
 
+const selectValue = ref('')
+watchEffect(() => {
+  selectValue.value = props.modelValue
+})
 
 // ---> E 值绑定 <---
 
