@@ -61,7 +61,8 @@ const configOptions = ref([
     formatter: (value = '') => {
       return `${value}`.match(/^\d{1,}$/) ? value : ''
     },
-    placeholder: ''
+    placeholder: '',
+    rules:true
   },
 
   {
