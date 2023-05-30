@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 11:48:20
+ * @LastEditTime: 2023-05-30 14:05:39
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -175,15 +175,13 @@ const configOptionsGet = computed(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   const reOptions = options.map((option) => {
-    let { rules = [], label = '' } = option
+    let { rules = [], label = '', validator = false } = option
     const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
     if (isBoolean(rules) && rules) {
       rules = [requiredRule]
-    } else if (Array.isArray(rules) && !!rules.length) {
-      rules = [requiredRule, ...rules]
-    } else {
-      rules = []
-    }
+    } else if ( !validator && Array.isArray(rules) && !!rules.length ) {
+      rules = [ requiredRule ,...rules,]
+    } 
     option.rules = rules
     return option
   })

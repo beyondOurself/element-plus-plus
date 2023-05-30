@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 11:44:19
+ * @LastEditTime: 2023-05-30 14:07:00
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -33,14 +33,26 @@ const confirm = () => {
   })
 }
 
-const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0' ,_prop104:'55'})
+const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0', _prop104: '' })
+
+
 
 // 配置项
 const configOptions = ref([
-   {
+  {
     label: 'prop104',
     prop: '_prop104',
-    rules: true
+    validator:true,
+    rules: [
+      {
+        validator: (rule, value, callback) => {
+          console.log('value', value)
+
+           return callback(new Error('Please input the age'))
+        },
+        trigger: 'change'
+      }
+    ]
   },
   {
     label: 'prop103',
@@ -249,9 +261,9 @@ const configOptions = ref([
       :config-options="configOptions"
       :bind-model="bindModel"
     >
-      <template #_prop104="{option}">
-         <div>666  </div>
-     </template>
+    <template #_prop104>
+      6666
+    </template>
     </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
   </div>
