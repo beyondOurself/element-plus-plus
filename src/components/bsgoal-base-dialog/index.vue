@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 15:30:52
+ * @LastEditTime: 2023-05-30 15:45:49
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -159,13 +159,14 @@ const widthGet = computed(() => {
           <slot name="footer" v-if="footer">
             <span class="base_dialog_footer">
               <BsgoalBaseButton
-                :task="cancel"
+                class='base_dialog_footer_cancel'
                 mode="cancel"
+                :task="cancel"
                 :content="cancelTxt"
                 :has-loading="false"
               >
               </BsgoalBaseButton>
-              <BsgoalBaseButton :task="confirm" mode="confirm" :content="confirmTxt">
+              <BsgoalBaseButton mode="confirm" :task="confirm"  :content="confirmTxt">
               </BsgoalBaseButton>
             </span>
           </slot>
@@ -217,6 +218,9 @@ const widthGet = computed(() => {
         padding-top: 16px;
       }
     }
+  }
+  .base_dialog_footer_cancel {
+    margin-right:16px;
   }
 }
 </style>
