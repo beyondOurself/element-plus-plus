@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 15:45:49
+ * @LastEditTime: 2023-05-31 11:57:26
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -152,7 +152,7 @@ const widthGet = computed(() => {
         <template #header>
           <div class="base_dialog_header">{{ title }}</div>
         </template>
-        <div :class="['base_dialog_content', { 'base_dialog_content--form': type === 'form' }]">
+        <div :class="['base_dialog_content', { 'base_dialog_content--form': type === 'form','base_dialog_content--blank': type === 'blank' }]">
           <slot></slot>
         </div>
         <template #footer>
@@ -195,7 +195,7 @@ const widthGet = computed(() => {
       padding: 16px 30px;
       margin-right: 0px;
       background-color: #f5f7fa;
-
+      height: initial !important;
       .el-dialog__headerbtn {
         top: 0px;
         right: 8px;
@@ -218,6 +218,11 @@ const widthGet = computed(() => {
         padding-top: 16px;
       }
     }
+
+    .base_dialog_content--blank{
+       padding-top: 0px;
+    }
+     
   }
   .base_dialog_footer_cancel {
     margin-right:16px;
