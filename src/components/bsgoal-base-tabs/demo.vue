@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-28 16:01:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-01 10:47:33
+ * @LastEditTime: 2023-06-01 11:03:24
  * @FilePath: \common\src\components\bsgoal-base-tabs\demo.vue
  * @Description: tabs 标签切页 公共组件演示
 -->

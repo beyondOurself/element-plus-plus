@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-31 11:57:26
+ * @LastEditTime: 2023-06-01 11:41:57
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -152,21 +152,29 @@ const widthGet = computed(() => {
         <template #header>
           <div class="base_dialog_header">{{ title }}</div>
         </template>
-        <div :class="['base_dialog_content', { 'base_dialog_content--form': type === 'form','base_dialog_content--blank': type === 'blank' }]">
+        <div
+          :class="[
+            'base_dialog_content',
+            {
+              'base_dialog_content--form': type === 'form',
+              'base_dialog_content--blank': type === 'blank'
+            }
+          ]"
+        >
           <slot></slot>
         </div>
         <template #footer>
           <slot name="footer" v-if="footer">
             <span class="base_dialog_footer">
               <BsgoalBaseButton
-                class='base_dialog_footer_cancel'
+                class="base_dialog_footer_cancel"
                 mode="cancel"
                 :task="cancel"
                 :content="cancelTxt"
                 :has-loading="false"
               >
               </BsgoalBaseButton>
-              <BsgoalBaseButton mode="confirm" :task="confirm"  :content="confirmTxt">
+              <BsgoalBaseButton mode="confirm" :task="confirm" :content="confirmTxt">
               </BsgoalBaseButton>
             </span>
           </slot>
@@ -190,6 +198,11 @@ const widthGet = computed(() => {
     display: none;
   }
 
+  .el-dialog__footer {
+    height: initial;
+    line-height: initial;
+  }
+
   .bsgoal_base_dialog_main {
     .el-dialog__header {
       padding: 16px 30px;
@@ -211,7 +224,7 @@ const widthGet = computed(() => {
     }
 
     .base_dialog_content--form {
-      padding: 0px 0px 30px 30px;
+      padding: 0px 0px 0px 30px;
 
       .bsgoal-base-form .base_form {
         padding: initial;
@@ -219,13 +232,12 @@ const widthGet = computed(() => {
       }
     }
 
-    .base_dialog_content--blank{
-       padding-top: 0px;
+    .base_dialog_content--blank {
+      padding-top: 0px;
     }
-     
   }
   .base_dialog_footer_cancel {
-    margin-right:16px;
+    margin-right: 16px;
   }
 }
 </style>
