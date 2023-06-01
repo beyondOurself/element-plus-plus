@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-28 16:01:06
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-20 16:14:19
+ * @LastEditTime: 2023-06-01 10:43:54
  * @FilePath: \common\src\components\bsgoal-base-tabs\index.vue
  * @Description: tabs 标签页公共组件
  * 
@@ -54,6 +54,13 @@ const props = defineProps({
   stretch: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * fill 自动填满高度
+   */
+  fill: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -77,7 +84,10 @@ const changeTab = (activeValue = '') => {
 <template>
   <div class="bsgoal-base-tabs">
     <el-tabs
-      class="bsgoal_base_tabs"
+      class="base_tabs"
+      :class="{
+        'base_tabs--fill': fill
+      }"
       :stretch="stretch"
       :type="type"
       :model-value="modelValueGet"
@@ -94,4 +104,19 @@ const changeTab = (activeValue = '') => {
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
+.bsgoal-base-tabs {
+  .base_tabs--fill {
+    position: absolute;
+    top: 8px;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    & > div.el-tabs__content {
+      flex: 1;
+      position: relative;
+    }
+  }
+}
 </style>

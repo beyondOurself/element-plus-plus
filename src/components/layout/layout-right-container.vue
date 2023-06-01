@@ -30,6 +30,7 @@ defineOptions({
 .layout-right-container {
   height: calc(100vh - 80px);
   overflow-y: scroll;
+  position: relative;
 }
 </style>
 <style lang="scss">
