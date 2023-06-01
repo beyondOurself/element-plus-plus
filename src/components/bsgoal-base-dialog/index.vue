@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-01 11:41:57
+ * @LastEditTime: 2023-06-01 11:56:02
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -201,6 +201,9 @@ const widthGet = computed(() => {
   .el-dialog__footer {
     height: initial;
     line-height: initial;
+    .el-button {
+      margin-left: initial;
+    }
   }
 
   .bsgoal_base_dialog_main {
