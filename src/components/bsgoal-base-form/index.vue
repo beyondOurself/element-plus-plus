@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 14:52:13
+ * @LastEditTime: 2023-05-31 14:46:37
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -96,6 +96,20 @@ const props = defineProps({
     type: [String],
     default: 'right',
     validator: (v) => ['left', 'rightn', 'top'].includes(v)
+  },
+  /**
+   * base_form  绑定的 style 对象
+   */
+  styler: {
+    type: [Object],
+    default: () => ({})
+  },
+  /**
+   * el_form_item  绑定的 style 对象
+   */
+  itemStyler: {
+    type: [Object],
+    default: () => ({})
   }
 })
 
@@ -397,11 +411,12 @@ defineExpose({
 </script>
 <template>
   <div class="bsgoal-base-form">
-    <div class="base_form">
+    <div class="base_form" :style="styler">
       <!-- / 表单内容 -->
       <el-form
         ref="EL_FORM_REF"
         label-suffix=":"
+        style="padding: 0px"
         :label-position="labelPosition"
         :model="model"
         v-align
@@ -437,7 +452,7 @@ defineExpose({
             :key="key"
           >
             <el-col :class="{ 'base_form--visible': !visible }" :xs="24" :sm="24" :md="medium">
-              <el-form-item :label="label" :prop="prop" :rules="rules">
+              <el-form-item :style="itemStyler" :label="label" :prop="prop" :rules="rules">
                 <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">
                   <!-- S 内容组件 -->
                   <template v-if="!readonly">
@@ -639,7 +654,7 @@ defineExpose({
 ---------------------------------------------------------------- */
 .bsgoal-base-form {
   .base_form {
-    padding: 16px 6px 8px 16px;
+    /* padding: 16px 6px 8px 16px; */
 
     .el-form-item {
       // margin-bottom: 8px;
