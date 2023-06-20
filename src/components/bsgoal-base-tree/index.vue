@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 09:10:35
+ * @LastEditTime: 2023-06-20 18:21:46
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -10,7 +10,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, watch } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import directiveBase from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseTreeFold from '../bsgoal-base-tree-fold/index.vue'
@@ -69,7 +69,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['on-click'])
+const emits = defineEmits(['on-click', 'on-switch'])
 
 // 计算高度的指令
 const vHeight = directiveBase.height
@@ -108,6 +108,11 @@ const foldStatus = ref(true)
 const clickNodeTree = (value, node, treeNode, event) => {
   emits('on-click', value, node, treeNode, event)
 }
+
+watch(foldStatus, () => {
+  emits('on-switch', foldStatus.value)
+})
+
 /**
  * @Author: canlong.shen
  * @description:  懒加载数据

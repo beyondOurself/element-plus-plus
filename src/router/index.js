@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-29 09:57:18
+ * @LastEditTime: 2023-06-20 10:07:27
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -127,6 +127,11 @@ const router = createRouter({
           path: 'bsgoal-base-item-demo',
           name: '表单项',
           component: import('@/components/bsgoal-base-item/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-tree-table-demo',
+          name: '树 + 查询 + 表格',
+          component: import('@/components/bsgoal-base-tree-table/demo.vue')
         },
       ]
     }

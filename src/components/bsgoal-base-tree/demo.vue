@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:39
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-21 18:03:30
+ * @LastEditTime: 2023-06-19 15:21:32
  * @FilePath: \common\src\components\bsgoal-base-tree\demo.vue
  * @Description: 左侧树的演示
  * 
@@ -44,7 +44,7 @@ const createData = (maxDeep, maxChildren, minNodesNumber, deep = 1, key = 'node'
 }
 treeData.value = createData(4, 4, 4)
 
-const triggerTreeClick = (value,node,treeNode,event ) => {
+const triggerTreeClick = (value, node, treeNode, event) => {
   console.log('value', value)
   console.log('node', node)
   console.log('treeNode', treeNode)
@@ -99,6 +99,7 @@ const treeInitNode = (node) => {
         :init-node="treeInitNode"
         @on-click="triggerTreeClick"
       />
+      
     </div>
   </div>
 </template>

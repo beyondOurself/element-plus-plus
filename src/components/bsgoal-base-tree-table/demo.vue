@@ -1,26 +1,79 @@
 <!--
  * @Author: canlong.shen
- * @Date: 2023-04-18 17:04:53
+ * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-19 18:20:59
- * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
- * @Description: 查询 + 表格 组合公共组件
+ * @LastEditTime: 2023-06-20 13:57:43
+ * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
+ * @Description:  树 + 列表 + 演示
  * 
 -->
-
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref } from 'vue'
+import { ref ,unref } from 'vue'
+import BsgoalBaseTreeTable from './index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
-import BsgoalBaseSearchTable from './index.vue'
-import BsgoalBaseButton from '../bsgoal-base-button/index.vue'
+
 
 defineOptions({
-  name: 'BsgoalSearchTableDemo'
+  name: 'BsgoalBaseTreeTableDemo'
 })
 
 const props = defineProps({})
+
+// ---> S 树 <---
+
+const triggerTreeClick = (value, node, treeNode, event) => {
+  console.log('value', value)
+  console.log('node', node)
+  console.log('treeNode', treeNode)
+  console.log('event', event)
+}
+
+const treeLazyLoad = (node) => {
+  console.log('treeLazyLoad', node)
+  return new Promise((resove, reject) => {
+    setTimeout(() => {
+      resove([
+        {
+          label: 'label2-1',
+          isLeaf: true
+        },
+        {
+          label: 'label2-2',
+          children: [
+            {
+              label: 'label2-2-1'
+            }
+          ]
+        },
+        {
+          label: 'label2-3'
+        }
+      ])
+    }, 1000)
+  })
+}
+
+const treeInitNode = (node) => {
+  console.log('treeInitNode', node)
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        {
+          value: 'value1',
+          label: 'label1'
+        }
+      ])
+    }, 1000)
+  })
+}
+
+// ---> E 树 <---
+
+// ---> S 列表 <---
+
 
 const configOptions = ref([
   {
@@ -695,10 +748,6 @@ const tableData = ref([
   }
 ])
 
-const call = (state, data) => {
-  console.log('call state', state)
-  console.log('call data', data)
-}
 
 const tableDataVal = unref(tableData)
 
@@ -714,62 +763,26 @@ const fetch = (params) => {
         },
         message: '获取数据成功'
       })
-      // 不存在分页
-      // resolve({
-      //   data: tableDataVal,
-      //   message: '获取数据成功'
-      // })
     }, 3000)
   })
 }
 
-const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
-const test = () => {
-  BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()
-}
 
-const task = (done = () => {}, rows = {}) => {
-  console.log('rows', rows.prop1)
-  setTimeout(() => {
-    done()
-  }, 3000)
-}
+// ---> E 列表 <---
 </script>
 <template>
-  <div class="bsgoal-search-table-demo">
-    <div class="search_table_demo">
-      <!-- <DemoTable /> -->
-      <BsgoalBaseSearchTable
-        ref="BSGOAL_BASE_SEARCH_TABLE_REF"
+  <div class="bsgoal-base-tree-table-demo">
+    <div class="base_tree_table_demo">
+      <BsgoalBaseTreeTable
         selection
         operation
-        :call="call"
+        :lazy-load="treeLazyLoad"
+        :init-node="treeInitNode"
         :fetch="fetch"
         :config-options="configOptions"
-        :expression="75"
-        @on-search="triggerSearch"
-      >
-        <!-- 
-        <BsgoalBaseSearchTable
-        selection
-        operation
-        :has-search="false"
-        :has-page="false"
-        :call="call"
-        :fetch="fetch"
-        :config-options="configOptions"
-        :expression="75"
-        @on-search="triggerSearch"
-      > -->
-        <template v-slot:menu>
-          <el-button type="primary" @click="test">操作按钮</el-button>
-        </template>
-        <template v-slot:operation="{ row }">
-          <div>
-            <BsgoalBaseButton :task="task" :values="row" />
-          </div>
-        </template>
-      </BsgoalBaseSearchTable>
+        :expression="77"
+        @on-click="triggerTreeClick"
+      ></BsgoalBaseTreeTable>
     </div>
   </div>
 </template>

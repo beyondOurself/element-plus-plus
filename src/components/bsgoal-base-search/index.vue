@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 15:53:40
+ * @LastEditTime: 2023-06-20 19:03:02
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -271,6 +271,7 @@ const triggerValueChange = (type, prop) => {
   emits('on-change', emitValue)
 }
 
+
 // ---> S 暴露 <---
 defineExpose({
   triggerOperationSearch
@@ -303,7 +304,9 @@ defineExpose({
             :key="index"
           >
             <el-col
-              v-show="index < 7 || type === ComponentTypeEnums.OPERATION || (index >= 7 && foldStatus)"
+              v-show="
+                index < 7 || type === ComponentTypeEnums.OPERATION || (index >= 7 && foldStatus)
+              "
               :xs="24"
               :sm="12"
               :md="medium"
@@ -388,9 +391,12 @@ defineExpose({
                   <!-- / 日期选择器 -->
                   <template
                     v-if="
-                      [ComponentTypeEnums.DATE, ComponentTypeEnums.MONTH, ComponentTypeEnums.YEAR, ComponentTypeEnums.DATE_TIME].includes(
-                        type
-                      )
+                      [
+                        ComponentTypeEnums.DATE,
+                        ComponentTypeEnums.MONTH,
+                        ComponentTypeEnums.YEAR,
+                        ComponentTypeEnums.DATE_TIME
+                      ].includes(type)
                     "
                   >
                     <el-date-picker

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-19 17:51:57
+ * @LastEditTime: 2023-06-20 19:14:25
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -164,9 +164,6 @@ watchEffect(() => {
   }
 })
 
-
-
-
 // 触发搜索
 const mapPropsVal = unref(props.mapProps)
 const mapPropsFuse = {
@@ -182,7 +179,7 @@ const pageSize = ref(10)
 const total = ref(0)
 const searchParams = ref({})
 const tableLoading = ref(props.loading)
-const tableData =  ref()
+const tableData = ref()
 const resData = ref({})
 const ping = () => {
   const { fetch, call, hasPage } = props
@@ -199,9 +196,8 @@ const ping = () => {
   useFetch(fetch(fetchParams), call, tableLoading, resData)
 }
 
-
 watchEffect(() => {
-     tableData.value = props.data
+  tableData.value = props.data
 })
 
 watch(resData, (data) => {
@@ -233,6 +229,10 @@ watch([currentPage, pageSize], () => {
   ping()
 })
 
+// ---> S 左侧机构树折叠状态 <---
+const TREE_SWITCH_STATUS = inject('TREE_SWITCH_STATUS')
+// ---> E 左侧机构树折叠状态 <---
+
 // 暴露的属性
 defineExpose({
   refreshList
@@ -241,7 +241,7 @@ defineExpose({
 
 <template>
   <div class="bsgoal-base-table">
-    <div class="base_table">
+    <div class="base_table" :class="{ 'base_table--tree': TREE_SWITCH_STATUS === false }">
       <!-- S 表头操作区域 -->
       <div class="base_table_menu" v-if="$slots.menu">
         <slot name="menu"></slot>
@@ -336,6 +336,9 @@ defineExpose({
 
   .el-scrollbar__view {
     height: 100%;
+  }
+  .base_table--tree {
+    margin-top: 10px;
   }
 }
 </style>
