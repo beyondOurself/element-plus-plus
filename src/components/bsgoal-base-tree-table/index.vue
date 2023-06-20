@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 18:52:36
+ * @LastEditTime: 2023-06-20 19:33:51
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -10,7 +10,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, useSlots, computed , provide  } from 'vue'
+import { ref, useSlots, computed, provide, unref } from 'vue'
 import BsgoalBaseTree from '../bsgoal-base-tree/index.vue'
 import BsgoalBaseSearchTable from '../bsgoal-base-search-table/index.vue'
 
@@ -146,8 +146,23 @@ const props = defineProps({
   hasSearch: {
     type: Boolean,
     default: true
+  },
+
+  /**
+   * pageSize
+   */
+  pageSize: {
+    type: [Number],
+    default: 0
   }
 })
+
+// ---> S 注入分页的值 <---
+const pageSizeValue = unref(props.pageSize)
+if (pageSizeValue) {
+  provide('PAGINATION_PAGE_SIZE', ref(props.pageSize))
+}
+// ---> E 注入分页的值 <---
 
 // ---> S 注入插槽 <---
 const slots = useSlots()
@@ -158,9 +173,8 @@ const slotNames = ref(Object.keys(slots))
 const switchStatus = ref(true)
 const switchTree = (status = '') => {
   switchStatus.value = status
-  console.log('status', status)
 }
-provide('TREE_SWITCH_STATUS',switchStatus)
+provide('TREE_SWITCH_STATUS', switchStatus)
 
 // ---> E 树 <---
 

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 13:57:43
+ * @LastEditTime: 2023-06-20 19:33:11
  * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -776,6 +776,7 @@ const fetch = (params) => {
       <BsgoalBaseTreeTable
         selection
         operation
+        :page-size="40"
         :lazy-load="treeLazyLoad"
         :init-node="treeInitNode"
         :fetch="fetch"

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 16:34:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 13:50:40
+ * @LastEditTime: 2023-06-20 19:34:36
  * @FilePath: \common\src\components\bsgoal-base-table-pagination\index.vue
  * @Description: 表格的分页按钮
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed } from 'vue'
+import { ref, computed, inject, unref } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 defineOptions({
@@ -70,6 +70,17 @@ const triggerCurrentChange = (current = 1) => {
   emits('on-current-change', current)
 }
 const page = ref(1)
+
+const injectPageSize = inject('PAGINATION_PAGE_SIZE')
+console.log('injectPageSize',injectPageSize);
+// ---> S pageSize 值注入 <---
+const pageSizeValueGet = computed(() => {
+  if (injectPageSize) {
+    return unref(injectPageSize)
+  }
+  return props.pageSize
+})
+// ---> E pageSize 值注入 <---
 </script>
 <template>
   <div class="bsgoal-base-table-pagination">
@@ -80,7 +91,7 @@ const page = ref(1)
           layout="total, sizes, prev, pager, next, jumper"
           v-model:current-page="page"
           :page-sizes="pageSizes"
-          :page-size="pageSize"
+          :page-size="pageSizeValueGet"
           :total="total"
           @size-change="triggerSizeChange"
           @current-change="triggerCurrentChange"

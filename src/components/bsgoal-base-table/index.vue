@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 19:14:25
+ * @LastEditTime: 2023-06-20 19:21:34
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
