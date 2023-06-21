@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 19:03:02
+ * @LastEditTime: 2023-06-21 14:26:46
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -17,7 +17,6 @@ import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
-
 defineOptions({
   name: 'BsgoalBaseSearch'
 })
@@ -72,7 +71,7 @@ const EL_FORM_REF = ref(null)
 const vAlign = baseDirective.align
 
 const model = ref({})
-const watchPropList = []
+// const watchPropList = []
 
 /**
  * @Author: canlong.shen
@@ -85,11 +84,8 @@ watchEffect(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   options.forEach((fei) => {
-    const { value, prop = '', type = '' } = fei
-    if (![ComponentTypeEnums.INPUT, ComponentTypeEnums.INPUT_TEXT_AREA].includes(type)) {
-      watchPropList.push(prop)
-    }
-    model.value[prop] = [0, false].includes(value) ? value : ''
+    const { value, prop = '' } = fei
+    model.value[prop] = value || [0, false].includes(value) ? value : ''
   })
 })
 
@@ -210,7 +206,12 @@ const triggerOperationSearch = () => {
       shadowModel[prop] = value
     }
 
-    if (type.endsWith('range') && range && range.length === 2) {
+    if (
+      Array.isArray(value) &&
+      Array.isArray(range) &&
+      type.endsWith('range') &&
+      range.length === 2
+    ) {
       const { 0: startValue = '', 1: endValue = '' } = value
       const { 0: startProp = '', 1: endProp = '' } = range
       shadowModel[startProp] = startValue
@@ -271,7 +272,6 @@ const triggerValueChange = (type, prop) => {
   emits('on-change', emitValue)
 }
 
-
 // ---> S 暴露 <---
 defineExpose({
   triggerOperationSearch
@@ -281,6 +281,7 @@ defineExpose({
 <template>
   <div class="bsgoal-base-search">
     <div class="base_search">
+      {{ model }}
       <!-- / 表单内容 -->
       <el-form ref="EL_FORM_REF" label-suffix=":" :show-message="false" :model="model" v-align>
         <el-row>
