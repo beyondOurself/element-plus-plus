@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 10:18:38
+ * @LastEditTime: 2023-06-21 17:57:59
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -10,7 +10,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, watch, watchEffect } from 'vue'
+import { ref, watch, watchEffect, computed } from 'vue'
 import directiveBase from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseTreeFold from '../bsgoal-base-tree-fold/index.vue'
@@ -122,17 +122,23 @@ watch(foldStatus, () => {
  * @return {*}
  */
 const loadNode = async (node, resolve, props) => {
-  // console.log('props',props);
   if (node.level === 0) {
     const initNodeData = await props.initNode(node)
-    // console.log('initNodeData',initNodeData);
     return resolve(initNodeData || [])
   } else {
     const lazyNodeData = await props.lazyLoad(node)
-    // console.log('lazyNodeData',lazyNodeData);
     resolve(lazyNodeData || [])
   }
 }
+
+const lazyGet = computed(() => {
+  const { data = [] } = props
+  if (!data || !data.length) {
+    return true
+  }
+
+  return false
+})
 
 /**
  * @Author: canlong.shen
@@ -156,9 +162,10 @@ const handleItemAdd = (node = null, data = {}) => {
         <!-- S 树结构 -->
         <el-tree
           ref="EL_TREE_REF"
-          lazy
           highlight-current
           empty-text="暂无数据"
+          :data="data"
+          :lazy="lazyGet"
           :load="(node, resolve) => loadNode(node, resolve, props)"
           :expand-on-click-node="false"
           :props="treeProps"

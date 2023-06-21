@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:39
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 10:19:13
+ * @LastEditTime: 2023-06-21 17:57:30
  * @FilePath: \common\src\components\bsgoal-base-tree\demo.vue
  * @Description: 左侧树的演示
  * 
@@ -59,7 +59,7 @@ const treeLazyLoad = (node) => {
         {
           label: 'label2-1',
           isLeaf: true,
-          hasIcon:true
+          hasIcon: true
         },
         {
           label: 'label2-2',
@@ -100,6 +100,17 @@ const triggerAddClick = (params = '') => {
   <div class="bsgoal-base-tree-demo">
     <div class="base_tree_demo">
       <BsgoalBaseTree
+        :data="[
+          {
+            value: 'value999',
+            label: 'label999',
+            children: [
+              {
+                label: '8888'
+              }
+            ]
+          }
+        ]"
         :lazy-load="treeLazyLoad"
         :init-node="treeInitNode"
         @on-click="triggerTreeClick"
