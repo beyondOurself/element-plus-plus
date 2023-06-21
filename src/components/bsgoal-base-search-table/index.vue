@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 15:59:09
+ * @LastEditTime: 2023-06-21 10:21:34
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -123,8 +123,23 @@ const props = defineProps({
   hasSearch: {
     type: Boolean,
     default: true
+  },
+  /**
+   * pageSize
+   */
+   pageSize: {
+    type: [Number],
+    default: 0
   }
 })
+
+
+// ---> S 注入分页的值 <---
+const pageSizeValue = unref(props.pageSize)
+if (pageSizeValue) {
+  provide('PAGINATION_PAGE_SIZE', ref(props.pageSize))
+}
+// ---> E 注入分页的值 <---
 
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-19 18:20:59
+ * @LastEditTime: 2023-06-21 10:22:10
  * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -747,6 +747,7 @@ const task = (done = () => {}, rows = {}) => {
         :fetch="fetch"
         :config-options="configOptions"
         :expression="75"
+        :page-size="40"
         @on-search="triggerSearch"
       >
         <!-- 

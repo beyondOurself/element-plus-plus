@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 19:33:51
+ * @LastEditTime: 2023-06-21 10:21:31
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -157,12 +157,7 @@ const props = defineProps({
   }
 })
 
-// ---> S 注入分页的值 <---
-const pageSizeValue = unref(props.pageSize)
-if (pageSizeValue) {
-  provide('PAGINATION_PAGE_SIZE', ref(props.pageSize))
-}
-// ---> E 注入分页的值 <---
+
 
 // ---> S 注入插槽 <---
 const slots = useSlots()

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 18:21:46
+ * @LastEditTime: 2023-06-21 10:18:38
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -14,7 +14,7 @@ import { ref, watch, watchEffect } from 'vue'
 import directiveBase from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseTreeFold from '../bsgoal-base-tree-fold/index.vue'
-
+import { Plus } from '@element-plus/icons-vue'
 defineOptions({
   name: 'BsgoalBaseTree'
 })
@@ -69,7 +69,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['on-click', 'on-switch'])
+const emits = defineEmits(['on-click', 'on-switch', 'on-click-add'])
 
 // 计算高度的指令
 const vHeight = directiveBase.height
@@ -133,6 +133,18 @@ const loadNode = async (node, resolve, props) => {
     resolve(lazyNodeData || [])
   }
 }
+
+/**
+ * @Author: canlong.shen
+ * @description: 点击加号图标触发事件
+ * @param {*} node
+ * @param {*} data
+ * @default:
+ * @return {*}
+ */
+const handleItemAdd = (node = null, data = {}) => {
+  emits('on-click-add', { node, data })
+}
 </script>
 <template>
   <div class="bsgoal-base-tree">
@@ -152,7 +164,24 @@ const loadNode = async (node, resolve, props) => {
           :props="treeProps"
           :filter-node-method="filterNode"
           @node-click="clickNodeTree"
-        />
+        >
+          <template #default="{ node, data }">
+            <div class="base_tree_node">
+              <!-- S 节点名称 -->
+              <span class="base_tree_node_label">
+                {{ node.label }}
+              </span>
+              <!-- E 节点名称 -->
+              <!-- S 操作符号 -->
+              <span class="base_tree_node_icon" v-show="data.hasIcon">
+                <el-icon color="#409EFF" @click="handleItemAdd(node, data)">
+                  <Plus />
+                </el-icon>
+              </span>
+              <!-- E 操作符号 -->
+            </div>
+          </template>
+        </el-tree>
         <!-- E 树结构 -->
       </div>
       <!-- S 横线 -->
@@ -212,6 +241,16 @@ const loadNode = async (node, resolve, props) => {
 
   .base_tree .el-tree-node__content > i.el-tree-node__expand-icon {
     padding-left: 0px;
+  }
+  .base_tree_node {
+    display: flex;
+    flex: 1;
+  }
+  .base_tree_node_label {
+    flex: 1;
+  }
+  .base_tree_node_icon {
+    flex: none;
   }
 }
 </style>

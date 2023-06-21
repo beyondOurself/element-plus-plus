@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:39
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-19 15:21:32
+ * @LastEditTime: 2023-06-21 10:19:13
  * @FilePath: \common\src\components\bsgoal-base-tree\demo.vue
  * @Description: 左侧树的演示
  * 
@@ -58,7 +58,8 @@ const treeLazyLoad = (node) => {
       resove([
         {
           label: 'label2-1',
-          isLeaf: true
+          isLeaf: true,
+          hasIcon:true
         },
         {
           label: 'label2-2',
@@ -90,6 +91,10 @@ const treeInitNode = (node) => {
     }, 1000)
   })
 }
+
+const triggerAddClick = (params = '') => {
+  console.log('params', params)
+}
 </script>
 <template>
   <div class="bsgoal-base-tree-demo">
@@ -98,8 +103,8 @@ const treeInitNode = (node) => {
         :lazy-load="treeLazyLoad"
         :init-node="treeInitNode"
         @on-click="triggerTreeClick"
+        @on-click-add="triggerAddClick"
       />
-      
     </div>
   </div>
 </template>
