@@ -19,6 +19,11 @@ const router = createRouter({
       component: LayoutHome,
       children: [
         {
+          path: '/bsgoal-baes-popover-demo',
+          name: '弹出框',
+          component: import('@/components/bsgoal-baes-popover/demo.vue')
+        },
+        {
           path: '/bsgoal-base-input-demo',
           name: '输入框',
           component: import('@/components/bsgoal-base-input/demo.vue')
