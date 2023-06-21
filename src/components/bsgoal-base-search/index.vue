@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 14:26:46
+ * @LastEditTime: 2023-06-21 14:35:58
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -281,7 +281,6 @@ defineExpose({
 <template>
   <div class="bsgoal-base-search">
     <div class="base_search">
-      {{ model }}
       <!-- / 表单内容 -->
       <el-form ref="EL_FORM_REF" label-suffix=":" :show-message="false" :model="model" v-align>
         <el-row>
