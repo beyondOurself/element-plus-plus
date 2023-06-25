@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 10:05:14
+ * @LastEditTime: 2023-06-25 15:38:56
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -55,7 +55,7 @@ const props = defineProps({
    */
   lazyLoad: {
     type: [Function],
-    default: () => {}
+    default: null
   },
   /**
    * 初始化树节点
@@ -65,7 +65,7 @@ const props = defineProps({
    */
   initNode: {
     type: [Function],
-    default: () => {}
+    default: null
   }
 })
 
@@ -132,11 +132,10 @@ const loadNode = async (node, resolve, props) => {
 }
 
 const lazyGet = computed(() => {
-  const { treeData = [] } = props
-  if (!treeData || !treeData.length) {
+  const { lazyLoad = null , initNode = null} = props
+  if(lazyLoad && initNode ){
     return true
   }
-
   return false
 })
 
