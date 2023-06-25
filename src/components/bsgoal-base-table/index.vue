@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 16:04:16
+ * @LastEditTime: 2023-06-25 17:14:14
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -127,10 +127,10 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
-    /**
+  /**
    * 每页显示条目个数
    */
-   pageSize: {
+  pageSize: {
     type: [Number],
     default: 10
   }
@@ -202,7 +202,6 @@ const ping = () => {
 
   useFetch(fetch(fetchParams), call, tableLoading, resData)
 }
-
 
 watchEffect(() => {
   tableData.value = props.data
@@ -300,7 +299,7 @@ defineExpose({
               :align="align"
               :width="width"
               :fixed="fixed"
-              :min-width="`${label.length * 14 + 24}px`"
+              :min-width="`${label.length * 14 + 30}px`"
             >
               <template v-slot:default="{ row }">
                 <slot :name="prop" :row="row">
@@ -348,6 +347,9 @@ defineExpose({
   }
   .base_table--tree {
     margin-top: 10px;
+  }
+  th > div.cell {
+    white-space: nowrap;
   }
 }
 </style>
