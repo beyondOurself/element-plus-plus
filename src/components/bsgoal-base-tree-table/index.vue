@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 09:25:26
+ * @LastEditTime: 2023-06-25 09:52:47
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -166,7 +166,7 @@ const slotNames = ref(Object.keys(slots))
 
 // ---> S 树 <---
 const switchStatus = ref(true)
-const switchTree = (status = '') => {
+const triggerTreeSwitch = (status = '') => {
   switchStatus.value = status
 }
 provide('TREE_SWITCH_STATUS', switchStatus)
@@ -175,7 +175,7 @@ provide('TREE_SWITCH_STATUS', switchStatus)
  * @description: 触发树 添加按钮 事件
  * @param {*} node
  * @param {*} data
- * @default: 
+ * @default:
  * @return {*}
  */
 const triggerTreeAdd = ({ node, data } = {}) => {
@@ -188,21 +188,11 @@ const triggerTreeAdd = ({ node, data } = {}) => {
  * @param {*} node
  * @param {*} treeNode
  * @param {*} event
- * @default: 
+ * @default:
  * @return {*}
  */
 const triggerTreeClick = (value, node, treeNode, event) => {
   emits('on-click-tree', value, node, treeNode, event)
-}
-/**
- * @Author: canlong.shen
- * @description: 触发树 切换显示/隐藏 事件
- * @param {*} status
- * @default: 
- * @return {*}
- */
-const triggerTreeSwitch = (status) => {
-  emits('on-switch-tree', status)
 }
 
 // ---> E 树 <---
@@ -227,18 +217,15 @@ const tableStyler = computed(() => {
         <BsgoalBaseTree
           v-bind="$props"
           class="base_tree_table--tree"
-          @on-switch="switchTree"
+          @on-switch="triggerTreeSwitch"
+          @on-add="triggerTreeAdd"
+          @on-click="triggerTreeClick"
         ></BsgoalBaseTree>
         <!-- E 树 -->
       </div>
       <div class="base_tree_table--table" :style="tableStyler">
         <!-- S 列表 -->
-        <BsgoalBaseSearchTable
-          v-bind="$props"
-          @on-click-add="triggerTreeAdd"
-          @on-click="triggerTreeClick"
-          @on-switch="triggerTreeSwitch"
-        >
+        <BsgoalBaseSearchTable v-bind="$props">
           <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">
             <slot :name="slotName" :row="row"></slot>
           </template>

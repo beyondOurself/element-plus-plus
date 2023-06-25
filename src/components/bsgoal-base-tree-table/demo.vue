@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 19:33:11
+ * @LastEditTime: 2023-06-25 09:52:13
  * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -10,10 +10,9 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref ,unref } from 'vue'
+import { ref, unref } from 'vue'
 import BsgoalBaseTreeTable from './index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
-
 
 defineOptions({
   name: 'BsgoalBaseTreeTableDemo'
@@ -73,7 +72,6 @@ const treeInitNode = (node) => {
 // ---> E 树 <---
 
 // ---> S 列表 <---
-
 
 const configOptions = ref([
   {
@@ -748,7 +746,6 @@ const tableData = ref([
   }
 ])
 
-
 const tableDataVal = unref(tableData)
 
 const fetch = (params) => {
@@ -767,6 +764,28 @@ const fetch = (params) => {
   })
 }
 
+const triggerTreeAddClick = (params = '') => {
+  console.log('triggerTreeAddClick', params)
+}
+
+const treeData = ref([
+  {
+    label: 'label2-1',
+    isLeaf: true,
+    hasIcon: true
+  },
+  {
+    label: 'label2-2',
+    children: [
+      {
+        label: 'label2-2-1'
+      }
+    ]
+  },
+  {
+    label: 'label2-3'
+  }
+])
 
 // ---> E 列表 <---
 </script>
@@ -776,13 +795,15 @@ const fetch = (params) => {
       <BsgoalBaseTreeTable
         selection
         operation
+        :tree-data="treeData"
         :page-size="40"
         :lazy-load="treeLazyLoad"
         :init-node="treeInitNode"
         :fetch="fetch"
         :config-options="configOptions"
         :expression="77"
-        @on-click="triggerTreeClick"
+        @on-click-tree="triggerTreeClick"
+        @on-add-tree="triggerTreeAddClick"
       ></BsgoalBaseTreeTable>
     </div>
   </div>

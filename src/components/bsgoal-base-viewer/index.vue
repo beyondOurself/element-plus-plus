@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-21 16:08:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 09:00:44
+ * @LastEditTime: 2023-06-25 10:00:41
  * @FilePath: \common\src\components\bsgoal-base-viewer\index.vue
  * @Description: 图片 预览
  * 
@@ -10,8 +10,9 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { preview, vPreview, Vue3ImagePreview } from 'vue3-image-preview'
+import uploadDefaultIcon from './assets/upload_default.svg'
 defineOptions({
   name: 'BsgoalBaseViewer'
 })
@@ -40,16 +41,18 @@ const props = defineProps({
   }
 })
 
-// https://img.phb123.com/uploads/allimg/200615/60-2006151H317-52.jpg
+const srcGet = computed(() => {
+  const { src = '' } = props
+  if (!src) {
+    return uploadDefaultIcon
+  }
+  return src
+})
 </script>
 <template>
   <div class="bsgoal-base-viewer">
     <div class="base_viewer">
-      <img
-        v-preview
-        :src="src"
-        :style="{ width: `${width}px`, height: `${height}px` }"
-      />
+      <img v-preview :src="srcGet" :style="{ width: `${width}px`, height: `${height}px` }" />
     </div>
   </div>
 </template>

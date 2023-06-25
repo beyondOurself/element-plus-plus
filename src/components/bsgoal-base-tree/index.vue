@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 09:14:57
+ * @LastEditTime: 2023-06-25 09:53:08
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -69,7 +69,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['on-click', 'on-switch', 'on-click-add'])
+const emits = defineEmits(['on-click', 'on-switch', 'on-add'])
 
 // 计算高度的指令
 const vHeight = directiveBase.height
@@ -132,8 +132,8 @@ const loadNode = async (node, resolve, props) => {
 }
 
 const lazyGet = computed(() => {
-  const { data = [] } = props
-  if (!data || !data.length) {
+  const { treeData = [] } = props
+  if (!treeData || !treeData.length) {
     return true
   }
 
@@ -149,7 +149,7 @@ const lazyGet = computed(() => {
  * @return {*}
  */
 const handleItemAdd = (node = null, data = {}) => {
-  emits('on-click-add', { node, data })
+  emits('on-add', { node, data })
 }
 </script>
 <template>
