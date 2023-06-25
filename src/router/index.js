@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 10:07:27
+ * @LastEditTime: 2023-06-21 16:56:42
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: '/bsgoal-base-viewer-demo',
+          name: '图片预览',
+          component: import('@/components/bsgoal-base-viewer/demo.vue')
+        },
         {
           path: '/bsgoal-baes-popover-demo',
           name: '弹出框',

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 17:57:59
+ * @LastEditTime: 2023-06-25 09:14:57
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -30,7 +30,7 @@ const props = defineProps({
   /**
    * 数据
    */
-  data: {
+  treeData: {
     type: [Object, Array],
     default: () => []
   },
@@ -164,7 +164,7 @@ const handleItemAdd = (node = null, data = {}) => {
           ref="EL_TREE_REF"
           highlight-current
           empty-text="暂无数据"
-          :data="data"
+          :data="treeData"
           :lazy="lazyGet"
           :load="(node, resolve) => loadNode(node, resolve, props)"
           :expand-on-click-node="false"

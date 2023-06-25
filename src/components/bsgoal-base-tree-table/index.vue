@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 10:21:31
+ * @LastEditTime: 2023-06-25 09:25:26
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -29,7 +29,7 @@ const props = defineProps({
   /**
    * 数据
    */
-  data: {
+  treeData: {
     type: [Object, Array],
     default: () => []
   },
@@ -157,7 +157,7 @@ const props = defineProps({
   }
 })
 
-
+const emits = defineEmits(['on-click-tree', 'on-switch-tree', 'on-add-tree'])
 
 // ---> S 注入插槽 <---
 const slots = useSlots()
@@ -170,6 +170,40 @@ const switchTree = (status = '') => {
   switchStatus.value = status
 }
 provide('TREE_SWITCH_STATUS', switchStatus)
+/**
+ * @Author: canlong.shen
+ * @description: 触发树 添加按钮 事件
+ * @param {*} node
+ * @param {*} data
+ * @default: 
+ * @return {*}
+ */
+const triggerTreeAdd = ({ node, data } = {}) => {
+  emits('on-add-tree', { node, data })
+}
+/**
+ * @Author: canlong.shen
+ * @description: 触发树 单击项事件
+ * @param {*} value
+ * @param {*} node
+ * @param {*} treeNode
+ * @param {*} event
+ * @default: 
+ * @return {*}
+ */
+const triggerTreeClick = (value, node, treeNode, event) => {
+  emits('on-click-tree', value, node, treeNode, event)
+}
+/**
+ * @Author: canlong.shen
+ * @description: 触发树 切换显示/隐藏 事件
+ * @param {*} status
+ * @default: 
+ * @return {*}
+ */
+const triggerTreeSwitch = (status) => {
+  emits('on-switch-tree', status)
+}
 
 // ---> E 树 <---
 
@@ -199,7 +233,12 @@ const tableStyler = computed(() => {
       </div>
       <div class="base_tree_table--table" :style="tableStyler">
         <!-- S 列表 -->
-        <BsgoalBaseSearchTable v-bind="$props">
+        <BsgoalBaseSearchTable
+          v-bind="$props"
+          @on-click-add="triggerTreeAdd"
+          @on-click="triggerTreeClick"
+          @on-switch="triggerTreeSwitch"
+        >
           <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">
             <slot :name="slotName" :row="row"></slot>
           </template>
