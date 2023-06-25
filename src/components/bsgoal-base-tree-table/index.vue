@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 16:09:04
+ * @LastEditTime: 2023-06-25 16:28:00
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -215,9 +215,9 @@ const tableStyler = computed(() => {
   const styler = {}
   const switchStatusValue = switchStatus.value
   if (switchStatusValue) {
-    styler.maxWidth = 'calc(100% - 250px)'
+    styler.minWidth = 'calc(100% - 250px)'
   } else {
-    styler.maxWidth = 'calc(100%)'
+    styler.minWidth = 'calc(100%)'
   }
 
   return styler

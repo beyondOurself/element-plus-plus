@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 15:32:25
+ * @LastEditTime: 2023-06-25 16:29:16
  * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -814,7 +814,11 @@ const test = () => {
         :expression="77"
         @on-click-tree="triggerTreeClick"
         @on-add-tree="triggerTreeAddClick"
-      ></BsgoalBaseTreeTable>
+      >
+      <!-- <template #prop1="{row}">
+         <div>{{ row }}</div>
+      </template> -->
+    </BsgoalBaseTreeTable>
     </div>
   </div>
 </template>
