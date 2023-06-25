@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 10:06:54
+ * @LastEditTime: 2023-06-25 15:22:12
  * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -23,7 +23,7 @@ const props = defineProps({})
 // ---> S 树 <---
 
 const triggerTreeClick = (value, node, treeNode, event) => {
-  console.log('triggerTreeClick =========================');
+  console.log('triggerTreeClick =========================')
   console.log('value', value)
   console.log('node', node)
   console.log('treeNode', treeNode)
@@ -787,19 +787,23 @@ const treeData = ref([
     label: 'label2-3'
   }
 ])
+const BSGOAL_BASE_TREE_TABLE_REF = ref(null)
+const test = () => {
+  BSGOAL_BASE_TREE_TABLE_REF.value.refreshList({ prop: 111 })
+}
 
 // ---> E 列表 <---
 </script>
 <template>
   <div class="bsgoal-base-tree-table-demo">
     <div class="base_tree_table_demo">
+      <!-- <div @click="test">点击</div> -->
       <BsgoalBaseTreeTable
+        ref="BSGOAL_BASE_TREE_TABLE_REF"
         selection
         operation
         :tree-data="treeData"
         :page-size="40"
-        :lazy-load="treeLazyLoad"
-        :init-node="treeInitNode"
         :fetch="fetch"
         :config-options="configOptions"
         :expression="77"

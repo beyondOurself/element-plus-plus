@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 09:52:47
+ * @LastEditTime: 2023-06-25 15:20:18
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -197,6 +197,20 @@ const triggerTreeClick = (value, node, treeNode, event) => {
 
 // ---> E 树 <---
 
+// ---> S 表 <---
+const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
+const refreshList = (params = {}) => {
+  console.log('params',params);
+  BSGOAL_BASE_SEARCH_TABLE_REF.value.refreshList(params)
+}
+
+// 暴露的属性
+defineExpose({
+  refreshList
+})
+
+// ---> E 表 <---
+
 const tableStyler = computed(() => {
   const styler = {}
   const switchStatusValue = switchStatus.value
@@ -225,7 +239,7 @@ const tableStyler = computed(() => {
       </div>
       <div class="base_tree_table--table" :style="tableStyler">
         <!-- S 列表 -->
-        <BsgoalBaseSearchTable v-bind="$props">
+        <BsgoalBaseSearchTable ref="BSGOAL_BASE_SEARCH_TABLE_REF" v-bind="$props">
           <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">
             <slot :name="slotName" :row="row"></slot>
           </template>
