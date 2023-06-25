@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 15:38:56
+ * @LastEditTime: 2023-06-25 17:37:08
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -180,7 +180,7 @@ const handleItemAdd = (node = null, data = {}) => {
               <!-- E 节点名称 -->
               <!-- S 操作符号 -->
               <span class="base_tree_node_icon" v-show="data.hasIcon">
-                <el-icon color="#409EFF" @click.stop="handleItemAdd(node, data)">
+                <el-icon color="var(--el-color-primary)"  @click.stop="handleItemAdd(node, data)">
                   <Plus />
                 </el-icon>
               </span>

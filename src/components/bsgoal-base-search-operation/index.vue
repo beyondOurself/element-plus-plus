@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 18:09:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 16:01:16
+ * @LastEditTime: 2023-06-25 17:35:04
  * @FilePath: \common\src\components\bsgoal-base-search-operation\index.vue
  * @Description:  表格查询操作项 组件
  * 
@@ -50,7 +50,8 @@ const handleFold = () => {
   <div class="bsgoal-base-search-operation">
     <el-button type="primary" :icon="Search" @click="$emit('on-search')">搜索</el-button>
     <el-button :icon="Delete" @click="$emit('on-clear')">清空</el-button>
-    <div v-if="fold"  class="operation_fold" style="color:var(--el-color-primary);"  @click="handleFold"> {{ foldStatus ? '收起' : '展开' }}<el-icon color="#409EFC">
+    <div v-if="fold"  class="operation_fold" style="color:var(--el-color-primary);"  @click="handleFold"> {{ foldStatus ? '收起' : '展开' }}
+      <el-icon color="var(--el-color-primary)">
         <ArrowUp v-show="foldStatus" />
         <ArrowDown v-show="!foldStatus" />
       </el-icon> </div>
