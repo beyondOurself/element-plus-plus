@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 10:21:34
+ * @LastEditTime: 2023-06-25 16:08:36
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -134,13 +134,6 @@ const props = defineProps({
 })
 
 
-// ---> S 注入分页的值 <---
-const pageSizeValue = unref(props.pageSize)
-if (pageSizeValue) {
-  provide('PAGINATION_PAGE_SIZE', ref(props.pageSize))
-}
-// ---> E 注入分页的值 <---
-
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)
 
@@ -214,6 +207,7 @@ defineExpose({
       <!-- S 表格 -->
       <BsgoalBaseTable
         ref="BSGOAL_BASE_TABLE_REF"
+        :page-size="pageSize"
         :map-props="mapProps"
         :operationWidth="operationWidth"
         :config-options="tableOptions"

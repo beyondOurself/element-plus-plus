@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 19:21:34
+ * @LastEditTime: 2023-06-25 16:04:16
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -126,6 +126,13 @@ const props = defineProps({
   hasPage: {
     type: Boolean,
     default: true
+  },
+    /**
+   * 每页显示条目个数
+   */
+   pageSize: {
+    type: [Number],
+    default: 10
   }
 })
 
@@ -175,7 +182,7 @@ const mapPropsFuse = {
 }
 
 const currentPage = ref(1)
-const pageSize = ref(10)
+const curPageSize = ref(props.pageSize)
 const total = ref(0)
 const searchParams = ref({})
 const tableLoading = ref(props.loading)
@@ -185,7 +192,7 @@ const ping = () => {
   const { fetch, call, hasPage } = props
   const searchParamsVal = searchParams.value
   const currentPageVal = currentPage.value
-  const pageSizeVal = pageSize.value
+  const pageSizeVal = curPageSize.value
   const fetchParams = { ...searchParamsVal }
   // 显示分页的注入分页参数
   if (hasPage) {
@@ -195,6 +202,7 @@ const ping = () => {
 
   useFetch(fetch(fetchParams), call, tableLoading, resData)
 }
+
 
 watchEffect(() => {
   tableData.value = props.data
@@ -222,10 +230,10 @@ const triggerPaginationCurrentChange = (current = 1) => {
 }
 //改变页数
 const triggerPaginationSizeChange = (size = 10) => {
-  pageSize.value = size
+  curPageSize.value = size
 }
 
-watch([currentPage, pageSize], () => {
+watch([currentPage, curPageSize], () => {
   ping()
 })
 
@@ -311,6 +319,7 @@ defineExpose({
       <BsgoalBaseTablePagination
         v-if="hasPage"
         :total="total"
+        :page-size="curPageSize"
         @on-current-change="triggerPaginationCurrentChange"
         @on-size-change="triggerPaginationSizeChange"
       />

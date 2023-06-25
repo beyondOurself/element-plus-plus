@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 14:26:06
+ * @LastEditTime: 2023-06-25 16:05:45
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
