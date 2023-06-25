@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 16:29:16
+ * @LastEditTime: 2023-06-25 16:46:31
  * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -794,7 +794,7 @@ setTimeout(() => {
 
 const BSGOAL_BASE_TREE_TABLE_REF = ref(null)
 const test = () => {
-  BSGOAL_BASE_TREE_TABLE_REF.value.refreshList({ prop: 111 })
+  BSGOAL_BASE_TREE_TABLE_REF.value.refreshList({})
 }
 
 // ---> E 列表 <---

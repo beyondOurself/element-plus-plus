@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 16:28:00
+ * @LastEditTime: 2023-06-25 16:45:42
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -200,8 +200,7 @@ const triggerTreeClick = (value, node, treeNode, event) => {
 // ---> S 表 <---
 const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
 const refreshList = (params = {}) => {
-  console.log('params',params);
-  BSGOAL_BASE_SEARCH_TABLE_REF.value.refreshList(params)
+  BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh(params)
 }
 
 // 暴露的属性
