@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-31 14:46:37
+ * @LastEditTime: 2023-06-26 11:56:55
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -510,6 +510,7 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.SELECT">
                       <el-select
                         v-model="model[prop]"
+                        no-data-text="暂无数据"
                         :multiple="multiple"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
