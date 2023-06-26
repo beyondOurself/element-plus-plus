@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 16:45:42
+ * @LastEditTime: 2023-06-26 11:54:08
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -153,7 +153,7 @@ const props = defineProps({
    */
   pageSize: {
     type: [Number],
-    default: 10
+    default: 20
   }
 })
 

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 16:08:36
+ * @LastEditTime: 2023-06-26 11:53:22
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -129,7 +129,7 @@ const props = defineProps({
    */
    pageSize: {
     type: [Number],
-    default: 0
+    default: 20
   }
 })
 
