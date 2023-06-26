@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 14:35:58
+ * @LastEditTime: 2023-06-26 18:00:13
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -18,20 +18,11 @@ import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 
-
-
 defineOptions({
   name: 'BsgoalBaseSearch'
 })
 
 const props = defineProps({
-
-
-
-
-
-
-  
   /**
    * >----------props----------<
    *  {
@@ -535,6 +526,9 @@ defineExpose({
     div.el-select {
       width: 100%;
     }
+  }
+  .el-col {
+    margin-bottom: 0px !important;
   }
 }
 </style>
