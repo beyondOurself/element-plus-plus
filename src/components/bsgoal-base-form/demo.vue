@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-31 17:43:54
+ * @LastEditTime: 2023-06-26 09:20:07
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -121,9 +121,10 @@ const configOptions = ref([
   },
   {
     label: 'prop2',
-    value: 'select2',
+    value: [],
     type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
+    multiple:true,
     range: [
       {
         label: 'select1',
@@ -142,7 +143,6 @@ const configOptions = ref([
         value: 'select5'
       }
     ],
-    readonly: true
   },
   {
     label: 'prop3',

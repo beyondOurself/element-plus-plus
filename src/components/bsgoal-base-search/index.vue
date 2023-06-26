@@ -17,11 +17,21 @@ import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
+
+
+
 defineOptions({
   name: 'BsgoalBaseSearch'
 })
 
 const props = defineProps({
+
+
+
+
+
+
+  
   /**
    * >----------props----------<
    *  {

@@ -440,6 +440,7 @@ defineExpose({
                 limit = limits,
                 length = 255,
                 visible = true,
+                multiple= false,
                 formatter = (v) => {
                   return v
                 },
@@ -509,6 +510,7 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.SELECT">
                       <el-select
                         v-model="model[prop]"
+                        :multiple="multiple"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
                       >
