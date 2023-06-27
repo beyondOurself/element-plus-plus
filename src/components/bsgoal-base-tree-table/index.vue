@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-27 11:50:21
+ * @LastEditTime: 2023-06-27 13:54:17
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -154,6 +154,20 @@ const props = defineProps({
   pageSize: {
     type: [Number],
     default: 20
+  },
+  /**
+   * 节点的 key
+   */
+   nodeKey: {
+    type: [String],
+    default: 'key'
+  },
+  /**
+   * 默认展开的节点
+   */
+  expandedKeys: {
+    type: [Array],
+    default: () => []
   }
 })
 
