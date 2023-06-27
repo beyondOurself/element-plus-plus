@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 17:37:08
+ * @LastEditTime: 2023-06-27 09:31:45
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -66,6 +66,20 @@ const props = defineProps({
   initNode: {
     type: [Function],
     default: null
+  },
+  /**
+   * 节点的 key
+   */
+  nodeKey: {
+    type: [String],
+    default: 'key'
+  },
+  /**
+   * 默认展开的节点
+   */
+  expandedKeys: {
+    type: [Array],
+    default: () => []
   }
 })
 
@@ -132,8 +146,8 @@ const loadNode = async (node, resolve, props) => {
 }
 
 const lazyGet = computed(() => {
-  const { lazyLoad = null , initNode = null} = props
-  if(lazyLoad && initNode ){
+  const { lazyLoad = null, initNode = null } = props
+  if (lazyLoad && initNode) {
     return true
   }
   return false
@@ -169,6 +183,7 @@ const handleItemAdd = (node = null, data = {}) => {
           :expand-on-click-node="false"
           :props="treeProps"
           :filter-node-method="filterNode"
+          :default-expanded-keys="expandedKeys"
           @node-click="clickNodeTree"
         >
           <template #default="{ node, data }">
@@ -180,7 +195,7 @@ const handleItemAdd = (node = null, data = {}) => {
               <!-- E 节点名称 -->
               <!-- S 操作符号 -->
               <span class="base_tree_node_icon" v-show="data.hasIcon">
-                <el-icon color="var(--el-color-primary)"  @click.stop="handleItemAdd(node, data)">
+                <el-icon color="var(--el-color-primary)" @click.stop="handleItemAdd(node, data)">
                   <Plus />
                 </el-icon>
               </span>
