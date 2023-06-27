@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-27 09:31:45
+ * @LastEditTime: 2023-06-27 11:47:51
  * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -176,7 +176,9 @@ const handleItemAdd = (node = null, data = {}) => {
         <el-tree
           ref="EL_TREE_REF"
           highlight-current
+          auto-expand-parent
           empty-text="暂无数据"
+          :nodeKey="nodeKey"
           :data="treeData"
           :lazy="lazyGet"
           :load="(node, resolve) => loadNode(node, resolve, props)"
@@ -187,20 +189,27 @@ const handleItemAdd = (node = null, data = {}) => {
           @node-click="clickNodeTree"
         >
           <template #default="{ node, data }">
-            <div class="base_tree_node">
-              <!-- S 节点名称 -->
-              <span class="base_tree_node_label">
-                {{ node.label }}
-              </span>
-              <!-- E 节点名称 -->
-              <!-- S 操作符号 -->
-              <span class="base_tree_node_icon" v-show="data.hasIcon">
-                <el-icon color="var(--el-color-primary)" @click.stop="handleItemAdd(node, data)">
-                  <Plus />
-                </el-icon>
-              </span>
-              <!-- E 操作符号 -->
-            </div>
+            <slot :data="data">
+              <div class="base_tree_node">
+                <!-- S 节点前图标 -->
+                <div v-if="$slots.prefix">
+                  <slot name="prefix" :data="data" ></slot>
+                </div>
+                <!-- E 节点前图标 -->
+                <!-- S 节点名称 -->
+                <span class="base_tree_node_label">
+                  {{ node.label }}
+                </span>
+                <!-- E 节点名称 -->
+                <!-- S 操作符号 -->
+                <span class="base_tree_node_icon" v-if="data.hasIcon">
+                  <el-icon color="var(--el-color-primary)" @click.stop="handleItemAdd(node, data)">
+                    <Plus />
+                  </el-icon>
+                </span>
+                <!-- E 操作符号 -->
+              </div>
+            </slot>
           </template>
         </el-tree>
         <!-- E 树结构 -->

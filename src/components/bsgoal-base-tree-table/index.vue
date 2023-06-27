@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-26 11:54:08
+ * @LastEditTime: 2023-06-27 11:50:21
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -233,7 +233,15 @@ const tableStyler = computed(() => {
           @on-switch="triggerTreeSwitch"
           @on-add="triggerTreeAdd"
           @on-click="triggerTreeClick"
-        ></BsgoalBaseTree>
+        >
+          <template #default="{ data }">
+            <slot name="tree" :data="data"></slot>
+          </template>
+
+          <template #prefix="{ data }">
+            <slot name="tree-prefix" :data="data"></slot>
+          </template>
+        </BsgoalBaseTree>
         <!-- E 树 -->
       </div>
       <div class="base_tree_table--table" :style="tableStyler">

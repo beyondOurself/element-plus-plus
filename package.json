@@ -26,6 +26,7 @@
     "issue": "npm run  build && npm publish"
   },
   "dependencies": {
+    "@bsgoal/common": "2.14.4",
     "element-plus": "^2.3.3",
     "vue": "^3.3.4",
     "vue-router": "^4.1.6",
