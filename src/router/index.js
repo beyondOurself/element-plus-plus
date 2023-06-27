@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 16:56:42
+ * @LastEditTime: 2023-06-27 17:17:30
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -18,6 +18,16 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: '/bsgoal-base-sizes-demo',
+          name: '页数切换',
+          component: import('@/components/bsgoal-base-sizes/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-table-pagination-demo',
+          name: '表格分页',
+          component: import('@/components/bsgoal-base-table-pagination/demo.vue')
+        },
         {
           path: '/bsgoal-base-viewer-demo',
           name: '图片预览',

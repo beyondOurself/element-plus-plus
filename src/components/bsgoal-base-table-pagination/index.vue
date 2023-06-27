@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 16:34:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 16:04:50
+ * @LastEditTime: 2023-06-27 16:49:55
  * @FilePath: \common\src\components\bsgoal-base-table-pagination\index.vue
  * @Description: 表格的分页按钮
  * 
@@ -77,7 +77,7 @@ const page = ref(1)
       <el-config-provider :locale="zhCn">
         <el-pagination
           background
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="total, slot, prev, pager, next, jumper"
           v-model:current-page="page"
           :page-sizes="pageSizes"
           :page-size="pageSize"
@@ -85,9 +85,12 @@ const page = ref(1)
           @size-change="triggerSizeChange"
           @current-change="triggerCurrentChange"
         >
-          <template v-slot:next>
-            <span>总数</span>
-          </template>
+         <template #default="data">
+           <div>
+            11
+             {{data }}
+           </div>
+         </template>
         </el-pagination>
       </el-config-provider>
     </div>
