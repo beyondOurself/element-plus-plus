@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 16:34:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 09:54:33
+ * @LastEditTime: 2023-06-28 10:12:16
  * @FilePath: \common\src\components\bsgoal-base-table-pagination\index.vue
  * @Description: 表格的分页按钮
  * 
@@ -88,8 +88,8 @@ const page = ref(1)
           <template #default="">
             <BsgoalBaseSizes
               :page-sizes="pageSizes"
-              :pageSize="pageSize"
-              @on-size-change="triggerCurrentChange"
+              :page-size="pageSize"
+              @on-size-change="triggerSizeChange"
             />
           </template>
         </el-pagination>
