@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-27 16:52:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 10:44:04
+ * @LastEditTime: 2023-06-28 11:09:20
  * @FilePath: \common\src\components\bsgoal-base-sizes\index.vue
  * @Description: 页数切换 公共组件
  * 
@@ -37,7 +37,7 @@ const props = defineProps({
    */
   width: {
     type: [String, Number],
-    default: 110
+    default: 100
   }
 })
 
@@ -66,7 +66,7 @@ watch(
 
     if (curIndex !== -1) {
       selectedIndex.value = curIndex
-      selectedSize.value = pageSize 
+      selectedSize.value = pageSize
     }
   },
   {
@@ -98,6 +98,9 @@ watchEffect(() => {
   content.value = `${curPageSize}条/页`
 })
 
+const isMicroApp = window.__MICRO_APP_ENVIRONMENT__
+console.log('isMicroApp',isMicroApp);
+
 // ---> E input <---
 </script>
 <template>
@@ -118,6 +121,7 @@ watchEffect(() => {
           readonly
           class="base_sizes_input"
           placeholder="Please input"
+          :class="{ bsgoal_micro_app: isMicroApp }"
           :style="{ width: `${width}px` }"
           :suffix-icon="suffixIcon"
         >
@@ -164,6 +168,12 @@ watchEffect(() => {
   .base_sizes_item--selected {
     color: #409eff;
     font-weight: 700;
+  }
+
+  .bsgoal_micro_app {
+    .el-input__suffix {
+      margin-right: 8px !important;
+    }
   }
 }
 </style>
