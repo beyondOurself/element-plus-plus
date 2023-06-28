@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 13:49:07
+ * @LastEditTime: 2023-06-28 14:17:06
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -136,8 +136,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['select','select-all','selection-change'])
-
+const emits = defineEmits(['select', 'select-all', 'selection-change','on-total-change'])
 
 /**
  * @Author: canlong.shen
@@ -220,6 +219,10 @@ watch(resData, (data) => {
   }
 })
 
+watchEffect(() => {
+  emits('on-total-change', total.value)
+})
+
 // 查询
 const refreshList = (params = {}) => {
   searchParams.value = params
@@ -257,14 +260,13 @@ const triggerSelectionChange = (selection) => {
 
 // ---> S 暴露事件 <---
 
- const BSGOAL_EL_TABLE_REF = ref(null)
- 
- const clearSelection = () => {
+const BSGOAL_EL_TABLE_REF = ref(null)
+
+const clearSelection = () => {
   BSGOAL_EL_TABLE_REF.value.clearSelection()
- }
+}
 
 // ---> E 暴露事件 <---
-
 
 // 暴露的属性
 defineExpose({

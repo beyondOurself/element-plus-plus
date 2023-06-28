@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 14:01:30
+ * @LastEditTime: 2023-06-28 14:21:32
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -177,7 +177,8 @@ const emits = defineEmits([
   'on-add-tree',
   'on-select-table',
   'on-select-all-table',
-  'on-selection-change-table'
+  'on-selection-change-table',
+  'on-total-change-table'
 ])
 
 // ---> S 注入插槽 <---
@@ -225,14 +226,17 @@ const refreshList = (params = {}) => {
 }
 
 // ---> S 触发事件 <---
-const triggerSelect = (selection, row) => {
+const triggerSelect = (selection = {}, row =[]) => {
   emits('on-select-table', selection, row)
 }
-const triggerSelectAll = (selection) => {
+const triggerSelectAll = (selection = {}) => {
   emits('on-select-all-table', selection)
 }
-const triggerSelectionChange = (selection) => {
+const triggerSelectionChange = (selection = {}) => {
   emits('on-selection-change-table', selection)
+}
+const triggerTotalChange = (total = 0) => {
+  emits('on-total-change-table', total)
 }
 // ---> E 触发事件 <---
 
@@ -294,6 +298,7 @@ const tableStyler = computed(() => {
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"
+          @on-total-change="triggerTotalChange"
         >
           <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">
             <slot :name="slotName" :row="row"></slot>

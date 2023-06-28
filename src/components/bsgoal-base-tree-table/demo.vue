@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 14:04:55
+ * @LastEditTime: 2023-06-28 14:22:20
  * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -807,6 +807,9 @@ const triggerTableSelectAll = () => {
 const triggerTableSelectionChange = () => {
   console.log('triggerTableSelectionChange', triggerTableSelectionChange)
 }
+const triggerTableTotalChange = (total = 0) => {
+  console.log('triggerTableTotalChange', total)
+}
 
 const clearSelection = () => {
   BSGOAL_BASE_TREE_TABLE_REF.value.clearSelection()
@@ -834,6 +837,7 @@ const clearSelection = () => {
         @on-select-table="triggerTableSelect"
         @on-select-all-table="triggerTableSelectAll"
         @on-selection-change-table="triggerTableSelectionChange"
+        @on-total-change-table="triggerTableTotalChange"
       >
         <!-- <template #tree="{data}">
          <div>{{ data }}</div>
