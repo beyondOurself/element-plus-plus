@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 16:34:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-27 16:49:55
+ * @LastEditTime: 2023-06-28 09:54:33
  * @FilePath: \common\src\components\bsgoal-base-table-pagination\index.vue
  * @Description: 表格的分页按钮
  * 
@@ -13,7 +13,7 @@
 ---------------------------------------------------------------- */
 import { ref, computed, inject, unref } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-
+import BsgoalBaseSizes from '../bsgoal-base-sizes/index.vue'
 defineOptions({
   name: 'BsgoalBaseTablePagination'
 })
@@ -85,12 +85,13 @@ const page = ref(1)
           @size-change="triggerSizeChange"
           @current-change="triggerCurrentChange"
         >
-         <template #default="data">
-           <div>
-            11
-             {{data }}
-           </div>
-         </template>
+          <template #default="">
+            <BsgoalBaseSizes
+              :page-sizes="pageSizes"
+              :pageSize="pageSize"
+              @on-size-change="triggerCurrentChange"
+            />
+          </template>
         </el-pagination>
       </el-config-provider>
     </div>

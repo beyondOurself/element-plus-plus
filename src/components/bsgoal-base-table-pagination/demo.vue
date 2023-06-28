@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-27 16:30:46
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-27 16:36:12
+ * @LastEditTime: 2023-06-28 10:02:50
  * @FilePath: \common\src\components\bsgoal-base-table-pagination\demo.vue
  * @Description: 分页公共组件 demo
  * 
@@ -21,7 +21,8 @@ const props = defineProps({})
 </script>
 <template>
   <div class="bsgoal-base-table-pagination-demo">
-    <BsgoalBaseTablePagination />
+    <div style="height: 300px; background-color: red;"></div>
+    <BsgoalBaseTablePagination  />
   </div>
 </template>
 <style lang="scss" scoped>
