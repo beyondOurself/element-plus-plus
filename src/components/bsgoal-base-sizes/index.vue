@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-27 16:52:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 10:15:08
+ * @LastEditTime: 2023-06-28 10:44:04
  * @FilePath: \common\src\components\bsgoal-base-sizes\index.vue
  * @Description: 页数切换 公共组件
  * 
@@ -37,7 +37,7 @@ const props = defineProps({
    */
   width: {
     type: [String, Number],
-    default: '100'
+    default: 110
   }
 })
 
