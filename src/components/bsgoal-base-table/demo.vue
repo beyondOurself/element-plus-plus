@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 17:11:30
+ * @LastEditTime: 2023-06-28 13:53:43
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -16,7 +16,7 @@ import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 
 defineOptions({
-   name:'BsgoalBaseTableDemo111'
+  name: 'BsgoalBaseTableDemo111'
 })
 
 let searchOptions = ref([
@@ -216,7 +216,7 @@ setTimeout(() => {
 const configOptionsTable = ref([
   {
     label: '宽度',
-    prop: 'prop1',
+    prop: 'prop1'
     // tooltip: true,
     // limit: 3
   },
@@ -245,12 +245,30 @@ const configOptionsTable = ref([
 const clearData = () => {
   data.value = []
 }
+
+const triggerSelect = (selection, row) => {
+  console.log('select', selection, row)
+}
+const triggerSelectAll = (selection) => {
+  console.log('select-all', selection)
+}
+const triggerSelectionChange = (selection) => {
+  console.log('selection-change', selection)
+}
+
+const BSGOAL_EL_TABLE_REF = ref(null)
+
+const clearSelection = () => {
+  BSGOAL_EL_TABLE_REF.value.clearSelection()
+}
 </script>
 <template>
   <div class="bsgoal-base-table-demo">
+    <el-button type="primary" @click="clearSelection">清空选择</el-button>
     <!-- <BsgoalBaseSearch  :config-options="searchOptions" /> -->
-    <el-button type="primary" @click="clearData">设置为空数据</el-button>
+    <!-- <el-button type="primary" @click="clearData">设置为空数据</el-button> -->
     <BsgoalBaseTable
+      ref="BSGOAL_EL_TABLE_REF"
       operation-width="200"
       operation
       selection
@@ -258,6 +276,9 @@ const clearData = () => {
       :config-options="configOptionsTable"
       :data="data"
       :auto-height="false"
+      @select="triggerSelect"
+      @select-all="triggerSelectAll"
+      @selection-change="triggerSelectionChange"
     >
       <!-- S 操作项 -->
       <template v-slot:operation="{ row }">

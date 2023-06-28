@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 17:14:14
+ * @LastEditTime: 2023-06-28 13:49:07
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -136,6 +136,9 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits(['select','select-all','selection-change'])
+
+
 /**
  * @Author: canlong.shen
  * @description:
@@ -240,9 +243,33 @@ watch([currentPage, curPageSize], () => {
 const TREE_SWITCH_STATUS = inject('TREE_SWITCH_STATUS')
 // ---> E 左侧机构树折叠状态 <---
 
+// ---> S 触发事件 <---
+const triggerSelect = (selection, row) => {
+  emits('select', selection, row)
+}
+const triggerSelectAll = (selection) => {
+  emits('select-all', selection)
+}
+const triggerSelectionChange = (selection) => {
+  emits('selection-change', selection)
+}
+// ---> E 触发事件 <---
+
+// ---> S 暴露事件 <---
+
+ const BSGOAL_EL_TABLE_REF = ref(null)
+ 
+ const clearSelection = () => {
+  BSGOAL_EL_TABLE_REF.value.clearSelection()
+ }
+
+// ---> E 暴露事件 <---
+
+
 // 暴露的属性
 defineExpose({
-  refreshList
+  refreshList,
+  clearSelection
 })
 </script>
 
@@ -257,6 +284,7 @@ defineExpose({
       <!-- S 表格区域 -->
       <div ref="EL_TABLE_WRAP_REF">
         <el-table
+          ref="BSGOAL_EL_TABLE_REF"
           stripe
           border
           highlight-current-row
@@ -269,6 +297,9 @@ defineExpose({
             color: 'rgba(0,0,0,.85)',
             fontSize: '14px'
           }"
+          @select="triggerSelect"
+          @select-all="triggerSelectAll"
+          @selection-change="triggerSelectionChange"
         >
           <!-- / 无数据展示内容 -->
           <template #empty>

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-27 13:54:17
+ * @LastEditTime: 2023-06-28 14:01:30
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -158,7 +158,7 @@ const props = defineProps({
   /**
    * 节点的 key
    */
-   nodeKey: {
+  nodeKey: {
     type: [String],
     default: 'key'
   },
@@ -171,7 +171,14 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['on-click-tree', 'on-switch-tree', 'on-add-tree'])
+const emits = defineEmits([
+  'on-click-tree',
+  'on-switch-tree',
+  'on-add-tree',
+  'on-select-table',
+  'on-select-all-table',
+  'on-selection-change-table'
+])
 
 // ---> S 注入插槽 <---
 const slots = useSlots()
@@ -217,9 +224,30 @@ const refreshList = (params = {}) => {
   BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh(params)
 }
 
+// ---> S 触发事件 <---
+const triggerSelect = (selection, row) => {
+  emits('on-select-table', selection, row)
+}
+const triggerSelectAll = (selection) => {
+  emits('on-select-all-table', selection)
+}
+const triggerSelectionChange = (selection) => {
+  emits('on-selection-change-table', selection)
+}
+// ---> E 触发事件 <---
+
+// ---> S 暴露事件 <---
+
+const clearSelection = () => {
+  BSGOAL_BASE_SEARCH_TABLE_REF.value.clearSelection()
+}
+
+// ---> E 暴露事件 <---
+
 // 暴露的属性
 defineExpose({
-  refreshList
+  refreshList,
+  clearSelection
 })
 
 // ---> E 表 <---
@@ -260,7 +288,13 @@ const tableStyler = computed(() => {
       </div>
       <div class="base_tree_table--table" :style="tableStyler">
         <!-- S 列表 -->
-        <BsgoalBaseSearchTable ref="BSGOAL_BASE_SEARCH_TABLE_REF" v-bind="$props">
+        <BsgoalBaseSearchTable
+          ref="BSGOAL_BASE_SEARCH_TABLE_REF"
+          v-bind="$props"
+          @select="triggerSelect"
+          @select-all="triggerSelectAll"
+          @selection-change="triggerSelectionChange"
+        >
           <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">
             <slot :name="slotName" :row="row"></slot>
           </template>

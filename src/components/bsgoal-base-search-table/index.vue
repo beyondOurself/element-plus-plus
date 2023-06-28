@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-26 11:53:22
+ * @LastEditTime: 2023-06-28 13:57:46
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -127,12 +127,13 @@ const props = defineProps({
   /**
    * pageSize
    */
-   pageSize: {
+  pageSize: {
     type: [Number],
     default: 20
   }
 })
 
+const emits = defineEmits(['select', 'select-all', 'selection-change'])
 
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)
@@ -185,10 +186,31 @@ const refresh = () => {
 }
 // ---> E 刷新 <---
 
+// ---> S 触发事件 <---
+const triggerSelect = (selection, row) => {
+  emits('select', selection, row)
+}
+const triggerSelectAll = (selection) => {
+  emits('select-all', selection)
+}
+const triggerSelectionChange = (selection) => {
+  emits('selection-change', selection)
+}
+// ---> E 触发事件 <---
+
+// ---> S 暴露事件 <---
+
+const clearSelection = () => {
+  BSGOAL_BASE_TABLE_REF.value.clearSelection()
+}
+
+// ---> E 暴露事件 <---
+
 // ---> S 暴露 <---
 
 defineExpose({
-  refresh
+  refresh,
+  clearSelection
 })
 // ---> E 暴露 <---
 </script>
@@ -218,6 +240,9 @@ defineExpose({
         :fetch="fetch"
         :call="call"
         :has-page="hasPage"
+        @select="triggerSelect"
+        @select-all="triggerSelectAll"
+        @selection-change="triggerSelectionChange"
       >
         <!-- S 顶部菜单 -->
 
