@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-31 11:44:23
+ * @LastEditTime: 2023-06-29 11:13:20
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -51,9 +51,9 @@ const tabsConfigOptions = ref([
   }
 ])
 
-const triggerConfirm = (done) => {
+const triggerConfirm = (done  ) => {
   setTimeout(() => {
-    done()
+    done(false)
   }, 3000)
   console.log('关闭前')
 }

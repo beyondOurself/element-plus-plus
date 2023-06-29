@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-26 11:56:55
+ * @LastEditTime: 2023-06-29 11:13:00
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -340,7 +340,8 @@ const filterSlotProps = (model = {}) => {
   const rebuildModel = {}
   for (const prop of Object.keys(model)) {
     if (!prop.startsWith('_')) {
-      rebuildModel[prop] = model[prop]
+      const value = model[prop]
+      rebuildModel[prop] = parseInt(value) ? +value : value
     }
   }
   return rebuildModel
@@ -440,7 +441,7 @@ defineExpose({
                 limit = limits,
                 length = 255,
                 visible = true,
-                multiple= false,
+                multiple = false,
                 formatter = (v) => {
                   return v
                 },
