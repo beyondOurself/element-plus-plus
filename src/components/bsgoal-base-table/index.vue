@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 15:50:58
+ * @LastEditTime: 2023-06-29 18:17:39
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -133,6 +133,13 @@ const props = defineProps({
   pageSize: {
     type: [Number],
     default: 20
+  },
+  /**
+   * 是否显示合计
+   */
+  showSummary: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -268,6 +275,33 @@ const clearSelection = () => {
 
 // ---> E 暴露事件 <---
 
+// ---> S 表格绑定的方法 <---
+
+const summaryMethod = (columns = '') => {
+  console.log('columns', columns)
+  console.log('data', columns.data)
+  const dataList = columns.data
+  const calcResultList = []
+
+  dataList.forEach((fi = {}) => {
+    let calcIndex = 0
+    for (const [prop, value] of Object.entries(fi)) {
+      const cellValue = calcResultList[calcIndex]
+      const cellValueInt = parseInt(cellValue) || 0
+      const valueInt = parseInt(value) || 0
+      calcResultList[calcIndex] = cellValueInt + valueInt
+      calcIndex++
+    }
+  })
+
+   const  dataListSlice = dataList.slice(1)
+  console.log('dataListSlice', dataListSlice) 
+
+  return ['合计', ...dataListSlice]
+}
+
+// ---> E 表格绑定的方法 <---
+
 // ---> S 兼容微前端 <---
 const isMicroApp = window.__MICRO_APP_ENVIRONMENT__
 // ---> E 兼容微前端 <---
@@ -299,6 +333,9 @@ defineExpose({
           highlight-current-row
           style="width: 100%"
           v-loading="tableLoading"
+          sum-text="合计"
+          :summary-method="summaryMethod"
+          :show-summary="showSummary"
           :data="tableData"
           :header-cell-style="{
             fontWeight: 'bold',

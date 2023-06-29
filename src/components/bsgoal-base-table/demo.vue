@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 13:53:43
+ * @LastEditTime: 2023-06-29 17:34:31
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -163,52 +163,52 @@ const data = ref([])
 setTimeout(() => {
   data.value = [
     {
-      prop1: 'prop1',
-      prop2: 'prop2',
-      prop3: 'prop3',
-      prop4: 'prop4',
-      prop5: 'prop5',
-      prop6: 'prop6'
+      prop1: 1,
+      prop2: 2,
+      prop3: 3,
+      prop4: 4,
+      prop5: 5,
+      prop6: 6
     },
     {
-      prop1: 'prop1',
-      prop2: 'prop2',
-      prop3: 'prop3',
-      prop4: 'prop4',
-      prop5: 'prop5',
-      prop6: 'prop6'
+      prop1: 1,
+      prop2: 2,
+      prop3: 3,
+      prop4: 4,
+      prop5: 5,
+      prop6: 6
     },
     {
-      prop1: 'prop1',
-      prop2: 'prop2',
-      prop3: 'prop3',
-      prop4: 'prop4',
-      prop5: 'prop5',
-      prop6: 'prop6'
+      prop1: 1,
+      prop2: 2,
+      prop3: 3,
+      prop4: 4,
+      prop5: 5,
+      prop6: 6
     },
     {
-      prop1: 'prop1',
-      prop2: 'prop2',
-      prop3: 'prop3',
-      prop4: 'prop4',
-      prop5: 'prop5',
-      prop6: 'prop6'
+      prop1: 1,
+      prop2: 2,
+      prop3: 3,
+      prop4: 4,
+      prop5: 5,
+      prop6: 6
     },
     {
-      prop1: 'prop1',
-      prop2: 'prop2',
-      prop3: 'prop3',
-      prop4: 'prop4',
-      prop5: 'prop5',
-      prop6: 'prop6'
+      prop1: 1,
+      prop2: 2,
+      prop3: 3,
+      prop4: 4,
+      prop5: 5,
+      prop6: 6
     },
     {
-      prop1: 'prop1',
-      prop2: 'prop2',
-      prop3: 'prop3',
-      prop4: 'prop4',
-      prop5: 'prop5',
-      prop6: 'prop6'
+      prop1: 1,
+      prop2: 2,
+      prop3: 3,
+      prop4: 4,
+      prop5: 5,
+      prop6: 6
     }
   ]
 }, 3000)
@@ -271,7 +271,7 @@ const clearSelection = () => {
       ref="BSGOAL_EL_TABLE_REF"
       operation-width="200"
       operation
-      selection
+      :showSummary="true"
       :has-page="false"
       :config-options="configOptionsTable"
       :data="data"
@@ -283,7 +283,7 @@ const clearSelection = () => {
       <!-- S 操作项 -->
       <template v-slot:operation="{ row }">
         <div>
-          {{ row }}
+          <!-- {{ row }} -->
         </div>
       </template>
       <!-- E 操作项 -->

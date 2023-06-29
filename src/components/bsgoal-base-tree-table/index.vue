@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 14:21:32
+ * @LastEditTime: 2023-06-29 14:37:18
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -168,6 +168,13 @@ const props = defineProps({
   expandedKeys: {
     type: [Array],
     default: () => []
+  },
+  /**
+   * 是否显示合计
+   */
+   showSummary: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -295,6 +302,7 @@ const tableStyler = computed(() => {
         <BsgoalBaseSearchTable
           ref="BSGOAL_BASE_SEARCH_TABLE_REF"
           v-bind="$props"
+          :show-summary="showSummary"
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"

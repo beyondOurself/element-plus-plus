@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 14:19:38
+ * @LastEditTime: 2023-06-29 14:35:56
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -130,6 +130,13 @@ const props = defineProps({
   pageSize: {
     type: [Number],
     default: 20
+  },
+  /**
+   * 是否显示合计
+   */
+  showSummary: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -234,6 +241,7 @@ defineExpose({
       <!-- S 表格 -->
       <BsgoalBaseTable
         ref="BSGOAL_BASE_TABLE_REF"
+        :show-summary="showSummary"
         :page-size="pageSize"
         :map-props="mapProps"
         :operationWidth="operationWidth"
