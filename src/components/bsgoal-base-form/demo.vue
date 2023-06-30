@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 16:10:39
+ * @LastEditTime: 2023-06-30 16:54:25
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -263,7 +263,6 @@ const changeValues = (params = '') => {
   <div class="bsgoal-base-form-demo">
     {{ values }}
     <BsgoalBaseForm
-      compact
       ref="BSGOAL_BASE_FORM_REF"
       readonly
       none="--"

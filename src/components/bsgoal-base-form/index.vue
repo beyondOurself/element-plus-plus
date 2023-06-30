@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 16:14:07
+ * @LastEditTime: 2023-06-30 17:32:31
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -356,7 +356,7 @@ const filterSlotProps = (model = {}) => {
     if (!prop.startsWith('_')) {
       const value = model[prop]
       const valueInt = Number.parseInt(value)
-      rebuildModel[prop] = valueInt || ['0', 0].includes(value) ? valueInt : value
+      rebuildModel[prop] = ( valueInt || ['0', 0].includes(value) ) && !(/^0.+/i).test(`${value}`) ? valueInt : value
     }
   }
   return rebuildModel
