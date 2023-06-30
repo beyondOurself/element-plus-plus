@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 09:19:56
+ * @LastEditTime: 2023-06-30 14:20:25
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -122,10 +122,16 @@ const EL_FORM_REF = ref(null)
 // 自定义指令
 const vAlign = baseDirective.align
 
-const model = ref(props.bindModel)
+const model = ref()
 const watchPropList = []
 
 // ---> S 初始值 <---
+
+watchEffect(() => {
+  const { bindModel = {} } = props
+  model.value = bindModel
+})
+
 /**
  * @Author: canlong.shen
  * @description:
@@ -166,10 +172,16 @@ watchEffect(() => {
     if (![ComponentTypeEnums.INPUT, ComponentTypeEnums.INPUT_TEXT_AREA].includes(type)) {
       watchPropList.push(prop)
     }
-    const bindValue = unref(model)[prop]
+    const bindValue = model.value[prop]
     if (prop.startsWith('_')) {
       model.value[prop] = `${prop}`
     } else {
+      console.log('bindValue', bindValue)
+      console.log('valuesModel[prop]', valuesModel[prop])
+      console.log(
+        'bindValue || valuesModel[prop] || value',
+        bindValue || valuesModel[prop] || value
+      )
       model.value[prop] = bindValue || valuesModel[prop] || value
     }
 
@@ -341,8 +353,8 @@ const filterSlotProps = (model = {}) => {
   for (const prop of Object.keys(model)) {
     if (!prop.startsWith('_')) {
       const value = model[prop]
-      const valueInt = Number.parseInt(value);
-      rebuildModel[prop] = valueInt || ['0', 0].includes(value) ? valueInt : value;
+      const valueInt = Number.parseInt(value)
+      rebuildModel[prop] = valueInt || ['0', 0].includes(value) ? valueInt : value
     }
   }
   return rebuildModel
@@ -409,7 +421,7 @@ defineExpose({
   triggerOperationClear,
   triggerOperationForm,
   validateForm,
-  resetFields:triggerOperationClear
+  resetFields: triggerOperationClear
 })
 </script>
 <template>

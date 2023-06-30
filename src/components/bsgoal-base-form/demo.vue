@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 08:59:19
+ * @LastEditTime: 2023-06-30 14:21:51
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -20,9 +20,7 @@ defineOptions({
 })
 
 const values = ref({
-  prop1: '222',
-  prop2: 'select1',
-  prop20: ''
+  residentialName: '1111'
 })
 
 const BSGOAL_BASE_FORM_REF = ref(null)
@@ -40,6 +38,8 @@ const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0', _
 
 // 配置项
 const configOptions = ref([
+  // { label: '名称', prop: 'residentialName', limit: 5, readonly: true }
+
   {
     label: 'prop104',
     prop: '_prop104',
@@ -252,10 +252,16 @@ const configOptions = ref([
     prop: 'prop16'
   }
 ])
+
+const changeValues = (params = '') => {
+  values.value = {
+    residentialName: '2222'
+  }
+}
 </script>
 <template>
   <div class="bsgoal-base-form-demo">
-    {{ bindModel }}
+    {{ values }}
     <BsgoalBaseForm
       ref="BSGOAL_BASE_FORM_REF"
       readonly
@@ -263,12 +269,13 @@ const configOptions = ref([
       :itemStyler="{ marginBottom: '8px' }"
       :limits="10"
       :config-options="configOptions"
-      :bind-model="bindModel"
+      :bind-model="values"
     >
       <template #_prop104> 6666 </template>
     </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
     <el-button type="primary" @click="resetFields">重置</el-button>
+    <el-button type="primary" @click="changeValues">改变值</el-button>
   </div>
 </template>
 <style lang="scss" scoped>
