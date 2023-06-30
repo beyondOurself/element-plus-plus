@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-29 10:41:56
+ * @LastEditTime: 2023-06-30 09:13:34
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -78,7 +78,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['update:modelValue', 'on-confirm'])
+const emits = defineEmits(['update:modelValue', 'on-confirm','on-show','on-hide'])
 const dialogVisible = ref(props.modelValue.value)
 
 /**
@@ -98,7 +98,7 @@ const cancel = () => {
  */
 const confirm = (done = () => {}) => {
   emits('on-confirm', (close = true) => {
-    if(close){
+    if (close) {
       dialogVisible.value = false
     }
     done()
@@ -114,6 +114,11 @@ watch(
 
 watch(dialogVisible, (v) => {
   emits('update:modelValue', v)
+  if (v) {
+    emits('on-show', v)
+  } else {
+    emits('on-hide', v)
+  }
 })
 
 //  设置不同尺寸

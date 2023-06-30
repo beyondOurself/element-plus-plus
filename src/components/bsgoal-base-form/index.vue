@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-29 13:23:38
+ * @LastEditTime: 2023-06-30 09:19:56
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -408,7 +408,8 @@ const setActiveValueText = (range = [], type = '') => {
 defineExpose({
   triggerOperationClear,
   triggerOperationForm,
-  validateForm
+  validateForm,
+  resetFields:triggerOperationClear
 })
 </script>
 <template>
