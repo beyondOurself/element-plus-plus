@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 15:53:40
+ * @LastEditTime: 2023-06-26 18:00:13
  * @FilePath: \common\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -72,7 +72,7 @@ const EL_FORM_REF = ref(null)
 const vAlign = baseDirective.align
 
 const model = ref({})
-const watchPropList = []
+// const watchPropList = []
 
 /**
  * @Author: canlong.shen
@@ -85,11 +85,8 @@ watchEffect(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   options.forEach((fei) => {
-    const { value, prop = '', type = '' } = fei
-    if (![ComponentTypeEnums.INPUT, ComponentTypeEnums.INPUT_TEXT_AREA].includes(type)) {
-      watchPropList.push(prop)
-    }
-    model.value[prop] = [0, false].includes(value) ? value : ''
+    const { value, prop = '' } = fei
+    model.value[prop] = value || [0, false].includes(value) ? value : ''
   })
 })
 
@@ -210,7 +207,12 @@ const triggerOperationSearch = () => {
       shadowModel[prop] = value
     }
 
-    if (type.endsWith('range') && range && range.length === 2) {
+    if (
+      Array.isArray(value) &&
+      Array.isArray(range) &&
+      type.endsWith('range') &&
+      range.length === 2
+    ) {
       const { 0: startValue = '', 1: endValue = '' } = value
       const { 0: startProp = '', 1: endProp = '' } = range
       shadowModel[startProp] = startValue
@@ -303,7 +305,9 @@ defineExpose({
             :key="index"
           >
             <el-col
-              v-show="index < 7 || type === ComponentTypeEnums.OPERATION || (index >= 7 && foldStatus)"
+              v-show="
+                index < 7 || type === ComponentTypeEnums.OPERATION || (index >= 7 && foldStatus)
+              "
               :xs="24"
               :sm="12"
               :md="medium"
@@ -388,9 +392,12 @@ defineExpose({
                   <!-- / 日期选择器 -->
                   <template
                     v-if="
-                      [ComponentTypeEnums.DATE, ComponentTypeEnums.MONTH, ComponentTypeEnums.YEAR, ComponentTypeEnums.DATE_TIME].includes(
-                        type
-                      )
+                      [
+                        ComponentTypeEnums.DATE,
+                        ComponentTypeEnums.MONTH,
+                        ComponentTypeEnums.YEAR,
+                        ComponentTypeEnums.DATE_TIME
+                      ].includes(type)
                     "
                   >
                     <el-date-picker
@@ -519,6 +526,9 @@ defineExpose({
     div.el-select {
       width: 100%;
     }
+  }
+  .el-col {
+    margin-bottom: 0px !important;
   }
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:39
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-19 15:21:32
+ * @LastEditTime: 2023-06-27 11:49:24
  * @FilePath: \common\src\components\bsgoal-base-tree\demo.vue
  * @Description: 左侧树的演示
  * 
@@ -45,10 +45,11 @@ const createData = (maxDeep, maxChildren, minNodesNumber, deep = 1, key = 'node'
 treeData.value = createData(4, 4, 4)
 
 const triggerTreeClick = (value, node, treeNode, event) => {
-  console.log('value', value)
-  console.log('node', node)
-  console.log('treeNode', treeNode)
-  console.log('event', event)
+  console.log('triggerTreeClick ================')
+  // console.log('value', value)
+  // console.log('node', node)
+  // console.log('treeNode', treeNode)
+  // console.log('event', event)
 }
 
 const treeLazyLoad = (node) => {
@@ -58,10 +59,13 @@ const treeLazyLoad = (node) => {
       resove([
         {
           label: 'label2-1',
-          isLeaf: true
+          isLeaf: true,
+          hasIcon: true
         },
         {
           label: 'label2-2',
+          key: 'label2-2',
+
           children: [
             {
               label: 'label2-2-1'
@@ -84,21 +88,46 @@ const treeInitNode = (node) => {
       resolve([
         {
           value: 'value1',
-          label: 'label1'
+          label: 'label1',
+          nodeKey:'label1'
         }
       ])
     }, 1000)
   })
 }
+
+const triggerAddClick = (params = '') => {
+  console.log('triggerAddClick', params)
+}
+
 </script>
 <template>
   <div class="bsgoal-base-tree-demo">
     <div class="base_tree_demo">
       <BsgoalBaseTree
+        :data="[
+          {
+            value: 'value999',
+            label: 'label999',
+            children: [
+              {
+                label: '8888',
+                key: '8888'
+              }
+            ]
+          }
+        ]"
+        node-key="nodeKey"
         :lazy-load="treeLazyLoad"
         :init-node="treeInitNode"
+        :expanded-keys="['label1']"
         @on-click="triggerTreeClick"
-      />
+        @on-click-add="triggerAddClick"
+      >
+        <template #prefix="{data}">
+          <div>66</div>
+        </template>
+      </BsgoalBaseTree>
     </div>
   </div>
 </template>

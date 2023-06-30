@@ -1,6 +1,6 @@
 {
   "name": "@bsgoal/common",
-  "version": "2.9.0",
+  "version": "2.15.10",
   "private": false,
   "files": [
     "dist",
@@ -26,9 +26,11 @@
     "issue": "npm run  build && npm publish"
   },
   "dependencies": {
+    "@bsgoal/common": "2.14.4",
     "element-plus": "^2.3.3",
     "vue": "^3.3.4",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue3-image-preview": "^0.2.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",

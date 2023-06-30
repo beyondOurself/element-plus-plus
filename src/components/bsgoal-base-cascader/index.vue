@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:27
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 15:54:39
+ * @LastEditTime: 2023-06-26 18:18:02
  * @FilePath: \common\src\components\bsgoal-base-cascader\index.vue
  * @Description: 级联选择 公共组件
  * 
@@ -85,9 +85,11 @@ const changeCascaderValue = (val) => {
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-cascader {
+  height: 100%;
   width: 100%;
   .base_cascader {
     width: inherit;
+    height: inherit;
   }
 }
 </style>

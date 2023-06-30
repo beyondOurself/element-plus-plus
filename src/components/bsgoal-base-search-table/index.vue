@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-18 15:59:09
+ * @LastEditTime: 2023-06-30 10:12:43
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -123,8 +123,31 @@ const props = defineProps({
   hasSearch: {
     type: Boolean,
     default: true
+  },
+  /**
+   * pageSize
+   */
+  pageSize: {
+    type: [Number],
+    default: 20
+  },
+  /**
+   * 是否显示合计
+   */
+  showSummary: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   *  合计的列
+   */
+   summaryProps: {
+    type: [Array],
+    default: () => []
   }
 })
+
+const emits = defineEmits(['select', 'select-all', 'selection-change', 'on-total-change'])
 
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)
@@ -177,10 +200,36 @@ const refresh = () => {
 }
 // ---> E 刷新 <---
 
+// ---> S 触发事件 <---
+const triggerSelect = (selection, row) => {
+  emits('select', selection, row)
+}
+const triggerSelectAll = (selection) => {
+  emits('select-all', selection)
+}
+const triggerSelectionChange = (selection) => {
+  emits('selection-change', selection)
+}
+
+const triggerTotalChange = (total = 0) => {
+  emits('on-total-change', total)
+}
+
+// ---> E 触发事件 <---
+
+// ---> S 暴露事件 <---
+
+const clearSelection = () => {
+  BSGOAL_BASE_TABLE_REF.value.clearSelection()
+}
+
+// ---> E 暴露事件 <---
+
 // ---> S 暴露 <---
 
 defineExpose({
-  refresh
+  refresh,
+  clearSelection
 })
 // ---> E 暴露 <---
 </script>
@@ -199,6 +248,8 @@ defineExpose({
       <!-- S 表格 -->
       <BsgoalBaseTable
         ref="BSGOAL_BASE_TABLE_REF"
+        :show-summary="showSummary"
+        :page-size="pageSize"
         :map-props="mapProps"
         :operationWidth="operationWidth"
         :config-options="tableOptions"
@@ -209,6 +260,11 @@ defineExpose({
         :fetch="fetch"
         :call="call"
         :has-page="hasPage"
+        :summary-props="summaryProps"
+        @select="triggerSelect"
+        @select-all="triggerSelectAll"
+        @selection-change="triggerSelectionChange"
+        @on-total-change="triggerTotalChange"
       >
         <!-- S 顶部菜单 -->
 

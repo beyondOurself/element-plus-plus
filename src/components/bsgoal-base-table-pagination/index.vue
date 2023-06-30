@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 16:34:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-25 13:50:40
+ * @LastEditTime: 2023-06-28 10:12:16
  * @FilePath: \common\src\components\bsgoal-base-table-pagination\index.vue
  * @Description: 表格的分页按钮
  * 
@@ -11,9 +11,9 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed } from 'vue'
+import { ref, computed, inject, unref } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-
+import BsgoalBaseSizes from '../bsgoal-base-sizes/index.vue'
 defineOptions({
   name: 'BsgoalBaseTablePagination'
 })
@@ -38,7 +38,7 @@ const props = defineProps({
    */
   pageSize: {
     type: [Number],
-    default: 10
+    default: 20
   },
   /**
    * 总条目
@@ -77,7 +77,7 @@ const page = ref(1)
       <el-config-provider :locale="zhCn">
         <el-pagination
           background
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="total, slot, prev, pager, next, jumper"
           v-model:current-page="page"
           :page-sizes="pageSizes"
           :page-size="pageSize"
@@ -85,8 +85,12 @@ const page = ref(1)
           @size-change="triggerSizeChange"
           @current-change="triggerCurrentChange"
         >
-          <template v-slot:next>
-            <span>总数</span>
+          <template #default="">
+            <BsgoalBaseSizes
+              :page-sizes="pageSizes"
+              :page-size="pageSize"
+              @on-size-change="triggerSizeChange"
+            />
           </template>
         </el-pagination>
       </el-config-provider>
