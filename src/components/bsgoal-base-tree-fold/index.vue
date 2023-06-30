@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 14:30:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 17:29:58
+ * @LastEditTime: 2023-05-26 16:09:24
  * @FilePath: \common\src\components\bsgoal-base-tree-fold\index.vue
  * @Description:  树结构折叠按钮
  * 
@@ -55,7 +55,7 @@ const triggerFold = () => {
     justify-content: center;
 
     border-radius: 10px;
-    background-color: var(--el-color-primary);
+    background-color: #409eff;
   }
   .base_tree_fold--hide {
     right: 0px;

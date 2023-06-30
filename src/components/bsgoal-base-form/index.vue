@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 09:19:56
+ * @LastEditTime: 2023-05-31 14:46:37
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -340,9 +340,7 @@ const filterSlotProps = (model = {}) => {
   const rebuildModel = {}
   for (const prop of Object.keys(model)) {
     if (!prop.startsWith('_')) {
-      const value = model[prop]
-      const valueInt = Number.parseInt(value);
-      rebuildModel[prop] = valueInt || ['0', 0].includes(value) ? valueInt : value;
+      rebuildModel[prop] = model[prop]
     }
   }
   return rebuildModel
@@ -408,8 +406,7 @@ const setActiveValueText = (range = [], type = '') => {
 defineExpose({
   triggerOperationClear,
   triggerOperationForm,
-  validateForm,
-  resetFields:triggerOperationClear
+  validateForm
 })
 </script>
 <template>
@@ -443,7 +440,6 @@ defineExpose({
                 limit = limits,
                 length = 255,
                 visible = true,
-                multiple = false,
                 formatter = (v) => {
                   return v
                 },
@@ -513,8 +509,6 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.SELECT">
                       <el-select
                         v-model="model[prop]"
-                        no-data-text="暂无数据"
-                        :multiple="multiple"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
                       >

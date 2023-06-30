@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-08 15:11:05
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 14:07:09
+ * @LastEditTime: 2023-05-08 15:11:11
  * @FilePath: \common\src\utils\common.js
  * @Description: 常用的工具方法
  * 
@@ -51,6 +51,3 @@ export const isBoolean = (tar) => {
 export const isUndefind = (tar) => {
   return getInstanceType(tar) === 'undefind'
 }
-export const isArray = (tar) => {
-  return Array.isArray(tar)
-};

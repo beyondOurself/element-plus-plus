@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-21 14:23:18
+ * @LastEditTime: 2023-04-27 17:44:25
  * @FilePath: \common\src\components\bsgoal-base-search\demo.vue
  * @Description: 表格查询组件演示
  * 
@@ -24,7 +24,7 @@ const searchModelValue = ref({})
 let curLocalOptions = ref([
   {
     label: 'prop1',
-    value: '111',
+    // value: '111',
     prop: 'prop1',
     type: ComponentTypeEnums.INPUT
   },
@@ -54,7 +54,7 @@ let curLocalOptions = ref([
   },
   {
     label: 'prop3',
-    value: '111',
+    // value: '111',
     type: ComponentTypeEnums.SLIDER,
     prop: 'prop3'
   },

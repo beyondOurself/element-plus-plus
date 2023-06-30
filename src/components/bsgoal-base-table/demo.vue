@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 10:04:04
+ * @LastEditTime: 2023-05-26 14:26:06
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -16,7 +16,7 @@ import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 
 defineOptions({
-  name: 'BsgoalBaseTableDemo111'
+   name:'BsgoalBaseTableDemo111'
 })
 
 let searchOptions = ref([
@@ -163,65 +163,65 @@ const data = ref([])
 setTimeout(() => {
   data.value = [
     {
-      prop1: 1,
-      prop2: 2,
-      prop3: 3,
-      prop4: 4,
-      prop5: 5,
-      prop6: 6
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
     },
     {
-      prop1: 1,
-      prop2: 2,
-      prop3: 3,
-      prop4: 4,
-      prop5: 5,
-      prop6: 6
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
     },
     {
-      prop1: 1,
-      prop2: 2,
-      prop3: 3,
-      prop4: 4,
-      prop5: 5,
-      prop6: 6
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
     },
     {
-      prop1: 1,
-      prop2: 2,
-      prop3: 3,
-      prop4: 4,
-      prop5: 5,
-      prop6: 6
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
     },
     {
-      prop1: 1,
-      prop2: 2,
-      prop3: 3,
-      prop4: 4,
-      prop5: 5,
-      prop6: 6
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
     },
     {
-      prop1: 1,
-      prop2: 2,
-      prop3: 3,
-      prop4: 4,
-      prop5: 5,
-      prop6: 6
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3',
+      prop4: 'prop4',
+      prop5: 'prop5',
+      prop6: 'prop6'
     }
   ]
 }, 3000)
 
 const configOptionsTable = ref([
   {
-    label: '宽度',
-    prop: 'prop1'
+    label: '列列列列列列列列列1',
+    prop: 'prop1',
     // tooltip: true,
     // limit: 3
   },
   {
-    label: '列列列列列列列列列',
+    label: '列列列列列列列列列2',
     prop: 'prop2'
   },
   {
@@ -245,46 +245,24 @@ const configOptionsTable = ref([
 const clearData = () => {
   data.value = []
 }
-
-const triggerSelect = (selection, row) => {
-  console.log('select', selection, row)
-}
-const triggerSelectAll = (selection) => {
-  console.log('select-all', selection)
-}
-const triggerSelectionChange = (selection) => {
-  console.log('selection-change', selection)
-}
-
-const BSGOAL_EL_TABLE_REF = ref(null)
-
-const clearSelection = () => {
-  BSGOAL_EL_TABLE_REF.value.clearSelection()
-}
 </script>
 <template>
   <div class="bsgoal-base-table-demo">
-    <el-button type="primary" @click="clearSelection">清空选择</el-button>
     <!-- <BsgoalBaseSearch  :config-options="searchOptions" /> -->
-    <!-- <el-button type="primary" @click="clearData">设置为空数据</el-button> -->
+    <el-button type="primary" @click="clearData">设置为空数据</el-button>
     <BsgoalBaseTable
-      ref="BSGOAL_EL_TABLE_REF"
       operation-width="200"
       operation
-      :showSummary="true"
+      selection
       :has-page="false"
       :config-options="configOptionsTable"
       :data="data"
       :auto-height="false"
-      :summary-props="['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6']"
-      @select="triggerSelect"
-      @select-all="triggerSelectAll"
-      @selection-change="triggerSelectionChange"
     >
       <!-- S 操作项 -->
       <template v-slot:operation="{ row }">
         <div>
-          <!-- {{ row }} -->
+          {{ row }}
         </div>
       </template>
       <!-- E 操作项 -->

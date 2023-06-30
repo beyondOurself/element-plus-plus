@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 17:12:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-20 19:14:29
+ * @LastEditTime: 2023-05-26 15:59:36
  * @FilePath: \common\src\components\bsgoal-base-line\index.vue
  * @Description: 分割线公共组件
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, inject, watchEffect } from 'vue'
+import { ref } from 'vue'
 
 defineOptions({
   name: 'BsgoalBaseLine'
@@ -26,21 +26,10 @@ const props = defineProps({
     default: false
   }
 })
-
-// ---> S 左侧机构树折叠状态 <---
-const TREE_SWITCH_STATUS = inject('TREE_SWITCH_STATUS')
-// ---> E 左侧机构树折叠状态 <---
 </script>
-
 <template>
   <div class="bsgoal-base-line" :class="{ 'bsgoal-base-line__vertical': vertical }">
-    <div
-      class="base_line"
-      :class="{
-        'base_line__vertical': vertical,
-        'bsgoal-base-line__fill': TREE_SWITCH_STATUS === false
-      }"
-    ></div>
+    <div class="base_line" :class="{ base_line__vertical: vertical }"></div>
   </div>
 </template>
 <style lang="scss">
@@ -59,12 +48,6 @@ const TREE_SWITCH_STATUS = inject('TREE_SWITCH_STATUS')
   .base_line__vertical {
     width: 10px;
     height: 100%;
-  }
-
-  .bsgoal-base-line__fill {
-    position: absolute;
-    left: 0;
-    right: 0;
   }
 }
 </style>

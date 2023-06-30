@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 08:59:19
+ * @LastEditTime: 2023-05-31 17:43:54
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -31,9 +31,6 @@ const confirm = () => {
   BSGOAL_BASE_FORM_REF.value.validateForm((res) => {
     console.log('res', res)
   })
-}
-const resetFields = () => {
-  BSGOAL_BASE_FORM_REF.value.resetFields()
 }
 
 const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0', _prop104: '' })
@@ -124,10 +121,9 @@ const configOptions = ref([
   },
   {
     label: 'prop2',
-    value: [],
+    value: 'select2',
     type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
-    multiple:true,
     range: [
       {
         label: 'select1',
@@ -146,6 +142,7 @@ const configOptions = ref([
         value: 'select5'
       }
     ],
+    readonly: true
   },
   {
     label: 'prop3',
@@ -268,7 +265,6 @@ const configOptions = ref([
       <template #_prop104> 6666 </template>
     </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
-    <el-button type="primary" @click="resetFields">重置</el-button>
   </div>
 </template>
 <style lang="scss" scoped>

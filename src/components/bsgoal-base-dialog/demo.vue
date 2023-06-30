@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 09:17:44
+ * @LastEditTime: 2023-05-31 11:44:23
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -53,16 +53,9 @@ const tabsConfigOptions = ref([
 
 const triggerConfirm = (done) => {
   setTimeout(() => {
-    done(false)
+    done()
   }, 3000)
   console.log('关闭前')
-}
-
-const triggerShow = (status = '') => {
-  console.log(status, '显示')
-}
-const triggerHide = (status = '') => {
-  console.log(status, '关闭')
 }
 </script>
 <template>
@@ -79,8 +72,6 @@ const triggerHide = (status = '') => {
         size="max"
         type="blank"
         @on-confirm="triggerConfirm"
-        @on-show="triggerShow"
-        @on-hide="triggerHide"
       >
         <BsgoalBaseTabs v-memo="activeTabName" :config-options="tabsConfigOptions" />
       </BsgoalBaseDialog>
