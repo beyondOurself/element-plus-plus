@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 15:58:56
+ * @LastEditTime: 2023-06-30 16:14:07
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -420,22 +420,23 @@ const setActiveValueText = (range = [], type = '') => {
 // ---> E switch active/inactive 的设置 <---
 
 // ---> S styles <---
-const colStyle = () => {
+const colStyle = computed(() => {
   const styler = {}
   const { compact = false } = props
   if (compact) {
     styler.marginBottom = '0px'
   }
   return styler
-}
-const itemStyle = () => {
+})
+const itemStyle = computed(() => {
   const styler = {}
   const { compact = false, itemStyler = {} } = props
   if (compact) {
     styler.marginBottom = '0px'
   }
-  return { ...itemStyler, ...styler }
-}
+
+  return {  ...styler ,...itemStyler }
+})
 
 // ---> E styles <---
 
@@ -490,11 +491,11 @@ defineExpose({
             :key="key"
           >
             <el-col
-              :style="colStyle"
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
               :md="medium"
+              :style="colStyle"
             >
               <el-form-item :style="itemStyle" :label="label" :prop="prop" :rules="rules">
                 <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">

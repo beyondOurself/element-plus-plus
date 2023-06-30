@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 14:21:51
+ * @LastEditTime: 2023-06-30 16:10:39
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -127,7 +127,7 @@ const configOptions = ref([
     value: [],
     type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
-    multiple:true,
+    multiple: true,
     range: [
       {
         label: 'select1',
@@ -145,7 +145,7 @@ const configOptions = ref([
         label: 'select4',
         value: 'select5'
       }
-    ],
+    ]
   },
   {
     label: 'prop3',
@@ -263,10 +263,10 @@ const changeValues = (params = '') => {
   <div class="bsgoal-base-form-demo">
     {{ values }}
     <BsgoalBaseForm
+      compact
       ref="BSGOAL_BASE_FORM_REF"
       readonly
       none="--"
-      :itemStyler="{ marginBottom: '8px' }"
       :limits="10"
       :config-options="configOptions"
       :bind-model="values"
