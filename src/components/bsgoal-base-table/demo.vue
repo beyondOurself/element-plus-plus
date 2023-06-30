@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-29 17:34:31
+ * @LastEditTime: 2023-06-30 10:04:04
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -276,6 +276,7 @@ const clearSelection = () => {
       :config-options="configOptionsTable"
       :data="data"
       :auto-height="false"
+      :summary-props="['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6']"
       @select="triggerSelect"
       @select-all="triggerSelectAll"
       @selection-change="triggerSelectionChange"

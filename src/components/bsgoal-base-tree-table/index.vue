@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-29 14:37:18
+ * @LastEditTime: 2023-06-30 10:13:58
  * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -172,9 +172,16 @@ const props = defineProps({
   /**
    * 是否显示合计
    */
-   showSummary: {
+  showSummary: {
     type: [Boolean],
     default: false
+  },
+  /**
+   *  合计的列
+   */
+  summaryProps: {
+    type: [Array],
+    default: () => []
   }
 })
 
@@ -233,7 +240,7 @@ const refreshList = (params = {}) => {
 }
 
 // ---> S 触发事件 <---
-const triggerSelect = (selection = {}, row =[]) => {
+const triggerSelect = (selection = {}, row = []) => {
   emits('on-select-table', selection, row)
 }
 const triggerSelectAll = (selection = {}) => {
@@ -303,6 +310,7 @@ const tableStyler = computed(() => {
           ref="BSGOAL_BASE_SEARCH_TABLE_REF"
           v-bind="$props"
           :show-summary="showSummary"
+          :summary-props="summaryProps"
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"

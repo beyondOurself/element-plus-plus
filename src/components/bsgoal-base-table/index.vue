@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 08:40:07
+ * @LastEditTime: 2023-06-30 09:56:18
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -140,6 +140,13 @@ const props = defineProps({
   showSummary: {
     type: [Boolean],
     default: false
+  },
+  /**
+   *  合计的列
+   */
+  summaryProps: {
+    type: [Array],
+    default: () => []
   }
 })
 
@@ -278,20 +285,21 @@ const clearSelection = () => {
 // ---> S 表格绑定的方法 <---
 
 const summaryMethod = (columns = '') => {
+  const { summaryProps = [] } = props
   const dataList = columns.data
   const calcResultList = []
 
-  dataList.forEach((fi = {}) => {
-    let calcIndex = 0
-    for (const [prop, value] of Object.entries(fi)) {
-      const cellValue = calcResultList[calcIndex]
-      const cellValueInt = parseInt(cellValue) || 0
-      const valueInt = parseInt(value) || 0
-      calcResultList[calcIndex] = cellValueInt + valueInt
-      calcIndex++
-    }
+  summaryProps.forEach((prop = '', index = 0) => {
+    let sum = 0
+    const propDataList = dataList.map((mi) => mi[prop])
+    propDataList.forEach((pfi) => {
+      const valueInt = parseInt(pfi) || 0
+      sum += valueInt
+    })
+    calcResultList[index] = sum
   })
 
+  console.log('calcResultList',calcResultList);
 
   return ['合计', ...calcResultList.slice(1)]
 }

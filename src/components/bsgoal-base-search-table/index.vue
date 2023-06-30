@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-29 14:35:56
+ * @LastEditTime: 2023-06-30 10:12:43
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -137,6 +137,13 @@ const props = defineProps({
   showSummary: {
     type: [Boolean],
     default: false
+  },
+  /**
+   *  合计的列
+   */
+   summaryProps: {
+    type: [Array],
+    default: () => []
   }
 })
 
@@ -253,6 +260,7 @@ defineExpose({
         :fetch="fetch"
         :call="call"
         :has-page="hasPage"
+        :summary-props="summaryProps"
         @select="triggerSelect"
         @select-all="triggerSelectAll"
         @selection-change="triggerSelectionChange"
