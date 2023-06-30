@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-29 18:20:53
+ * @LastEditTime: 2023-06-30 08:40:07
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -278,8 +278,6 @@ const clearSelection = () => {
 // ---> S 表格绑定的方法 <---
 
 const summaryMethod = (columns = '') => {
-  console.log('columns', columns)
-  console.log('data', columns.data)
   const dataList = columns.data
   const calcResultList = []
 
