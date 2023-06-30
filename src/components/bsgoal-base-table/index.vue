@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 09:56:18
+ * @LastEditTime: 2023-06-30 10:33:45
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -298,10 +298,7 @@ const summaryMethod = (columns = '') => {
     })
     calcResultList[index] = sum
   })
-
-  console.log('calcResultList',calcResultList);
-
-  return ['合计', ...calcResultList.slice(1)]
+  return ['合计', ...calcResultList]
 }
 
 // ---> E 表格绑定的方法 <---
