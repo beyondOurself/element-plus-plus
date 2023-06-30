@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 14:20:25
+ * @LastEditTime: 2023-06-30 15:58:56
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -110,6 +110,14 @@ const props = defineProps({
   itemStyler: {
     type: [Object],
     default: () => ({})
+  },
+
+  /**
+   * 紧凑型
+   */
+  compact: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -176,12 +184,6 @@ watchEffect(() => {
     if (prop.startsWith('_')) {
       model.value[prop] = `${prop}`
     } else {
-      console.log('bindValue', bindValue)
-      console.log('valuesModel[prop]', valuesModel[prop])
-      console.log(
-        'bindValue || valuesModel[prop] || value',
-        bindValue || valuesModel[prop] || value
-      )
       model.value[prop] = bindValue || valuesModel[prop] || value
     }
 
@@ -417,6 +419,26 @@ const setActiveValueText = (range = [], type = '') => {
 
 // ---> E switch active/inactive 的设置 <---
 
+// ---> S styles <---
+const colStyle = () => {
+  const styler = {}
+  const { compact = false } = props
+  if (compact) {
+    styler.marginBottom = '0px'
+  }
+  return styler
+}
+const itemStyle = () => {
+  const styler = {}
+  const { compact = false, itemStyler = {} } = props
+  if (compact) {
+    styler.marginBottom = '0px'
+  }
+  return { ...itemStyler, ...styler }
+}
+
+// ---> E styles <---
+
 defineExpose({
   triggerOperationClear,
   triggerOperationForm,
@@ -467,8 +489,14 @@ defineExpose({
             ) of configOptionsGet"
             :key="key"
           >
-            <el-col :class="{ 'base_form--visible': !visible }" :xs="24" :sm="24" :md="medium">
-              <el-form-item :style="itemStyler" :label="label" :prop="prop" :rules="rules">
+            <el-col
+              :style="colStyle"
+              :class="{ 'base_form--visible': !visible }"
+              :xs="24"
+              :sm="24"
+              :md="medium"
+            >
+              <el-form-item :style="itemStyle" :label="label" :prop="prop" :rules="rules">
                 <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">
                   <!-- S 内容组件 -->
                   <template v-if="!readonly">
