@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 19:44:43
+ * @LastEditTime: 2023-07-01 13:41:22
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -463,6 +463,7 @@ defineExpose({
           <template
             v-for="(
               {
+                md = 0,
                 label = '',
                 prop = '',
                 type = 'text',
@@ -494,7 +495,7 @@ defineExpose({
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
-              :md="medium"
+              :md="md || medium"
               :style="colStyle"
             >
               <el-form-item :style="itemStyle" :label="label" :prop="prop" :rules="rules">

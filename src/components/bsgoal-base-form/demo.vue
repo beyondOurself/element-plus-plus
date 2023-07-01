@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 16:54:25
+ * @LastEditTime: 2023-07-01 13:45:35
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -249,7 +249,8 @@ const configOptions = ref([
     label: 'prop16',
     // value: '111',
     type: ComponentTypeEnums.DATE_TIME_RANGE,
-    prop: 'prop16'
+    prop: 'prop16',
+    md:24
   }
 ])
 
@@ -266,6 +267,7 @@ const changeValues = (params = '') => {
       ref="BSGOAL_BASE_FORM_REF"
       readonly
       none="--"
+      :medium="6"
       :limits="10"
       :config-options="configOptions"
       :bind-model="values"
