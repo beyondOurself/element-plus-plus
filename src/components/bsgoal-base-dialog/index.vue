@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 09:13:34
+ * @LastEditTime: 2023-07-01 09:08:25
  * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -75,10 +75,17 @@ const props = defineProps({
   footer: {
     type: [Boolean],
     default: true
+  },
+  /**
+   * 是否重新渲染整个视图
+   */
+  isRefresh: {
+    type: [Boolean],
+    default: true
   }
 })
 
-const emits = defineEmits(['update:modelValue', 'on-confirm','on-show','on-hide'])
+const emits = defineEmits(['update:modelValue', 'on-confirm', 'on-show', 'on-hide'])
 const dialogVisible = ref(props.modelValue.value)
 
 /**
@@ -168,7 +175,7 @@ const widthGet = computed(() => {
             }
           ]"
         >
-          <slot></slot>
+          <slot v-if="dialogVisible && isRefresh"></slot>
         </div>
         <template #footer>
           <slot name="footer" v-if="footer">
