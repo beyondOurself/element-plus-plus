@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-01 09:09:48
+ * @LastEditTime: 2023-07-01 09:17:22
  * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
@@ -14,7 +14,7 @@
 import { ref } from 'vue'
 import BsgoalBaseDialog from './index.vue'
 import BsgoalBaseTabs from '../bsgoal-base-tabs/index.vue'
-import BsgoalBaseForm from '../bsgoal-base-form/index.vue';
+import BsgoalBaseForm from '../bsgoal-base-form/index.vue'
 defineOptions({
   name: 'BsgoalBaseDialogDemo'
 })
@@ -293,7 +293,6 @@ const configOptions = ref([
 const values = ref({
   residentialName: '1111'
 })
-
 </script>
 <template>
   <div class="bsgoal-base-dialog-demo">
@@ -316,25 +315,24 @@ const values = ref({
       </BsgoalBaseDialog>
       <BsgoalBaseDialog
         v-model="dialogVisible3"
-        size="max"
+        size="medium"
         type="blank"
         @on-confirm="triggerConfirm"
         @on-show="triggerShow"
         @on-hide="triggerHide"
       >
-       
-      <div class="bsgoal-base-form-demo">
-    <BsgoalBaseForm
-      ref="BSGOAL_BASE_FORM_REF"
-      readonly
-      none="--"
-      :limits="10"
-      :config-options="configOptions"
-      :bind-model="values"
-    >
-      <template #_prop104> 6666 </template>
-    </BsgoalBaseForm>
-  </div>
+        <div class="bsgoal-base-form-demo">
+          <BsgoalBaseForm
+            ref="BSGOAL_BASE_FORM_REF"
+            readonly
+            none="--"
+            :limits="10"
+            :config-options="configOptions"
+            :bind-model="values"
+          >
+            <template #_prop104> 6666 </template>
+          </BsgoalBaseForm>
+        </div>
       </BsgoalBaseDialog>
       <el-button type="primary" @click="test">打开弹窗</el-button>
       <el-button type="primary" @click="test2">打开弹窗2</el-button>

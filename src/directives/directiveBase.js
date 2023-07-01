@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-14 10:50:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 15:55:30
+ * @LastEditTime: 2023-07-01 09:22:49
  * @FilePath: \common\src\directives\directiveBase.js
  * @Description: 常用的公共指令
  *
@@ -76,7 +76,9 @@ export default {
       })
     },
     mounted(el) {
+      setTimeout(() => {
       autoAlign(el)
+      }, 100);
     },
     unmounted(el) {
       window.removeEventListener('resize', autoAlign(el))
