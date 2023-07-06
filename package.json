@@ -1,6 +1,6 @@
 {
   "name": "@bsgoal/common",
-  "version": "2.15.19",
+  "version": "2.15.20",
   "private": false,
   "files": [
     "dist",
