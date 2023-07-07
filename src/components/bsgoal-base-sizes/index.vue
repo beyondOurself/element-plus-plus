@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-27 16:52:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-06 11:23:17
+ * @LastEditTime: 2023-06-28 14:56:45
  * @FilePath: \common\src\components\bsgoal-base-sizes\index.vue
  * @Description: 页数切换 公共组件
  * 
@@ -165,7 +165,7 @@ const isMicroApp = window.__MICRO_APP_ENVIRONMENT__
   }
 
   .base_sizes_item--selected {
-    color: var(--el-color-primary);
+    color: #409eff;
     font-weight: 700;
   }
 

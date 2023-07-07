@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-03 16:11:22
- * @FilePath: \estate_web_v3\packages\common\src\components\bsgoal-base-tree-table\index.vue
+ * @LastEditTime: 2023-07-07 14:21:11
+ * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
 -->
@@ -182,6 +182,13 @@ const props = defineProps({
   summaryProps: {
     type: [Array],
     default: () => []
+  },
+  /**
+   * 序号 列
+   */
+  serial: {
+    type: [Boolean],
+    default: false
   }
 })
 
