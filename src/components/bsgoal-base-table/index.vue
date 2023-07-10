@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-07 14:25:44
+ * @LastEditTime: 2023-07-10 17:56:26
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -154,6 +154,13 @@ const props = defineProps({
   serial: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * 主体style
+   */
+  bodyStyle: {
+    type: [Object],
+    default: () => ({})
   }
 })
 
@@ -326,6 +333,7 @@ defineExpose({
     <div
       class="base_table"
       :class="{ 'base_table--tree': TREE_SWITCH_STATUS === false, bsgoal_micro_app: isMicroApp }"
+      :style="bodyStyle"
     >
       <!-- S 表头操作区域 -->
       <div class="base_table_menu" v-if="$slots.menu">
