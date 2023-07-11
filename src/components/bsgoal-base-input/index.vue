@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-29 09:38:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-29 18:01:19
+ * @LastEditTime: 2023-07-11 09:44:43
  * @FilePath: \common\src\components\bsgoal-base-input\index.vue
  * @Description:  Input 输入框
  * 
@@ -11,8 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { processSlotOutlet } from '@vue/compiler-core'
-import { ref, watch, watchEffect } from 'vue'
+import { ref, watch, watchEffect, useSlots } from 'vue'
 
 defineOptions({
   name: 'BsgoalBaseInput'
@@ -57,6 +56,13 @@ const props = defineProps({
     default: () => {
       return (v) => v
     }
+  },
+  /**
+   * 显示清楚按钮
+   */
+  clearable: {
+    type: [Boolean],
+    default: true
   }
 })
 
@@ -106,14 +112,19 @@ const input = (value = '') => {
 }
 
 // ---> E 事件  <---
+
+// ---> S 插槽 <---
+const slots = useSlots()
+const slotNames = ref(Object.keys(slots))
+// ---> E 插槽 <---
 </script>
 
 <template>
   <div class="bsgoal-base-input">
     <el-input
       v-model="inputValue"
-      clearable
       class="base_input"
+      :clearable="clearable"
       :placeholder="placeholder"
       :disabled="disabled"
       :formatter="formatter"
@@ -121,7 +132,12 @@ const input = (value = '') => {
       @change="change"
       @clear="clear"
       @input="input"
-    />
+    >
+      <!-- S 输入框头部内容 -->
+      <template #[slotName] v-for="slotName of slotNames">
+        <slot :name="slotName"></slot>
+      </template>
+    </el-input>
   </div>
 </template>
 <style lang="scss" scoped>

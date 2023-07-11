@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 15:53:36
+ * @LastEditTime: 2023-07-11 11:20:37
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -31,7 +31,7 @@ const props = defineProps({
     validator: (v) => ['primary', 'success', 'warning', 'danger', 'info'].includes(v)
   },
   icon: {
-    type: [String, Object],
+    type: [String, Object, Boolean],
     default: ''
   },
   content: {
@@ -63,10 +63,10 @@ const props = defineProps({
 // ---> S 触发按钮 <---
 const loading = ref(false)
 const triggerClick = () => {
-  // 默认 loading 是打开的 
- if(props.hasLoading){
-  loading.value = true
- }
+  // 默认 loading 是打开的
+  if (props.hasLoading) {
+    loading.value = true
+  }
   const { task } = props
   const taskValue = unref(task)
   taskValue(() => {
@@ -87,23 +87,26 @@ const typeGet = computed(() => {
       return ''
     case 'confirm':
     case 'add':
+    case 'edit':
       return 'primary'
   }
   return type
 })
 const iconGet = computed(() => {
   const { mode = '', icon = '' } = props
-
-  switch (mode) {
-    case 'delete':
-      return Delete
-    case 'add':
-      return Plus
-    case 'cancel':
-      return CloseBold
-    case 'confirm':
-      return Select
+  if (icon !== false) {
+    switch (mode) {
+      case 'delete':
+        return Delete
+      case 'add':
+        return Plus
+      case 'cancel':
+        return CloseBold
+      case 'confirm':
+        return Select
+    }
   }
+
   return icon
 })
 const contentGet = computed(() => {
@@ -116,8 +119,12 @@ const contentGet = computed(() => {
       return '确认'
     case 'add':
       return '新增'
+    case 'edit':
+      return '编辑'
     case 'delete':
       return '删除'
+    case 'detail':
+      return '详情'
   }
   return content
 })

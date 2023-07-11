@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-29 09:38:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-29 18:01:43
+ * @LastEditTime: 2023-07-11 09:36:34
  * @FilePath: \common\src\components\bsgoal-base-input\demo.vue
  * @Description: Input 输入框 演示
  * 
@@ -20,15 +20,20 @@ const props = defineProps({})
 const inputValue = ref('')
 
 const test = () => {
-    inputValue.value = '666'
+  inputValue.value = '666'
 }
-
 </script>
 <template>
   <div class="bsgoal-base-input-demo">
     <div class="base_input_demo">
-        {{ inputValue }}
-      <BsgoalBaseInput v-model="inputValue"/>
+      {{ inputValue }}
+      <BsgoalBaseInput
+        v-model="inputValue"
+      >
+       <template #suffix>
+           <div>111</div>
+       </template>
+      </BsgoalBaseInput>
       <el-button type="primary" @click="test">测试</el-button>
     </div>
   </div>

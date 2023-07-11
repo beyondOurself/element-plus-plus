@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:58:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 16:36:56
+ * @LastEditTime: 2023-07-11 12:00:53
  * @FilePath: \common\src\components\bsgoal-base-time\index.vue
  * @Description: 时间选择器 
  * 
@@ -41,7 +41,63 @@ const props = defineProps({
   format: {
     type: [String],
     default: 'HH:mm'
-  }
+  },
+  /**
+   * 箭头进行选择
+   */
+  arrowControl: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   *  禁止选择部分小时选项
+   */
+  disabledHours: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   *  禁止选择部分分钟选项
+   */
+  disabledMinutes: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   *  禁止选择部分秒选项
+   */
+  disabledSeconds: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 完全只读
+   */
+  readonly: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 禁用
+   */
+   disabled: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 文本框可输入
+   */
+   editable: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 是否显示清除按钮
+   */
+   clearable: {
+    type: [Boolean],
+    default: false
+  },
 })
 
 // ---> S 绑定值 <---
@@ -96,9 +152,16 @@ const triggerChange = (date = new Date()) => {
       <el-time-picker
         v-model="bindValue"
         class="base_time"
+        :arrow-control="arrowControl"
         :format="format"
-        :clearable="false"
+        :clearable="clearable"
+        :readonly="readonly"
+        :disabled="disabled"
+        :editable="editable"
         :placeholder="placeholder"
+        :disabled-hours="disabledHours"
+        :disabled-minutes="disabledMinutes"
+        :disabled-seconds="disabledSeconds"
         @change="triggerChange"
       />
     </el-config-provider>

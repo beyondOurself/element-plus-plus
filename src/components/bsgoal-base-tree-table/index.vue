@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-03 16:11:22
- * @FilePath: \estate_web_v3\packages\common\src\components\bsgoal-base-tree-table\index.vue
+ * @LastEditTime: 2023-07-11 11:07:55
+ * @FilePath: \common\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
 -->
@@ -182,6 +182,13 @@ const props = defineProps({
   summaryProps: {
     type: [Array],
     default: () => []
+  },
+  /**
+   * 序号 列
+   */
+  serial: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -316,8 +323,8 @@ const tableStyler = computed(() => {
           @selection-change="triggerSelectionChange"
           @on-total-change="triggerTotalChange"
         >
-          <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">
-            <slot :name="slotName" :row="row"></slot>
+          <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} , column={} , index = 0 }">
+            <slot :name="slotName" :row="row" :column="column" :index="index"></slot>
           </template>
         </BsgoalBaseSearchTable>
         <!-- E 列表 -->

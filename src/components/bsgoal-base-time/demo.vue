@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:58:50
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 15:37:12
+ * @LastEditTime: 2023-07-11 13:40:53
  * @FilePath: \common\src\components\bsgoal-base-time\demo.vue
  * @Description: 时间选择器
  * 
@@ -19,12 +19,43 @@ defineOptions({
 
 const props = defineProps({})
 const time = ref('11:22')
+
+const makeRange = (start, end) => {
+  const result = []
+  for (let i = start; i <= end; i++) {
+    result.push(i)
+  }
+
+  // console.log('makeRange',result);
+  return result
+}
+const disabledHours = () => {
+  return [16]
+}
+const disabledMinutes = (hour) => {
+  if (hour === 17) {
+    return makeRange(0, 29)
+  }
+  if (hour === 18) {
+    return makeRange(31, 59)
+  }
+}
+const disabledSeconds = (hour, minute) => {
+  if (hour === 18 && minute === 30) {
+    return makeRange(1, 59)
+  }
+}
 </script>
 <template>
   <div class="bsgoal-base-time-demo">
     <div class="base_time_demo">
       {{ time }}
-      <BsgoalBaseTime v-model="time" />
+      <BsgoalBaseTime
+        v-model="time"
+        :disabled-hours="disabledHours"
+        :disabled-minutes="disabledMinutes"
+        :disabled-seconds="disabledSeconds"
+      />
     </div>
   </div>
 </template>
