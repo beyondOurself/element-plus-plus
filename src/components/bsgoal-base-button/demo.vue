@@ -27,7 +27,7 @@ const task = (done) => {
 </script>
 <template>
   <div class="bsgoal-base-button-demo">
-    <BsgoalBaseButton :task="task"  mode="detail" > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task"  mode="detail" disabled > </BsgoalBaseButton>
 
     <BsgoalBaseButton :task="task" mode="edit" plain > </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="cancel" > </BsgoalBaseButton>

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 11:20:37
+ * @LastEditTime: 2023-07-11 18:04:43
  * @FilePath: \common\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -57,6 +57,13 @@ const props = defineProps({
   hasLoading: {
     type: [Boolean],
     default: true
+  },
+  /**
+   * disabled
+   */
+  disabled: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -135,9 +142,14 @@ const contentGet = computed(() => {
   <div class="bsgoal-base-button">
     <div class="base_button" @click="triggerClick">
       <slot :loading="loading">
-        <el-button :type="typeGet" :icon="iconGet" :loading="loading" :plain="plain">{{
-          contentGet
-        }}</el-button>
+        <el-button
+          :type="typeGet"
+          :icon="iconGet"
+          :loading="loading"
+          :plain="plain"
+          :disabled="disabled"
+          >{{ contentGet }}</el-button
+        >
       </slot>
     </div>
   </div>
