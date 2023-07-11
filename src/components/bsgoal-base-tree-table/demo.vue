@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-07 14:23:10
+ * @LastEditTime: 2023-06-30 08:42:21
  * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -824,8 +824,9 @@ const clearSelection = () => {
       <!-- <div @click="test">点击</div> -->
       <BsgoalBaseTreeTable
         ref="BSGOAL_BASE_TREE_TABLE_REF"
-        serial
+        selection
         operation
+        showSummary
         :expandedKeys="expandedKeys"
         :tree-data="treeData"
         :page-size="40"

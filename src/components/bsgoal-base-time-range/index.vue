@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:09:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 10:13:39
+ * @LastEditTime: 2023-05-25 11:20:07
  * @FilePath: \common\src\components\bsgoal-base-time-range\index.vue
  * @Description: 时间选择 公共组件
  * 
@@ -48,17 +48,10 @@ const props = defineProps({
   format: {
     type: [String],
     default: 'HH:mm'
-  },
-  /**
-   * 格式 HH:mm:ss
-   */
-   bodyStyle: {
-    type: [Object],
-    default: () => ({})
   }
 })
 
-const emits = defineEmits(['update:modelValue', 'update:startTime', 'update:endTime','on-change'])
+const emits = defineEmits(['update:modelValue', 'update:startTime', 'update:endTime'])
 // ---> S 值绑定 <---
 const bindValue = ref([])
 
@@ -119,8 +112,6 @@ const triggerChange = (range = []) => {
   } else {
     emits('update:modelValue', [startDateFormat, endDateFormat])
   }
-
-  emits('on-change',startDateFormat, endDateFormat)
 }
 
 /**
@@ -144,11 +135,10 @@ const triggerVisibleChange = (visibility = false) => {
         v-model="bindValue"
         is-range
         class="base_time_range"
+        :format="format"
         range-separator="至"
         start-placeholder="开始时间"
         end-placeholder="结束时间"
-        :style="bodyStyle"
-        :format="format"
         @change="triggerChange"
         @visible-change="triggerVisibleChange"
       />
@@ -158,11 +148,6 @@ const triggerVisibleChange = (visibility = false) => {
 <style lang="scss" scoped>
 /* 自定义样式
 ---------------------------------------------------------------- */
-.bsgoal-base-time-range {
-   .base_time_range {
-    width: 100%;
-   }
-}
 </style>
 <style lang="scss">
 /* 覆盖样式

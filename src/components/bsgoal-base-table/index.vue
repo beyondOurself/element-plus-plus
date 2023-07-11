@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 11:01:20
+ * @LastEditTime: 2023-06-30 10:33:45
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -147,20 +147,6 @@ const props = defineProps({
   summaryProps: {
     type: [Array],
     default: () => []
-  },
-  /**
-   * 序号 列
-   */
-  serial: {
-    type: [Boolean],
-    default: false
-  },
-  /**
-   * 主体style
-   */
-  bodyStyle: {
-    type: [Object],
-    default: () => ({})
   }
 })
 
@@ -333,7 +319,6 @@ defineExpose({
     <div
       class="base_table"
       :class="{ 'base_table--tree': TREE_SWITCH_STATUS === false, bsgoal_micro_app: isMicroApp }"
-      :style="bodyStyle"
     >
       <!-- S 表头操作区域 -->
       <div class="base_table_menu" v-if="$slots.menu">
@@ -368,9 +353,6 @@ defineExpose({
             <BsgoalBaseTableEmpty />
           </template>
           <!-- / 无数据展示内容 -->
-          <!-- / 序号 -->
-          <el-table-column v-if="serial" type="index" width="55" label="序号" align="center" />
-          <!-- / 序号 -->
           <!-- / 多选 -->
           <el-table-column v-if="selection" fixed="left" type="selection" width="40" />
           <!-- / 多选 -->
@@ -396,10 +378,9 @@ defineExpose({
               :width="width"
               :fixed="fixed"
               :min-width="`${label.length * 14 + 30}px`"
-              :max-width="`${label.length * 14 + 30}px`"
             >
-              <template v-slot:default="{ row ,column, $index }">
-                <slot :name="prop" :row="row" :column="column" :index="$index">
+              <template v-slot:default="{ row }">
+                <slot :name="prop" :row="row">
                   <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" />
                 </slot>
               </template>
