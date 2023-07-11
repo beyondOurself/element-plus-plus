@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 14:26:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-30 10:04:04
+ * @LastEditTime: 2023-07-11 11:01:43
  * @FilePath: \common\src\components\bsgoal-base-table\demo.vue
  * @Description: 表格公共组件演示页面
  * 
@@ -282,9 +282,10 @@ const clearSelection = () => {
       @selection-change="triggerSelectionChange"
     >
       <!-- S 操作项 -->
-      <template v-slot:operation="{ row }">
+      <template v-slot:operation="{ row , index }">
         <div>
           <!-- {{ row }} -->
+          {{ index }}
         </div>
       </template>
       <!-- E 操作项 -->

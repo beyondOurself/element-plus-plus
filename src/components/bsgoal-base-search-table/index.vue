@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-07 14:19:38
+ * @LastEditTime: 2023-07-11 11:04:07
  * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -276,8 +276,8 @@ defineExpose({
       >
         <!-- S 顶部菜单 -->
 
-        <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} }">
-          <slot :name="slotName" :row="row"></slot>
+        <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} , column = {} , index  = 0 }">
+          <slot :name="slotName" :row="row" :column="column" :index="index"></slot>
         </template>
         <!-- E 顶部菜单 -->
       </BsgoalBaseTable>

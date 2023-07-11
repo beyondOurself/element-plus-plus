@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-10 17:56:26
+ * @LastEditTime: 2023-07-11 11:01:20
  * @FilePath: \common\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -398,8 +398,8 @@ defineExpose({
               :min-width="`${label.length * 14 + 30}px`"
               :max-width="`${label.length * 14 + 30}px`"
             >
-              <template v-slot:default="{ row }">
-                <slot :name="prop" :row="row">
+              <template v-slot:default="{ row ,column, $index }">
+                <slot :name="prop" :row="row" :column="column" :index="$index">
                   <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" />
                 </slot>
               </template>
