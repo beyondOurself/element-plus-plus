@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-29 09:38:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 09:44:43
+ * @LastEditTime: 2023-07-12 09:25:21
  * @FilePath: \common\src\components\bsgoal-base-input\index.vue
  * @Description:  Input 输入框
  * 
@@ -66,7 +66,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['update:modelValue', 'change'])
+const emits = defineEmits(['update:modelValue', 'change' , 'blur' ,'focus'])
 
 // ---> S 值绑定 <---
 
@@ -111,6 +111,28 @@ const input = (value = '') => {
   emits('update:modelValue', value)
 }
 
+/**
+ * @Author: canlong.shen
+ * @description: 当选择器的输入框失去焦点时触发
+ * @param {*} value
+ * @default: 
+ * @return {*}
+ */
+const blur = (value = '') => {
+  emits('input', value)
+}
+
+/**
+ * @Author: canlong.shen
+ * @description: 当选择器的输入框失去焦点时触发
+ * @param {*} value
+ * @default: 
+ * @return {*}
+ */
+const focus = (value = '') => {
+  emits('focus', value)
+}
+
 // ---> E 事件  <---
 
 // ---> S 插槽 <---
@@ -132,6 +154,8 @@ const slotNames = ref(Object.keys(slots))
       @change="change"
       @clear="clear"
       @input="input"
+      @blur="blur"
+      @focus="focus"
     >
       <!-- S 输入框头部内容 -->
       <template #[slotName] v-for="slotName of slotNames">

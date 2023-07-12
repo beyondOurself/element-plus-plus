@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-01 13:45:35
+ * @LastEditTime: 2023-07-12 14:33:25
  * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -267,6 +267,7 @@ const changeValues = (params = '') => {
       ref="BSGOAL_BASE_FORM_REF"
       readonly
       none="--"
+      disabled
       :medium="6"
       :limits="10"
       :config-options="configOptions"

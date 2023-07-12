@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-01 13:41:22
+ * @LastEditTime: 2023-07-12 14:33:02
  * @FilePath: \common\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -116,6 +116,13 @@ const props = defineProps({
    * 紧凑型
    */
   compact: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 失效
+   */
+  disabled: {
     type: [Boolean],
     default: false
   }
@@ -356,7 +363,8 @@ const filterSlotProps = (model = {}) => {
     if (!prop.startsWith('_')) {
       const value = model[prop]
       const valueInt = Number.parseFloat(value)
-      rebuildModel[prop] = ( valueInt || ['0', 0].includes(value) ) && !(/^0.+/i).test(`${value}`) ? valueInt : value
+      rebuildModel[prop] =
+        (valueInt || ['0', 0].includes(value)) && !/^0.+/i.test(`${value}`) ? valueInt : value
     }
   }
   return rebuildModel
@@ -435,7 +443,7 @@ const itemStyle = computed(() => {
     styler.marginBottom = '0px'
   }
 
-  return {  ...styler ,...itemStyler }
+  return { ...styler, ...itemStyler }
 })
 
 // ---> E styles <---
@@ -455,6 +463,7 @@ defineExpose({
         ref="EL_FORM_REF"
         label-suffix=":"
         style="padding: 0px"
+        :disabled="disabled"
         :label-position="labelPosition"
         :model="model"
         v-align
