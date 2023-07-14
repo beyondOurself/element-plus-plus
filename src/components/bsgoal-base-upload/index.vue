@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-07-13 16:37:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-14 13:48:33
- * @FilePath: \common\src\components\bsgoal-base-upload\index.vue
+ * @LastEditTime: 2023-07-14 15:04:50
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-upload\index.vue
  * @Description: 附件上传
  * 
 -->
@@ -111,10 +111,12 @@ const changeFiles = (file, files) => {
 }
 
 const refreshFileList = (files) => {
-  emits('on-change', uploadFilesList, deleteFilesList, files)
+   const uploadFilesListValue = [...uploadFilesList.value]
+   const deleteFilesListValue = [...deleteFilesList.value]
+  emits('on-change', uploadFilesListValue, deleteFilesListValue, files)
   emits('update:modelValue', files)
-  emits('update:uploadFiles', [...uploadFilesList.value])
-  emits('update:deleteFiles', [...deleteFilesList.value])
+  emits('update:uploadFiles', uploadFilesListValue)
+  emits('update:deleteFiles', deleteFilesListValue)
 }
 
 const previewImg = (uploadFile) => {

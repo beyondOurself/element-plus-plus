@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-07-13 16:37:39
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-14 08:38:11
- * @FilePath: \common\src\components\bsgoal-base-upload\demo.vue
+ * @LastEditTime: 2023-07-14 15:03:07
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-upload\demo.vue
  * @Description: 附近上传演示
  * 
 -->
