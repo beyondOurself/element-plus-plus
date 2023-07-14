@@ -3,8 +3,7 @@
   "version": "2.16.6",
   "private": false,
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "main": "dist/index.umd.js",
   "module": "dist/index.mjs",
