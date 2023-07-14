@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-27 17:17:30
+ * @LastEditTime: 2023-07-13 16:49:22
  * @FilePath: \common\src\router\index.js
  * @Description: 路由配置
  * 
@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: '/bsgoal-base-upload-demo',
+          name: '附件上传',
+          component: import('@/components/bsgoal-base-upload/demo.vue')
+        },
         {
           path: '/bsgoal-base-sizes-demo',
           name: '页数切换',
