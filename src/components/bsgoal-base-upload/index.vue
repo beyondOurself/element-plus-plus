@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-07-13 16:37:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-14 08:48:50
+ * @LastEditTime: 2023-07-14 13:48:33
  * @FilePath: \common\src\components\bsgoal-base-upload\index.vue
  * @Description: 附件上传
  * 
@@ -160,8 +160,8 @@ defineExpose({
 ---------------------------------------------------------------- */
 .bsgoal-base-upload {
   .el-upload-list__item {
-    width: 100px;
-    height: 100px;
+    width: 100px !important;
+    height: 100px !important;
   }
   .el-upload {
     width: 100px;
