@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-06-21 16:08:07
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 09:59:14
- * @FilePath: \common\src\components\bsgoal-base-viewer\demo.vue
+ * @LastEditTime: 2023-07-15 20:53:07
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-viewer\demo.vue
  * @Description: 图片预览 演示
  * 
 -->
@@ -18,7 +18,12 @@ defineOptions({
 })
 
 const props = defineProps({})
-const src = ref('https://img.phb123.com/uploads/allimg/200615/60-2006151H317-52.jpg')
+const src = ref([
+  'https://img.phb123.com/uploads/allimg/200615/60-2006151H317-52.jpg',
+  'https://img.phb123.com/uploads/allimg/200615/60-2006151H317-52.jpg',
+  'https://img.phb123.com/uploads/allimg/200615/60-2006151H317-52.jpg',
+  'https://img.phb123.com/uploads/allimg/200615/60-2006151H317-52.jpg',
+])
 </script>
 <template>
   <div class="bsgoal-base-viewer-demo">
