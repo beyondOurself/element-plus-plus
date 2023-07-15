@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:58:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 12:00:53
- * @FilePath: \common\src\components\bsgoal-base-time\index.vue
+ * @LastEditTime: 2023-07-15 17:47:46
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-time\index.vue
  * @Description: 时间选择器 
  * 
 -->
@@ -80,24 +80,24 @@ const props = defineProps({
   /**
    * 禁用
    */
-   disabled: {
+  disabled: {
     type: [Boolean],
     default: false
   },
   /**
    * 文本框可输入
    */
-   editable: {
+  editable: {
     type: [Boolean],
     default: false
   },
   /**
    * 是否显示清除按钮
    */
-   clearable: {
+  clearable: {
     type: [Boolean],
     default: false
-  },
+  }
 })
 
 // ---> S 绑定值 <---
@@ -167,11 +167,13 @@ const triggerChange = (date = new Date()) => {
     </el-config-provider>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" >
 /* 自定义样式
 ---------------------------------------------------------------- */
-</style>
-<style lang="scss">
-/* 覆盖样式
----------------------------------------------------------------- */
+.bsgoal-base-time {
+  .el-input__prefix,
+  .el-input__suffix {
+    position: initial;
+  }
+}
 </style>
