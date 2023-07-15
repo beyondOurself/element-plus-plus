@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-12 14:33:25
- * @FilePath: \common\src\components\bsgoal-base-form\demo.vue
+ * @LastEditTime: 2023-07-15 15:37:51
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
 -->
@@ -26,7 +26,8 @@ const values = ref({
 const BSGOAL_BASE_FORM_REF = ref(null)
 
 const confirm = () => {
-  BSGOAL_BASE_FORM_REF.value.validateForm((res) => {
+  let isParseInt = true
+  BSGOAL_BASE_FORM_REF.value.validateForm((res ) => {
     console.log('res', res)
   })
 }
@@ -60,11 +61,10 @@ const configOptions = ref([
     label: 'prop103',
     prop: 'prop103',
     type: ComponentTypeEnums.INPUT,
-    formatter: (value = '') => {
-      return `${value}`.match(/^\d{1,}$/) ? value : ''
-    },
+    // formatter: (value = '') => {
+    //   return `${value}`.match(/^\d{1,}$/) ? value : ''
+    // },
     placeholder: '',
-    rules: true
   },
 
   {
@@ -267,7 +267,6 @@ const changeValues = (params = '') => {
       ref="BSGOAL_BASE_FORM_REF"
       readonly
       none="--"
-      disabled
       :medium="6"
       :limits="10"
       :config-options="configOptions"

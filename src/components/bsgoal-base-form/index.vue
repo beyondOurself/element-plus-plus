@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-12 14:33:02
- * @FilePath: \common\src\components\bsgoal-base-form\index.vue
+ * @LastEditTime: 2023-07-15 15:39:10
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
 -->
@@ -357,14 +357,22 @@ const triggerValueChange = (type, prop) => {
  * @default:
  * @return {*}
  */
-const filterSlotProps = (model = {}) => {
+const filterSlotProps = (model = {}, isParseInt) => {
   const rebuildModel = {}
   for (const prop of Object.keys(model)) {
     if (!prop.startsWith('_')) {
       const value = model[prop]
-      const valueInt = Number.parseFloat(value)
-      rebuildModel[prop] =
-        (valueInt || ['0', 0].includes(value)) && !/^0.+/i.test(`${value}`) ? valueInt : value
+      if (isParseInt) {
+        const valueInt = Number.parseFloat(value)
+        rebuildModel[prop] =
+          (valueInt || ['0', 0].includes(value)) &&
+          !/^0.+/i.test(`${value}`) &&
+          /^(\\-|\+)?\d+(\.\d+)?$/i.test(`${value}`)
+            ? valueInt
+            : value
+      } else {
+        rebuildModel[prop] = value
+      }
     }
   }
   return rebuildModel
@@ -376,11 +384,11 @@ const filterSlotProps = (model = {}) => {
  * @default:
  * @return {*}
  */
-const validateForm = (callback = () => {}) => {
+const validateForm = (callback = () => {}, isParseInt = true) => {
   EL_FORM_REF.value.validate((valid = false, field = {}) => {
     if (valid) {
       const validModel = triggerOperationForm()
-      const cleanModel = filterSlotProps(validModel)
+      const cleanModel = filterSlotProps(validModel, isParseInt)
       callback(cleanModel)
     } else {
       callback(false)
@@ -489,6 +497,7 @@ defineExpose({
                 length = 255,
                 visible = true,
                 multiple = false,
+                itemDisabled = disabled,
                 formatter = (v) => {
                   return v
                 },
@@ -515,6 +524,7 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.INPUT">
                       <el-input
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         :clearable="clearable"
                         :formatter="formatter"
@@ -529,6 +539,7 @@ defineExpose({
                         v-model="model[prop]"
                         show-word-limit
                         type="textarea"
+                        :disabled="itemDisabled"
                         :autosize="{ minRows: rows }"
                         :maxlength="length"
                         :clearable="clearable"
@@ -541,6 +552,7 @@ defineExpose({
                       <el-input-number
                         v-model="model[prop]"
                         controls-position="right"
+                        :disabled="itemDisabled"
                         :min="min"
                         :max="max"
                         @change="triggerValueChange"
@@ -552,6 +564,7 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.RADIO">
                       <el-radio-group
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         @change="triggerValueChange(type, prop)"
                       >
                         <template v-for="(item, itemIndex) of range" :key="itemIndex">
@@ -565,6 +578,7 @@ defineExpose({
                       <el-select
                         v-model="model[prop]"
                         no-data-text="暂无数据"
+                        :disabled="itemDisabled"
                         :multiple="multiple"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
@@ -579,6 +593,7 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.SLIDER">
                       <el-slider
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         :min="min"
                         :max="max"
                         @change="triggerValueChange(type, prop)"
@@ -589,6 +604,7 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.SWITCH">
                       <el-switch
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         :active-value="setActiveValueText(range, 'active-value')"
                         :inactive-value="setActiveValueText(range, 'inactive-value')"
                         :active-text="setActiveValueText(range, 'active-text')"
@@ -610,6 +626,7 @@ defineExpose({
                     >
                       <el-date-picker
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         :format="formatSet(type, format)"
                         :value-format="formatSet(type, format)"
                         :type="type"
@@ -630,6 +647,7 @@ defineExpose({
                     >
                       <el-date-picker
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         :type="type"
                         :value-format="formatSet(type, format)"
                         :start-placeholder="placeholderSet(type, label, placeholder)[0]"
@@ -643,6 +661,7 @@ defineExpose({
                       <el-time-picker
                         v-model="model[prop]"
                         arrow-control
+                        :disabled="itemDisabled"
                         :value-format="formatSet(type, format)"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
@@ -654,6 +673,7 @@ defineExpose({
                       <el-time-picker
                         v-model="model[prop]"
                         is-range
+                        :disabled="itemDisabled"
                         :value-format="formatSet(type, format)"
                         :start-placeholder="placeholderSet(type, label, placeholder)[0]"
                         :end-placeholder="placeholderSet(type, label, placeholder)[1]"
@@ -665,6 +685,7 @@ defineExpose({
                     <template v-if="[ComponentTypeEnums.CHECKBOX].includes(type)">
                       <el-checkbox-group
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         @change="triggerValueChange(type, prop)"
                       >
                         <template v-for="(item, itemIndex) of range" :key="itemIndex">
@@ -677,6 +698,7 @@ defineExpose({
                     <template v-if="[ComponentTypeEnums.CHECKBOX_SINGLE].includes(type)">
                       <el-checkbox
                         v-model="model[prop]"
+                        :disabled="itemDisabled"
                         :true-label="range[0] ? range[0].value : '1'"
                         :false-label="range[1] ? range[1].value : '0'"
                         @change="triggerValueChange(type, prop)"
