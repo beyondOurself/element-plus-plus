@@ -33,6 +33,7 @@ const props = defineProps({
    *      placeholder:''  // placeholder 提示文本
    *      readonly: false  // 是否为只读文本
    *      clearable:  true  //是否为可清空
+   *      filterable:  true  // select是否为可搜索
    *  }
    *
    * >----------events----------<
@@ -294,6 +295,7 @@ defineExpose({
                 placeholder = '',
                 readonly = false,
                 clearable = true,
+                filterable = false,
                 rows = 2,
                 min = 1,
                 max = 10,
@@ -360,6 +362,7 @@ defineExpose({
                   <template v-if="type === ComponentTypeEnums.SELECT">
                     <el-select
                       v-model="model[prop]"
+                      :filterable="filterable"
                       :placeholder="placeholderSet(type, label, placeholder)"
                       @change="triggerValueChange(type, prop)"
                     >

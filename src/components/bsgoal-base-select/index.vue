@@ -52,6 +52,13 @@ const props = defineProps({
   clearable: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * 是否可搜索
+   */
+  filterable: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -91,6 +98,7 @@ const triggerChange = (value = '') => {
       class="base_select"
       v-model="selectValue"
       :clearable="clearable"
+      :filterable="filterable"
       :no-data-text="none"
       :placeholder="placeholder"
       @change="triggerChange"
