@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-06-21 16:08:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 10:00:41
- * @FilePath: \common\src\components\bsgoal-base-viewer\index.vue
+ * @LastEditTime: 2023-07-15 20:52:45
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-viewer\index.vue
  * @Description: 图片 预览
  * 
 -->
@@ -36,7 +36,7 @@ const props = defineProps({
    * 预览图片路径
    */
   src: {
-    type: [String],
+    type: [String, Array],
     default: ''
   }
 })
@@ -46,13 +46,23 @@ const srcGet = computed(() => {
   if (!src) {
     return uploadDefaultIcon
   }
-  return src
+  return Array.isArray(src) ? src[0] : src
 })
+
+const handlePreview = () => {
+  preview({
+    images: props.src
+  })
+}
 </script>
 <template>
   <div class="bsgoal-base-viewer">
     <div class="base_viewer">
-      <img v-preview :src="srcGet" :style="{ width: `${width}px`, height: `${height}px` }" />
+      <img
+        @click="handlePreview"
+        :src="srcGet"
+        :style="{ width: `${width}px`, height: `${height}px` }"
+      />
     </div>
   </div>
 </template>
