@@ -494,6 +494,7 @@ defineExpose({
                 format = '',
                 rules = [],
                 limit = limits,
+                filterable = filterable,
                 length = 255,
                 visible = true,
                 multiple = false,
@@ -580,6 +581,7 @@ defineExpose({
                         no-data-text="暂无数据"
                         :disabled="itemDisabled"
                         :multiple="multiple"
+                        :filterable="filterable"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
                       >
