@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-26 18:00:13
- * @FilePath: \common\src\components\bsgoal-base-search\index.vue
+ * @LastEditTime: 2023-08-02 17:16:54
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
 -->
@@ -17,6 +17,7 @@ import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 defineOptions({
   name: 'BsgoalBaseSearch'
@@ -318,180 +319,186 @@ defineExpose({
                 <!-- S 内容组件 -->
 
                 <template v-if="!readonly">
-                  <!-- / input 输入框组件 -->
-                  <template v-if="type === ComponentTypeEnums.INPUT">
-                    <el-input
-                      v-model="model[prop]"
-                      :placeholder="placeholderSet(type, label, placeholder)"
-                      :clearable="clearable"
-                    />
-                  </template>
-                  <!-- / input 输入框组件 -->
-                  <!-- / textarea 输入框组件 -->
-                  <template v-if="type === ComponentTypeEnums.INPUT_TEXT_AREA">
-                    <el-input
-                      v-model="model[prop]"
-                      type="textarea"
-                      :rows="rows"
-                      :clearable="clearable"
-                      :placeholder="placeholderSet(type, label, placeholder)"
-                      @change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / textarea 输入框组件 -->
-                  <template v-if="type === ComponentTypeEnums.INPUT_NUMBER">
-                    <el-input-number
-                      v-model="num"
-                      :min="min"
-                      :max="max"
-                      @change="triggerValueChange"
-                    />
-                  </template>
-                  <!-- / 数字输入框 -->
+                  <el-config-provider :locale="zhCn">
+                    <!-- / input 输入框组件 -->
+                    <template v-if="type === ComponentTypeEnums.INPUT">
+                      <el-input
+                        v-model="model[prop]"
+                        :placeholder="placeholderSet(type, label, placeholder)"
+                        :clearable="clearable"
+                      />
+                    </template>
+                    <!-- / input 输入框组件 -->
+                    <!-- / textarea 输入框组件 -->
+                    <template v-if="type === ComponentTypeEnums.INPUT_TEXT_AREA">
+                      <el-input
+                        v-model="model[prop]"
+                        type="textarea"
+                        :rows="rows"
+                        :clearable="clearable"
+                        :placeholder="placeholderSet(type, label, placeholder)"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / textarea 输入框组件 -->
+                    <template v-if="type === ComponentTypeEnums.INPUT_NUMBER">
+                      <el-input-number
+                        v-model="num"
+                        :min="min"
+                        :max="max"
+                        @change="triggerValueChange"
+                      />
+                    </template>
+                    <!-- / 数字输入框 -->
 
-                  <!-- / 单选框 -->
-                  <template v-if="type === ComponentTypeEnums.RADIO">
-                    <el-radio-group v-model="model[prop]" @change="triggerValueChange(type, prop)">
-                      <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                        <el-radio :label="item.value">{{ item.label }}</el-radio>
-                      </template>
-                    </el-radio-group>
-                  </template>
-                  <!-- / 单选框 -->
-                  <!-- / select 选择器 -->
-                  <template v-if="type === ComponentTypeEnums.SELECT">
-                    <el-select
-                      v-model="model[prop]"
-                      :filterable="filterable"
-                      :placeholder="placeholderSet(type, label, placeholder)"
-                      @change="triggerValueChange(type, prop)"
+                    <!-- / 单选框 -->
+                    <template v-if="type === ComponentTypeEnums.RADIO">
+                      <el-radio-group
+                        v-model="model[prop]"
+                        @change="triggerValueChange(type, prop)"
+                      >
+                        <template v-for="(item, itemIndex) of range" :key="itemIndex">
+                          <el-radio :label="item.value">{{ item.label }}</el-radio>
+                        </template>
+                      </el-radio-group>
+                    </template>
+                    <!-- / 单选框 -->
+                    <!-- / select 选择器 -->
+                    <template v-if="type === ComponentTypeEnums.SELECT">
+                      <el-select
+                        v-model="model[prop]"
+                        :filterable="filterable"
+                        :placeholder="placeholderSet(type, label, placeholder)"
+                        @change="triggerValueChange(type, prop)"
+                      >
+                        <template v-for="(item, itemIndex) of range" :key="itemIndex">
+                          <el-option :label="item.label" :value="item.value" />
+                        </template>
+                      </el-select>
+                    </template>
+                    <!-- / select 选择器 -->
+                    <!-- / 滑块 -->
+                    <template v-if="type === ComponentTypeEnums.SLIDER">
+                      <el-slider
+                        v-model="model[prop]"
+                        :min="min"
+                        :max="max"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / 滑块 -->
+                    <!-- / Switch 开关 -->
+                    <template v-if="type === ComponentTypeEnums.SWITCH">
+                      <el-switch
+                        v-model="model[prop]"
+                        :active-value="range[0] || true"
+                        :inactive-value="range[1] || false"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / Switch 开关 -->
+                    <!-- / 日期选择器 -->
+                    <template
+                      v-if="
+                        [
+                          ComponentTypeEnums.DATE,
+                          ComponentTypeEnums.MONTH,
+                          ComponentTypeEnums.YEAR,
+                          ComponentTypeEnums.DATE_TIME
+                        ].includes(type)
+                      "
                     >
-                      <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                        <el-option :label="item.label" :value="item.value" />
-                      </template>
-                    </el-select>
-                  </template>
-                  <!-- / select 选择器 -->
-                  <!-- / 滑块 -->
-                  <template v-if="type === ComponentTypeEnums.SLIDER">
-                    <el-slider
-                      v-model="model[prop]"
-                      :min="min"
-                      :max="max"
-                      @change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / 滑块 -->
-                  <!-- / Switch 开关 -->
-                  <template v-if="type === ComponentTypeEnums.SWITCH">
-                    <el-switch
-                      v-model="model[prop]"
-                      :active-value="range[0] || true"
-                      :inactive-value="range[1] || false"
-                      @change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / Switch 开关 -->
-                  <!-- / 日期选择器 -->
-                  <template
-                    v-if="
-                      [
-                        ComponentTypeEnums.DATE,
-                        ComponentTypeEnums.MONTH,
-                        ComponentTypeEnums.YEAR,
-                        ComponentTypeEnums.DATE_TIME
-                      ].includes(type)
-                    "
-                  >
-                    <el-date-picker
-                      v-model="model[prop]"
-                      :format="formatSet(type, format)"
-                      :value-format="formatSet(type, format)"
-                      :type="type"
-                      :placeholder="placeholderSet(type, label, placeholder)"
-                      @change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / 日期选择器 -->
-                  <!-- / 日期时间区域选择器 -->
-                  <template
-                    v-if="
-                      [
-                        ComponentTypeEnums.DATE_RANGE,
-                        ComponentTypeEnums.MONTH_RANGE,
-                        ComponentTypeEnums.DATE_TIME_RANGE
-                      ].includes(type)
-                    "
-                  >
-                    <el-date-picker
-                      v-model="model[prop]"
-                      :type="type"
-                      :value-format="formatSet(type, format)"
-                      :start-placeholder="placeholderSet(type, label, placeholder)[0]"
-                      :end-placeholder="placeholderSet(type, label, placeholder)[1]"
-                      @change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / 日期时间区域选择器 -->
-                  <!-- / 时间选择器 -->
-                  <template v-if="[ComponentTypeEnums.TIME].includes(type)">
-                    <el-time-picker
-                      v-model="model[prop]"
-                      arrow-control
-                      :value-format="formatSet(type, format)"
-                      :placeholder="placeholderSet(type, label, placeholder)"
-                      @change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / 时间选择器 -->
-                  <!-- / 时间区域选择器 -->
-                  <template v-if="[ComponentTypeEnums.TIME_RANGE].includes(type)">
-                    <el-time-picker
-                      v-model="model[prop]"
-                      is-range
-                      :value-format="formatSet(type, format)"
-                      :start-placeholder="placeholderSet(type, label, placeholder)[0]"
-                      :end-placeholder="placeholderSet(type, label, placeholder)[1]"
-                      @change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / 时间区域选择器 -->
-                  <!-- / 复选框 -->
-                  <template v-if="[ComponentTypeEnums.CHECKBOX].includes(type)">
-                    <el-checkbox-group
-                      v-model="model[prop]"
-                      @change="triggerValueChange(type, prop)"
+                      <el-date-picker
+                        v-model="model[prop]"
+                        :format="formatSet(type, format)"
+                        :value-format="formatSet(type, format)"
+                        :type="type"
+                        :placeholder="placeholderSet(type, label, placeholder)"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / 日期选择器 -->
+                    <!-- / 日期时间区域选择器 -->
+                    <template
+                      v-if="
+                        [
+                          ComponentTypeEnums.DATE_RANGE,
+                          ComponentTypeEnums.MONTH_RANGE,
+                          ComponentTypeEnums.DATE_TIME_RANGE
+                        ].includes(type)
+                      "
                     >
-                      <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                        <el-checkbox :label="item.value">{{ item.label }}</el-checkbox>
-                      </template>
-                    </el-checkbox-group>
-                  </template>
-                  <!-- / 复选框 -->
-                  <!-- / 级联选择器 -->
-                  <template v-if="[ComponentTypeEnums.CASCADER].includes(type)">
-                    <BsgoalBaseCascader
-                      v-model="model[prop]"
-                      :data-options="range"
-                      :placeholder="placeholderSet(type, label, placeholder)"
-                      @on-change="triggerValueChange(type, prop)"
-                    />
-                  </template>
-                  <!-- / 级联选择器 -->
-                  <!-- / 模板 -->
-                  <template v-if="[].includes(type)"> </template>
-                  <!-- / 模板 -->
-                  <!-- / 操作组件 -->
-                  <template v-if="[ComponentTypeEnums.OPERATION].includes(type)">
-                    <BsgoalBaseSearchOperation
-                      :fold="index >= 7"
-                      @on-search="triggerOperationSearch"
-                      @on-clear="triggerOperationClear"
-                      @on-fold="triggerOperationFold"
-                    />
-                  </template>
-                  <!-- / 操作组件 -->
+                      <el-date-picker
+                        v-model="model[prop]"
+                        :type="type"
+                        :value-format="formatSet(type, format)"
+                        :start-placeholder="placeholderSet(type, label, placeholder)[0]"
+                        :end-placeholder="placeholderSet(type, label, placeholder)[1]"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / 日期时间区域选择器 -->
+                    <!-- / 时间选择器 -->
+                    <template v-if="[ComponentTypeEnums.TIME].includes(type)">
+                      <el-time-picker
+                        v-model="model[prop]"
+                        arrow-control
+                        :value-format="formatSet(type, format)"
+                        :placeholder="placeholderSet(type, label, placeholder)"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / 时间选择器 -->
+                    <!-- / 时间区域选择器 -->
+                    <template v-if="[ComponentTypeEnums.TIME_RANGE].includes(type)">
+                      <el-time-picker
+                        v-model="model[prop]"
+                        is-range
+                        :value-format="formatSet(type, format)"
+                        :start-placeholder="placeholderSet(type, label, placeholder)[0]"
+                        :end-placeholder="placeholderSet(type, label, placeholder)[1]"
+                        @change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / 时间区域选择器 -->
+                    <!-- / 复选框 -->
+                    <template v-if="[ComponentTypeEnums.CHECKBOX].includes(type)">
+                      <el-checkbox-group
+                        v-model="model[prop]"
+                        @change="triggerValueChange(type, prop)"
+                      >
+                        <template v-for="(item, itemIndex) of range" :key="itemIndex">
+                          <el-checkbox :label="item.value">{{ item.label }}</el-checkbox>
+                        </template>
+                      </el-checkbox-group>
+                    </template>
+                    <!-- / 复选框 -->
+                    <!-- / 级联选择器 -->
+                    <template v-if="[ComponentTypeEnums.CASCADER].includes(type)">
+                      <BsgoalBaseCascader
+                        v-model="model[prop]"
+                        :data-options="range"
+                        :placeholder="placeholderSet(type, label, placeholder)"
+                        @on-change="triggerValueChange(type, prop)"
+                      />
+                    </template>
+                    <!-- / 级联选择器 -->
+                    <!-- / 模板 -->
+                    <template v-if="[].includes(type)"> </template>
+                    <!-- / 模板 -->
+                    <!-- / 操作组件 -->
+                    <template v-if="[ComponentTypeEnums.OPERATION].includes(type)">
+                      <BsgoalBaseSearchOperation
+                        :fold="index >= 7"
+                        @on-search="triggerOperationSearch"
+                        @on-clear="triggerOperationClear"
+                        @on-fold="triggerOperationFold"
+                      />
+                    </template>
+                    <!-- / 操作组件 -->
+                  </el-config-provider>
                 </template>
+
                 <!-- E 内容组件 -->
 
                 <!-- S 文本内容 -->
