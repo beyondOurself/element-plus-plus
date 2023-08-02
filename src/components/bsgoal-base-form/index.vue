@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-15 15:39:10
+ * @LastEditTime: 2023-08-02 14:58:26
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -494,7 +494,7 @@ defineExpose({
                 format = '',
                 rules = [],
                 limit = limits,
-                filterable = filterable,
+                filterable = false,
                 length = 255,
                 visible = true,
                 multiple = false,
