@@ -128,6 +128,7 @@ const configOptions = ref([
     type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
     multiple: true,
+    filterable: true,
     range: [
       {
         label: 'select1',

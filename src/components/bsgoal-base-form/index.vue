@@ -494,7 +494,7 @@ defineExpose({
                 format = '',
                 rules = [],
                 limit = limits,
-                filterable = filterable,
+                filterable = false,
                 length = 255,
                 visible = true,
                 multiple = false,
