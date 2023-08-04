@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 11:04:07
- * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
+ * @LastEditTime: 2023-08-04 16:08:36
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
 -->
@@ -154,7 +154,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['select', 'select-all', 'selection-change', 'on-total-change'])
+const emits = defineEmits(['select', 'select-all', 'selection-change', 'on-total-change','on-change'])
 
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)
@@ -221,6 +221,10 @@ const triggerSelectionChange = (selection) => {
 const triggerTotalChange = (total = 0) => {
   emits('on-total-change', total)
 }
+const triggerChange = (changer = {}) => {
+  emits('on-change', changer)
+}
+
 
 // ---> E 触发事件 <---
 
@@ -250,6 +254,7 @@ defineExpose({
         :config-options="searchOptions"
         @on-search="triggerSearch"
         @on-clear="triggerSearch"
+        @on-change="triggerChange"
       />
       <!-- E 查询 -->
       <!-- S 表格 -->
