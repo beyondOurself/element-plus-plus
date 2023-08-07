@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-29 14:43:56
- * @FilePath: \common\src\components\bsgoal-base-search-table\demo.vue
+ * @LastEditTime: 2023-08-07 09:00:10
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
 -->
@@ -25,7 +25,7 @@ const props = defineProps({})
 const configOptions = ref([
   {
     label: 'prop1',
-     value: '111',
+    value: '111',
     prop: 'prop1',
     type: ComponentTypeEnums.INPUT,
     width: '100px'
@@ -726,7 +726,8 @@ const fetch = (params) => {
 
 const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
 const test = () => {
-  BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()
+  const searchParams = BSGOAL_BASE_SEARCH_TABLE_REF.value.getSearchParams()
+  console.log('searchParams', searchParams)
 }
 
 const task = (done = () => {}, rows = {}) => {

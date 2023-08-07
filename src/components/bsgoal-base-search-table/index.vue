@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-04 16:08:36
+ * @LastEditTime: 2023-08-04 17:29:15
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -141,20 +141,26 @@ const props = defineProps({
   /**
    *  合计的列
    */
-   summaryProps: {
+  summaryProps: {
     type: [Array],
     default: () => []
   },
-   /**
+  /**
    * 序号 列
    */
-   serial: {
+  serial: {
     type: [Boolean],
     default: false
   }
 })
 
-const emits = defineEmits(['select', 'select-all', 'selection-change', 'on-total-change','on-change'])
+const emits = defineEmits([
+  'select',
+  'select-all',
+  'selection-change',
+  'on-total-change',
+  'on-change'
+])
 
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)
@@ -185,6 +191,10 @@ const slotNames = ref(Object.keys(slots))
 const BSGOAL_BASE_TABLE_REF = ref(null)
 const triggerSearch = (searchParams) => {
   BSGOAL_BASE_TABLE_REF.value.refreshList(searchParams)
+}
+
+const getSearchParams = () => {
+  return BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch(false)
 }
 
 // ---> S 计算expression <---
@@ -225,7 +235,6 @@ const triggerChange = (changer = {}) => {
   emits('on-change', changer)
 }
 
-
 // ---> E 触发事件 <---
 
 // ---> S 暴露事件 <---
@@ -240,7 +249,8 @@ const clearSelection = () => {
 
 defineExpose({
   refresh,
-  clearSelection
+  clearSelection,
+  getSearchParams
 })
 // ---> E 暴露 <---
 </script>
@@ -281,7 +291,10 @@ defineExpose({
       >
         <!-- S 顶部菜单 -->
 
-        <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} , column = {} , index  = 0 }">
+        <template
+          v-for="slotName of slotNames"
+          v-slot:[slotName]="{ row = {}, column = {}, index = 0 }"
+        >
           <slot :name="slotName" :row="row" :column="column" :index="index"></slot>
         </template>
         <!-- E 顶部菜单 -->

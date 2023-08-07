@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-02 17:16:54
+ * @LastEditTime: 2023-08-07 08:52:15
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -188,7 +188,7 @@ const formatSet = (type = '', format = '') => {
  * @default:
  * @return {*}
  */
-const triggerOperationSearch = () => {
+const triggerOperationSearch = (isSearch = true) => {
   const { configOptions } = props
   const modelValue = unref(model)
   const options = unref(configOptions)
@@ -221,8 +221,12 @@ const triggerOperationSearch = () => {
       shadowModel[endProp] = endValue
     }
   }
-  emits('on-search', shadowModel)
-  emits('update:modelValue', shadowModel)
+
+  if (isSearch) {
+    emits('on-search', shadowModel)
+    emits('update:modelValue', shadowModel)
+  }
+  return shadowModel
 }
 // 默认查询一次
 nextTick(() => {
