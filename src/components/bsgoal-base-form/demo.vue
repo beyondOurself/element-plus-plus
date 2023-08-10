@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-15 15:37:51
+ * @LastEditTime: 2023-08-10 16:44:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -27,7 +27,7 @@ const BSGOAL_BASE_FORM_REF = ref(null)
 
 const confirm = () => {
   let isParseInt = true
-  BSGOAL_BASE_FORM_REF.value.validateForm((res ) => {
+  BSGOAL_BASE_FORM_REF.value.validateForm((res) => {
     console.log('res', res)
   })
 }
@@ -64,7 +64,7 @@ const configOptions = ref([
     // formatter: (value = '') => {
     //   return `${value}`.match(/^\d{1,}$/) ? value : ''
     // },
-    placeholder: '',
+    placeholder: ''
   },
 
   {
@@ -124,10 +124,10 @@ const configOptions = ref([
   },
   {
     label: 'prop2',
-    value: [],
     type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
     multiple: true,
+    rules: true,
     range: [
       {
         label: 'select1',
@@ -250,7 +250,7 @@ const configOptions = ref([
     // value: '111',
     type: ComponentTypeEnums.DATE_TIME_RANGE,
     prop: 'prop16',
-    md:24
+    md: 24
   }
 ])
 

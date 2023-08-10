@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-02 15:13:16
+ * @LastEditTime: 2023-08-10 16:41:10
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -214,10 +214,13 @@ const configOptionsGet = computed(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   const reOptions = options.map((option) => {
-    let { rules = [], label = '', prop = '' } = option
+    let { rules = [], label = '', prop = '', type = '' } = option
     const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
+    const requiredSelectRule = { required: true, message: `${label}不能为空`, trigger: 'change' }
     if (isBoolean(rules) && rules) {
-      rules = [requiredRule]
+      rules = [ComponentTypeEnums.SELECT].includes(type)
+        ? [requiredRule, requiredSelectRule]
+        : [requiredRule]
     } else if (Array.isArray(rules) && !!rules.length) {
       rules = [requiredRule, ...rules]
     }
