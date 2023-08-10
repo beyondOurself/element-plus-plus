@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-07 08:52:15
+ * @LastEditTime: 2023-08-10 17:08:55
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -181,14 +181,7 @@ const formatSet = (type = '', format = '') => {
 
   return format
 }
-
-/**
- * @Author: canlong.shen
- * @description: 触发查询
- * @default:
- * @return {*}
- */
-const triggerOperationSearch = (isSearch = true) => {
+const changeValue = (isSearch = false) => {
   const { configOptions } = props
   const modelValue = unref(model)
   const options = unref(configOptions)
@@ -224,14 +217,24 @@ const triggerOperationSearch = (isSearch = true) => {
 
   if (isSearch) {
     emits('on-search', shadowModel)
-    emits('update:modelValue', shadowModel)
   }
+  emits('update:modelValue', shadowModel)
   return shadowModel
+}
+/**
+ * @Author: canlong.shen
+ * @description: 触发查询
+ * @default:
+ * @return {*}
+ */
+const triggerOperationSearch = (isSearch = true) => {
+  return changeValue(isSearch)
 }
 // 默认查询一次
 nextTick(() => {
   triggerOperationSearch()
 })
+
 /**
  * @Author: canlong.shen
  * @description: 触发清空
@@ -240,7 +243,8 @@ nextTick(() => {
  */
 const triggerOperationClear = () => {
   EL_FORM_REF.value.resetFields()
-  emits('on-clear', model.value)
+  const searcher = changeValue()
+  emits('on-clear', searcher)
 }
 
 // 折叠值
