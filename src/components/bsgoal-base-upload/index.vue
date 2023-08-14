@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-07-13 16:37:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-14 10:44:46
+ * @LastEditTime: 2023-08-14 11:00:08
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-upload\index.vue
  * @Description: 附件上传
  * 
@@ -175,7 +175,6 @@ defineExpose({
 <template>
   <div class="bsgoal-base-upload">
     <div class="base_upload">
-      {{ fileListModel }}
       <el-upload
         list-type="picture-card"
         v-model:file-list="fileListModel"
