@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-04 17:29:15
+ * @LastEditTime: 2023-08-15 17:18:01
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -151,7 +151,14 @@ const props = defineProps({
   serial: {
     type: [Boolean],
     default: false
-  }
+  },
+   /**
+   * 中屏设备宽度的比例
+   */
+   medium: {
+    type: [Number, String],
+    default: 6
+  },
 })
 
 const emits = defineEmits([
@@ -262,6 +269,7 @@ defineExpose({
         ref="BSGOAL_BASE_SEARCH_REF"
         v-show="hasSearch"
         :config-options="searchOptions"
+        :medium="medium"
         @on-search="triggerSearch"
         @on-clear="triggerSearch"
         @on-change="triggerChange"
