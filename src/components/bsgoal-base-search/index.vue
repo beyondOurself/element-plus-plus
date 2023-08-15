@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-10 17:08:55
+ * @LastEditTime: 2023-08-15 17:14:54
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -309,7 +309,8 @@ defineExpose({
                 min = 1,
                 max = 10,
                 range = [],
-                format = ''
+                format = '',
+                md = ''
               } = {},
               index
             ) of configOptionsGet"
@@ -321,7 +322,7 @@ defineExpose({
               "
               :xs="24"
               :sm="12"
-              :md="medium"
+              :md="md || medium"
             >
               <el-form-item :label="label" :prop="prop">
                 <!-- S 内容组件 -->
