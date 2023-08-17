@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-11 18:31:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-14 08:59:06
- * @FilePath: \common\src\entry.js
+ * @LastEditTime: 2023-08-17 14:08:21
+ * @FilePath: \v3_basic_component\src\entry.js
  * @Description: 打包 入口文件
  * 
  */
@@ -32,6 +32,7 @@ import BsgoalBaesPopover from '@/components/bsgoal-baes-popover/index.vue'
 import BsgoalBaseViewer from '@/components/bsgoal-base-viewer/index.vue'
 import BsgoalBaseTooltip from '@/components/bsgoal-base-tooltip/index.vue'
 import BsgoalBaseUpload from '@/components/bsgoal-base-upload/index.vue'
+import BsgoalBaseDialogForm from '@/components/bsgoal-base-dialog-form/index.vue'
 import componentTypeEnums from '@/enums/componentTypeEnums.js'
 import { useFetch } from '@/combines/useFetchs.js'
 
@@ -65,7 +66,8 @@ export default {
       BsgoalBaesPopover,
       BsgoalBaseViewer,
       BsgoalBaseTooltip,
-      BsgoalBaseUpload
+      BsgoalBaseUpload,
+      BsgoalBaseDialogForm
     }
 
     for (const [name, component] of Object.entries(componentsMap)) {

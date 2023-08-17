@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-01 09:08:25
- * @FilePath: \common\src\components\bsgoal-base-dialog\index.vue
+ * @LastEditTime: 2023-08-17 13:58:14
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
 -->
@@ -152,6 +152,21 @@ const widthGet = computed(() => {
       return width
   }
 })
+
+const show = () => {
+  dialogVisible.value = true
+}
+
+const hide = () => {
+  dialogVisible.value = false
+}
+
+// ---> S 暴露属性  <---
+defineExpose({
+  show,
+  hide
+})
+// ---> E 暴露属性  <---
 </script>
 <template>
   <div class="bsgoal-base-dialog">
