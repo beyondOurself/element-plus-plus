@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-17 16:08:00
+ * @LastEditTime: 2023-08-17 16:28:45
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -43,6 +43,8 @@ const showDialog3 = () => {
   BSGOAL_BASE_DIALOG_FORM_REF.value.show()
 }
 
+// ---> S 新增/编辑/详情 <---
+               
 const configOptionsForm = ref([
   {
     label: '字段1',
@@ -66,6 +68,9 @@ const confirm = (formModel = {}, done = () => {}) => {
   console.log('formModel', formModel)
   done()
 }
+
+// ---> E 新增/编辑/详情 <---
+
 </script>
 <template>
   <div class="bsgoal-base-dialog-form-demo">
@@ -77,7 +82,6 @@ const confirm = (formModel = {}, done = () => {}) => {
       :options="configOptionsForm"
       @on-confirm="confirm"
     >
-
 
     </BsgoalBaseDialogForm>
   </div>

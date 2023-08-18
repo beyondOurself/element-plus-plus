@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-10 16:44:32
+ * @LastEditTime: 2023-08-18 14:01:21
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -44,7 +44,6 @@ const configOptions = ref([
   {
     label: 'prop104',
     prop: '_prop104',
-    validator: true,
     rules: [
       {
         validator: (rule, value, callback) => {
@@ -251,6 +250,15 @@ const configOptions = ref([
     type: ComponentTypeEnums.DATE_TIME_RANGE,
     prop: 'prop16',
     md: 24
+  },
+  {
+    label: '电话号码',
+    // value: '111',
+    type: ComponentTypeEnums.INPUT,
+    prop: 'prop17',
+    md: 24,
+    validation:true,
+    rules: []
   }
 ])
 

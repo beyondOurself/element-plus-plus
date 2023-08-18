@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-10 16:41:10
+ * @LastEditTime: 2023-08-18 14:04:04
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -205,6 +205,46 @@ watchEffect(() => {
 
 /**
  * @Author: canlong.shen
+ * @description: 获取默认校验规则
+ * @param {*} label
+ * @default:
+ * @return {*}
+ */
+const getValidator = (label = '') => {
+  const valiMap = [
+    [
+      /.*(电话|手机)(号码|号).*/,
+      /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/
+    ],
+    [
+      /.*(身份证)(号码|号).*/,
+      /^\d{6}((((((19|20)\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|(((19|20)\d{2})(0[13578]|1[02])31)|((19|20)\d{2})02(0[1-9]|1\d|2[0-8])|((((19|20)([13579][26]|[2468][048]|0[48]))|(2000))0229))\d{3})|((((\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|((\d{2})(0[13578]|1[02])31)|((\d{2})02(0[1-9]|1\d|2[0-8]))|(([13579][26]|[2468][048]|0[048])0229))\d{2}))(\d|X|x)$/
+    ],
+    [
+      /.*(车牌)(号码|号).*/,
+      /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-HJ-NP-Z][A-HJ-NP-Z0-9]{4,5}[A-HJ-NP-Z0-9挂学警港澳]$/
+    ]
+  ]
+
+  for (const { 0: labelReg, 1: valueReg } of valiMap) {
+    if (labelReg.test(label)) {
+      return {
+        validator: (rule, value, callback) => {
+          if ( value && !valueReg.test(value)) {
+            callback(new Error(`${label}格式不符合`))
+          }
+          callback()
+        },
+        trigger: 'change'
+      }
+    }
+  }
+
+  return null
+}
+
+/**
+ * @Author: canlong.shen
  * @description: 配置项
  * @param {*} computed
  * @default:
@@ -214,7 +254,7 @@ const configOptionsGet = computed(() => {
   const { configOptions } = props
   const options = unref(configOptions)
   const reOptions = options.map((option) => {
-    let { rules = [], label = '', prop = '', type = '' } = option
+    let { rules = [], label = '', prop = '', type = '', validation = false } = option
     const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
     const requiredSelectRule = { required: true, message: `${label}不能为空`, trigger: 'change' }
     if (isBoolean(rules) && rules) {
@@ -224,6 +264,12 @@ const configOptionsGet = computed(() => {
     } else if (Array.isArray(rules) && !!rules.length) {
       rules = [requiredRule, ...rules]
     }
+    // 自动新增校验规则
+    const validatorRule = getValidator(label)
+    if (validatorRule && [ComponentTypeEnums.INPUT].includes(type) && validation) {
+      rules = [validatorRule, ...rules]
+    }
+
     option.rules = rules
     return option
   })
