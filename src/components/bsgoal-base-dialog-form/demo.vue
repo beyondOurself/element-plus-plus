@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-17 16:28:45
+ * @LastEditTime: 2023-08-18 15:43:17
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -23,13 +23,17 @@ const props = defineProps({})
 
 const BSGOAL_BASE_DIALOG_FORM_REF = ref(null)
 
+let formModel = {}
+
 const showDialog1 = () => {
   const model = ref({
     prop1: '111',
     prop2: '112',
     prop3: '113'
   })
-  BSGOAL_BASE_DIALOG_FORM_REF.value.show(model,'detail')
+  const model1 = BSGOAL_BASE_DIALOG_FORM_REF.value.show(model)
+  model1.value.prop1 = '999'
+  formModel  = model1
 }
 const showDialog2 = () => {
   const model = ref({
@@ -44,7 +48,7 @@ const showDialog3 = () => {
 }
 
 // ---> S 新增/编辑/详情 <---
-               
+
 const configOptionsForm = ref([
   {
     label: '字段1',
@@ -69,8 +73,12 @@ const confirm = (formModel = {}, done = () => {}) => {
   done()
 }
 
-// ---> E 新增/编辑/详情 <---
+const test = () => {
+  console.log('formModel.value',formModel.value);
+  formModel.value.prop1 = '6666'
+}
 
+// ---> E 新增/编辑/详情 <---
 </script>
 <template>
   <div class="bsgoal-base-dialog-form-demo">
@@ -82,7 +90,9 @@ const confirm = (formModel = {}, done = () => {}) => {
       :options="configOptionsForm"
       @on-confirm="confirm"
     >
-
+      <template #prop3>
+        <el-button type="primary" @click="test">点击测试</el-button>
+      </template>
     </BsgoalBaseDialogForm>
   </div>
 </template>
