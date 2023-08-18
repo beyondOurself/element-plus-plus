@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-18 15:32:30
+ * @LastEditTime: 2023-08-18 16:19:50
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -104,7 +104,7 @@ const show = (raw = {}, mode = '') => {
 
   BSGOAL_BASE_DIALOG_REF.value.show()
   emits('on-show')
-  return model
+  return toValue(model)
 }
 
 const hide = () => {

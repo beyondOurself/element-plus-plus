@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-18 15:43:17
+ * @LastEditTime: 2023-08-18 16:20:36
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -23,7 +23,7 @@ const props = defineProps({})
 
 const BSGOAL_BASE_DIALOG_FORM_REF = ref(null)
 
-let formModel = {}
+const formModel = ref({})
 
 const showDialog1 = () => {
   const model = ref({
@@ -32,8 +32,8 @@ const showDialog1 = () => {
     prop3: '113'
   })
   const model1 = BSGOAL_BASE_DIALOG_FORM_REF.value.show(model)
-  model1.value.prop1 = '999'
-  formModel  = model1
+  console.log('model1',model1);
+  formModel.value =  model1
 }
 const showDialog2 = () => {
   const model = ref({
@@ -74,7 +74,7 @@ const confirm = (formModel = {}, done = () => {}) => {
 }
 
 const test = () => {
-  console.log('formModel.value',formModel.value);
+  console.log('formModel.value', formModel)
   formModel.value.prop1 = '6666'
 }
 
