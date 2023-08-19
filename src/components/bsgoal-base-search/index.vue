@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-19 10:53:37
+ * @LastEditTime: 2023-08-19 14:34:18
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -18,6 +18,7 @@ import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseSearchOperation from '../bsgoal-base-search-operation/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import { dayjs } from 'element-plus'
 
 defineOptions({
   name: 'BsgoalBaseSearch'
@@ -283,6 +284,15 @@ const triggerValueChange = (type, prop) => {
   emits('on-change', emitValue)
 }
 
+// ---> S 时间区域默认值 <---
+
+const ymd = dayjs().format('YYYY-MM-DD')
+const startDefaultTime = dayjs(`${ymd} 00:00:00`)
+const endDefaultTime = dayjs(`${ymd} 23:59:59`)
+const defaultTime = ref([startDefaultTime, endDefaultTime])
+
+// ---> E 时间区域默认值 <---
+
 // ---> S 暴露 <---
 defineExpose({
   triggerOperationSearch
@@ -450,6 +460,7 @@ defineExpose({
                         :value-format="formatSet(type, format)"
                         :start-placeholder="placeholderSet(type, label, placeholder)[0]"
                         :end-placeholder="placeholderSet(type, label, placeholder)[1]"
+                        :default-time="defaultTime"
                         @change="triggerValueChange(type, prop)"
                       />
                     </template>
