@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-10 16:54:26
+ * @LastEditTime: 2023-08-19 10:49:21
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\demo.vue
  * @Description: 表格查询组件演示
  * 
@@ -33,6 +33,7 @@ let curLocalOptions = ref([
     value: 'select2',
     type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
+    multiple:true,
     range: [
       {
         label: 'select1',

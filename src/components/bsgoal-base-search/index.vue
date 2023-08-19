@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-15 17:14:54
+ * @LastEditTime: 2023-08-19 10:53:37
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -310,7 +310,9 @@ defineExpose({
                 max = 10,
                 range = [],
                 format = '',
-                md = ''
+                md = '',
+                multiple = false,
+                limit = 0
               } = {},
               index
             ) of configOptionsGet"
@@ -376,6 +378,11 @@ defineExpose({
                     <template v-if="type === ComponentTypeEnums.SELECT">
                       <el-select
                         v-model="model[prop]"
+                        :multiple="multiple"
+                        :multiple-limit="limit"
+                        :max-collapse-tags="2"
+                        :collapse-tags="true"
+                        :collapse-tags-tooltip="true"
                         :filterable="filterable"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @change="triggerValueChange(type, prop)"
