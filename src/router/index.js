@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-17 14:06:58
+ * @LastEditTime: 2023-08-19 15:15:50
  * @FilePath: \v3_basic_component\src\router\index.js
  * @Description: 路由配置
  * 
@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: '/bsgoal-base-time-select-demo',
+          name: '时间选择',
+          component: import('@/components/bsgoal-base-time-select/demo.vue')
+        },
         {
           path: '/bsgoal-base-dialog-form-demo',
           name: '弹窗表单',
