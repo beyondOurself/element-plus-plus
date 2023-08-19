@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:58:50
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 13:40:53
- * @FilePath: \common\src\components\bsgoal-base-time\demo.vue
+ * @LastEditTime: 2023-08-19 17:11:25
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-time\demo.vue
  * @Description: 时间选择器
  * 
 -->
@@ -50,6 +50,13 @@ const disabledSeconds = (hour, minute) => {
   <div class="bsgoal-base-time-demo">
     <div class="base_time_demo">
       {{ time }}
+      <BsgoalBaseTime
+        v-model="time"
+        hide
+        :disabled-hours="disabledHours"
+        :disabled-minutes="disabledMinutes"
+        :disabled-seconds="disabledSeconds"
+      />
       <BsgoalBaseTime
         v-model="time"
         :disabled-hours="disabledHours"

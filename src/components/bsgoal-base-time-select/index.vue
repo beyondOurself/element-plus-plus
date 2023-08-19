@@ -111,6 +111,8 @@ watchEffect(() => {
   curStart.value = start
   curEnd.value = end
 })
+
+
 </script>
 <template>
   <div class="bsgoal-base-time-select">

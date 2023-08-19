@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:58:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-15 17:47:46
+ * @LastEditTime: 2023-08-19 17:10:22
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-time\index.vue
  * @Description: 时间选择器 
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref, watchEffect } from 'vue'
+import { ref, unref, watchEffect, onMounted, nextTick, getCurrentInstance, toValue } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import { dayjs } from 'element-plus'
 const emits = defineEmits(['update:modelValue'])
@@ -97,6 +97,13 @@ const props = defineProps({
   clearable: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * 隐藏无效的值
+   */
+  hide: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -144,14 +151,29 @@ const triggerChange = (date = new Date()) => {
 }
 
 // ---> E 绑定值 <---
+
+// ---> S 隐藏不可选择项 <---
+const BSGOAL_BASE_TIME_REF = ref(null)
+const changeVisible = () => {
+  const { hide = false } = props
+  if (hide) {
+    nextTick(() => {
+      const liList = document.querySelectorAll('div.bsgoal_time_picker--disabled li.is-disabled')
+      liList.forEach((el) => (el.style.display = 'none'))
+    })
+  }
+}
+// ---> E 隐藏不可选择项 <---
 </script>
 
 <template>
-  <div class="bsgoal-base-time">
+  <div class="bsgoal-base-time" ref="BSGOAL_BASE_TIME_REF">
     <el-config-provider :locale="zhCn">
       <el-time-picker
+        ref="EL_TIME_PICKER_REF"
         v-model="bindValue"
         class="base_time"
+        popper-class="bsgoal_time_picker--disabled"
         :arrow-control="arrowControl"
         :format="format"
         :clearable="clearable"
@@ -163,11 +185,12 @@ const triggerChange = (date = new Date()) => {
         :disabled-minutes="disabledMinutes"
         :disabled-seconds="disabledSeconds"
         @change="triggerChange"
+        @visible-change="changeVisible"
       />
     </el-config-provider>
   </div>
 </template>
-<style lang="scss" >
+<style lang="scss">
 /* 自定义样式
 ---------------------------------------------------------------- */
 .bsgoal-base-time {
