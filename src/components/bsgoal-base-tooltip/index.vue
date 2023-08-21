@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-04 10:59:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-06 11:47:17
- * @FilePath: \common\src\components\bsgoal-base-tooltip\index.vue
+ * @LastEditTime: 2023-08-21 11:27:59
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-tooltip\index.vue
  * @Description:  文字提示公共组件 
  * 
 -->
@@ -60,7 +60,7 @@ const props = defineProps({
 const contentGet = computed(() => {
   const { content = '', limit = 0, none = '' } = props
   let contentString = content
-  const contentLength = content.length
+  const contentLength = `${content|| ''}`.length
   if (limit && contentLength > limit) {
     contentString = `${content.substring(0, limit)}...`
   }
@@ -71,7 +71,7 @@ const contentGet = computed(() => {
 // ---> S 禁用tooltip <---
 const disabledGet = computed(() => {
   const { content = '', limit = 0 } = props
-  return content.length < limit || !limit
+  return `${content || ''}`.length < limit || !limit
 })
 // ---> E 禁用tooltip <---
 </script>

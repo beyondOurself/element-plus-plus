@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-11 17:12:00
+ * @LastEditTime: 2023-08-21 11:22:13
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -386,7 +386,6 @@ defineExpose({
                 tooltip = false,
                 limit = 0,
                 minWidth='',
-                maxWidth='',
               } = {},
               index
             ) of configOptionsGet"
@@ -398,7 +397,6 @@ defineExpose({
               :width="width"
               :fixed="fixed"
               :min-width="minWidth || `${label.length * 14 + 30}px`"
-              :max-width="maxWidth || `${label.length * 14 + 30}px`"
             >
               <template v-slot:default="{ row, column, $index }">
                 <slot :name="prop" :row="row" :column="column" :index="$index">

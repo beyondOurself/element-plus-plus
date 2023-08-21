@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:58:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-19 17:10:22
+ * @LastEditTime: 2023-08-19 17:35:13
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-time\index.vue
  * @Description: 时间选择器 
  * 
@@ -159,7 +159,12 @@ const changeVisible = () => {
   if (hide) {
     nextTick(() => {
       const liList = document.querySelectorAll('div.bsgoal_time_picker--disabled li.is-disabled')
-      liList.forEach((el) => (el.style.display = 'none'))
+      liList.forEach((el) => {
+        // el.style.width = '1px'
+        // el.style.height = '1px'
+        // el.style.overflow = 'hidden'
+      
+      })
     })
   }
 }
@@ -197,6 +202,10 @@ const changeVisible = () => {
   .el-input__prefix,
   .el-input__suffix {
     position: initial;
+
+     width: 0;
+     height: 0;
+     overflow: hidden;
   }
 }
 </style>

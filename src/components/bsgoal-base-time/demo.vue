@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:58:50
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-19 17:11:25
+ * @LastEditTime: 2023-08-19 17:28:17
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-time\demo.vue
  * @Description: 时间选择器
  * 
@@ -33,12 +33,14 @@ const disabledHours = () => {
   return [16]
 }
 const disabledMinutes = (hour) => {
-  if (hour === 17) {
-    return makeRange(0, 29)
-  }
-  if (hour === 18) {
-    return makeRange(31, 59)
-  }
+  const disabledM = []
+   for(let i = 0 ; i < 60 ; i ++){
+    disabledM.push(i)
+   }
+
+   console.log('disabledM',disabledM);
+
+   return disabledM
 }
 const disabledSeconds = (hour, minute) => {
   if (hour === 18 && minute === 30) {
