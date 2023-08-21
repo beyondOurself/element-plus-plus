@@ -774,13 +774,18 @@ const expandedKeys = ['label2-2']
 setTimeout(() => {
   treeData.value = ref([
     {
-      label: 'label2-1',
+      label: '深圳市博思高高高高科技有限公司',
       isLeaf: true,
-      hasIcon: true
+      hasIcon: true,
+      children: [
+        {
+          label: 'label2-2-1'
+        }
+      ]
     },
     {
       key: 'label2-2',
-      label: 'label2-2',
+      label: '深圳市博思高高高高科技有限公司',
       children: [
         {
           label: 'label2-2-1'

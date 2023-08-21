@@ -191,22 +191,27 @@ const handleItemAdd = (node = null, data = {}) => {
           <template #default="{ node, data }">
             <slot :data="data">
               <div class="base_tree_node">
-                <!-- S 节点前图标 -->
-                <div v-if="$slots.prefix">
-                  <slot name="prefix" :data="data" ></slot>
+                <div>
+                  <!-- S 节点前图标 -->
+                  <span v-if="$slots.prefix"><slot name="prefix" :data="data" ></slot></span>
+                  <!-- E 节点前图标 -->
+                  <!-- S 节点名称 -->
+                  <span v-if="node.label.length && node.label.length > 10">
+                    <el-tooltip :content="node.label" placement="right" effect="dark">
+                      <div class="base_tree_node_label_tooltip base_tree_node_label">
+                        {{ node.label.substring(0,10) + '......'}}
+                      </div>
+                    </el-tooltip>
+                  </span>
+                  <span v-else class="base_tree_node_label">{{ node.label }}</span>
+                  <!-- E 节点名称 -->
                 </div>
-                <!-- E 节点前图标 -->
-                <!-- S 节点名称 -->
-                <span class="base_tree_node_label">
-                  {{ node.label }}
-                </span>
-                <!-- E 节点名称 -->
                 <!-- S 操作符号 -->
-                <span class="base_tree_node_icon" v-if="data.hasIcon">
+                <div class="base_tree_node_icon" v-if="data.hasIcon">
                   <el-icon color="var(--el-color-primary)" @click.stop="handleItemAdd(node, data)">
                     <Plus />
                   </el-icon>
-                </span>
+                </div>
                 <!-- E 操作符号 -->
               </div>
             </slot>
@@ -234,6 +239,7 @@ const handleItemAdd = (node = null, data = {}) => {
     box-sizing: border-box;
     position: relative;
     min-width: 14px;
+    overflow-x: hidden;
   }
   .base_tree_main {
     width: 221px;
@@ -273,8 +279,17 @@ const handleItemAdd = (node = null, data = {}) => {
     padding-left: 0px;
   }
   .base_tree_node {
-    display: flex;
     flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
+  }
+  .base_tree_node_label_tooltip{
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .base_tree_node_label {
     flex: 1;
