@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-18 14:04:04
+ * @LastEditTime: 2023-08-23 10:34:06
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -230,7 +230,7 @@ const getValidator = (label = '') => {
     if (labelReg.test(label)) {
       return {
         validator: (rule, value, callback) => {
-          if ( value && !valueReg.test(value)) {
+          if (value && !valueReg.test(value)) {
             callback(new Error(`${label}格式不符合`))
           }
           callback()
@@ -549,6 +549,7 @@ defineExpose({
                 visible = true,
                 multiple = false,
                 itemDisabled = disabled,
+                detail = false, 
                 formatter = (v) => {
                   return v
                 },
@@ -567,10 +568,16 @@ defineExpose({
               :md="md || medium"
               :style="colStyle"
             >
-              <el-form-item :style="itemStyle" :label="label" :prop="prop" :rules="rules">
+              <el-form-item
+                :style="itemStyle"
+                :class="{ 'bsgoal_base_form_item--disable': detail }"
+                :label="label"
+                :prop="prop"
+                :rules="rules"
+              >
                 <slot :name="[prop]" :option="{ readonly, value: model[prop], values: model }">
                   <!-- S 内容组件 -->
-                  <template v-if="!readonly">
+                  <template v-if="!readonly && !detail">
                     <el-config-provider :locale="zhCn">
                       <!-- / input 输入框组件 -->
                       <template v-if="type === ComponentTypeEnums.INPUT">
@@ -803,6 +810,15 @@ defineExpose({
     width: 0px;
     height: 0px;
     overflow: hidden;
+  }
+
+  .bsgoal_base_form_item--disable {
+    .el-form-item__content {
+      background: #f5f7fa;
+      outline: solid 1px #e4e7ed;
+      border-radius: 4px;
+      padding-left: 8px;
+    }
   }
 }
 </style>

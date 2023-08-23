@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-18 14:01:21
+ * @LastEditTime: 2023-08-23 10:34:40
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -35,7 +35,7 @@ const resetFields = () => {
   BSGOAL_BASE_FORM_REF.value.resetFields()
 }
 
-const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0', _prop104: '' })
+const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0', prop104: '888' })
 
 // 配置项
 const configOptions = ref([
@@ -44,6 +44,7 @@ const configOptions = ref([
   {
     label: 'prop104',
     prop: '_prop104',
+    readonly:true,
     rules: [
       {
         validator: (rule, value, callback) => {
@@ -59,6 +60,8 @@ const configOptions = ref([
   {
     label: 'prop103',
     prop: 'prop103',
+    value:'444',
+    detail:true,
     type: ComponentTypeEnums.INPUT,
     // formatter: (value = '') => {
     //   return `${value}`.match(/^\d{1,}$/) ? value : ''
