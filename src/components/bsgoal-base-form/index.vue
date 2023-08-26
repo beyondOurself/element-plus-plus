@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-23 10:34:06
+ * @LastEditTime: 2023-08-26 11:01:55
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -815,7 +815,7 @@ defineExpose({
   .bsgoal_base_form_item--disable {
     .el-form-item__content {
       background: #f5f7fa;
-      outline: solid 1px #e4e7ed;
+      outline: solid 1px #e4e7ed;
       border-radius: 4px;
       padding-left: 8px;
     }

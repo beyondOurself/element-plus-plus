@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-18 16:20:36
+ * @LastEditTime: 2023-08-26 10:55:54
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -32,8 +32,8 @@ const showDialog1 = () => {
     prop3: '113'
   })
   const model1 = BSGOAL_BASE_DIALOG_FORM_REF.value.show(model)
-  console.log('model1',model1);
-  formModel.value =  model1
+  console.log('model1', model1)
+  formModel.value = model1
 }
 const showDialog2 = () => {
   const model = ref({
@@ -78,6 +78,10 @@ const test = () => {
   formModel.value.prop1 = '6666'
 }
 
+const changeFormItem = (values = {}) => {
+  console.log('values22', values)
+}
+
 // ---> E 新增/编辑/详情 <---
 </script>
 <template>
@@ -89,6 +93,7 @@ const test = () => {
       ref="BSGOAL_BASE_DIALOG_FORM_REF"
       :options="configOptionsForm"
       @on-confirm="confirm"
+      @on-change="changeFormItem"
     >
       <template #prop3>
         <el-button type="primary" @click="test">点击测试</el-button>

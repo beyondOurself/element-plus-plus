@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-18 16:19:50
+ * @LastEditTime: 2023-08-26 11:03:08
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -51,7 +51,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['on-confirm', 'on-show', 'on-hide'])
+const emits = defineEmits(['on-confirm', 'on-show', 'on-hide', 'on-change'])
 
 // ---> S 插槽 <---
 const slots = useSlots()
@@ -87,6 +87,10 @@ const disabledGet = computed(() => {
   return false
 })
 
+const changeFormItem = (values = {}) => {
+  emits('on-change', values)
+}
+
 // ---> E 表单 <---
 
 // ---> S 弹窗 <---
@@ -98,7 +102,7 @@ const show = (raw = {}, mode = '') => {
 
   if (mode) {
     curMode.value = mode
-  }else{
+  } else {
     curMode.value = 'add'
   }
 
@@ -172,6 +176,7 @@ defineExpose({
           :disabled="disabledGet"
           :config-options="configOptionsGet"
           :bind-model="model"
+          @on-change="changeFormItem"
         >
           <template #[slotName] v-for="slotName of slotNames">
             <slot :name="slotName"></slot>
