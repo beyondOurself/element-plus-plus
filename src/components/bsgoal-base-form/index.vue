@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-26 11:01:55
+ * @LastEditTime: 2023-08-26 14:04:02
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -391,12 +391,29 @@ const triggerOperationClear = () => {
  * @default:
  * @return {*}
  */
-const triggerValueChange = (type, prop) => {
+const triggerValueChange = (type, prop, range = []) => {
+  const value = model.value[prop] || ''
+  let option = {}
+
+  if ([ComponentTypeEnums.SELECT].includes(type) && range.length) {
+    let hitList = value
+    if (!Array.isArray(value)) {
+      hitList = [value]
+    }
+    const filterOptions = range.filter((fi) => hitList.includes(fi.value))
+    if (filterOptions.length === 1) {
+      option = filterOptions[0]
+    } else {
+      option = filterOptions
+    }
+  }
+
   // 触发查询
   const emitValue = {
     type,
     prop,
-    value: model.value[prop] || ''
+    option,
+    value
   }
   emits('on-change', emitValue)
 }
@@ -549,7 +566,7 @@ defineExpose({
                 visible = true,
                 multiple = false,
                 itemDisabled = disabled,
-                detail = false, 
+                detail = false,
                 formatter = (v) => {
                   return v
                 },
@@ -641,7 +658,7 @@ defineExpose({
                           :multiple="multiple"
                           :filterable="filterable"
                           :placeholder="placeholderSet(type, label, placeholder)"
-                          @change="triggerValueChange(type, prop)"
+                          @change="triggerValueChange(type, prop, range)"
                         >
                           <template v-for="(item, itemIndex) of range" :key="itemIndex">
                             <el-option :label="item.label" :value="item.value" />

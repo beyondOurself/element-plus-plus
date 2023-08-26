@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-23 10:34:40
+ * @LastEditTime: 2023-08-26 14:05:18
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -44,7 +44,7 @@ const configOptions = ref([
   {
     label: 'prop104',
     prop: '_prop104',
-    readonly:true,
+    readonly: true,
     rules: [
       {
         validator: (rule, value, callback) => {
@@ -60,8 +60,8 @@ const configOptions = ref([
   {
     label: 'prop103',
     prop: 'prop103',
-    value:'444',
-    detail:true,
+    value: '444',
+    detail: true,
     type: ComponentTypeEnums.INPUT,
     // formatter: (value = '') => {
     //   return `${value}`.match(/^\d{1,}$/) ? value : ''
@@ -128,16 +128,18 @@ const configOptions = ref([
     label: 'prop2',
     type: ComponentTypeEnums.SELECT,
     prop: 'prop2',
-    multiple: true,
+    // multiple: true,
     rules: true,
     range: [
       {
         label: 'select1',
-        value: 'select1'
+        value: 'select1',
+        extra: 'extra1'
       },
       {
         label: 'select2',
-        value: 'select2'
+        value: 'select2',
+        extra: 'extra2'
       },
       {
         label: 'select3',
@@ -260,15 +262,13 @@ const configOptions = ref([
     type: ComponentTypeEnums.INPUT,
     prop: 'prop17',
     md: 24,
-    validation:true,
+    validation: true,
     rules: []
   }
 ])
 
-const changeValues = (params = '') => {
-  values.value = {
-    residentialName: '2222'
-  }
+const changeFormItem = (values = '') => {
+  console.log('values', values)
 }
 </script>
 <template>
@@ -282,12 +282,13 @@ const changeValues = (params = '') => {
       :limits="10"
       :config-options="configOptions"
       :bind-model="values"
+      @on-change="changeFormItem"
     >
       <template #_prop104> 6666 </template>
     </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
     <el-button type="primary" @click="resetFields">重置</el-button>
-    <el-button type="primary" @click="changeValues">改变值</el-button>
+    <!-- <el-button type="primary" @click="changeValues">改变值</el-button> -->
   </div>
 </template>
 <style lang="scss" scoped>
