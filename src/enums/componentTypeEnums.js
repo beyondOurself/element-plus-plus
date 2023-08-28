@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 16:20:09
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-22 14:29:02
- * @FilePath: \common\src\enums\componentTypeEnums.js
+ * @LastEditTime: 2023-08-28 16:47:30
+ * @FilePath: \v3_basic_component\src\enums\componentTypeEnums.js
  * @Description: 组件类型 枚举
  * 
  */
@@ -32,4 +32,5 @@ export default class ComponentTypeEnums {
   static get OPERATION(){ return 'operation'}
   static get CASCADER(){ return 'cascader'}
   static get CHECKBOX_SINGLE(){ return 'checkboxsingle'}
+  static get CASCADER_MULTIPLE(){ return 'cascadermultiple'}
 }

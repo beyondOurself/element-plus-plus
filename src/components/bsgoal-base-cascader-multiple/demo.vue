@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:31:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-26 16:04:08
+ * @LastEditTime: 2023-08-28 16:59:24
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\demo.vue
  * @Description:  级联多选
  * 
@@ -103,11 +103,16 @@ const options = [
   },
 ]
 
+const data = ref([
+  
+])
+
 </script>
 <template>
   <div class="bsgoal-base-cascader-multiple-demo">
     <div class="base_cascader_multiple_demo">
-      <BsgoalBaseCascaderMultipl :options="options"></BsgoalBaseCascaderMultipl>
+      {{ data }}
+      <BsgoalBaseCascaderMultipl v-model="data"  rootDisabled :options="options"></BsgoalBaseCascaderMultipl>
     </div>
   </div>
 </template>

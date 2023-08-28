@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-26 14:04:02
+ * @LastEditTime: 2023-08-28 17:09:41
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -15,6 +15,7 @@ import { ref, computed, unref, watchEffect, watch } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
+import  BsgoalBaseCascaderMultipl from '../bsgoal-base-cascader-multiple/index.vue'
 import { ElMessage } from 'element-plus'
 import { isObject } from '../../utils/common.js'
 import { isBoolean } from 'lodash'
@@ -567,6 +568,8 @@ defineExpose({
                 multiple = false,
                 itemDisabled = disabled,
                 detail = false,
+                rootDisabled = false, 
+                attribute = { }, 
                 formatter = (v) => {
                   return v
                 },
@@ -781,7 +784,11 @@ defineExpose({
                           @change="triggerValueChange(type, prop)"
                         />
                       </template>
-                      <!-- / 复选框单选 -->
+                      <!-- / 级联-多选 -->
+                      <template v-if="[ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)">
+                         <BsgoalBaseCascaderMultipl   v-bind="attribute"  v-model="model[prop]" :options="range"></BsgoalBaseCascaderMultipl>
+                      </template>
+                      <!-- / 级联-多选 -->
                       <!-- / 模板 -->
                       <template v-if="[].includes(type)"> </template>
                       <!-- / 模板 -->

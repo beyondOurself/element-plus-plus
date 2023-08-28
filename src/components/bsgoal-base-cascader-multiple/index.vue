@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:30:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-26 16:12:27
+ * @LastEditTime: 2023-08-28 17:01:43
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\index.vue
  * @Description:  级联选择器 - 多选
  * 
@@ -38,6 +38,28 @@ const props = defineProps({
   options: {
     type: [Array],
     default: () => []
+  },
+
+  /**
+   * root 是否只读
+   */
+  rootDisabled: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   *仅显示最后一级
+   */
+  showAllLevels: {
+    type: [Boolean],
+    default: true
+  },
+  /**
+   * 映射props
+   */
+  propsMap: {
+    type: [Object],
+    default: () => ({ multiple: true, checkStrictly: true })
   }
 })
 
@@ -47,11 +69,19 @@ const curModelValue = ref([])
 
 watchEffect(() => {
   const { modelValue = [] } = props
+
   curModelValue.value = toValue(modelValue)
 })
 
 const optionsGet = computed(() => {
-  const { options = [] } = props
+  const { options = [], rootDisabled = false } = props
+
+  if (rootDisabled) {
+    return options.map((mi) => {
+      mi.disabled = true
+      return mi
+    })
+  }
 
   return options
 })
@@ -76,10 +106,11 @@ const change = (value = []) => {
       clearable
       collapse-tags
       collapse-tags-tooltip
+      :show-all-levels="showAllLevels"
       :style="styleGet"
-      :max-collapse-tags="1"
-      :options="max"
-      :props="{ multiple: true, checkStrictly: true }"
+      :max-collapse-tags="max"
+      :options="optionsGet"
+      :props="propsMap"
       @change="change"
     >
     </el-cascader>
@@ -89,8 +120,9 @@ const change = (value = []) => {
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-cascader-multipl {
-    .base_cascader_multipl {
-        width: 100%;
-    }
+  width: 100%;
+  .base_cascader_multipl {
+    width: inherit;
+  }
 }
 </style>
