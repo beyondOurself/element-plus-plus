@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-21 11:22:13
+ * @LastEditTime: 2023-08-28 09:53:50
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -161,7 +161,7 @@ const props = defineProps({
   bodyStyle: {
     type: [Object],
     default: () => ({})
-  }
+  },
 })
 
 const emits = defineEmits(['select', 'select-all', 'selection-change', 'on-total-change'])
@@ -385,7 +385,7 @@ defineExpose({
                 fixed = false,
                 tooltip = false,
                 limit = 0,
-                minWidth='',
+                minWidth = ''
               } = {},
               index
             ) of configOptionsGet"
@@ -414,6 +414,7 @@ defineExpose({
       <!-- S 分页 -->
       <BsgoalBaseTablePagination
         v-if="hasPage"
+        :currentPage="currentPage"
         :total="total"
         :page-size="curPageSize"
         @on-current-change="triggerPaginationCurrentChange"
