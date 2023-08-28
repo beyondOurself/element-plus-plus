@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-28 17:09:41
+ * @LastEditTime: 2023-08-28 17:31:36
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -786,7 +786,7 @@ defineExpose({
                       </template>
                       <!-- / 级联-多选 -->
                       <template v-if="[ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)">
-                         <BsgoalBaseCascaderMultipl   v-bind="attribute"  v-model="model[prop]" :options="range"></BsgoalBaseCascaderMultipl>
+                         <BsgoalBaseCascaderMultipl   v-bind="attribute"  v-model="model[prop]" :options="range" @on-change="triggerValueChange(type, prop)"></BsgoalBaseCascaderMultipl>
                       </template>
                       <!-- / 级联-多选 -->
                       <!-- / 模板 -->
