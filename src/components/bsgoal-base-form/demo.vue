@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-28 17:10:36
+ * @LastEditTime: 2023-08-29 12:00:01
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -49,6 +49,7 @@ const configOptions = ref([
       rootDisabled: true
     },
     type: ComponentTypeEnums.CASCADER_MULTIPLE,
+    rules:true,
     range: [
       {
         value: 1,

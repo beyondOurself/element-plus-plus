@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-28 17:31:36
+ * @LastEditTime: 2023-08-29 13:45:38
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -259,7 +259,7 @@ const configOptionsGet = computed(() => {
     const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
     const requiredSelectRule = { required: true, message: `${label}不能为空`, trigger: 'change' }
     if (isBoolean(rules) && rules) {
-      rules = [ComponentTypeEnums.SELECT].includes(type)
+      rules = [ComponentTypeEnums.SELECT, ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)
         ? [requiredRule, requiredSelectRule]
         : [requiredRule]
     } else if (Array.isArray(rules) && !!rules.length) {
@@ -267,7 +267,7 @@ const configOptionsGet = computed(() => {
     }
     // 自动新增校验规则
     const validatorRule = getValidator(label)
-    if (validatorRule && [ComponentTypeEnums.INPUT].includes(type) && validation) {
+    if (validatorRule && [ComponentTypeEnums.INPUT  ].includes(type) && validation) {
       rules = [validatorRule, ...rules]
     }
 
@@ -568,7 +568,6 @@ defineExpose({
                 multiple = false,
                 itemDisabled = disabled,
                 detail = false,
-                rootDisabled = false, 
                 attribute = { }, 
                 formatter = (v) => {
                   return v
