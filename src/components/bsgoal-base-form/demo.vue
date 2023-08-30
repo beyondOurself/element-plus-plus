@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-29 12:00:01
+ * @LastEditTime: 2023-08-30 11:06:26
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -49,7 +49,7 @@ const configOptions = ref([
       rootDisabled: true
     },
     type: ComponentTypeEnums.CASCADER_MULTIPLE,
-    rules:true,
+    rules: true,
     range: [
       {
         value: 1,
@@ -224,26 +224,7 @@ const configOptions = ref([
     prop: 'prop2',
     // multiple: true,
     rules: true,
-    range: [
-      {
-        label: 'select1',
-        value: 'select1',
-        extra: 'extra1'
-      },
-      {
-        label: 'select2',
-        value: 'select2',
-        extra: 'extra2'
-      },
-      {
-        label: 'select3',
-        value: 'select3'
-      },
-      {
-        label: 'select4',
-        value: 'select5'
-      }
-    ]
+    range: []
   },
   {
     label: 'prop3',
@@ -364,6 +345,31 @@ const configOptions = ref([
 const changeFormItem = (values = '') => {
   console.log('values', values)
 }
+
+setTimeout(() => {
+  const findOption = configOptions.value.find((fi) => fi.prop === 'prop2')
+  findOption.range = [
+    {
+      label: 'select1',
+      value: 'select1',
+      extra: 'extra1'
+    },
+    {
+      label: 'select2',
+      value: 'select2',
+      extra: 'extra2'
+    },
+    {
+      label: 'select3',
+      value: 'select3'
+    },
+    {
+      label: 'select4',
+      value: 'select5'
+    }
+  ]
+  console.log('configOptions',configOptions.value);
+}, 3000)
 </script>
 <template>
   <div class="bsgoal-base-form-demo">

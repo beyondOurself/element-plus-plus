@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-26 10:55:54
+ * @LastEditTime: 2023-08-30 10:20:17
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -54,12 +54,17 @@ const configOptionsForm = ref([
     label: '字段1',
     prop: 'prop1',
     rules: true,
-    type: ComponentTypeEnums.INPUT
+    type: ComponentTypeEnums.INPUT,
+    fun: () => {
+      console.log('666');
+    }
   },
   {
-    label: '字段2',
+    label: '电话号',
     prop: 'prop2',
-    type: ComponentTypeEnums.INPUT
+    validation:true,
+    type: ComponentTypeEnums.INPUT, 
+ 
   },
   {
     label: '字段3',
@@ -70,7 +75,7 @@ const configOptionsForm = ref([
 
 const confirm = (formModel = {}, done = () => {}) => {
   console.log('formModel', formModel)
-  done()
+  done(false)
 }
 
 const test = () => {

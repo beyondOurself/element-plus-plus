@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-29 13:45:38
+ * @LastEditTime: 2023-08-30 11:08:52
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -11,13 +11,13 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, watchEffect, watch } from 'vue'
+import { ref, computed, toValue, watchEffect, watch, onUnmounted, toRaw } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
-import  BsgoalBaseCascaderMultipl from '../bsgoal-base-cascader-multiple/index.vue'
+import BsgoalBaseCascaderMultipl from '../bsgoal-base-cascader-multiple/index.vue'
 import { ElMessage } from 'element-plus'
-import { isObject } from '../../utils/common.js'
+import { isObject, deepClone } from '../../utils/common.js'
 import { isBoolean } from 'lodash'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
@@ -163,7 +163,7 @@ const watchPropsForShow = (show = {}, model = {}, prop = '') => {
       resultList.push(values.includes(`${model[name]}`))
     }
     const { configOptions } = props
-    const options = unref(configOptions)
+    const options = toValue(configOptions)
     const findProp = options.find((fi) => fi.prop === prop)
     if (resultList.every((ei) => !!ei)) {
       findProp.visible = true
@@ -182,8 +182,8 @@ const watchPropsForShow = (show = {}, model = {}, prop = '') => {
  */
 watchEffect(() => {
   const { configOptions, values } = props
-  const options = unref(configOptions)
-  const valuesModel = unref(values)
+  const options = toValue(configOptions)
+  const valuesModel = toValue(values)
   options.forEach((fei) => {
     const { value = '', prop = '', type = '', show = null } = fei
     if (![ComponentTypeEnums.INPUT, ComponentTypeEnums.INPUT_TEXT_AREA].includes(type)) {
@@ -197,7 +197,7 @@ watchEffect(() => {
     }
 
     if (isObject(show)) {
-      watchPropsForShow(show, unref(model), prop)
+      watchPropsForShow(show, toValue(model), prop)
     }
   })
 })
@@ -251,31 +251,43 @@ const getValidator = (label = '') => {
  * @default:
  * @return {*}
  */
-const configOptionsGet = computed(() => {
-  const { configOptions } = props
-  const options = unref(configOptions)
-  const reOptions = options.map((option) => {
-    let { rules = [], label = '', prop = '', type = '', validation = false } = option
-    const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
-    const requiredSelectRule = { required: true, message: `${label}不能为空`, trigger: 'change' }
-    if (isBoolean(rules) && rules) {
-      rules = [ComponentTypeEnums.SELECT, ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)
-        ? [requiredRule, requiredSelectRule]
-        : [requiredRule]
-    } else if (Array.isArray(rules) && !!rules.length) {
-      rules = [requiredRule, ...rules]
-    }
-    // 自动新增校验规则
-    const validatorRule = getValidator(label)
-    if (validatorRule && [ComponentTypeEnums.INPUT  ].includes(type) && validation) {
-      rules = [validatorRule, ...rules]
-    }
 
-    option.rules = rules
-    return option
-  })
-  return reOptions
-})
+const curOptions = ref([])
+watch(
+  () => props.configOptions,
+  () => {
+    const { configOptions } = props
+    const options = deepClone(toRaw(toValue(configOptions)))
+    curOptions.value = options.map((option) => {
+      let { rules = [], label = '', prop = '', type = '', validation = false } = option
+      const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
+      const requiredSelectRule = { required: true, message: `${label}不能为空`, trigger: 'change' }
+      if (isBoolean(rules) && rules) {
+        rules = [ComponentTypeEnums.SELECT, ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)
+          ? [requiredRule, requiredSelectRule]
+          : [requiredRule]
+      } else if (Array.isArray(rules) && !!rules.length) {
+        rules = [requiredRule, ...rules]
+      }
+      // 自动新增校验规则
+      const validatorRule = getValidator(label)
+      if (validatorRule && [ComponentTypeEnums.INPUT].includes(type) && validation) {
+        rules = [validatorRule, ...rules]
+      }
+      option.rules = rules
+      return option
+    })
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
+
+// const configOptionsGet = computed(() => {
+
+//   return reOptions
+// })
 
 /**
  * @Author: canlong.shen
@@ -357,9 +369,9 @@ const formatSet = (type = '', format = '') => {
  * @return {*}
  */
 const triggerOperationForm = () => {
-  const modelValue = unref(model)
+  const modelValue = toValue(model)
   const { configOptions } = props
-  const options = unref(configOptions)
+  const options = toValue(configOptions)
   for (const option of options) {
     const { type = '', range = [], prop = '' } = option
     if (type.endsWith('range') && range && range.length === 2) {
@@ -568,7 +580,7 @@ defineExpose({
                 multiple = false,
                 itemDisabled = disabled,
                 detail = false,
-                attribute = { }, 
+                attribute = {},
                 formatter = (v) => {
                   return v
                 },
@@ -577,7 +589,7 @@ defineExpose({
                 }
               } = {},
               key
-            ) of configOptionsGet"
+            ) of curOptions"
             :key="key"
           >
             <el-col
@@ -785,7 +797,12 @@ defineExpose({
                       </template>
                       <!-- / 级联-多选 -->
                       <template v-if="[ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)">
-                         <BsgoalBaseCascaderMultipl   v-bind="attribute"  v-model="model[prop]" :options="range" @on-change="triggerValueChange(type, prop)"></BsgoalBaseCascaderMultipl>
+                        <BsgoalBaseCascaderMultipl
+                          v-bind="attribute"
+                          v-model="model[prop]"
+                          :options="range"
+                          @on-change="triggerValueChange(type, prop)"
+                        ></BsgoalBaseCascaderMultipl>
                       </template>
                       <!-- / 级联-多选 -->
                       <!-- / 模板 -->

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-26 11:03:08
+ * @LastEditTime: 2023-08-30 10:43:49
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -11,9 +11,11 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, toValue, useSlots, toRaw, watchEffect } from 'vue'
+import { ref, computed, toValue, useSlots, toRaw, watchEffect, onUnmounted } from 'vue'
 import BsgoalBaseDialog from '../bsgoal-base-dialog/index.vue'
 import BsgoalBaseForm from '../bsgoal-base-form/index.vue'
+import { deepClone } from '../../utils/common.js'
+
 defineOptions({
   name: 'BsgoalBaseDialogForm'
 })
@@ -97,9 +99,7 @@ const changeFormItem = (values = {}) => {
 const BSGOAL_BASE_DIALOG_REF = ref(null)
 
 const show = (raw = {}, mode = '') => {
-  const rawModel = toRaw(toValue(raw))
-  model.value = { ...rawModel }
-
+  model.value = deepClone(toRaw(toValue(raw)))
   if (mode) {
     curMode.value = mode
   } else {
