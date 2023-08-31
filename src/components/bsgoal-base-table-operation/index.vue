@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-31 15:11:07
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 15:36:14
+ * @LastEditTime: 2023-08-31 17:22:20
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table-operation\index.vue
  * @Description:  表格 - 操作列
  * 
@@ -56,4 +56,11 @@ if (slotNameList.includes('more')) {
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
+.bsgoal-base-table-operation {
+  .base_table_operation {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
 </style>

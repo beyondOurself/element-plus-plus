@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-11 17:12:31
+ * @LastEditTime: 2023-08-31 17:20:52
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -15,7 +15,7 @@ import { ref, unref } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import BsgoalBaseSearchTable from './index.vue'
 import BsgoalBaseButton from '../bsgoal-base-button/index.vue'
-
+import BsgoalBaseTableOperation from '../bsgoal-base-table-operation/index.vue'
 defineOptions({
   name: 'BsgoalSearchTableDemo'
 })
@@ -28,7 +28,7 @@ const configOptions = ref([
     value: '111',
     prop: 'prop1',
     type: ComponentTypeEnums.INPUT,
-    width: 100,
+    width: 100
   },
   {
     label: 'prop2',
@@ -54,7 +54,7 @@ const configOptions = ref([
         value: 'select5'
       }
     ]
-  },
+  }
   // {
   //   label: 'prop3',
   //   // value: '111',
@@ -745,6 +745,7 @@ const task = (done = () => {}, rows = {}) => {
         ref="BSGOAL_BASE_SEARCH_TABLE_REF"
         selection
         operation
+        :operation-width="400"
         :show-summary="true"
         :call="call"
         :fetch="fetch"
@@ -769,7 +770,12 @@ const task = (done = () => {}, rows = {}) => {
         </template>
         <template v-slot:operation="{ row }">
           <div>
-            <BsgoalBaseButton :task="task" :values="row" />
+            <BsgoalBaseTableOperation>
+              <BsgoalBaseButton :task="task" :values="row" content="按钮1" />
+              <BsgoalBaseButton :task="task" :values="row" content="按钮1" />
+              <BsgoalBaseButton :task="task" :values="row" content="按钮1" />
+              <template #more> </template>
+            </BsgoalBaseTableOperation>
           </div>
         </template>
       </BsgoalBaseSearchTable>
