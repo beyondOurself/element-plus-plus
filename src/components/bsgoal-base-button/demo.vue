@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-07 17:09:38
- * @FilePath: \common\src\components\bsgoal-base-button\demo.vue
+ * @LastEditTime: 2023-08-31 16:03:48
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\demo.vue
  * @Description:  按钮 演示
  * 
 -->
@@ -27,7 +27,7 @@ const task = (done) => {
 </script>
 <template>
   <div class="bsgoal-base-button-demo">
-    <BsgoalBaseButton :task="task"  mode="detail" disabled > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task"  mode="detail" hasConfirm > </BsgoalBaseButton>
 
     <BsgoalBaseButton :task="task" mode="edit" plain > </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="cancel" > </BsgoalBaseButton>
