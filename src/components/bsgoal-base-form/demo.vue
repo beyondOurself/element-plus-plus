@@ -137,19 +137,19 @@ const configOptions = ref([
 
   {
     label: 'prop104',
-    prop: '_prop104',
-    readonly: true,
-    rules: [
-      {
-        validator: (rule, value, callback) => {
-          console.log('value', value)
+    prop: 'prop104',
+    // readonly: true,
+    // rules: [
+    //   {
+    //     validator: (rule, value, callback) => {
+    //       console.log('value', value)
 
-          //  return callback(new Error('Please input the age'))
-          return callback()
-        },
-        trigger: 'change'
-      }
-    ]
+    //       //  return callback(new Error('Please input the age'))
+    //       return callback()
+    //     },
+    //     trigger: 'change'
+    //   }
+    // ]
   },
   {
     label: 'prop103',
