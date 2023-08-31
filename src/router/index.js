@@ -18,6 +18,12 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+
+        {
+          path: '/bsgoal-base-table-operation-demo',
+          name: '表格操作列',
+          component: import('@/components/bsgoal-base-table-operation/demo.vue')
+        },
         {
           path: '/bsgoal-base-cascader-multiple-demo',
           name: '级联选择多选',

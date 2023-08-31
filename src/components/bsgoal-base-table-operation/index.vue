@@ -1,0 +1,59 @@
+<!--
+ * @Author: canlong.shen
+ * @Date: 2023-08-31 15:11:07
+ * @LastEditors: canlong.shen
+ * @LastEditTime: 2023-08-31 15:36:14
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-table-operation\index.vue
+ * @Description:  表格 - 操作列
+ * 
+-->
+
+<script setup>
+/* setup模板
+---------------------------------------------------------------- */
+import { ref, useSlots } from 'vue'
+
+defineOptions({
+  name: 'BsgoalBaseTableOperation'
+})
+
+const props = defineProps({
+  /**
+   *  宽度
+   */
+  width: {
+    type: [Number],
+    default: 150
+  }
+})
+
+const slots = useSlots()
+const slotNameList = Object.keys(slots)
+
+const hasMore = ref(false)
+
+if (slotNameList.includes('more')) {
+  hasMore.value = true
+}
+</script>
+<template>
+  <div class="bsgoal-base-table-operation">
+    <div class="base_table_operation">
+      <slot></slot>
+      <template v-if="hasMore">
+        <el-popover placement="top-start" :width="width" trigger="hover">
+          <template #reference>
+            <el-button> 更多 </el-button>
+          </template>
+          <!-- S 更多 -->
+          <slot name="more"></slot>
+          <!-- E 更多 -->
+        </el-popover>
+      </template>
+    </div>
+  </div>
+</template>
+<style lang="scss">
+/* 覆盖样式
+---------------------------------------------------------------- */
+</style>
