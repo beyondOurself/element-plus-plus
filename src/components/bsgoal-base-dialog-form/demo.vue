@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-30 10:20:17
+ * @LastEditTime: 2023-08-31 11:13:38
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -87,6 +87,11 @@ const changeFormItem = (values = {}) => {
   console.log('values22', values)
 }
 
+const hide = () => {
+   console.log('隐藏了')
+   
+}
+
 // ---> E 新增/编辑/详情 <---
 </script>
 <template>
@@ -99,6 +104,7 @@ const changeFormItem = (values = {}) => {
       :options="configOptionsForm"
       @on-confirm="confirm"
       @on-change="changeFormItem"
+      @on-hide="hide"
     >
       <template #prop3>
         <el-button type="primary" @click="test">点击测试</el-button>

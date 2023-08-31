@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-30 10:43:49
+ * @LastEditTime: 2023-08-31 11:14:30
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -113,6 +113,10 @@ const show = (raw = {}, mode = '') => {
 
 const hide = () => {
   BSGOAL_BASE_DIALOG_REF.value.hide()
+  // emits('on-hide')
+}
+
+const hideDialog = () => {
   emits('on-hide')
 }
 
@@ -167,6 +171,7 @@ defineExpose({
       v-bind="$props"
       :title="titleGet"
       @on-confirm="confirmDialog"
+      @on-hide="hideDialog"
     >
       <div>
         <BsgoalBaseForm
