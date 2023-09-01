@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 16:11:23
+ * @LastEditTime: 2023-09-01 10:35:26
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -133,7 +133,9 @@ const iconGet = computed(() => {
 })
 const contentGet = computed(() => {
   const { mode = '', content = '' } = props
-
+  if (content) {
+    return content
+  }
   switch (mode) {
     case 'cancel':
       return '取消'
