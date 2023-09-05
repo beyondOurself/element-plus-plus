@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-31 15:11:07
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 17:22:20
+ * @LastEditTime: 2023-09-05 14:36:17
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table-operation\index.vue
  * @Description:  表格 - 操作列
  * 
@@ -41,12 +41,14 @@ if (slotNameList.includes('more')) {
     <div class="base_table_operation">
       <slot></slot>
       <template v-if="hasMore">
-        <el-popover placement="top-start" :width="width" trigger="hover">
+        <el-popover placement="top-start" :teleported="false" :width="width" trigger="hover">
           <template #reference>
             <el-button> 更多 </el-button>
           </template>
           <!-- S 更多 -->
-          <slot name="more"></slot>
+          <div class="table_operation_more">
+            <slot name="more"></slot>
+          </div>
           <!-- E 更多 -->
         </el-popover>
       </template>
@@ -61,6 +63,14 @@ if (slotNameList.includes('more')) {
     display: flex;
     align-items: center;
     justify-content: space-around;
+  }
+  .table_operation_more {
+    display: flex;
+    flex-direction: column;
+    & > button {
+      margin-left: 0px;
+      margin-top: 8px;
+    }
   }
 }
 </style>
