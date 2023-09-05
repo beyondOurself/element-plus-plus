@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-31 15:11:07
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-05 14:50:32
+ * @LastEditTime: 2023-09-05 15:07:28
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table-operation\index.vue
  * @Description:  表格 - 操作列
  * 
@@ -73,15 +73,18 @@ if (slotNameList.includes('more')) {
 
 .base_table_operation_popover {
   .table_operation_popover_more {
+    text-align: center;
     display: flex;
     flex-direction: column;
-    & > button {
+    align-items: center;
+   
+    & > * {
       margin-left: 0px !important;
       margin-bottom: 8px !important;
       &:last-child {
         margin-bottom: 0px !important;
       }
-    }
+    } 
   }
 }
 </style>
