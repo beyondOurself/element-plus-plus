@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-01 10:35:26
+ * @LastEditTime: 2023-09-07 00:10:28
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -11,9 +11,10 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref, computed } from 'vue'
+import { ref, unref, computed, nextTick } from 'vue'
 import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
-
+import iconMap from './assets/map-icon.js'
+import BsgoalBaseIcon from '../bsgoal-base-icon/index.vue'
 defineOptions({
   name: 'BsgoalBaseButton'
 })
@@ -79,6 +80,13 @@ const props = defineProps({
   title: {
     type: [String],
     default: '是否删除!'
+  },
+  /**
+   * 自定义图标路径
+   */
+  url: {
+    type: [String],
+    default: ''
   }
 })
 
@@ -99,6 +107,15 @@ const triggerClick = () => {
 
 // ---> S 模式 <---
 
+const getIconMapproperty = (prop = '') => {
+  const { mode = '' } = props
+  const mapModeConfig = iconMap[mode]
+  if (mapModeConfig && mapModeConfig[prop]) {
+    return mapModeConfig[prop]
+  }
+  return ''
+}
+
 const typeGet = computed(() => {
   const { mode = '', type = '' } = props
 
@@ -112,10 +129,14 @@ const typeGet = computed(() => {
     case 'edit':
       return 'primary'
   }
-  return type
+
+  const typeValue = getIconMapproperty('type')
+
+  return typeValue || type
 })
 const iconGet = computed(() => {
   const { mode = '', icon = '' } = props
+
   if (icon !== false) {
     switch (mode) {
       case 'delete':
@@ -150,10 +171,39 @@ const contentGet = computed(() => {
     case 'detail':
       return '详情'
   }
-  return content
+
+  const contentValue = getIconMapproperty('content')
+
+  return contentValue || content
 })
 
 // ---> E 模式 <---
+
+const iconUrlGet = computed(() => {
+  const { url = '' } = props
+  const svgUrl = getIconMapproperty('icon')
+  return url || svgUrl
+})
+const curIconColor = ref('')
+const EL_BUTTON_REF = ref(null)
+const setIconColor = () => {
+  nextTick(() => {
+    const buttonEl = EL_BUTTON_REF.value
+    const elIconEl = buttonEl.querySelector('.el-button')
+    setTimeout(() => {
+      const colorValue = window.getComputedStyle(elIconEl, null).getPropertyValue('color')
+      curIconColor.value = colorValue
+    }, 50)
+  })
+}
+
+setIconColor()
+const mouseenter = () => {
+  setIconColor()
+}
+const mouseleave = () => {
+  setIconColor()
+}
 </script>
 <template>
   <div class="bsgoal-base-button">
@@ -168,15 +218,15 @@ const contentGet = computed(() => {
                 :loading="loading"
                 :plain="plain"
                 :disabled="disabled"
-                >{{ contentGet }}</el-button
-              >
+                >{{ contentGet }}
+              </el-button>
             </slot>
           </template>
         </el-popconfirm>
       </div>
     </template>
     <template v-else>
-      <div class="base_button" @click="triggerClick">
+      <div class="base_button" ref="EL_BUTTON_REF" @click="triggerClick">
         <slot :loading="loading">
           <el-button
             :type="typeGet"
@@ -184,8 +234,15 @@ const contentGet = computed(() => {
             :loading="loading"
             :plain="plain"
             :disabled="disabled"
-            >{{ contentGet }}</el-button
-          >
+            :url="url"
+            @mouseenter="mouseenter"
+            @mouseleave="mouseleave"
+            >{{ contentGet }}
+
+            <template #icon>
+              <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+            </template>
+          </el-button>
         </slot>
       </div>
     </template>

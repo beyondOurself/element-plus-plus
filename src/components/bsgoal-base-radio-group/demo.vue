@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-05 17:49:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-06 14:02:50
+ * @LastEditTime: 2023-09-06 17:13:05
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-radio-group\demo.vue
  * @Description:  单选框组 - 演示
  * 
@@ -42,6 +42,10 @@ const radioGroupOptions = ref([
 <template>
   <div class="bsgoal-base-radio-group-demo">
     <BsgoalBaseRadioGroup :options="radioGroupOptions" />
+
+    <el-icon :size="size" :color="color">
+      <Edit />
+    </el-icon>
   </div>
 </template>
 <style lang="scss">

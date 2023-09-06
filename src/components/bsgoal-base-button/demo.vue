@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 16:03:48
+ * @LastEditTime: 2023-09-07 00:11:37
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\demo.vue
  * @Description:  按钮 演示
  * 
@@ -28,8 +28,10 @@ const task = (done) => {
 <template>
   <div class="bsgoal-base-button-demo">
     <BsgoalBaseButton :task="task"  mode="detail" hasConfirm > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task"  content="测试" url="https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/button/icon_take%20notes.svg" > </BsgoalBaseButton>
 
     <BsgoalBaseButton :task="task" mode="edit" plain > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="delete" plain > </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="cancel" > </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="confirm" content="取消"> </BsgoalBaseButton>
 
