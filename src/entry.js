@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-11 18:31:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 15:14:36
+ * @LastEditTime: 2023-09-06 11:50:31
  * @FilePath: \v3_basic_component\src\entry.js
  * @Description: 打包 入口文件
  * 
@@ -36,6 +36,7 @@ import BsgoalBaseDialogForm from '@/components/bsgoal-base-dialog-form/index.vue
 import BsgoalBaseTimeSelect from '@/components/bsgoal-base-time-select/index.vue'
 import BsgoalBaseCascaderMultipl from '@/components/bsgoal-base-cascader-multiple/index.vue'
 import BsgoalBaseTableOperation from '@/components/bsgoal-base-table-operation/index.vue'
+import BsgoalBaseRadioGroup from '@/components/bsgoal-base-radio-group/index.vue'
 import componentTypeEnums from '@/enums/componentTypeEnums.js'
 import { useFetch } from '@/combines/useFetchs.js'
 
@@ -73,7 +74,8 @@ export default {
       BsgoalBaseDialogForm,
       BsgoalBaseTimeSelect,
       BsgoalBaseCascaderMultipl,
-      BsgoalBaseTableOperation
+      BsgoalBaseTableOperation,
+      BsgoalBaseRadioGroup
     }
 
     for (const [name, component] of Object.entries(componentsMap)) {

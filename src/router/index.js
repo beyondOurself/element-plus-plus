@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-26 15:52:51
+ * @LastEditTime: 2023-09-06 11:59:51
  * @FilePath: \v3_basic_component\src\router\index.js
  * @Description: 路由配置
  * 
@@ -19,6 +19,11 @@ const router = createRouter({
       component: LayoutHome,
       children: [
 
+        {
+          path: '/bsgoal-base-radio-group-demo',
+          name: '单选框组',
+          component: import('@/components/bsgoal-base-radio-group/demo.vue')
+        },
         {
           path: '/bsgoal-base-table-operation-demo',
           name: '表格操作列',
