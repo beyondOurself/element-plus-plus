@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 00:33:53
+ * @LastEditTime: 2023-09-07 00:36:44
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -189,9 +189,6 @@ const EL_BUTTON_REF = ref(null)
 const setIconColor = (resetPrimary = false) => {
   const { plain = false } = props
   const type = typeGet.value
-  console.log('type', type)
-  console.log('plain', plain)
-  console.log('resetPrimary', resetPrimary)
   nextTick(() => {
     if (type === 'primary' && plain && resetPrimary) {
       curIconColor.value = 'var(--el-color-primary)'
