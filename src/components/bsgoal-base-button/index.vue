@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 00:10:28
+ * @LastEditTime: 2023-09-07 00:33:53
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -186,23 +186,34 @@ const iconUrlGet = computed(() => {
 })
 const curIconColor = ref('')
 const EL_BUTTON_REF = ref(null)
-const setIconColor = () => {
+const setIconColor = (resetPrimary = false) => {
+  const { plain = false } = props
+  const type = typeGet.value
+  console.log('type', type)
+  console.log('plain', plain)
+  console.log('resetPrimary', resetPrimary)
   nextTick(() => {
-    const buttonEl = EL_BUTTON_REF.value
-    const elIconEl = buttonEl.querySelector('.el-button')
-    setTimeout(() => {
-      const colorValue = window.getComputedStyle(elIconEl, null).getPropertyValue('color')
-      curIconColor.value = colorValue
-    }, 50)
+    if (type === 'primary' && plain && resetPrimary) {
+      curIconColor.value = 'var(--el-color-primary)'
+    } else {
+      const buttonEl = EL_BUTTON_REF.value
+      if (buttonEl) {
+        const elIconEl = buttonEl.querySelector('.el-button')
+        setTimeout(() => {
+          const colorValue = window.getComputedStyle(elIconEl, null).getPropertyValue('color')
+          curIconColor.value = colorValue
+        }, 50)
+      }
+    }
   })
 }
 
-setIconColor()
+setIconColor(true)
 const mouseenter = () => {
   setIconColor()
 }
 const mouseleave = () => {
-  setIconColor()
+  setIconColor(true)
 }
 </script>
 <template>
