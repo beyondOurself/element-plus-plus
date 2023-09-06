@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-05 17:49:42
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-06 14:03:06
+ * @LastEditTime: 2023-09-06 14:57:36
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-radio-group\index.vue
  * @Description: 单选框 - 按钮组
  * 
@@ -22,7 +22,7 @@ const props = defineProps({
    * value
    */
   modelValue: {
-    type: [String],
+    type: [String , Number, Boolean],
     default: ''
   },
   /**
