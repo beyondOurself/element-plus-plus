@@ -2,7 +2,7 @@ const BASE_ICON_URL = 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/est
 
 export default {
   edit: { icon: `${BASE_ICON_URL}icon_Edit.svg`, type: 'primary', content: '编辑' },
-  issued: { icon: `${BASE_ICON_URL}icon_Issued.svg`, type: 'primary', content: '下发' },
+  issued: { icon: `${BASE_ICON_URL}icon_Issued.svg`, type: 'success', content: '下发' },
   reassignment: { icon: `${BASE_ICON_URL}icon_Reassignment.svg`, type: 'primary', content: '转派' },
   setting: { icon: `${BASE_ICON_URL}icon_Setting.svg`, type: 'primary', content: '设置' },
   batch: { icon: `${BASE_ICON_URL}icon_batch.svg`, type: 'primary', content: '批量' },

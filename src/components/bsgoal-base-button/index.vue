@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 10:11:38
+ * @LastEditTime: 2023-09-07 10:28:20
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -129,10 +129,8 @@ const typeGet = computed(() => {
     case 'edit':
       return 'primary'
   }
-
   const typeValue = getIconMapproperty('type')
-
-  return typeValue || type
+  return   type || typeValue
 })
 const iconGet = computed(() => {
   const { mode = '', icon = '' } = props
