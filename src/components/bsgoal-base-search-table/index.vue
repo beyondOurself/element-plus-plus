@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-28 09:47:47
+ * @LastEditTime: 2023-09-07 16:08:20
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, provide, useSlots } from 'vue'
+import { ref, computed, unref, provide, useSlots, watchEffect } from 'vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import BsgoalBaseTable from '../bsgoal-base-table/index.vue'
 
@@ -152,13 +152,13 @@ const props = defineProps({
     type: [Boolean],
     default: false
   },
-   /**
+  /**
    * 中屏设备宽度的比例
    */
-   medium: {
+  medium: {
     type: [Number, String],
     default: 6
-  },
+  }
 })
 
 const emits = defineEmits([
@@ -172,11 +172,18 @@ const emits = defineEmits([
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)
 
-const options = unref(props.configOptions)
+const curConfigOptions = ref([])
+
+watchEffect(() => {
+  const { configOptions } = props
+  curConfigOptions.value = configOptions
+})
+
 
 // 查询 配置项
 const searchOptions = computed(() => {
-  return options.filter((fi) => {
+  const curConfigOptionsValue = curConfigOptions.value
+  return curConfigOptionsValue.filter((fi) => {
     const { type = '' } = fi
     return !!type
   })
@@ -184,7 +191,8 @@ const searchOptions = computed(() => {
 
 // 表格 配置项
 const tableOptions = computed(() => {
-  return options.filter((fi) => {
+  const curConfigOptionsValue = curConfigOptions.value
+  return curConfigOptionsValue.filter((fi) => {
     const { item = false } = fi
     return !item
   })
