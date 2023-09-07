@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 10:28:20
+ * @LastEditTime: 2023-09-07 17:05:10
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -87,6 +87,27 @@ const props = defineProps({
   url: {
     type: [String],
     default: ''
+  },
+  /**
+   * 链接按钮
+   */
+  link: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * tooltip 提示文字
+   */
+  tooltip: {
+    type: [String],
+    default: ''
+  },
+  /**
+   * tooltip 内容宽度
+   */
+  tooltipWidth: {
+    type: [String, Number],
+    default: 400
   }
 })
 
@@ -130,7 +151,7 @@ const typeGet = computed(() => {
       return 'primary'
   }
   const typeValue = getIconMapproperty('type')
-  return   type || typeValue
+  return type || typeValue
 })
 const iconGet = computed(() => {
   const { mode = '', icon = '' } = props
@@ -210,6 +231,16 @@ const mouseenter = () => {
 const mouseleave = () => {
   setIconColor(true)
 }
+
+const tooltipStyleGet = computed(() => {
+  const styler = {}
+  const { tooltipWidth = 0 } = props
+
+  if (tooltipWidth) {
+    styler.width = Number.isInteger(tooltipWidth) ? `${tooltipWidth}px` : tooltipWidth
+  }
+  return styler
+})
 </script>
 <template>
   <div class="bsgoal-base-button">
@@ -219,6 +250,7 @@ const mouseleave = () => {
           <template #reference>
             <slot :loading="loading">
               <el-button
+                :link="link"
                 :type="typeGet"
                 :icon="iconGet"
                 :loading="loading"
@@ -236,23 +268,32 @@ const mouseleave = () => {
     </template>
     <template v-else>
       <div class="base_button" ref="EL_BUTTON_REF" @click="triggerClick">
-        <slot :loading="loading">
-          <el-button
-            :type="typeGet"
-            :icon="iconGet"
-            :loading="loading"
-            :plain="plain"
-            :disabled="disabled"
-            :url="url"
-            @mouseenter="mouseenter"
-            @mouseleave="mouseleave"
-            >{{ contentGet }}
+        <el-tooltip effect="light" :disabled="!tooltip" :content="tooltip" placement="top">
+          <template #content>
+            <div :style="tooltipStyleGet">
+              {{ tooltip }}
+            </div>
+          </template>
 
-            <template #icon v-if="iconUrlGet">
-              <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
-            </template>
-          </el-button>
-        </slot>
+          <slot :loading="loading">
+            <el-button
+              :link="link"
+              :type="typeGet"
+              :icon="iconGet"
+              :loading="loading"
+              :plain="plain"
+              :disabled="disabled"
+              :url="url"
+              @mouseenter="mouseenter"
+              @mouseleave="mouseleave"
+              >{{ contentGet }}
+
+              <template #icon v-if="iconUrlGet">
+                <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+              </template>
+            </el-button>
+          </slot>
+        </el-tooltip>
       </div>
     </template>
   </div>
