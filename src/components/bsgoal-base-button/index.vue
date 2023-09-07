@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 17:05:10
+ * @LastEditTime: 2023-09-07 17:33:46
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -108,6 +108,13 @@ const props = defineProps({
   tooltipWidth: {
     type: [String, Number],
     default: 400
+  },
+  /**
+   * placement
+   */
+  tooltipPlacement: {
+    type: [String],
+    default: 'top'
   }
 })
 
@@ -268,10 +275,20 @@ const tooltipStyleGet = computed(() => {
     </template>
     <template v-else>
       <div class="base_button" ref="EL_BUTTON_REF" @click="triggerClick">
-        <el-tooltip effect="light" :disabled="!tooltip" :content="tooltip" placement="top">
+        <el-tooltip
+          effect="light"
+          :disabled="!tooltip"
+          :content="tooltip"
+          :placement="tooltipPlacement"
+        >
           <template #content>
-            <div :style="tooltipStyleGet">
-              {{ tooltip }}
+            <div class="base_button_tooltip" :style="tooltipStyleGet">
+              <el-input
+                :model-value="tooltip"
+                autosize
+                type="textarea"
+                readonly
+              />
             </div>
           </template>
 
@@ -305,6 +322,10 @@ const tooltipStyleGet = computed(() => {
   &,
   .base_button {
     display: inline-block;
+  }
+  .base_button_tooltip {
+    word-wrap: break-word;
+    word-break: break-all;
   }
 }
 </style>
