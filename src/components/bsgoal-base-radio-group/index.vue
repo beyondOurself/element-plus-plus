@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-05 17:49:42
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-06 14:57:36
+ * @LastEditTime: 2023-09-07 10:12:05
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-radio-group\index.vue
  * @Description: 单选框 - 按钮组
  * 
@@ -73,5 +73,6 @@ export default {
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-radio-group {
+  display: inline-block;
 }
 </style>

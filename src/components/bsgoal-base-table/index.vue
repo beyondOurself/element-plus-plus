@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-06 11:45:53
+ * @LastEditTime: 2023-09-07 10:13:49
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -433,6 +433,8 @@ defineExpose({
   }
 
   .base_table_menu {
+    display: flex;
+    align-items: center;
     margin-bottom: 8px;
   }
 

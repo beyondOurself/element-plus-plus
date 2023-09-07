@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 10:05:35
+ * @LastEditTime: 2023-09-07 10:11:38
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -227,6 +227,9 @@ const mouseleave = () => {
                 :plain="plain"
                 :disabled="disabled"
                 >{{ contentGet }}
+                <template #icon v-if="iconUrlGet">
+                  <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+                </template>
               </el-button>
             </slot>
           </template>
@@ -248,7 +251,7 @@ const mouseleave = () => {
             >{{ contentGet }}
 
             <template #icon v-if="iconUrlGet">
-              <BsgoalBaseIcon  width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+              <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
             </template>
           </el-button>
         </slot>
