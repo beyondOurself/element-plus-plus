@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 10:13:49
+ * @LastEditTime: 2023-09-08 17:24:14
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -223,7 +223,12 @@ const ping = () => {
   const searchParamsVal = searchParams.value
   const currentPageVal = currentPage.value
   const pageSizeVal = curPageSize.value
-  const fetchParams = { ...searchParamsVal }
+  const fetchParams = {}
+  for (const [prop, value] of Object.entries(searchParamsVal)) {
+    if (!`${prop}`.startsWith('_')) {
+      fetchParams[prop] = value
+    }
+  }
   // 显示分页的注入分页参数
   if (hasPage) {
     fetchParams[mapPropsFuse.currentPage] = currentPageVal
