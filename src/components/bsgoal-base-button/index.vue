@@ -15,6 +15,8 @@ import { ref, unref, computed, nextTick } from 'vue'
 import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
 import iconMap from './assets/map-icon.js'
 import BsgoalBaseIcon from '../bsgoal-base-icon/index.vue'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+
 defineOptions({
   name: 'BsgoalBaseButton'
 })
@@ -251,10 +253,43 @@ const tooltipStyleGet = computed(() => {
 </script>
 <template>
   <div class="bsgoal-base-button">
-    <template v-if="hasConfirm && !disabled">
-      <div class="base_button">
-        <el-popconfirm :title="title" @confirm="triggerClick">
-          <template #reference>
+    <el-config-provider :locale="zhCn">
+      <template v-if="hasConfirm && !disabled">
+        <div class="base_button">
+          <el-popconfirm :title="title" @confirm="triggerClick">
+            <template #reference>
+              <slot :loading="loading">
+                <el-button
+                  :link="link"
+                  :type="typeGet"
+                  :icon="iconGet"
+                  :loading="loading"
+                  :plain="plain"
+                  :disabled="disabled"
+                  >{{ contentGet }}
+                  <template #icon v-if="iconUrlGet">
+                    <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+                  </template>
+                </el-button>
+              </slot>
+            </template>
+          </el-popconfirm>
+        </div>
+      </template>
+      <template v-else>
+        <div class="base_button" ref="EL_BUTTON_REF" @click="triggerClick">
+          <el-tooltip
+            effect="light"
+            :disabled="!tooltip"
+            :content="tooltip"
+            :placement="tooltipPlacement"
+          >
+            <template #content>
+              <div class="base_button_tooltip" :style="tooltipStyleGet">
+                <el-input :model-value="tooltip" autosize type="textarea" readonly />
+              </div>
+            </template>
+
             <slot :loading="loading">
               <el-button
                 :link="link"
@@ -263,56 +298,20 @@ const tooltipStyleGet = computed(() => {
                 :loading="loading"
                 :plain="plain"
                 :disabled="disabled"
+                :url="url"
+                @mouseenter="mouseenter"
+                @mouseleave="mouseleave"
                 >{{ contentGet }}
+
                 <template #icon v-if="iconUrlGet">
                   <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
                 </template>
               </el-button>
             </slot>
-          </template>
-        </el-popconfirm>
-      </div>
-    </template>
-    <template v-else>
-      <div class="base_button" ref="EL_BUTTON_REF" @click="triggerClick">
-        <el-tooltip
-          effect="light"
-          :disabled="!tooltip"
-          :content="tooltip"
-          :placement="tooltipPlacement"
-        >
-          <template #content>
-            <div class="base_button_tooltip" :style="tooltipStyleGet">
-              <el-input
-                :model-value="tooltip"
-                autosize
-                type="textarea"
-                readonly
-              />
-            </div>
-          </template>
-
-          <slot :loading="loading">
-            <el-button
-              :link="link"
-              :type="typeGet"
-              :icon="iconGet"
-              :loading="loading"
-              :plain="plain"
-              :disabled="disabled"
-              :url="url"
-              @mouseenter="mouseenter"
-              @mouseleave="mouseleave"
-              >{{ contentGet }}
-
-              <template #icon v-if="iconUrlGet">
-                <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
-              </template>
-            </el-button>
-          </slot>
-        </el-tooltip>
-      </div>
-    </template>
+          </el-tooltip>
+        </div>
+      </template>
+    </el-config-provider>
   </div>
 </template>
 <style lang="scss">
