@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 16:08:20
+ * @LastEditTime: 2023-09-08 13:37:29
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -225,10 +225,10 @@ const expresionGet = computed(() => {
 // ---> S 刷新 <---
 const BSGOAL_BASE_SEARCH_REF = ref(null)
 const refresh = () => {
-  const { hasSearch } = props
-  if (unref(hasSearch)) {
+  // const { hasSearch } = props
+  // if (unref(hasSearch)) {
     BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
-  }
+  // }
 }
 // ---> E 刷新 <---
 
