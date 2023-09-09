@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-15 17:19:04
+ * @LastEditTime: 2023-09-09 09:12:39
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -196,6 +196,13 @@ const props = defineProps({
   medium: {
     type: [Number, String],
     default: 6
+  },
+  /**
+   * 表格菜单自动布局
+   */
+   autoLayoutMenu: {
+    type: [Boolean],
+    default: false
   }
 })
 
