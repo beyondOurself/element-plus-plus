@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-08 17:24:14
+ * @LastEditTime: 2023-09-09 08:49:15
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -161,6 +161,13 @@ const props = defineProps({
   bodyStyle: {
     type: [Object],
     default: () => ({})
+  },
+  /**
+   * 表格菜单自动布局
+   */
+  autoLayoutMenu: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -341,7 +348,11 @@ defineExpose({
       :style="bodyStyle"
     >
       <!-- S 表头操作区域 -->
-      <div class="base_table_menu" v-if="$slots.menu">
+      <div
+        class="base_table_menu"
+        v-if="$slots.menu"
+        :class="{ 'base_table_menu--auto': autoLayoutMenu }"
+      >
         <slot name="menu"></slot>
       </div>
       <!-- E 表头操作区域 -->
@@ -438,6 +449,9 @@ defineExpose({
   }
 
   .base_table_menu {
+  }
+
+  .base_table_menu--auto {
     display: flex;
     align-items: center;
     margin-bottom: 8px;

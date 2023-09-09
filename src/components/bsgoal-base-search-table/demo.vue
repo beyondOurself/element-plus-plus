@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-08 17:28:48
+ * @LastEditTime: 2023-09-09 08:51:05
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -970,6 +970,7 @@ const task = (done = () => {}, rows = {}) => {
         ref="BSGOAL_BASE_SEARCH_TABLE_REF"
         selection
         operation
+        auto-layout-menu
         :operation-width="400"
         :show-summary="true"
         :call="call"
@@ -992,6 +993,10 @@ const task = (done = () => {}, rows = {}) => {
       > -->
         <template v-slot:menu>
           <el-button type="primary" @click="test">操作按钮</el-button>
+          <el-button type="primary" @click="test">操作按钮</el-button>
+          <el-button type="primary" @click="test">操作按钮</el-button>
+
+          <el-alert title="info alert" type="info" />
         </template>
         <template v-slot:operation="{ row }">
           <div>

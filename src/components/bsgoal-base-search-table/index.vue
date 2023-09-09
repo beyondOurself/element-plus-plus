@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-08 13:37:29
+ * @LastEditTime: 2023-09-09 08:50:30
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -158,6 +158,13 @@ const props = defineProps({
   medium: {
     type: [Number, String],
     default: 6
+  },
+  /**
+   * 表格菜单自动布局
+   */
+  autoLayoutMenu: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -178,7 +185,6 @@ watchEffect(() => {
   const { configOptions } = props
   curConfigOptions.value = configOptions
 })
-
 
 // 查询 配置项
 const searchOptions = computed(() => {
@@ -227,7 +233,7 @@ const BSGOAL_BASE_SEARCH_REF = ref(null)
 const refresh = () => {
   // const { hasSearch } = props
   // if (unref(hasSearch)) {
-    BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
+  BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
   // }
 }
 // ---> E 刷新 <---
@@ -300,6 +306,7 @@ defineExpose({
         :has-page="hasPage"
         :summary-props="summaryProps"
         :serial="serial"
+        :autoLayoutMenu="autoLayoutMenu"
         @select="triggerSelect"
         @select-all="triggerSelectAll"
         @selection-change="triggerSelectionChange"
