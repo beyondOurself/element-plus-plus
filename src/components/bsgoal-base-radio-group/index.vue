@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-05 17:49:42
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 15:46:11
+ * @LastEditTime: 2023-09-09 16:40:59
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-radio-group\index.vue
  * @Description: 单选框 - 按钮组
  * 
@@ -72,8 +72,8 @@ export default {
   <div class="bsgoal-base-radio-group">
     <el-radio-group class="base_radio_group" v-model="curModelValue" @change="change">
       <template v-for="(option, index) of curOptions" :key="index">
-        <el-radio-button v-if="mode === 'button'" :label="option.value"> {{ option.label }}</el-radio-button>
-        <el-radio v-if="mode === 'radio'" :label="option.value"> {{ option.label }}</el-radio>
+        <el-radio-button v-if="mode === 'button'" :disabled="!!option.disabled" :label="option.value"> {{ option.label }}</el-radio-button>
+        <el-radio v-if="mode === 'radio'"  :disabled="!!option.disabled" :label="option.value"> {{ option.label }}</el-radio>
       </template>
     </el-radio-group>
   </div>

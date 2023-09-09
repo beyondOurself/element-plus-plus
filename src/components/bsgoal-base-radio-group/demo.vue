@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-05 17:49:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 15:47:10
+ * @LastEditTime: 2023-09-09 16:41:49
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-radio-group\demo.vue
  * @Description:  单选框组 - 演示
  * 
@@ -35,7 +35,8 @@ const radioGroupOptions = ref([
   },
   {
     label: 'label4',
-    value: 'value4'
+    value: 'value4',
+    disabled: true
   }
 ])
 </script>
