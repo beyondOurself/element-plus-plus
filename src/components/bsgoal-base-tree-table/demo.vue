@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-07 14:23:10
- * @FilePath: \common\src\components\bsgoal-base-tree-table\demo.vue
+ * @LastEditTime: 2023-09-11 11:55:05
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
 -->
@@ -311,7 +311,48 @@ const tableData = ref([
     prop13: 'row1value',
     prop14: 'row1value',
     prop15: 'row1value',
-    prop16: 'row1value'
+    prop16: 'row1value',
+    hasChildren:false,
+    children: [
+      {
+        id:31,
+        prop1: 'row1-1value',
+        prop2: 'row1-1value',
+        prop3: 'row1-1value',
+        prop4: 'row1-1value',
+        prop5: 'row1-1value',
+        prop6: 'row1-1value',
+        prop7: 'row1-1value',
+        prop8: 'row1-1value',
+        prop9: 'row1-1value',
+        prop10: 'row1-1value',
+        prop11: 'row1-1value',
+        prop12: 'row1-1value',
+        prop13: 'row1-1value',
+        prop14: 'row1-1value',
+        prop15: 'row1-1value',
+        prop16: 'row1-1value'
+      },
+      {
+        id:32,
+        prop1: 'row1-2value',
+        prop2: 'row1-2value',
+        prop3: 'row1-2value',
+        prop4: 'row1-2value',
+        prop5: 'row1-2value',
+        prop6: 'row1-2value',
+        prop7: 'row1-2value',
+        prop8: 'row1-2value',
+        prop9: 'row1-2value',
+        prop10: 'row1-2value',
+        prop11: 'row1-2value',
+        prop12: 'row1-2value',
+        prop13: 'row1-2value',
+        prop14: 'row1-2value',
+        prop15: 'row1-2value',
+        prop16: 'row1-2value'
+      },
+    ]
   },
   {
     prop1: 'row2value',

@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 13:49:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-15 14:26:22
- * @FilePath: \common\src\components\bsgoal-base-table-content\index.vue
+ * @LastEditTime: 2023-09-11 11:18:33
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-table-content\index.vue
  * @Description: 表格内容 
  * 
 -->
@@ -51,7 +51,6 @@ const props = defineProps({
             <BsgoalBaseTooltip v-if="tooltip" :content="data" :limit="limit" />
             <div v-else class="base_table_table_txt">
                 {{ data }}
-
             </div>
         </div>
     </div>
@@ -59,6 +58,8 @@ const props = defineProps({
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
-.bsgoal-base-table-content {}
+.bsgoal-base-table-content {
+    display: inline-block;
+}
 </style>
 

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 08:50:30
+ * @LastEditTime: 2023-09-11 13:38:30
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -165,6 +165,41 @@ const props = defineProps({
   autoLayoutMenu: {
     type: [Boolean],
     default: false
+  },
+   /**
+   * 加载子节点数据的函数
+   */
+   load: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 是否懒加载
+   */
+  lazy: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 渲染嵌套数据的配置选项
+   */
+  treeProps: {
+    type: [Object],
+    default: () => ({ hasChildren: 'hasChildren', children: 'children' })
+  },
+  /**
+   * 行数据的 Key
+   */
+  rowKey: {
+    type: [String, Function],
+    default: 'id'
+  },
+  /**
+   * 默认展开所有扩展
+   */
+  defaultExpandAll: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -292,6 +327,7 @@ defineExpose({
       <!-- S 表格 -->
       <BsgoalBaseTable
         ref="BSGOAL_BASE_TABLE_REF"
+        v-bind="$props"
         :show-summary="showSummary"
         :page-size="pageSize"
         :map-props="mapProps"

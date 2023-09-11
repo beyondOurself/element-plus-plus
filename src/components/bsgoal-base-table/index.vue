@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 08:49:15
+ * @LastEditTime: 2023-09-11 11:47:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -166,6 +166,41 @@ const props = defineProps({
    * 表格菜单自动布局
    */
   autoLayoutMenu: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 加载子节点数据的函数
+   */
+  load: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 是否懒加载
+   */
+  lazy: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 渲染嵌套数据的配置选项
+   */
+  treeProps: {
+    type: [Object],
+    default: () => ({ hasChildren: 'hasChildren', children: 'children' })
+  },
+  /**
+   * 行数据的 Key
+   */
+  rowKey: {
+    type: [String, Function],
+    default: 'id'
+  },
+  /**
+   * 默认展开所有扩展
+   */
+  defaultExpandAll: {
     type: [Boolean],
     default: false
   }
@@ -366,9 +401,15 @@ defineExpose({
           style="width: 100%"
           v-loading="tableLoading"
           sum-text="合计"
+          :indent="32"
+          :default-expand-all="defaultExpandAll"
           :summary-method="summaryMethod"
           :show-summary="showSummary"
           :data="tableData"
+          :tree-props="treeProps"
+          :load="load"
+          :lazy="lazy"
+          :row-key="rowKey"
           :header-cell-style="{
             fontWeight: 'bold',
             backgroundColor: '#EBEEF5',
@@ -390,6 +431,9 @@ defineExpose({
           <!-- / 多选 -->
           <el-table-column v-if="selection" fixed="left" type="selection" width="40" />
           <!-- / 多选 -->
+          <!-- / 多选 -->
+          <!-- <el-table-column   type="expand"   /> -->
+          <!-- / 多选 -->
           <!-- / 表格内容 -->
           <template
             v-for="(
@@ -401,13 +445,15 @@ defineExpose({
                 fixed = false,
                 tooltip = false,
                 limit = 0,
-                minWidth = ''
+                minWidth = '',
+                sortable = false
               } = {},
               index
             ) of configOptionsGet"
             :key="index"
           >
             <el-table-column
+              :sortable="sortable"
               :label="label"
               :align="align"
               :width="width"

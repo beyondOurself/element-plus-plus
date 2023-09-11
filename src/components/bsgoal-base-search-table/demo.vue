@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 08:51:05
+ * @LastEditTime: 2023-09-11 11:44:57
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -28,8 +28,8 @@ const configOptions = ref([
     value: '111',
     prop: 'prop1',
     type: ComponentTypeEnums.INPUT,
-    width: 100,
-    item:true
+    minWidth: 200,
+    id: 1,
   },
   {
     label: 'prop2',
@@ -287,7 +287,7 @@ const configOptions2 = ref([
     // value: '111',
     type: ComponentTypeEnums.SWITCH,
     prop: 'prop4'
-  },
+  }
   // {
   //   label: 'prop5',
   //   // value: '111',
@@ -466,6 +466,7 @@ const configOptions2 = ref([
 
 const tableData = ref([
   {
+    id:3,
     prop1: 'row1value',
     prop2: 'row1value',
     prop3: 'row1value',
@@ -481,7 +482,29 @@ const tableData = ref([
     prop13: 'row1value',
     prop14: 'row1value',
     prop15: 'row1value',
-    prop16: 'row1value'
+    prop16: 'row1value',
+    hasChildren:false,
+    children: [
+      {
+        id:31,
+        prop1: 'row1-1value',
+        prop2: 'row1-1value',
+        prop3: 'row1-1value',
+        prop4: 'row1-1value',
+        prop5: 'row1-1value',
+        prop6: 'row1-1value',
+        prop7: 'row1-1value',
+        prop8: 'row1-1value',
+        prop9: 'row1-1value',
+        prop10: 'row1-1value',
+        prop11: 'row1-1value',
+        prop12: 'row1-1value',
+        prop13: 'row1-1value',
+        prop14: 'row1-1value',
+        prop15: 'row1-1value',
+        prop16: 'row1-1value'
+      }
+    ]
   },
   {
     prop1: 'row2value',
@@ -952,7 +975,6 @@ const test = () => {
   // configOptions.value =  configOptions2.value
 
   BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()
-
 }
 
 const task = (done = () => {}, rows = {}) => {

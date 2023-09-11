@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 09:12:39
+ * @LastEditTime: 2023-09-11 11:59:23
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -203,6 +203,41 @@ const props = defineProps({
    autoLayoutMenu: {
     type: [Boolean],
     default: false
+  },
+   /**
+   * 加载子节点数据的函数
+   */
+   tableLoad: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 是否懒加载
+   */
+   tableLazy: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 渲染嵌套数据的配置选项
+   */
+  tableProps: {
+    type: [Object],
+    default: () => ({ hasChildren: 'hasChildren', children: 'children' })
+  },
+  /**
+   * 行数据的 Key
+   */
+  rowKey: {
+    type: [String, Function],
+    default: 'id'
+  },
+  /**
+   * 默认展开所有扩展
+   */
+  defaultExpandAll: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -332,6 +367,11 @@ const tableStyler = computed(() => {
           v-bind="$props"
           :show-summary="showSummary"
           :summary-props="summaryProps"
+          :load="tableLoad"
+          :lazy="tableLazy"
+          :treeProps="tableProps"
+          :rowKey="rowKey"
+          :defaultExpandAll="defaultExpandAll"
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"
