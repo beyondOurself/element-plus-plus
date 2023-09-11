@@ -11,18 +11,18 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
-import BsgoalBaesPopover from './index.vue';
+import BsgoalBasePopover from './index.vue';
 defineOptions({
-  name: 'BsgoalBaesPopoverDemo'
+  name: 'BsgoalBasePopoverDemo'
 })
 
 const props = defineProps({})
 </script>
 <template>
   <div class="bsgoal-base-popover-demo">
-     <BsgoalBaesPopover content="这是内容" :width="300">
+     <BsgoalBasePopover content="这是内容" :width="300">
          <span>愚蠢的地球人</span>
-     </BsgoalBaesPopover>
+     </BsgoalBasePopover>
   </div>
 </template>
 <style lang="scss" scoped>

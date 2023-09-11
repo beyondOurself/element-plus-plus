@@ -13,7 +13,7 @@
 import { ref } from 'vue'
 
 defineOptions({
-  name: 'BsgoalBaesPopover'
+  name: 'BsgoalBasePopover'
 })
 
 const props = defineProps({

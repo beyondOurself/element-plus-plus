@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-11 18:31:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 17:06:53
+ * @LastEditTime: 2023-09-11 09:22:15
  * @FilePath: \v3_basic_component\src\entry.js
  * @Description: 打包 入口文件
  * 
@@ -28,7 +28,7 @@ import BsgoalBaseSwitch from '@/components/bsgoal-base-switch/index.vue'
 import BsgoalBaseItem from '@/components/bsgoal-base-item/index.vue'
 import BsgoalBaseInput from '@/components/bsgoal-base-input/index.vue'
 import BsgoalBaseTreeTable from '@/components/bsgoal-base-tree-table/index.vue'
-import BsgoalBaesPopover from '@/components/bsgoal-base-popover/index.vue'
+import BsgoalBasePopover from '@/components/bsgoal-base-popover/index.vue'
 import BsgoalBaseViewer from '@/components/bsgoal-base-viewer/index.vue'
 import BsgoalBaseTooltip from '@/components/bsgoal-base-tooltip/index.vue'
 import BsgoalBaseUpload from '@/components/bsgoal-base-upload/index.vue'
@@ -68,7 +68,7 @@ export default {
       BsgoalBaseItem,
       BsgoalBaseInput,
       BsgoalBaseTreeTable,
-      BsgoalBaesPopover,
+      BsgoalBasePopover,
       BsgoalBaseViewer,
       BsgoalBaseTooltip,
       BsgoalBaseUpload,
