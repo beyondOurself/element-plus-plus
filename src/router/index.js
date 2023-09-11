@@ -70,9 +70,9 @@ const router = createRouter({
           component: import('@/components/bsgoal-base-viewer/demo.vue')
         },
         {
-          path: '/bsgoal-baes-popover-demo',
+          path: '/bsgoal-base-popover-demo',
           name: '弹出框',
-          component: import('@/components/bsgoal-baes-popover/demo.vue')
+          component: import('@/components/bsgoal-base-popover/demo.vue')
         },
         {
           path: '/bsgoal-base-input-demo',

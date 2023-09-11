@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:10:09
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-24 14:07:27
- * @FilePath: \common\src\components\bsgoal-base-select\demo.vue
+ * @LastEditTime: 2023-09-11 09:18:45
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-select\demo.vue
  * @Description: select  演示
  * 
 -->

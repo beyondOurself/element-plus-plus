@@ -3,7 +3,7 @@
  * @Date: 2023-06-21 15:12:45
  * @LastEditors: canlong.shen
  * @LastEditTime: 2023-06-21 15:41:54
- * @FilePath: \common\src\components\bsgoal-baes-popover\demo.vue
+ * @FilePath: \common\src\components\bsgoal-base-popover\demo.vue
  * @Description: 弹出框 演示
  * 
 -->
@@ -19,7 +19,7 @@ defineOptions({
 const props = defineProps({})
 </script>
 <template>
-  <div class="bsgoal-baes-popover-demo">
+  <div class="bsgoal-base-popover-demo">
      <BsgoalBaesPopover content="这是内容" :width="300">
          <span>愚蠢的地球人</span>
      </BsgoalBaesPopover>
