@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:30:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-28 17:01:43
+ * @LastEditTime: 2023-09-11 18:34:35
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\index.vue
  * @Description:  级联选择器 - 多选
  * 
@@ -60,6 +60,28 @@ const props = defineProps({
   propsMap: {
     type: [Object],
     default: () => ({ multiple: true, checkStrictly: true })
+  },
+  /**
+   * 是否懒加载
+   */
+  lazy: {
+    type: [Boolean],
+    default: false
+  },
+
+  /**
+   * 懒加载方法
+   */
+  lazyLoad: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 懒加载开始层级
+   */
+  startLevel: {
+    type: [Number],
+    default: 0
   }
 })
 
@@ -96,6 +118,33 @@ const change = (value = []) => {
   emits('on-change', value)
   emits('update:modelValue', value)
 }
+
+const setLeaf = (data = []) => {
+  data.forEach((fi) => {
+    const { children = null } = fi
+    if (children && children.length) {
+      fi.leaf = false
+      setLeaf(children)
+    } else {
+      fi.leaf = true
+    }
+  })
+}
+
+const propsMapGet = computed(() => {
+  const { propsMap = {}, lazy = false, lazyLoad = () => {}, startLevel = 0 } = props
+  const lazyLoadHook = (node, resolve) => {
+    const { level } = node
+    if (level > startLevel) {
+      lazyLoad(node, resolve, level).then((data = []) => {
+        setLeaf(data)
+        resolve(data)
+      })
+    }
+    resolve()
+  }
+  return { ...propsMap, lazy, lazyLoad: lazyLoadHook }
+})
 </script>
 <template>
   <div class="bsgoal-base-cascader-multipl">
@@ -110,7 +159,7 @@ const change = (value = []) => {
       :style="styleGet"
       :max-collapse-tags="max"
       :options="optionsGet"
-      :props="propsMap"
+      :props="propsMapGet"
       @change="change"
     >
     </el-cascader>
