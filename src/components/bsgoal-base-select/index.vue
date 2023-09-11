@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:09:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 15:30:55
+ * @LastEditTime: 2023-09-11 15:52:46
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-select\index.vue
  * @Description: Select 公共组件
  * 
@@ -96,9 +96,16 @@ watchEffect(() => {
  * @return {*}
  */
 const triggerChange = (value = '') => {
-  const { range = [] } = props
+  const { range = [], multiple = false } = props
   const finder = range.find((fi) => fi.value === value)
-  const data = finder ? finder.data : null
+  let data = finder ? finder.data : null
+
+  if (multiple) {
+    const filterRange = range.filter((fi) => value.includes(fi.value))
+    if (filterRange && filterRange.length) {
+      data = filterRange.map((mi) => mi.data)
+    }
+  }
 
   emits('update:modelValue', value)
   emits('change', value, data)

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:10:09
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 09:18:45
+ * @LastEditTime: 2023-09-11 15:53:04
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-select\demo.vue
  * @Description: select  演示
  * 
@@ -29,7 +29,8 @@ const selectRange = ref([
   },
   {
     label: '22',
-    value: '22'
+    value: '22',
+    data: { prop1: 'prop22', prop2: 'prop22' }
   },
   {
     label: '33',
@@ -50,13 +51,17 @@ const change = (value = '', data = {}) => {
 
 const test = (params = '') => {
    selectValue.value = ''
-}
+  }
+
+  const values = ref([])
+
 </script>
 <template>
   <div class="bsgoal-base-select-demo">
     <div class="base_select_demo">
       {{ selectValue }}
       <BsgoalBaseSelect :model-value="selectValue" :range="selectRange" @change="change" />
+      <BsgoalBaseSelect  multiple  v-model="values" :range="selectRange" @change="change" />
       <el-button type="primary" @click="test">test</el-button>
     </div>
   </div>
