@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:09:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-30 17:58:18
- * @FilePath: \common\src\components\bsgoal-base-select\index.vue
+ * @LastEditTime: 2023-09-11 15:30:55
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-select\index.vue
  * @Description: Select 公共组件
  * 
 -->
@@ -59,6 +59,20 @@ const props = defineProps({
   filterable: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * 是否多选
+   */
+  multiple: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   *需要显示的 Tag 的最大数量
+   */
+  maxCollapseTags: {
+    type: [Number],
+    default: 3
   }
 })
 
@@ -97,6 +111,10 @@ const triggerChange = (value = '') => {
     <el-select
       class="base_select"
       v-model="selectValue"
+      v-bind="$props"
+      collapse-tags
+      collapse-tags-tooltip
+      :max-collapse-tags="maxCollapseTags"
       :clearable="clearable"
       :filterable="filterable"
       :no-data-text="none"
