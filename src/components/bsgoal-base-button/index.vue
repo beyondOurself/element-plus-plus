@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 18:04:43
- * @FilePath: \common\src\components\bsgoal-base-button\index.vue
+ * @LastEditTime: 2023-09-07 17:33:46
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
 -->
@@ -11,8 +11,11 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref, computed } from 'vue'
+import { ref, unref, computed, nextTick } from 'vue'
 import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
+import iconMap from './assets/map-icon.js'
+import BsgoalBaseIcon from '../bsgoal-base-icon/index.vue'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 defineOptions({
   name: 'BsgoalBaseButton'
@@ -64,6 +67,56 @@ const props = defineProps({
   disabled: {
     type: [Boolean],
     default: false
+  },
+
+  /**
+   *  确认
+   */
+  hasConfirm: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 确认框内容
+   */
+  title: {
+    type: [String],
+    default: '是否删除!'
+  },
+  /**
+   * 自定义图标路径
+   */
+  url: {
+    type: [String],
+    default: ''
+  },
+  /**
+   * 链接按钮
+   */
+  link: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * tooltip 提示文字
+   */
+  tooltip: {
+    type: [String],
+    default: ''
+  },
+  /**
+   * tooltip 内容宽度
+   */
+  tooltipWidth: {
+    type: [String, Number],
+    default: 400
+  },
+  /**
+   * placement
+   */
+  tooltipPlacement: {
+    type: [String],
+    default: 'top'
   }
 })
 
@@ -84,6 +137,15 @@ const triggerClick = () => {
 
 // ---> S 模式 <---
 
+const getIconMapproperty = (prop = '') => {
+  const { mode = '' } = props
+  const mapModeConfig = iconMap[mode]
+  if (mapModeConfig && mapModeConfig[prop]) {
+    return mapModeConfig[prop]
+  }
+  return ''
+}
+
 const typeGet = computed(() => {
   const { mode = '', type = '' } = props
 
@@ -97,10 +159,12 @@ const typeGet = computed(() => {
     case 'edit':
       return 'primary'
   }
-  return type
+  const typeValue = getIconMapproperty('type')
+  return type || typeValue
 })
 const iconGet = computed(() => {
   const { mode = '', icon = '' } = props
+
   if (icon !== false) {
     switch (mode) {
       case 'delete':
@@ -118,7 +182,9 @@ const iconGet = computed(() => {
 })
 const contentGet = computed(() => {
   const { mode = '', content = '' } = props
-
+  if (content) {
+    return content
+  }
   switch (mode) {
     case 'cancel':
       return '取消'
@@ -133,25 +199,119 @@ const contentGet = computed(() => {
     case 'detail':
       return '详情'
   }
-  return content
+
+  const contentValue = getIconMapproperty('content')
+
+  return contentValue || content
 })
 
 // ---> E 模式 <---
+
+const iconUrlGet = computed(() => {
+  const { url = '' } = props
+  const svgUrl = getIconMapproperty('icon')
+  return url || svgUrl
+})
+const curIconColor = ref('')
+const EL_BUTTON_REF = ref(null)
+const setIconColor = (resetPrimary = false) => {
+  const { plain = false } = props
+  const type = typeGet.value
+  nextTick(() => {
+    if (type === 'primary' && plain && resetPrimary) {
+      curIconColor.value = 'var(--el-color-primary)'
+    } else {
+      const buttonEl = EL_BUTTON_REF.value
+      if (buttonEl) {
+        const elIconEl = buttonEl.querySelector('.el-button')
+        setTimeout(() => {
+          const colorValue = window.getComputedStyle(elIconEl, null).getPropertyValue('color')
+          curIconColor.value = colorValue
+        }, 50)
+      }
+    }
+  })
+}
+
+setIconColor(true)
+const mouseenter = () => {
+  setIconColor()
+}
+const mouseleave = () => {
+  setIconColor(true)
+}
+
+const tooltipStyleGet = computed(() => {
+  const styler = {}
+  const { tooltipWidth = 0 } = props
+
+  if (tooltipWidth) {
+    styler.width = Number.isInteger(tooltipWidth) ? `${tooltipWidth}px` : tooltipWidth
+  }
+  return styler
+})
 </script>
 <template>
   <div class="bsgoal-base-button">
-    <div class="base_button" @click="triggerClick">
-      <slot :loading="loading">
-        <el-button
-          :type="typeGet"
-          :icon="iconGet"
-          :loading="loading"
-          :plain="plain"
-          :disabled="disabled"
-          >{{ contentGet }}</el-button
-        >
-      </slot>
-    </div>
+    <el-config-provider :locale="zhCn">
+      <template v-if="hasConfirm && !disabled">
+        <div class="base_button">
+          <el-popconfirm :title="title" @confirm="triggerClick">
+            <template #reference>
+              <slot :loading="loading">
+                <el-button
+                  :link="link"
+                  :type="typeGet"
+                  :icon="iconGet"
+                  :loading="loading"
+                  :plain="plain"
+                  :disabled="disabled"
+                  >{{ contentGet }}
+                  <template #icon v-if="iconUrlGet">
+                    <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+                  </template>
+                </el-button>
+              </slot>
+            </template>
+          </el-popconfirm>
+        </div>
+      </template>
+      <template v-else>
+        <div class="base_button" ref="EL_BUTTON_REF" @click="triggerClick">
+          <el-tooltip
+            effect="light"
+            :disabled="!tooltip"
+            :content="tooltip"
+            :placement="tooltipPlacement"
+          >
+            <template #content>
+              <div class="base_button_tooltip" :style="tooltipStyleGet">
+                <el-input :model-value="tooltip" autosize type="textarea" readonly />
+              </div>
+            </template>
+
+            <slot :loading="loading">
+              <el-button
+                :link="link"
+                :type="typeGet"
+                :icon="iconGet"
+                :loading="loading"
+                :plain="plain"
+                :disabled="disabled"
+                :url="url"
+                @mouseenter="mouseenter"
+                @mouseleave="mouseleave"
+                >{{ contentGet }}
+
+                <template #icon v-if="iconUrlGet">
+                  <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+                </template>
+              </el-button>
+            </slot>
+          </el-tooltip>
+        </div>
+      </template>
+    </el-config-provider>
   </div>
 </template>
 <style lang="scss">
@@ -161,6 +321,10 @@ const contentGet = computed(() => {
   &,
   .base_button {
     display: inline-block;
+  }
+  .base_button_tooltip {
+    word-wrap: break-word;
+    word-break: break-all;
   }
 }
 </style>

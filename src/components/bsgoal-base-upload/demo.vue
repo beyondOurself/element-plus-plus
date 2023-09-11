@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-07-13 16:37:39
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-14 15:03:07
+ * @LastEditTime: 2023-08-14 10:24:43
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-upload\demo.vue
  * @Description: 附近上传演示
  * 
@@ -60,6 +60,7 @@ const test = () => {
       v-model="fileList"
       v-model:uploadFiles="uploadList"
       v-model:deleteFiles="deleteList"
+      :file-size="200"
       @on-change="changeFiles"
     ></BsgoalBaseUpload>
   </div>

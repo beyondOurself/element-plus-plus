@@ -3,7 +3,7 @@
  * @Date: 2023-06-21 15:12:28
  * @LastEditors: canlong.shen
  * @LastEditTime: 2023-06-21 15:38:11
- * @FilePath: \common\src\components\bsgoal-baes-popover\index.vue
+ * @FilePath: \common\src\components\bsgoal-base-popover\index.vue
  * @Description: 弹出框 公共组件 
  * 
 -->
@@ -13,7 +13,7 @@
 import { ref } from 'vue'
 
 defineOptions({
-  name: 'BsgoalBaesPopover'
+  name: 'BsgoalBasePopover'
 })
 
 const props = defineProps({
@@ -41,7 +41,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <div class="bsgoal-baes-popover">
+  <div class="bsgoal-base-popover">
     <el-popover
       class="baes_popover"
       placement="top-start"

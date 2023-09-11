@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-29 09:38:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-12 09:25:21
- * @FilePath: \common\src\components\bsgoal-base-input\index.vue
+ * @LastEditTime: 2023-08-11 10:20:33
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-input\index.vue
  * @Description:  Input 输入框
  * 
 -->
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, watch, watchEffect, useSlots } from 'vue'
+import { ref, watch, watchEffect, useSlots ,computed} from 'vue'
 
 defineOptions({
   name: 'BsgoalBaseInput'
@@ -63,10 +63,24 @@ const props = defineProps({
   clearable: {
     type: [Boolean],
     default: true
+  },
+  /**
+   * 输入框
+   */
+  type: {
+    type: [String],
+    default: 'text'
+  },
+  /**
+   * 是否为 数字输入框
+   */
+  isNumber: {
+    type: [Boolean],
+    default: false
   }
 })
 
-const emits = defineEmits(['update:modelValue', 'change' , 'blur' ,'focus'])
+const emits = defineEmits(['update:modelValue', 'change', 'blur', 'focus'])
 
 // ---> S 值绑定 <---
 
@@ -115,7 +129,7 @@ const input = (value = '') => {
  * @Author: canlong.shen
  * @description: 当选择器的输入框失去焦点时触发
  * @param {*} value
- * @default: 
+ * @default:
  * @return {*}
  */
 const blur = (value = '') => {
@@ -126,7 +140,7 @@ const blur = (value = '') => {
  * @Author: canlong.shen
  * @description: 当选择器的输入框失去焦点时触发
  * @param {*} value
- * @default: 
+ * @default:
  * @return {*}
  */
 const focus = (value = '') => {
@@ -139,6 +153,18 @@ const focus = (value = '') => {
 const slots = useSlots()
 const slotNames = ref(Object.keys(slots))
 // ---> E 插槽 <---
+
+// ---> S 类型 <---
+const typeGet = computed(() => {
+  const { type = '', isNumber = false } = props
+
+  if (isNumber) {
+    return 'number'
+  }
+
+  return type
+})
+// ---> E 类型 <---
 </script>
 
 <template>
@@ -146,6 +172,7 @@ const slotNames = ref(Object.keys(slots))
     <el-input
       v-model="inputValue"
       class="base_input"
+      :type="typeGet"
       :clearable="clearable"
       :placeholder="placeholder"
       :disabled="disabled"

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-07-13 16:37:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-14 15:04:50
+ * @LastEditTime: 2023-08-14 11:00:08
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-upload\index.vue
  * @Description: 附件上传
  * 
@@ -14,7 +14,7 @@
 import { ref, watch, watchEffect } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { preview, vPreview, Vue3ImagePreview } from 'vue3-image-preview'
-
+import { ElMessage } from 'element-plus'
 defineOptions({
   name: 'BsgoalBaseUpload'
 })
@@ -69,6 +69,13 @@ const props = defineProps({
   accept: {
     type: [String],
     default: ''
+  },
+  /**
+   * 限制的文件大小 默认 10M
+   */
+  fileSize: {
+    type: [Number],
+    default: 10
   }
 })
 
@@ -95,7 +102,7 @@ const removeFiles = (file, files) => {
   const uploadFilesValue = uploadFilesList.value
   if (status === 'success') {
     deleteFilesList.value.push(file)
-  }
+  } 
   if (status === 'ready') {
     const findIndex = uploadFilesValue.findIndex((fi) => fi.name === name)
     if (findIndex !== -1) {
@@ -106,23 +113,51 @@ const removeFiles = (file, files) => {
 }
 
 const changeFiles = (file, files) => {
+  const { fileSize = 0 } = props
+  console.log('file', file)
+  // 10485760
+  const { size = 0 } = file
+  if (size && size >= fileSize * 1048576 ) {
+    ElMessage({
+      message: '超过文件大小限制',
+      grouping: true,
+      type: 'error'
+    })
+    fileListModel.value.pop()
+    return
+  }
   uploadFilesList.value = files.filter((fi) => fi.status === 'ready')
   refreshFileList(files)
 }
 
 const refreshFileList = (files) => {
-   const uploadFilesListValue = [...uploadFilesList.value]
-   const deleteFilesListValue = [...deleteFilesList.value]
+  const uploadFilesListValue = [...uploadFilesList.value]
+  const deleteFilesListValue = [...deleteFilesList.value]
   emits('on-change', uploadFilesListValue, deleteFilesListValue, files)
   emits('update:modelValue', files)
   emits('update:uploadFiles', uploadFilesListValue)
   emits('update:deleteFiles', deleteFilesListValue)
 }
 
+const exceedFiles = () => {
+  const { limit = 0 } = props
+  ElMessage({
+    message: `超出${limit}数量限制!`,
+    grouping: true,
+    type: 'error'
+  })
+}
+
 const previewImg = (uploadFile) => {
   preview({
     images: uploadFile.url
   })
+}
+
+const beforeUpload = (params = '') => {
+   
+
+  return false
 }
 
 const reset = () => {
@@ -148,9 +183,11 @@ defineExpose({
         :auto-upload="false"
         :limit="limit"
         :disabled="disabled"
+        :before-upload="beforeUpload"
         :on-preview="previewImg"
         :on-change="changeFiles"
         :on-remove="removeFiles"
+        :on-exceed="exceedFiles"
       >
         <el-icon><Plus /></el-icon>
       </el-upload>

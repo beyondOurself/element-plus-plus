@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-13 16:49:22
- * @FilePath: \common\src\router\index.js
+ * @LastEditTime: 2023-09-11 11:52:33
+ * @FilePath: \v3_basic_component\src\router\index.js
  * @Description: 路由配置
  * 
  */
@@ -18,6 +18,41 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: 'bsgoal-base-tree-table-demo',
+          name: '树 + 表格',
+          component: import('@/components/bsgoal-base-tree-table/demo.vue')
+        },
+        {
+          path: 'bsgoal-base-icon-demo',
+          name: '图标',
+          component: import('@/components/bsgoal-base-icon/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-radio-group-demo',
+          name: '单选框组',
+          component: import('@/components/bsgoal-base-radio-group/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-table-operation-demo',
+          name: '表格操作列',
+          component: import('@/components/bsgoal-base-table-operation/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-cascader-multiple-demo',
+          name: '级联选择多选',
+          component: import('@/components/bsgoal-base-cascader-multiple/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-time-select-demo',
+          name: '时间选择',
+          component: import('@/components/bsgoal-base-time-select/demo.vue')
+        },
+        {
+          path: '/bsgoal-base-dialog-form-demo',
+          name: '弹窗表单',
+          component: import('@/components/bsgoal-base-dialog-form/demo.vue')
+        },
         {
           path: '/bsgoal-base-upload-demo',
           name: '附件上传',
@@ -39,9 +74,9 @@ const router = createRouter({
           component: import('@/components/bsgoal-base-viewer/demo.vue')
         },
         {
-          path: '/bsgoal-baes-popover-demo',
+          path: '/bsgoal-base-popover-demo',
           name: '弹出框',
-          component: import('@/components/bsgoal-baes-popover/demo.vue')
+          component: import('@/components/bsgoal-base-popover/demo.vue')
         },
         {
           path: '/bsgoal-base-input-demo',

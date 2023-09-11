@@ -3,7 +3,7 @@
  * @Date: 2023-06-21 15:12:45
  * @LastEditors: canlong.shen
  * @LastEditTime: 2023-06-21 15:41:54
- * @FilePath: \common\src\components\bsgoal-baes-popover\demo.vue
+ * @FilePath: \common\src\components\bsgoal-base-popover\demo.vue
  * @Description: 弹出框 演示
  * 
 -->
@@ -11,18 +11,18 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref } from 'vue'
-import BsgoalBaesPopover from './index.vue';
+import BsgoalBasePopover from './index.vue';
 defineOptions({
-  name: 'BsgoalBaesPopoverDemo'
+  name: 'BsgoalBasePopoverDemo'
 })
 
 const props = defineProps({})
 </script>
 <template>
-  <div class="bsgoal-baes-popover-demo">
-     <BsgoalBaesPopover content="这是内容" :width="300">
+  <div class="bsgoal-base-popover-demo">
+     <BsgoalBasePopover content="这是内容" :width="300">
          <span>愚蠢的地球人</span>
-     </BsgoalBaesPopover>
+     </BsgoalBasePopover>
   </div>
 </template>
 <style lang="scss" scoped>

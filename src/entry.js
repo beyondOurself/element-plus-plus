@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-11 18:31:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-14 08:59:06
- * @FilePath: \common\src\entry.js
+ * @LastEditTime: 2023-09-11 09:22:15
+ * @FilePath: \v3_basic_component\src\entry.js
  * @Description: 打包 入口文件
  * 
  */
@@ -28,10 +28,16 @@ import BsgoalBaseSwitch from '@/components/bsgoal-base-switch/index.vue'
 import BsgoalBaseItem from '@/components/bsgoal-base-item/index.vue'
 import BsgoalBaseInput from '@/components/bsgoal-base-input/index.vue'
 import BsgoalBaseTreeTable from '@/components/bsgoal-base-tree-table/index.vue'
-import BsgoalBaesPopover from '@/components/bsgoal-baes-popover/index.vue'
+import BsgoalBasePopover from '@/components/bsgoal-base-popover/index.vue'
 import BsgoalBaseViewer from '@/components/bsgoal-base-viewer/index.vue'
 import BsgoalBaseTooltip from '@/components/bsgoal-base-tooltip/index.vue'
 import BsgoalBaseUpload from '@/components/bsgoal-base-upload/index.vue'
+import BsgoalBaseDialogForm from '@/components/bsgoal-base-dialog-form/index.vue'
+import BsgoalBaseTimeSelect from '@/components/bsgoal-base-time-select/index.vue'
+import BsgoalBaseCascaderMultipl from '@/components/bsgoal-base-cascader-multiple/index.vue'
+import BsgoalBaseTableOperation from '@/components/bsgoal-base-table-operation/index.vue'
+import BsgoalBaseRadioGroup from '@/components/bsgoal-base-radio-group/index.vue'
+import BsgoalBaseIcon from '@/components/bsgoal-base-icon/index.vue'
 import componentTypeEnums from '@/enums/componentTypeEnums.js'
 import { useFetch } from '@/combines/useFetchs.js'
 
@@ -62,10 +68,16 @@ export default {
       BsgoalBaseItem,
       BsgoalBaseInput,
       BsgoalBaseTreeTable,
-      BsgoalBaesPopover,
+      BsgoalBasePopover,
       BsgoalBaseViewer,
       BsgoalBaseTooltip,
-      BsgoalBaseUpload
+      BsgoalBaseUpload,
+      BsgoalBaseDialogForm,
+      BsgoalBaseTimeSelect,
+      BsgoalBaseCascaderMultipl,
+      BsgoalBaseTableOperation,
+      BsgoalBaseRadioGroup,
+      BsgoalBaseIcon
     }
 
     for (const [name, component] of Object.entries(componentsMap)) {

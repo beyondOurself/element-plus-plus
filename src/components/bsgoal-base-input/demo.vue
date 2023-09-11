@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-29 09:38:59
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 09:36:34
- * @FilePath: \common\src\components\bsgoal-base-input\demo.vue
+ * @LastEditTime: 2023-08-11 10:21:17
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-input\demo.vue
  * @Description: Input 输入框 演示
  * 
 -->
@@ -27,12 +27,10 @@ const test = () => {
   <div class="bsgoal-base-input-demo">
     <div class="base_input_demo">
       {{ inputValue }}
-      <BsgoalBaseInput
-        v-model="inputValue"
-      >
-       <template #suffix>
-           <div>111</div>
-       </template>
+      <BsgoalBaseInput is-number v-model="inputValue">
+        <template #suffix>
+          <div>111</div>
+        </template>
       </BsgoalBaseInput>
       <el-button type="primary" @click="test">测试</el-button>
     </div>

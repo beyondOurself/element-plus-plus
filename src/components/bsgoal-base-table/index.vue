@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 11:01:20
- * @FilePath: \common\src\components\bsgoal-base-table\index.vue
+ * @LastEditTime: 2023-09-11 11:47:32
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
 -->
@@ -161,6 +161,48 @@ const props = defineProps({
   bodyStyle: {
     type: [Object],
     default: () => ({})
+  },
+  /**
+   * 表格菜单自动布局
+   */
+  autoLayoutMenu: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 加载子节点数据的函数
+   */
+  load: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 是否懒加载
+   */
+  lazy: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 渲染嵌套数据的配置选项
+   */
+  treeProps: {
+    type: [Object],
+    default: () => ({ hasChildren: 'hasChildren', children: 'children' })
+  },
+  /**
+   * 行数据的 Key
+   */
+  rowKey: {
+    type: [String, Function],
+    default: 'id'
+  },
+  /**
+   * 默认展开所有扩展
+   */
+  defaultExpandAll: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -223,7 +265,12 @@ const ping = () => {
   const searchParamsVal = searchParams.value
   const currentPageVal = currentPage.value
   const pageSizeVal = curPageSize.value
-  const fetchParams = { ...searchParamsVal }
+  const fetchParams = {}
+  for (const [prop, value] of Object.entries(searchParamsVal)) {
+    if (!`${prop}`.startsWith('_')) {
+      fetchParams[prop] = value
+    }
+  }
   // 显示分页的注入分页参数
   if (hasPage) {
     fetchParams[mapPropsFuse.currentPage] = currentPageVal
@@ -336,7 +383,11 @@ defineExpose({
       :style="bodyStyle"
     >
       <!-- S 表头操作区域 -->
-      <div class="base_table_menu" v-if="$slots.menu">
+      <div
+        class="base_table_menu"
+        v-if="$slots.menu"
+        :class="{ 'base_table_menu--auto': autoLayoutMenu }"
+      >
         <slot name="menu"></slot>
       </div>
       <!-- E 表头操作区域 -->
@@ -350,9 +401,15 @@ defineExpose({
           style="width: 100%"
           v-loading="tableLoading"
           sum-text="合计"
+          :indent="32"
+          :default-expand-all="defaultExpandAll"
           :summary-method="summaryMethod"
           :show-summary="showSummary"
           :data="tableData"
+          :tree-props="treeProps"
+          :load="load"
+          :lazy="lazy"
+          :row-key="rowKey"
           :header-cell-style="{
             fontWeight: 'bold',
             backgroundColor: '#EBEEF5',
@@ -374,6 +431,9 @@ defineExpose({
           <!-- / 多选 -->
           <el-table-column v-if="selection" fixed="left" type="selection" width="40" />
           <!-- / 多选 -->
+          <!-- / 多选 -->
+          <!-- <el-table-column   type="expand"   /> -->
+          <!-- / 多选 -->
           <!-- / 表格内容 -->
           <template
             v-for="(
@@ -384,21 +444,23 @@ defineExpose({
                 width = '',
                 fixed = false,
                 tooltip = false,
-                limit = 0
+                limit = 0,
+                minWidth = '',
+                sortable = false
               } = {},
               index
             ) of configOptionsGet"
             :key="index"
           >
             <el-table-column
+              :sortable="sortable"
               :label="label"
               :align="align"
               :width="width"
               :fixed="fixed"
-              :min-width="`${label.length * 14 + 30}px`"
-              :max-width="`${label.length * 14 + 30}px`"
+              :min-width="minWidth || `${label.length * 14 + 30}px`"
             >
-              <template v-slot:default="{ row ,column, $index }">
+              <template v-slot:default="{ row, column, $index }">
                 <slot :name="prop" :row="row" :column="column" :index="$index">
                   <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" />
                 </slot>
@@ -414,6 +476,7 @@ defineExpose({
       <!-- S 分页 -->
       <BsgoalBaseTablePagination
         v-if="hasPage"
+        :currentPage="currentPage"
         :total="total"
         :page-size="curPageSize"
         @on-current-change="triggerPaginationCurrentChange"
@@ -432,6 +495,11 @@ defineExpose({
   }
 
   .base_table_menu {
+  }
+
+  .base_table_menu--auto {
+    display: flex;
+    align-items: center;
     margin-bottom: 8px;
   }
 
@@ -456,6 +524,11 @@ defineExpose({
     th.el-table__cell {
       overflow: initial !important;
     }
+  }
+
+  .el-table--border,
+  .el-table--group {
+    border: 0px solid #ebeef5;
   }
 }
 </style>

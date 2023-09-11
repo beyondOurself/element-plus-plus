@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 09:12:54
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 15:52:34
- * @FilePath: \common\src\components\bsgoal-base-alert\index.vue
+ * @LastEditTime: 2023-09-09 10:13:57
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-alert\index.vue
  * @Description: alert 提示组件
  * 
 -->
@@ -44,6 +44,12 @@ const props = defineProps({
   .el-alert {
     display: flex;
     align-items: center;
+  }
+
+  .el-alert__close-btn {
+    top: 0 !important;
+    bottom: 0;
+    margin: auto;
   }
 }
 </style>

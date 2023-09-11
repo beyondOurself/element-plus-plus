@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 11:04:07
- * @FilePath: \common\src\components\bsgoal-base-search-table\index.vue
+ * @LastEditTime: 2023-09-11 13:38:30
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
 -->
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, provide, useSlots } from 'vue'
+import { ref, computed, unref, provide, useSlots, watchEffect } from 'vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import BsgoalBaseTable from '../bsgoal-base-table/index.vue'
 
@@ -141,29 +141,90 @@ const props = defineProps({
   /**
    *  合计的列
    */
-   summaryProps: {
+  summaryProps: {
     type: [Array],
     default: () => []
   },
-   /**
+  /**
    * 序号 列
    */
-   serial: {
+  serial: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 中屏设备宽度的比例
+   */
+  medium: {
+    type: [Number, String],
+    default: 6
+  },
+  /**
+   * 表格菜单自动布局
+   */
+  autoLayoutMenu: {
+    type: [Boolean],
+    default: false
+  },
+   /**
+   * 加载子节点数据的函数
+   */
+   load: {
+    type: [Function],
+    default: () => {}
+  },
+  /**
+   * 是否懒加载
+   */
+  lazy: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 渲染嵌套数据的配置选项
+   */
+  treeProps: {
+    type: [Object],
+    default: () => ({ hasChildren: 'hasChildren', children: 'children' })
+  },
+  /**
+   * 行数据的 Key
+   */
+  rowKey: {
+    type: [String, Function],
+    default: 'id'
+  },
+  /**
+   * 默认展开所有扩展
+   */
+  defaultExpandAll: {
     type: [Boolean],
     default: false
   }
 })
 
-const emits = defineEmits(['select', 'select-all', 'selection-change', 'on-total-change'])
+const emits = defineEmits([
+  'select',
+  'select-all',
+  'selection-change',
+  'on-total-change',
+  'on-change'
+])
 
 const transferFoldStatus = ref(false)
 provide('transferFoldStatus', transferFoldStatus)
 
-const options = unref(props.configOptions)
+const curConfigOptions = ref([])
+
+watchEffect(() => {
+  const { configOptions } = props
+  curConfigOptions.value = configOptions
+})
 
 // 查询 配置项
 const searchOptions = computed(() => {
-  return options.filter((fi) => {
+  const curConfigOptionsValue = curConfigOptions.value
+  return curConfigOptionsValue.filter((fi) => {
     const { type = '' } = fi
     return !!type
   })
@@ -171,7 +232,8 @@ const searchOptions = computed(() => {
 
 // 表格 配置项
 const tableOptions = computed(() => {
-  return options.filter((fi) => {
+  const curConfigOptionsValue = curConfigOptions.value
+  return curConfigOptionsValue.filter((fi) => {
     const { item = false } = fi
     return !item
   })
@@ -187,6 +249,10 @@ const triggerSearch = (searchParams) => {
   BSGOAL_BASE_TABLE_REF.value.refreshList(searchParams)
 }
 
+const getSearchParams = () => {
+  return BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch(false)
+}
+
 // ---> S 计算expression <---
 const expresionGet = computed(() => {
   const { expression, hasPage } = props
@@ -200,10 +266,10 @@ const expresionGet = computed(() => {
 // ---> S 刷新 <---
 const BSGOAL_BASE_SEARCH_REF = ref(null)
 const refresh = () => {
-  const { hasSearch } = props
-  if (unref(hasSearch)) {
-    BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
-  }
+  // const { hasSearch } = props
+  // if (unref(hasSearch)) {
+  BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
+  // }
 }
 // ---> E 刷新 <---
 
@@ -221,6 +287,9 @@ const triggerSelectionChange = (selection) => {
 const triggerTotalChange = (total = 0) => {
   emits('on-total-change', total)
 }
+const triggerChange = (changer = {}) => {
+  emits('on-change', changer)
+}
 
 // ---> E 触发事件 <---
 
@@ -236,7 +305,8 @@ const clearSelection = () => {
 
 defineExpose({
   refresh,
-  clearSelection
+  clearSelection,
+  getSearchParams
 })
 // ---> E 暴露 <---
 </script>
@@ -248,13 +318,16 @@ defineExpose({
         ref="BSGOAL_BASE_SEARCH_REF"
         v-show="hasSearch"
         :config-options="searchOptions"
+        :medium="medium"
         @on-search="triggerSearch"
         @on-clear="triggerSearch"
+        @on-change="triggerChange"
       />
       <!-- E 查询 -->
       <!-- S 表格 -->
       <BsgoalBaseTable
         ref="BSGOAL_BASE_TABLE_REF"
+        v-bind="$props"
         :show-summary="showSummary"
         :page-size="pageSize"
         :map-props="mapProps"
@@ -269,6 +342,7 @@ defineExpose({
         :has-page="hasPage"
         :summary-props="summaryProps"
         :serial="serial"
+        :autoLayoutMenu="autoLayoutMenu"
         @select="triggerSelect"
         @select-all="triggerSelectAll"
         @selection-change="triggerSelectionChange"
@@ -276,7 +350,10 @@ defineExpose({
       >
         <!-- S 顶部菜单 -->
 
-        <template v-for="slotName of slotNames" v-slot:[slotName]="{ row = {} , column = {} , index  = 0 }">
+        <template
+          v-for="slotName of slotNames"
+          v-slot:[slotName]="{ row = {}, column = {}, index = 0 }"
+        >
           <slot :name="slotName" :row="row" :column="column" :index="index"></slot>
         </template>
         <!-- E 顶部菜单 -->

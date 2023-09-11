@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-15 16:34:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-28 10:12:16
- * @FilePath: \common\src\components\bsgoal-base-table-pagination\index.vue
+ * @LastEditTime: 2023-08-28 09:55:41
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-table-pagination\index.vue
  * @Description: 表格的分页按钮
  * 
 -->
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, inject, unref } from 'vue'
+import { ref, computed, inject, unref , watchEffect } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import BsgoalBaseSizes from '../bsgoal-base-sizes/index.vue'
 defineOptions({
@@ -70,6 +70,11 @@ const triggerCurrentChange = (current = 1) => {
   emits('on-current-change', current)
 }
 const page = ref(1)
+
+watchEffect(() => {
+  const { currentPage = 1 } = props
+  page.value = currentPage
+})
 </script>
 <template>
   <div class="bsgoal-base-table-pagination">

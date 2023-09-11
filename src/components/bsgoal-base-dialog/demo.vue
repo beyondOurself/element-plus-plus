@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:24
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-01 09:17:22
- * @FilePath: \common\src\components\bsgoal-base-dialog\demo.vue
+ * @LastEditTime: 2023-09-01 10:33:02
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog\demo.vue
  * @Description: 弹窗公共组件 演示
  * 
 -->
@@ -307,6 +307,7 @@ const values = ref({
         v-model="dialogVisible2"
         size="max"
         type="blank"
+        confirmTxt="提交啦"
         @on-confirm="triggerConfirm"
         @on-show="triggerShow"
         @on-hide="triggerHide"
