@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:30:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 08:56:47
+ * @LastEditTime: 2023-09-12 11:12:42
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\index.vue
  * @Description:  级联选择器 - 多选
  * 
@@ -11,6 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
+import { checkboxGroupContextKey } from 'element-plus'
 import { ref, toValue, watchEffect, computed } from 'vue'
 
 defineOptions({
@@ -48,6 +49,13 @@ const props = defineProps({
     default: false
   },
   /**
+   * 是否禁用
+   */
+  disabled: {
+    type: [Boolean],
+    default: false
+  },
+  /**
    *仅显示最后一级
    */
   showAllLevels: {
@@ -76,6 +84,15 @@ const props = defineProps({
     type: [Function],
     default: () => {}
   },
+
+  /**
+   * 初始加载
+   */
+  initLoad: {
+    type: [Function],
+    default: () => {}
+  },
+
   /**
    * 懒加载开始层级
    */
@@ -119,27 +136,24 @@ const change = (value = []) => {
   emits('update:modelValue', value)
 }
 
-const setLeaf = (data = []) => {
-  data.forEach((fi) => {
-    const { children = null } = fi
-    if (children && children.length) {
-      fi.leaf = false
-      setLeaf(children)
-    } else {
-      fi.leaf = true
-    }
-  })
-}
-
 const propsMapGet = computed(() => {
-  const { propsMap = {}, lazy = false, lazyLoad = () => {}, startLevel = 0 } = props
+  const { propsMap = {}, lazy = false, lazyLoad = () => {} , initLoad = () => {}} = props
   const lazyLoadHook = (node, resolve) => {
     const { level } = node
-    if (level > startLevel) {
+    if (level === 0) {
+      initLoad(node, resolve)
+    } else {
       lazyLoad(node, resolve, level)
     }
   }
   return { ...propsMap, lazy, lazyLoad: lazyLoadHook }
+})
+
+const curDisabled = ref(false)
+
+watchEffect(() => {
+  const { disabled = false } = props
+  curDisabled.value = disabled
 })
 </script>
 <template>
@@ -151,6 +165,7 @@ const propsMapGet = computed(() => {
       clearable
       collapse-tags
       collapse-tags-tooltip
+      :disabled="curDisabled"
       :show-all-levels="showAllLevels"
       :style="styleGet"
       :max-collapse-tags="max"

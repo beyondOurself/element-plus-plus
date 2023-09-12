@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:31:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 08:57:36
+ * @LastEditTime: 2023-09-12 11:14:07
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\demo.vue
  * @Description:  级联多选
  * 
@@ -19,7 +19,7 @@ defineOptions({
 
 const props = defineProps({})
 
-const options = [
+const options = ref([
   {
     value: 1,
     label: 'Asia',
@@ -73,36 +73,48 @@ const options = [
       }
     ]
   }
-]
+])
 
 const data = ref([])
 
 const lazyLoad = (node, resolve, level = 0) => {
-  console.log('level',level);
-  resolve([
-    {
-      value: 28,
-      label: 'Canada',
-      children: [
-        { value: 29, label: 'Toronto' },
-        { value: 30, label: 'Montreal' },
-        { value: 31, label: 'Ottawa' }
-      ]
-    }
-  ])
+  const { value = 0, label = '' } = node
+
+  console.log('level', level)
+
+  if (level === 1) {
+    setTimeout(() => {
+      resolve([
+        {
+          value: 28,
+          label: 'Canada',
+          leaf: true
+        }
+      ])
+    }, 3000)
+  }
+}
+
+const initLoad = (node, resolve) => {
+  resolve(options.value)
 }
 </script>
 <template>
   <div class="bsgoal-base-cascader-multiple-demo">
     <div class="base_cascader_multiple_demo">
       {{ data }}
+      <!-- S 单选 -->
+      <BsgoalBaseCascaderMultipl v-model="data" :options="options"></BsgoalBaseCascaderMultipl>
+      <!-- E 单选 -->
+      <!-- S 多选 -->
       <BsgoalBaseCascaderMultipl
         v-model="data"
         lazy
-        :lazyLoad="lazyLoad"
         rootDisabled
-        :options="options"
+        :initLoad="initLoad"
+        :lazyLoad="lazyLoad"
       ></BsgoalBaseCascaderMultipl>
+      <!-- E 多选 -->
     </div>
   </div>
 </template>
