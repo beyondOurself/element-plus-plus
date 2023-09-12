@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 13:38:30
+ * @LastEditTime: 2023-09-12 10:40:06
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -208,7 +208,8 @@ const emits = defineEmits([
   'select-all',
   'selection-change',
   'on-total-change',
-  'on-change'
+  'on-change',
+  'on-clear'
 ])
 
 const transferFoldStatus = ref(false)
@@ -246,6 +247,10 @@ const slotNames = ref(Object.keys(slots))
 // 触发查询
 const BSGOAL_BASE_TABLE_REF = ref(null)
 const triggerSearch = (searchParams) => {
+  BSGOAL_BASE_TABLE_REF.value.refreshList(searchParams)
+}
+const triggerClear = (searchParams) => {
+  emits('on-clear', searchParams)
   BSGOAL_BASE_TABLE_REF.value.refreshList(searchParams)
 }
 
@@ -320,7 +325,7 @@ defineExpose({
         :config-options="searchOptions"
         :medium="medium"
         @on-search="triggerSearch"
-        @on-clear="triggerSearch"
+        @on-clear="triggerClear"
         @on-change="triggerChange"
       />
       <!-- E 查询 -->
