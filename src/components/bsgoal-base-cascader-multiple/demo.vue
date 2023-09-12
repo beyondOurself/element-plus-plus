@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:31:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 11:14:07
+ * @LastEditTime: 2023-09-12 15:32:13
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\demo.vue
  * @Description:  级联多选
  * 
@@ -96,7 +96,9 @@ const lazyLoad = (node, resolve, level = 0) => {
 }
 
 const initLoad = (node, resolve) => {
-  resolve(options.value)
+  setTimeout(() => {
+    resolve(options.value)
+  }, 3000)
 }
 </script>
 <template>
@@ -111,8 +113,8 @@ const initLoad = (node, resolve) => {
         v-model="data"
         lazy
         rootDisabled
-        :initLoad="initLoad"
         :lazyLoad="lazyLoad"
+        :initLoad="initLoad"
       ></BsgoalBaseCascaderMultipl>
       <!-- E 多选 -->
     </div>
