@@ -21,4 +21,5 @@ export default {
   using: { icon: `${BASE_ICON_URL}icon_start using.svg`, type: 'primary', content: '启用' },
   notes: { icon: `${BASE_ICON_URL}icon_take notes.svg}`, type: 'primary', content: '记录' },
   face: { icon: `${BASE_ICON_URL}icon_face.svg}`, type: 'primary', content: '人脸录入' },
+  release: { icon: `${BASE_ICON_URL}icon_release.svg`, type: 'primary', content: '发布' },
 }

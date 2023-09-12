@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-06 17:27:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-06 17:45:30
+ * @LastEditTime: 2023-09-12 14:29:44
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-icon\index.vue
  * @Description: 图标 
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, toValue } from 'vue'
+import { ref, computed, toValue, inject } from 'vue'
 defineOptions({
   name: 'BsgoalBaseIcon'
 })
@@ -46,8 +46,23 @@ const props = defineProps({
   }
 })
 
+const iconMapping = inject('ICON_MAPPING')
+
+console.log('iconMapping', iconMapping)
+
 const srcGet = computed(() => {
   const { src = '' } = props
+  const srcSplitlist = src.split('>')
+  if (iconMapping && srcSplitlist.length === 2) {
+    const { 0: group, 1: name } = srcSplitlist
+    try {
+      const mappingSrc = iconMapping[group][name]
+      return mappingSrc
+    } catch (error) {
+      console.log('BsgoalBaseIcon', '映射的图标路径异常')
+    }
+  }
+
   return src
 })
 const widthGet = computed(() => {
@@ -67,15 +82,28 @@ const styleGet = computed(() => {
 
   return styler
 })
+
+const colorGet = computed(() => {
+  const { color = '' } = props
+  switch (color) {
+    case 'white':
+      return '#ffffff'
+    case 'info':
+      return '#848484'
+    case 'primary':
+      return 'var(--el-color-primary)'
+  }
+  return color
+})
+
 const imgStyleGet = computed(() => {
   const styler = {}
-  const { color = '' } = props
-
+  const colorValue = toValue(colorGet)
   const widthValue = toValue(widthGet)
   const heightValue = toValue(heightGet)
 
-  if (color) {
-    styler.filter = `drop-shadow(${color} ${widthValue} 0)`
+  if (colorValue) {
+    styler.filter = `drop-shadow(${colorValue} ${widthValue} 0)`
     styler.transform = `translateX(-${widthValue})`
     styler.width = widthValue
     styler.height = heightValue || widthValue
@@ -92,7 +120,7 @@ const imgStyleGet = computed(() => {
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-svg {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
