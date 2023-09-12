@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:30:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 18:34:35
+ * @LastEditTime: 2023-09-12 08:56:47
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\index.vue
  * @Description:  级联选择器 - 多选
  * 
@@ -136,12 +136,8 @@ const propsMapGet = computed(() => {
   const lazyLoadHook = (node, resolve) => {
     const { level } = node
     if (level > startLevel) {
-      lazyLoad(node, resolve, level).then((data = []) => {
-        setLeaf(data)
-        resolve(data)
-      })
+      lazyLoad(node, resolve, level)
     }
-    resolve()
   }
   return { ...propsMap, lazy, lazyLoad: lazyLoadHook }
 })

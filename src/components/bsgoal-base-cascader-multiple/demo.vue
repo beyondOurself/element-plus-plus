@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:31:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 18:32:59
+ * @LastEditTime: 2023-09-12 08:57:36
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\demo.vue
  * @Description:  级联多选
  * 
@@ -78,15 +78,18 @@ const options = [
 const data = ref([])
 
 const lazyLoad = (node, resolve, level = 0) => {
-  return new Promise((reject, resove) => {
-    resove([
-      {
-        value: 28,
-        label: 'Canada',
-        children: []
-      }
-    ])
-  })
+  console.log('level',level);
+  resolve([
+    {
+      value: 28,
+      label: 'Canada',
+      children: [
+        { value: 29, label: 'Toronto' },
+        { value: 30, label: 'Montreal' },
+        { value: 31, label: 'Ottawa' }
+      ]
+    }
+  ])
 }
 </script>
 <template>
