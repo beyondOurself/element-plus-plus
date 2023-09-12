@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-05 17:49:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 16:41:49
+ * @LastEditTime: 2023-09-12 17:58:12
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-radio-group\demo.vue
  * @Description:  单选框组 - 演示
  * 
@@ -39,14 +39,22 @@ const radioGroupOptions = ref([
     disabled: true
   }
 ])
+
+const curDisabled = ref(false)
+
+const test = () => {
+  curDisabled.value = ['value1', 'value2']
+}
+
+
 </script>
 <template>
   <div class="bsgoal-base-radio-group-demo">
-    <BsgoalBaseRadioGroup mode="radio" :options="radioGroupOptions" />
+    <BsgoalBaseRadioGroup mode="radio" :options="radioGroupOptions" :disabled="curDisabled" />
 
-    <el-icon :size="size" :color="color">
-      <Edit />
-    </el-icon>
+
+    <el-button type="primary" @click="test">测试</el-button>
+    
   </div>
 </template>
 <style lang="scss">

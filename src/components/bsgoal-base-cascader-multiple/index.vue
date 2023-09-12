@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:30:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 15:35:30
+ * @LastEditTime: 2023-09-12 17:18:58
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\index.vue
  * @Description:  级联选择器 - 多选
  * 
@@ -32,7 +32,7 @@ const props = defineProps({
    */
   max: {
     type: [Number],
-    default: 1
+    default: 3
   },
   /**
    * 选项的数据源
