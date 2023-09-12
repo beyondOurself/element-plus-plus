@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 11:10:09
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 15:53:04
+ * @LastEditTime: 2023-09-12 17:11:35
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-select\demo.vue
  * @Description: select  演示
  * 
@@ -61,7 +61,7 @@ const test = (params = '') => {
     <div class="base_select_demo">
       {{ selectValue }}
       <BsgoalBaseSelect :model-value="selectValue" :range="selectRange" @change="change" />
-      <BsgoalBaseSelect  multiple  v-model="values" :range="selectRange" @change="change" />
+      <BsgoalBaseSelect  multiple disabled  v-model="values" :range="selectRange" @change="change" />
       <el-button type="primary" @click="test">test</el-button>
     </div>
   </div>
