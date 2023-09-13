@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 11:14:30
+ * @LastEditTime: 2023-09-13 18:50:11
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -50,6 +50,13 @@ const props = defineProps({
     type: [String, Number],
     default: 'medium',
     validator: (v) => ['small', 'medium', 'lagre', 'max', 'dnymic'].includes(v)
+  },
+  /**
+   * 隐藏项
+   */
+   conceal: {
+    type: [Array],
+    default: () => []
   }
 })
 
