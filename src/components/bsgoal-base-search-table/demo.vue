@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 11:44:57
+ * @LastEditTime: 2023-09-13 10:58:35
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -73,6 +73,23 @@ const configOptions = ref([
     // value: '111',
     type: ComponentTypeEnums.RADIO,
     prop: 'prop5',
+    range: [
+      {
+        label: 'radio1',
+        value: 'radio1'
+      },
+      {
+        label: 'radio2',
+        value: 'radio2'
+      }
+    ]
+  },
+  {
+    label: 'prop5-1',
+     value: 'radio1',
+    type: ComponentTypeEnums.RADIO,
+    prop: 'prop5-1',
+    mode:'button',
     range: [
       {
         label: 'radio1',

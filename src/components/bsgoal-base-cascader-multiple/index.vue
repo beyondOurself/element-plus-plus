@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:30:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 17:18:58
+ * @LastEditTime: 2023-09-13 10:48:26
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\index.vue
  * @Description:  级联选择器 - 多选
  * 
@@ -11,9 +11,8 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { checkboxGroupContextKey } from 'element-plus'
-import { ref, toValue, watchEffect, computed } from 'vue'
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import { ref, toValue, watchEffect, computed , toRaw } from 'vue'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 defineOptions({
   name: 'BsgoalBaseCascaderMultipl'
@@ -131,9 +130,14 @@ const styleGet = computed(() => {
 
   return styler
 })
+const EL_CASCADER_REF = ref(null)
+
 
 const change = (value = []) => {
-  emits('on-change', value)
+  const nodes = EL_CASCADER_REF.value.getCheckedNodes()
+  const options = nodes.map( mi => mi.data  )
+  const data = options.map(  ({ data = {}}) => data  )
+  emits('on-change', value,  toRaw(data), toRaw(options)  , nodes)
   emits('update:modelValue', value)
 }
 
@@ -170,10 +174,10 @@ watchEffect(() => {
 </script>
 <template>
   <div class="bsgoal-base-cascader-multipl">
-
     <el-config-provider :locale="zhCn">
       <el-cascader
         class="base_cascader_multipl"
+        ref="EL_CASCADER_REF"
         v-model="curModelValue"
         filterable
         clearable

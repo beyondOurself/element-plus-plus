@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 14:43:57
+ * @LastEditTime: 2023-09-13 10:54:02
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -582,6 +582,7 @@ defineExpose({
                 itemDisabled = disabled,
                 detail = false,
                 attribute = {},
+                mode ='',
                 formatter = (v) => {
                   return v
                 },
@@ -659,7 +660,8 @@ defineExpose({
                           @change="triggerValueChange(type, prop)"
                         >
                           <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                            <el-radio :label="item.value">{{ item.label }}</el-radio>
+                            <el-radio  v-if="mode === 'button' " :label="item.value">{{ item.label }}</el-radio>
+                            <el-radio v-else :label="item.value">{{ item.label }}</el-radio>
                           </template>
                         </el-radio-group>
                       </template>

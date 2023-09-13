@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-26 15:31:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 15:32:13
+ * @LastEditTime: 2023-09-13 10:42:15
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader-multiple\demo.vue
  * @Description:  级联多选
  * 
@@ -23,7 +23,12 @@ const options = ref([
   {
     value: 1,
     label: 'Asia',
-    children: []
+    children: [],
+    data: {
+      prop1: 'prop1',
+      prop2: 'prop2',
+      prop3: 'prop3'
+    }
   },
   {
     value: 14,
@@ -100,13 +105,24 @@ const initLoad = (node, resolve) => {
     resolve(options.value)
   }, 3000)
 }
+
+const changeCascader = (value, data, options, nodes) => {
+  console.log('value', value)
+  console.log('data', data)
+  console.log('options', options)
+  console.log('nodes', nodes)
+}
 </script>
 <template>
   <div class="bsgoal-base-cascader-multiple-demo">
     <div class="base_cascader_multiple_demo">
       {{ data }}
       <!-- S 单选 -->
-      <BsgoalBaseCascaderMultipl v-model="data" :options="options"></BsgoalBaseCascaderMultipl>
+      <BsgoalBaseCascaderMultipl
+        v-model="data"
+        :options="options"
+        @on-change="changeCascader"
+      ></BsgoalBaseCascaderMultipl>
       <!-- E 单选 -->
       <!-- S 多选 -->
       <BsgoalBaseCascaderMultipl

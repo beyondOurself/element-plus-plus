@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-19 14:34:18
+ * @LastEditTime: 2023-09-13 10:57:49
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -322,7 +322,8 @@ defineExpose({
                 format = '',
                 md = '',
                 multiple = false,
-                limit = 0
+                limit = 0,
+                mode=''
               } = {},
               index
             ) of configOptionsGet"
@@ -379,7 +380,8 @@ defineExpose({
                         @change="triggerValueChange(type, prop)"
                       >
                         <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                          <el-radio :label="item.value">{{ item.label }}</el-radio>
+                          <el-radio-button v-if="mode === 'button'" :label="item.value">{{ item.label }}</el-radio-button>
+                          <el-radio  v-else :label="item.value">{{ item.label }}</el-radio>
                         </template>
                       </el-radio-group>
                     </template>
