@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-30 11:06:26
+ * @LastEditTime: 2023-09-13 18:29:28
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -26,6 +26,11 @@ const values = ref({
 const BSGOAL_BASE_FORM_REF = ref(null)
 
 const confirm = () => {
+
+  curConceal.value.push('prop104')
+
+  return;
+
   let isParseInt = true
   BSGOAL_BASE_FORM_REF.value.validateForm((res) => {
     console.log('res', res)
@@ -387,6 +392,9 @@ setTimeout(() => {
   ]
   console.log('configOptions',configOptions.value);
 }, 3000)
+
+const curConceal = ref(['prop105'])
+
 </script>
 <template>
   <div class="bsgoal-base-form-demo">
@@ -395,6 +403,7 @@ setTimeout(() => {
       ref="BSGOAL_BASE_FORM_REF"
       readonly
       none="--"
+      :conceal="curConceal"
       :medium="6"
       :limits="10"
       :config-options="configOptions"

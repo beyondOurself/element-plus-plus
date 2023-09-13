@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-05 17:49:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 17:58:12
+ * @LastEditTime: 2023-09-13 14:23:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-radio-group\demo.vue
  * @Description:  单选框组 - 演示
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref } from 'vue'
+import { ref  , computed} from 'vue'
 
 import BsgoalBaseRadioGroup from './index.vue'
 
@@ -46,11 +46,15 @@ const test = () => {
   curDisabled.value = ['value1', 'value2']
 }
 
+const curDisabledGet = computed(() => {
+  
+  return ['value1', 'value2']
+})
 
 </script>
 <template>
   <div class="bsgoal-base-radio-group-demo">
-    <BsgoalBaseRadioGroup mode="radio" :options="radioGroupOptions" :disabled="curDisabled" />
+    <BsgoalBaseRadioGroup mode="radio" :options="radioGroupOptions" :disabled="curDisabledGet" />
 
 
     <el-button type="primary" @click="test">测试</el-button>

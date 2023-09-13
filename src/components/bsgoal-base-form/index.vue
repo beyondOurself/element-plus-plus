@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-13 10:54:02
+ * @LastEditTime: 2023-09-13 18:23:03
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -127,6 +127,13 @@ const props = defineProps({
   disabled: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * 隐藏项
+   */
+  conceal: {
+    type: [Array],
+    default: () => []
   }
 })
 
@@ -203,6 +210,15 @@ watchEffect(() => {
 })
 
 // ---> E 初始值 <---
+
+// ---> S 隐藏项 <---
+
+const curConceal = ref([])
+watchEffect(() => {
+  const { conceal } = props
+  curConceal.value = conceal
+})
+// ---> E 隐藏项 <---
 
 /**
  * @Author: canlong.shen
@@ -582,7 +598,7 @@ defineExpose({
                 itemDisabled = disabled,
                 detail = false,
                 attribute = {},
-                mode ='',
+                mode = '',
                 formatter = (v) => {
                   return v
                 },
@@ -595,6 +611,7 @@ defineExpose({
             :key="key"
           >
             <el-col
+            v-if="!curConceal.includes(prop)"
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
@@ -660,7 +677,9 @@ defineExpose({
                           @change="triggerValueChange(type, prop)"
                         >
                           <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                            <el-radio  v-if="mode === 'button' " :label="item.value">{{ item.label }}</el-radio>
+                            <el-radio v-if="mode === 'button'" :label="item.value">{{
+                              item.label
+                            }}</el-radio>
                             <el-radio v-else :label="item.value">{{ item.label }}</el-radio>
                           </template>
                         </el-radio-group>
