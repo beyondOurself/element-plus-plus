@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-23 16:35:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-17 13:58:14
+ * @LastEditTime: 2023-09-14 09:40:30
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog\index.vue
  * @Description:  弹窗公共组件
  * 
@@ -82,6 +82,13 @@ const props = defineProps({
   isRefresh: {
     type: [Boolean],
     default: true
+  },
+  /**
+   * 弹窗的上边距
+   */
+  top: {
+    type: [String],
+    default: '10vh'
   }
 })
 
@@ -176,6 +183,7 @@ defineExpose({
         v-model="dialogVisible"
         custom-class="bsgoal_base_dialog_main"
         :class="{ 'bsgoal-dialog__footer--conceal': !footer }"
+        :top="top"
         :width="widthGet"
       >
         <template #header>
