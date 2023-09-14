@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-04-27 16:05:33
- * @FilePath: \common\src\components\bsgoal-base-cascader\demo.vue
+ * @LastEditTime: 2023-09-14 15:09:29
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader\demo.vue
  * @Description: 级联选择公共组件 演示
  * 
 -->
@@ -108,11 +108,17 @@ const  cascaderData = ref([
     }
 ])
 
+const change = (value, data , node  ) => {
+  console.log('value',value);
+  console.log('data',data);
+  console.log('node',node);
+}
+
 </script>
 <template>
   <div class="bsgoal-base-cascader-demo"> 
     {{ cascaderValue }}
-    <BsgoalBaseCascader v-model="cascaderValue" :data-options="cascaderData"  />
+    <BsgoalBaseCascader  v-model="cascaderValue" :data-options="cascaderData"  @on-change="change" />
   </div>
 </template>
 <style lang="scss" scoped>

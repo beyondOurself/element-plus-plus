@@ -2,15 +2,15 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:27
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-26 18:18:02
- * @FilePath: \common\src\components\bsgoal-base-cascader\index.vue
+ * @LastEditTime: 2023-09-14 15:06:31
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader\index.vue
  * @Description: 级联选择 公共组件
  * 
 -->
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, computed } from 'vue'
 
 defineOptions({
   name: 'BsgoalBaseCascader'
@@ -44,14 +44,26 @@ const props = defineProps({
   placeholder: {
     type: [String],
     default: ''
+  },
+  /**
+   * 取消父子节点广联
+   */
+  checkStrictly: {
+    type: [Boolean],
+    default: true
   }
 })
 
 const emits = defineEmits(['update:model-value', 'on-change'])
 
-const configProps = ref({
-  checkStrictly: true,
-  multiple: false
+const configPropsGet = computed(() => {
+  const { checkStrictly = true } = props
+  const configProps = {
+    checkStrictly,
+    multiple: false
+  }
+
+  return configProps
 })
 
 /**
@@ -61,20 +73,26 @@ const configProps = ref({
  * @default:
  * @return {*}
  */
+const EL_CASCADER_REF = ref(null)
 const changeCascaderValue = (val) => {
+  const nodes = EL_CASCADER_REF.value.getCheckedNodes()
+  const options = nodes.map((mi) => mi.data)
+  const data = options.map(({ data = {} }) => data)
   emits('update:model-value', val)
-  emits('on-change', val)
+  emits('on-change', val, data, options, nodes)
 }
 </script>
 <template>
   <div class="bsgoal-base-cascader">
     <el-cascader
+      filterable
       clearable
       class="base_cascader"
+      ref="EL_CASCADER_REF"
       :show-all-levels="false"
       :model-value="modelValue"
       :options="dataOptions"
-      :props="configProps"
+      :props="configPropsGet"
       :placeholder="placeholder"
       @change="changeCascaderValue"
     />
