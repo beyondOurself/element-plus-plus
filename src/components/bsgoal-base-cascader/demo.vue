@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 15:09:29
+ * @LastEditTime: 2023-09-14 17:32:27
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader\demo.vue
  * @Description: 级联选择公共组件 演示
  * 
@@ -118,7 +118,7 @@ const change = (value, data , node  ) => {
 <template>
   <div class="bsgoal-base-cascader-demo"> 
     {{ cascaderValue }}
-    <BsgoalBaseCascader  v-model="cascaderValue" :data-options="cascaderData"  @on-change="change" />
+    <BsgoalBaseCascader  v-model="cascaderValue" :options="cascaderData"  @on-change="change" />
   </div>
 </template>
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 09:56:31
+ * @LastEditTime: 2023-09-14 17:44:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -53,7 +53,7 @@ const configOptions = ref([
     attribute: {
       rootDisabled: true
     },
-    type: ComponentTypeEnums.CASCADER_MULTIPLE,
+    type: ComponentTypeEnums.CASCADER,
     rules: true,
     range: [
       {
@@ -394,7 +394,7 @@ setTimeout(() => {
   console.log('configOptions',configOptions.value);
 }, 3000)
 
-const curConceal = ref(['prop105'])
+const curConceal = ref([])
 
 </script>
 <template>

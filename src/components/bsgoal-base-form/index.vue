@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 09:55:18
+ * @LastEditTime: 2023-09-14 17:49:00
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -16,6 +16,7 @@ import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
 import BsgoalBaseCascaderMultipl from '../bsgoal-base-cascader-multiple/index.vue'
+import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 import { ElMessage } from 'element-plus'
 import { isObject, deepClone } from '../../utils/common.js'
 import { isBoolean } from 'lodash'
@@ -279,7 +280,7 @@ watch(
       const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
       const requiredSelectRule = { required: true, message: `${label}不能为空`, trigger: 'change' }
       if (isBoolean(rules) && rules) {
-        rules = [ComponentTypeEnums.SELECT, ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)
+        rules = [ComponentTypeEnums.SELECT, ComponentTypeEnums.CASCADER_MULTIPLE, ComponentTypeEnums.CASCADER].includes(type)
           ? [requiredRule, requiredSelectRule]
           : [requiredRule]
       } else if (Array.isArray(rules) && !!rules.length) {
@@ -599,7 +600,7 @@ defineExpose({
                 detail = false,
                 attribute = {},
                 mode = '',
-                gap=false,
+                gap = false,
                 formatter = (v) => {
                   return v
                 },
@@ -822,6 +823,17 @@ defineExpose({
                             @change="triggerValueChange(type, prop)"
                           />
                         </template>
+                        <!-- / 级联 -->
+                        <template v-if="[ComponentTypeEnums.CASCADER].includes(type)">
+                          <BsgoalBaseCascader
+                            v-bind="attribute"
+                            v-model="model[prop]"
+                            :options="range"
+                            @on-change="triggerValueChange(type, prop)"
+                          ></BsgoalBaseCascader>
+                        </template>
+                        <!-- / 级联 -->
+
                         <!-- / 级联-多选 -->
                         <template v-if="[ComponentTypeEnums.CASCADER_MULTIPLE].includes(type)">
                           <BsgoalBaseCascaderMultipl

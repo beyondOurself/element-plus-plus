@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:27
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 15:06:31
+ * @LastEditTime: 2023-09-14 17:49:45
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader\index.vue
  * @Description: 级联选择 公共组件
  * 
@@ -34,7 +34,7 @@ const props = defineProps({
    *   ]
    *  }
    */
-  dataOptions: {
+  options: {
     type: [Array],
     default: () => []
   },
@@ -81,6 +81,12 @@ const changeCascaderValue = (val) => {
   emits('update:model-value', val)
   emits('on-change', val, data, options, nodes)
 }
+
+const optionsGet = computed(() => {
+  const { options = [] } = props
+
+  return options
+})
 </script>
 <template>
   <div class="bsgoal-base-cascader">
@@ -91,7 +97,7 @@ const changeCascaderValue = (val) => {
       ref="EL_CASCADER_REF"
       :show-all-levels="false"
       :model-value="modelValue"
-      :options="dataOptions"
+      :options="optionsGet"
       :props="configPropsGet"
       :placeholder="placeholder"
       @change="changeCascaderValue"
