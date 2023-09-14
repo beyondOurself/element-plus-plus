@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-13 18:29:28
+ * @LastEditTime: 2023-09-14 09:56:31
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -143,6 +143,7 @@ const configOptions = ref([
   {
     label: 'prop104',
     prop: 'prop104',
+    gap:true,
     // readonly: true,
     // rules: [
     //   {
@@ -410,7 +411,7 @@ const curConceal = ref(['prop105'])
       :bind-model="values"
       @on-change="changeFormItem"
     >
-      <template #_prop104> 6666 </template>
+      <template #prop104> 6666 </template>
     </BsgoalBaseForm>
     <el-button type="primary" @click="confirm">提交</el-button>
     <el-button type="primary" @click="resetFields">重置</el-button>

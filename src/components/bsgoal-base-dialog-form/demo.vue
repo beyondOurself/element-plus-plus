@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-31 11:13:38
+ * @LastEditTime: 2023-09-14 09:58:56
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -63,6 +63,7 @@ const configOptionsForm = ref([
     label: '电话号',
     prop: 'prop2',
     validation:true,
+    gap:true,
     type: ComponentTypeEnums.INPUT, 
  
   },
@@ -108,6 +109,11 @@ const hide = () => {
     >
       <template #prop3>
         <el-button type="primary" @click="test">点击测试</el-button>
+      </template>
+      <template #prop2>
+       <div>
+         ============================ 间隔 =============================
+       </div>
       </template>
     </BsgoalBaseDialogForm>
   </div>
