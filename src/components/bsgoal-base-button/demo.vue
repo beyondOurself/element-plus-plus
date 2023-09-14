@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 14:44:01
+ * @LastEditTime: 2023-09-14 11:05:42
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\demo.vue
  * @Description:  按钮 演示
  * 
@@ -30,7 +30,7 @@ const tooltip = `{"data":{"areaId":0,"areaSerialNumber":"","baseFloor":"2","buil
   <div class="bsgoal-base-button-demo">
     <BsgoalBaseButton :task="task"  mode="release"  > </BsgoalBaseButton>
 
-    <BsgoalBaseButton :task="task"  mode="detail" hasConfirm > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task"  mode="detail" hasConfirm  confirmWidth="200"> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task"   type="primary" plain content="测试" url="https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/button/icon_take%20notes.svg" > </BsgoalBaseButton>
     <BsgoalBaseButton :task="task"  link type="primary" :tooltip="tooltip" tooltipPlacement="left-start" plain content="测试"> </BsgoalBaseButton>
 

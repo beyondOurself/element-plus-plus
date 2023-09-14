@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-07 17:33:46
+ * @LastEditTime: 2023-09-14 11:05:15
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -15,7 +15,7 @@ import { ref, unref, computed, nextTick } from 'vue'
 import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
 import iconMap from './assets/map-icon.js'
 import BsgoalBaseIcon from '../bsgoal-base-icon/index.vue'
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 defineOptions({
   name: 'BsgoalBaseButton'
@@ -117,6 +117,13 @@ const props = defineProps({
   tooltipPlacement: {
     type: [String],
     default: 'top'
+  },
+  /**
+   * 气泡确认框内容的宽度
+   */
+  confirmWidth: {
+    type: [String,Number],
+    default: ''
   }
 })
 
@@ -256,7 +263,7 @@ const tooltipStyleGet = computed(() => {
     <el-config-provider :locale="zhCn">
       <template v-if="hasConfirm && !disabled">
         <div class="base_button">
-          <el-popconfirm :title="title" @confirm="triggerClick">
+          <el-popconfirm :title="title" :width="confirmWidth" @confirm="triggerClick">
             <template #reference>
               <slot :loading="loading">
                 <el-button
