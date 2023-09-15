@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 17:32:27
+ * @LastEditTime: 2023-09-15 11:50:52
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader\demo.vue
  * @Description: 级联选择公共组件 演示
  * 
@@ -104,21 +104,22 @@ const  cascaderData = ref([
             }
         ],
         "label": "深圳市博思高科技有限公司",
-        "value": 354
+        "value": 354,
+        data:{
+          test: 111
+        }
     }
 ])
 
-const change = (value, data , node  ) => {
-  console.log('value',value);
-  console.log('data',data);
-  console.log('node',node);
+const change = (values ) => {
+  console.log('values',values);
 }
 
 </script>
 <template>
   <div class="bsgoal-base-cascader-demo"> 
     {{ cascaderValue }}
-    <BsgoalBaseCascader  v-model="cascaderValue" :options="cascaderData"  @on-change="change" />
+    <BsgoalBaseCascader    v-model="cascaderValue" :options="cascaderData"  @on-change="change" />
   </div>
 </template>
 <style lang="scss" scoped>

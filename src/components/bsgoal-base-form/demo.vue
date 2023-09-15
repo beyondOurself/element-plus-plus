@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 17:44:32
+ * @LastEditTime: 2023-09-15 11:47:39
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -26,10 +26,9 @@ const values = ref({
 const BSGOAL_BASE_FORM_REF = ref(null)
 
 const confirm = () => {
-
   curConceal.value.push('prop104')
 
-  return;
+  return
 
   let isParseInt = true
   BSGOAL_BASE_FORM_REF.value.validateForm((res) => {
@@ -51,7 +50,8 @@ const configOptions = ref([
     prop: 'prop105',
     value: [],
     attribute: {
-      rootDisabled: true
+      rootDisabled: true,
+      checkStrictly: false
     },
     type: ComponentTypeEnums.CASCADER,
     rules: true,
@@ -143,7 +143,7 @@ const configOptions = ref([
   {
     label: 'prop104',
     prop: 'prop104',
-    gap:true,
+    gap: true
     // readonly: true,
     // rules: [
     //   {
@@ -391,11 +391,10 @@ setTimeout(() => {
       value: 'select5'
     }
   ]
-  console.log('configOptions',configOptions.value);
+  console.log('configOptions', configOptions.value)
 }, 3000)
 
 const curConceal = ref([])
-
 </script>
 <template>
   <div class="bsgoal-base-form-demo">
@@ -409,6 +408,7 @@ const curConceal = ref([])
       :limits="10"
       :config-options="configOptions"
       :bind-model="values"
+      :checkStrictly="false"
       @on-change="changeFormItem"
     >
       <template #prop104> 6666 </template>

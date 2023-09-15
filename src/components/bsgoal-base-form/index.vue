@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 17:49:00
+ * @LastEditTime: 2023-09-15 11:51:39
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -280,7 +280,11 @@ watch(
       const requiredRule = { required: true, message: `${label}不能为空`, trigger: 'blur' }
       const requiredSelectRule = { required: true, message: `${label}不能为空`, trigger: 'change' }
       if (isBoolean(rules) && rules) {
-        rules = [ComponentTypeEnums.SELECT, ComponentTypeEnums.CASCADER_MULTIPLE, ComponentTypeEnums.CASCADER].includes(type)
+        rules = [
+          ComponentTypeEnums.SELECT,
+          ComponentTypeEnums.CASCADER_MULTIPLE,
+          ComponentTypeEnums.CASCADER
+        ].includes(type)
           ? [requiredRule, requiredSelectRule]
           : [requiredRule]
       } else if (Array.isArray(rules) && !!rules.length) {
@@ -425,6 +429,8 @@ const triggerValueChange = (type, prop, range = []) => {
   const value = model.value[prop] || ''
   let option = {}
 
+  console.log('range', range)
+
   if ([ComponentTypeEnums.SELECT].includes(type) && range.length) {
     let hitList = value
     if (!Array.isArray(value)) {
@@ -446,6 +452,18 @@ const triggerValueChange = (type, prop, range = []) => {
     value
   }
   emits('on-change', emitValue)
+}
+
+const changeCascader = (type, prop, values) => {
+  const { value = '', data = {}, option = {}, node = {} } = values
+  emits('on-change', {
+    type,
+    prop,
+    value,
+    data,
+    option,
+    node
+  })
 }
 
 /**
@@ -829,7 +847,11 @@ defineExpose({
                             v-bind="attribute"
                             v-model="model[prop]"
                             :options="range"
-                            @on-change="triggerValueChange(type, prop)"
+                            @on-change="
+                              (value, values) => {
+                                changeCascader(type, prop, values)
+                              }
+                            "
                           ></BsgoalBaseCascader>
                         </template>
                         <!-- / 级联 -->

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:27
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 17:49:45
+ * @LastEditTime: 2023-09-15 11:49:05
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader\index.vue
  * @Description: 级联选择 公共组件
  * 
@@ -74,12 +74,14 @@ const configPropsGet = computed(() => {
  * @return {*}
  */
 const EL_CASCADER_REF = ref(null)
-const changeCascaderValue = (val) => {
+const change = (value) => {
   const nodes = EL_CASCADER_REF.value.getCheckedNodes()
-  const options = nodes.map((mi) => mi.data)
-  const data = options.map(({ data = {} }) => data)
-  emits('update:model-value', val)
-  emits('on-change', val, data, options, nodes)
+  const { 0: node } = nodes
+  const { data: option = {} } = node
+  const { data = {} } = option
+
+  emits('update:model-value', value)
+  emits('on-change', value, {value, data, option, node})
 }
 
 const optionsGet = computed(() => {
@@ -100,7 +102,7 @@ const optionsGet = computed(() => {
       :options="optionsGet"
       :props="configPropsGet"
       :placeholder="placeholder"
-      @change="changeCascaderValue"
+      @change="change"
     />
   </div>
 </template>
