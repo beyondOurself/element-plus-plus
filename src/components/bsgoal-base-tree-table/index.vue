@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 11:59:23
+ * @LastEditTime: 2023-09-15 15:40:26
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -200,21 +200,21 @@ const props = defineProps({
   /**
    * 表格菜单自动布局
    */
-   autoLayoutMenu: {
+  autoLayoutMenu: {
     type: [Boolean],
     default: false
   },
-   /**
+  /**
    * 加载子节点数据的函数
    */
-   tableLoad: {
+  tableLoad: {
     type: [Function],
     default: () => {}
   },
   /**
    * 是否懒加载
    */
-   tableLazy: {
+  tableLazy: {
     type: [Boolean],
     default: false
   },
@@ -248,7 +248,8 @@ const emits = defineEmits([
   'on-select-table',
   'on-select-all-table',
   'on-selection-change-table',
-  'on-total-change-table'
+  'on-total-change-table',
+  'on-change-table-search'
 ])
 
 // ---> S 注入插槽 <---
@@ -308,6 +309,11 @@ const triggerSelectionChange = (selection = {}) => {
 const triggerTotalChange = (total = 0) => {
   emits('on-total-change-table', total)
 }
+
+const triggerTableChange = (values = {}) => {
+  emits('on-change-table-search', values)
+}
+
 // ---> E 触发事件 <---
 
 // ---> S 暴露事件 <---
@@ -376,6 +382,7 @@ const tableStyler = computed(() => {
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"
           @on-total-change="triggerTotalChange"
+          @on-change="triggerTableChange"
         >
           <template
             v-for="slotName of slotNames"
