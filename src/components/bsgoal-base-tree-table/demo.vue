@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-15 15:42:17
+ * @LastEditTime: 2023-09-18 11:50:15
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -312,10 +312,10 @@ const tableData = ref([
     prop14: 'row1value',
     prop15: 'row1value',
     prop16: 'row1value',
-    hasChildren:false,
+    hasChildren: false,
     children: [
       {
-        id:31,
+        id: 31,
         prop1: 'row1-1value',
         prop2: 'row1-1value',
         prop3: 'row1-1value',
@@ -334,7 +334,7 @@ const tableData = ref([
         prop16: 'row1-1value'
       },
       {
-        id:32,
+        id: 32,
         prop1: 'row1-2value',
         prop2: 'row1-2value',
         prop3: 'row1-2value',
@@ -351,7 +351,7 @@ const tableData = ref([
         prop14: 'row1-2value',
         prop15: 'row1-2value',
         prop16: 'row1-2value'
-      },
+      }
     ]
   },
   {
@@ -795,12 +795,20 @@ const fetch = (params) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       // 存在分页
+      // resolve({
+      //   data: {
+      //     rows: tableDataVal,
+      //     total: tableDataVal.length
+      //   },
+      //   message: '获取数据成功'
+      // })
+
       resolve({
+        code: 0,
+        message: '',
         data: {
-          rows: tableDataVal,
-          total: tableDataVal.length
-        },
-        message: '获取数据成功'
+          list: tableDataVal
+        }
       })
     }, 3000)
   })
@@ -861,8 +869,8 @@ const clearSelection = () => {
   BSGOAL_BASE_TREE_TABLE_REF.value.clearSelection()
 }
 
-const changeTableSearch = (values ={}) => {
-  console.log('values',values);
+const changeTableSearch = (values = {}) => {
+  console.log('values', values)
 }
 // ---> E 列表 <---
 </script>
@@ -873,15 +881,21 @@ const changeTableSearch = (values ={}) => {
     <div class="base_tree_table_demo">
       <!-- <div @click="test">点击</div> -->
       <BsgoalBaseTreeTable
+        
         ref="BSGOAL_BASE_TREE_TABLE_REF"
         serial
         operation
         :expandedKeys="expandedKeys"
         :tree-data="treeData"
         :page-size="40"
+        :table-props="{
+          'rows':'list'
+        }"
         :fetch="fetch"
         :config-options="configOptions"
         :expression="77"
+        :has-page="false"
+         :has-search="false"
         @on-click-tree="triggerTreeClick"
         @on-add-tree="triggerTreeAddClick"
         @on-select-table="triggerTableSelect"

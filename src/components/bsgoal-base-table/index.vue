@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 11:47:32
+ * @LastEditTime: 2023-09-18 11:52:59
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -290,7 +290,8 @@ watch(resData, (data) => {
     tableData.value = data[mapPropsFuse.rows]
     total.value = data[mapPropsFuse.total]
   } else {
-    tableData.value = data
+    console.log('data',data);
+    tableData.value = data[mapPropsFuse.rows]
   }
 })
 
