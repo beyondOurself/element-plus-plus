@@ -107,7 +107,7 @@ const configOptions = ref([
     type: ComponentTypeEnums.CHECKBOX,
     prop: 'prop6',
     range: [
-      {
+    {
         label: 'checkbox1',
         value: 'checkbox1'
       },

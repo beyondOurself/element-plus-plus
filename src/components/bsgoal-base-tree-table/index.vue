@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-15 15:40:26
+ * @LastEditTime: 2023-09-18 11:08:40
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -34,7 +34,7 @@ const props = defineProps({
     default: () => []
   },
   /**
-   * 配置
+   * 树 配置映射
    */
   treeProps: {
     type: [Object],
@@ -46,6 +46,20 @@ const props = defineProps({
       class: 'class'
     })
   },
+
+    /**
+   * 表格 配置映射
+   */
+   tableProps: {
+    type: [Object],
+    default: () => ({
+      currentPage: 'currentPage',
+      pageSize: 'pageSize',
+      rows: 'rows',
+      total: 'total'
+    })
+  },
+
   /**
    * 懒加载数据方法
    * () => {
@@ -378,6 +392,7 @@ const tableStyler = computed(() => {
           :treeProps="tableProps"
           :rowKey="rowKey"
           :defaultExpandAll="defaultExpandAll"
+          :map-props="tableProps"
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"
