@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-18 11:08:40
+ * @LastEditTime: 2023-09-18 11:12:56
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -233,13 +233,6 @@ const props = defineProps({
     default: false
   },
   /**
-   * 渲染嵌套数据的配置选项
-   */
-  tableProps: {
-    type: [Object],
-    default: () => ({ hasChildren: 'hasChildren', children: 'children' })
-  },
-  /**
    * 行数据的 Key
    */
   rowKey: {
@@ -366,6 +359,7 @@ const tableStyler = computed(() => {
         <BsgoalBaseTree
           v-bind="$props"
           class="base_tree_table--tree"
+          :tree-props="treeProps"
           @on-switch="triggerTreeSwitch"
           @on-add="triggerTreeAdd"
           @on-click="triggerTreeClick"
@@ -389,7 +383,6 @@ const tableStyler = computed(() => {
           :summary-props="summaryProps"
           :load="tableLoad"
           :lazy="tableLazy"
-          :treeProps="tableProps"
           :rowKey="rowKey"
           :defaultExpandAll="defaultExpandAll"
           :map-props="tableProps"
