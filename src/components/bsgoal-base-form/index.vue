@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-15 11:51:39
+ * @LastEditTime: 2023-09-18 14:19:30
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -635,11 +635,16 @@ defineExpose({
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
-              :md="md || medium"
+              :md="gap ? 24 : md || medium"
               :style="colStyle"
             >
               <template v-if="gap">
-                <slot :name="prop"></slot>
+                <slot :name="prop || `gap_${key}`">
+                  <div class="form_item_gap">
+                    <div class="item_gap_line"></div>
+                    <div class="item_gap_title">{{ gap }}</div>
+                  </div>
+                </slot>
               </template>
               <template v-else>
                 <el-form-item
@@ -921,6 +926,27 @@ defineExpose({
       border-radius: 4px;
       padding-left: 8px;
     }
+  }
+
+  .form_item_gap {
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .item_gap_line,
+  .item_gap_title {
+    display: inline-block;
+  }
+  .item_gap_line {
+    width: 3px;
+    height: 16px;
+    margin-right: 8px;
+    background-color: var(--el-color-primary);
+  }
+  .item_gap_title {
+    font-size: 16px;
+    color: #303133;
   }
 }
 </style>

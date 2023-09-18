@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-15 11:47:39
+ * @LastEditTime: 2023-09-18 14:10:04
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -44,6 +44,10 @@ const bindModel = ref({ prop1: '111', prop99: 1, prop101: '否', prop102: '0', p
 // 配置项
 const configOptions = ref([
   // { label: '名称', prop: 'residentialName', limit: 5, readonly: true }
+
+  {
+    gap: '设备基础信息'
+  },
 
   {
     label: 'prop105',
