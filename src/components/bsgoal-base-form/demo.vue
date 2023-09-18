@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-18 14:10:04
+ * @LastEditTime: 2023-09-18 18:23:19
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -234,6 +234,10 @@ const configOptions = ref([
     prop: 'prop2',
     multiple: true,
     filterable: true,
+    attribute: {
+      'allow-create': true,
+      'default-first-option': true
+    },
     range: [
       {
         label: 'select1',

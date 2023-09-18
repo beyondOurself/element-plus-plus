@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-18 14:19:30
+ * @LastEditTime: 2023-09-18 18:27:41
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -619,6 +619,7 @@ defineExpose({
                 attribute = {},
                 mode = '',
                 gap = false,
+                gapStyle = {},
                 formatter = (v) => {
                   return v
                 },
@@ -640,7 +641,7 @@ defineExpose({
             >
               <template v-if="gap">
                 <slot :name="prop || `gap_${key}`">
-                  <div class="form_item_gap">
+                  <div class="form_item_gap" :style="gapStyle">
                     <div class="item_gap_line"></div>
                     <div class="item_gap_title">{{ gap }}</div>
                   </div>
@@ -662,6 +663,7 @@ defineExpose({
                         <template v-if="type === ComponentTypeEnums.INPUT">
                           <el-input
                             v-model="model[prop]"
+                            v-bind="attribute"
                             :disabled="itemDisabled"
                             :placeholder="placeholderSet(type, label, placeholder)"
                             :clearable="clearable"
@@ -677,6 +679,7 @@ defineExpose({
                             v-model="model[prop]"
                             show-word-limit
                             type="textarea"
+                            v-bind="attribute"
                             :disabled="itemDisabled"
                             :autosize="{ minRows: rows }"
                             :maxlength="length"
@@ -690,6 +693,7 @@ defineExpose({
                           <el-input-number
                             v-model="model[prop]"
                             controls-position="right"
+                            v-bind="attribute"
                             :disabled="itemDisabled"
                             :min="min"
                             :max="max"
@@ -702,6 +706,7 @@ defineExpose({
                         <template v-if="type === ComponentTypeEnums.RADIO">
                           <el-radio-group
                             v-model="model[prop]"
+                            v-bind="attribute"
                             :disabled="itemDisabled"
                             @change="triggerValueChange(type, prop)"
                           >
@@ -718,6 +723,8 @@ defineExpose({
                         <template v-if="type === ComponentTypeEnums.SELECT">
                           <el-select
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             no-data-text="暂无数据"
                             :disabled="itemDisabled"
                             :multiple="multiple"
@@ -735,6 +742,8 @@ defineExpose({
                         <template v-if="type === ComponentTypeEnums.SLIDER">
                           <el-slider
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             :disabled="itemDisabled"
                             :min="min"
                             :max="max"
@@ -746,6 +755,8 @@ defineExpose({
                         <template v-if="type === ComponentTypeEnums.SWITCH">
                           <el-switch
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             :disabled="itemDisabled"
                             :active-value="setActiveValueText(range, 'active-value')"
                             :inactive-value="setActiveValueText(range, 'inactive-value')"
@@ -768,6 +779,8 @@ defineExpose({
                         >
                           <el-date-picker
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             :disabled="itemDisabled"
                             :format="formatSet(type, format)"
                             :value-format="formatSet(type, format)"
@@ -789,6 +802,8 @@ defineExpose({
                         >
                           <el-date-picker
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             :disabled="itemDisabled"
                             :type="type"
                             :value-format="formatSet(type, format)"
@@ -802,6 +817,8 @@ defineExpose({
                         <template v-if="[ComponentTypeEnums.TIME].includes(type)">
                           <el-time-picker
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             arrow-control
                             :disabled="itemDisabled"
                             :value-format="formatSet(type, format)"
@@ -815,6 +832,8 @@ defineExpose({
                           <el-time-picker
                             v-model="model[prop]"
                             is-range
+                            v-bind="attribute"
+
                             :disabled="itemDisabled"
                             :value-format="formatSet(type, format)"
                             :start-placeholder="placeholderSet(type, label, placeholder)[0]"
@@ -827,6 +846,8 @@ defineExpose({
                         <template v-if="[ComponentTypeEnums.CHECKBOX].includes(type)">
                           <el-checkbox-group
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             :disabled="itemDisabled"
                             @change="triggerValueChange(type, prop)"
                           >
@@ -840,6 +861,8 @@ defineExpose({
                         <template v-if="[ComponentTypeEnums.CHECKBOX_SINGLE].includes(type)">
                           <el-checkbox
                             v-model="model[prop]"
+                            v-bind="attribute"
+
                             :disabled="itemDisabled"
                             :true-label="range[0] ? range[0].value : '1'"
                             :false-label="range[1] ? range[1].value : '0'"
@@ -947,6 +970,9 @@ defineExpose({
   .item_gap_title {
     font-size: 16px;
     color: #303133;
+  }
+  .form_item_gap:first-child {
+    margin-top: 0px;
   }
 }
 </style>
