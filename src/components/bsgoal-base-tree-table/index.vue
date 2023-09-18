@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-18 11:12:56
+ * @LastEditTime: 2023-09-18 14:37:00
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -47,17 +47,12 @@ const props = defineProps({
     })
   },
 
-    /**
+  /**
    * 表格 配置映射
    */
-   tableProps: {
+  tableProps: {
     type: [Object],
-    default: () => ({
-      currentPage: 'currentPage',
-      pageSize: 'pageSize',
-      rows: 'rows',
-      total: 'total'
-    })
+    default: () => ({})
   },
 
   /**
@@ -350,6 +345,11 @@ const tableStyler = computed(() => {
 
   return styler
 })
+
+const mapPropsGet = computed(() => {
+  const { mapProps = {}, tableProps = {} } = props
+  return { ...mapProps, ...tableProps }
+})
 </script>
 <template>
   <div class="bsgoal-base-tree-table">
@@ -385,7 +385,7 @@ const tableStyler = computed(() => {
           :lazy="tableLazy"
           :rowKey="rowKey"
           :defaultExpandAll="defaultExpandAll"
-          :map-props="tableProps"
+          :map-props="mapPropsGet"
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"
