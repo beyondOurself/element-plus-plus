@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 09:58:56
+ * @LastEditTime: 2023-09-19 14:21:14
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -63,7 +63,6 @@ const configOptionsForm = ref([
     label: '电话号',
     prop: 'prop2',
     validation:true,
-    gap:true,
     type: ComponentTypeEnums.INPUT, 
  
   },
@@ -71,8 +70,30 @@ const configOptionsForm = ref([
     label: '字段3',
     prop: 'prop3',
     type: ComponentTypeEnums.INPUT
-  }
+  },
+  {
+    label: '字段4',
+    prop: 'prop4',
+    type: ComponentTypeEnums.INPUT
+  },
+  {
+    label: '字段5',
+    prop: 'prop5',
+    type: ComponentTypeEnums.INPUT
+  },
+  {
+    label: '字段6666',
+    prop: 'prop666666',
+    type: ComponentTypeEnums.INPUT
+  },
+  {
+    label: '字段7787777777777777',
+    prop: 'prop7787777777777777',
+    type: ComponentTypeEnums.INPUT
+  },
 ])
+
+const curConceal = ref(['prop7787777777777777'])
 
 const confirm = (formModel = {}, done = () => {}) => {
   console.log('formModel', formModel)
@@ -82,10 +103,12 @@ const confirm = (formModel = {}, done = () => {}) => {
 const test = () => {
   console.log('formModel.value', formModel)
   formModel.value.prop1 = '6666'
+   curConceal.value = []
 }
 
 const changeFormItem = (values = {}) => {
   console.log('values22', values)
+  
 }
 
 const hide = () => {
@@ -103,6 +126,7 @@ const hide = () => {
     <BsgoalBaseDialogForm
       ref="BSGOAL_BASE_DIALOG_FORM_REF"
       :options="configOptionsForm"
+      :conceal="curConceal"
       @on-confirm="confirm"
       @on-change="changeFormItem"
       @on-hide="hide"

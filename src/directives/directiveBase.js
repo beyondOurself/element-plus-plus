@@ -2,13 +2,13 @@
  * @Author: canlong.shen
  * @Date: 2023-04-14 10:50:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-01 09:22:49
- * @FilePath: \common\src\directives\directiveBase.js
+ * @LastEditTime: 2023-09-19 14:09:25
+ * @FilePath: \v3_basic_component\src\directives\directiveBase.js
  * @Description: 常用的公共指令
  *
  */
 
-const autoAlign = (el) => {
+export const autoAlign = (el) => {
    let timeoutID = null
   //指令所在组件的 VNode 及其子 VNode 全部更新后调用。
   /**

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-19 13:51:14
+ * @LastEditTime: 2023-09-19 14:09:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, toValue, watchEffect, watch, onUnmounted, toRaw } from 'vue'
+import { ref, computed, toValue, watchEffect, watch, nextTick, toRaw } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
@@ -20,6 +20,7 @@ import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 import { ElMessage } from 'element-plus'
 import { isObject, deepClone } from '../../utils/common.js'
 import { isBoolean } from 'lodash'
+import { autoAlign } from '@/directives/directiveBase.js'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 defineOptions({
@@ -214,11 +215,17 @@ watchEffect(() => {
 
 // ---> S 隐藏项 <---
 
+const BASE_FORM_WRAP_REF = ref(null)
 const curConceal = ref([])
 watchEffect(() => {
   const { conceal } = props
   curConceal.value = conceal
+
+  nextTick(() => {
+    autoAlign(BASE_FORM_WRAP_REF.value)
+  })
 })
+
 // ---> E 隐藏项 <---
 
 /**
@@ -581,7 +588,7 @@ defineExpose({
 </script>
 <template>
   <div class="bsgoal-base-form">
-    <div class="base_form" :style="styler">
+    <div ref="BASE_FORM_WRAP_REF" class="base_form" :style="styler">
       <!-- / 表单内容 -->
       <el-form
         ref="EL_FORM_REF"
@@ -632,7 +639,7 @@ defineExpose({
             :key="key"
           >
             <el-col
-              v-show="!curConceal.includes(prop)"
+              v-if="!curConceal.includes(prop)"
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
@@ -724,7 +731,6 @@ defineExpose({
                           <el-select
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             no-data-text="暂无数据"
                             :disabled="itemDisabled"
                             :multiple="multiple"
@@ -743,7 +749,6 @@ defineExpose({
                           <el-slider
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             :disabled="itemDisabled"
                             :min="min"
                             :max="max"
@@ -756,7 +761,6 @@ defineExpose({
                           <el-switch
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             :disabled="itemDisabled"
                             :active-value="setActiveValueText(range, 'active-value')"
                             :inactive-value="setActiveValueText(range, 'inactive-value')"
@@ -780,7 +784,6 @@ defineExpose({
                           <el-date-picker
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             :disabled="itemDisabled"
                             :format="formatSet(type, format)"
                             :value-format="formatSet(type, format)"
@@ -803,7 +806,6 @@ defineExpose({
                           <el-date-picker
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             :disabled="itemDisabled"
                             :type="type"
                             :value-format="formatSet(type, format)"
@@ -818,7 +820,6 @@ defineExpose({
                           <el-time-picker
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             arrow-control
                             :disabled="itemDisabled"
                             :value-format="formatSet(type, format)"
@@ -833,7 +834,6 @@ defineExpose({
                             v-model="model[prop]"
                             is-range
                             v-bind="attribute"
-
                             :disabled="itemDisabled"
                             :value-format="formatSet(type, format)"
                             :start-placeholder="placeholderSet(type, label, placeholder)[0]"
@@ -847,7 +847,6 @@ defineExpose({
                           <el-checkbox-group
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             :disabled="itemDisabled"
                             @change="triggerValueChange(type, prop)"
                           >
@@ -862,7 +861,6 @@ defineExpose({
                           <el-checkbox
                             v-model="model[prop]"
                             v-bind="attribute"
-
                             :disabled="itemDisabled"
                             :true-label="range[0] ? range[0].value : '1'"
                             :false-label="range[1] ? range[1].value : '0'"
