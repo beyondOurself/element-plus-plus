@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-18 18:27:41
+ * @LastEditTime: 2023-09-19 13:51:14
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -475,7 +475,7 @@ const changeCascader = (type, prop, values) => {
 const filterSlotProps = (model = {}, isParseInt) => {
   const rebuildModel = {}
   for (const prop of Object.keys(model)) {
-    if (!prop.startsWith('_')) {
+    if (!prop.startsWith('_') && !!prop) {
       const value = model[prop]
       if (isParseInt) {
         const valueInt = Number.parseFloat(value)
@@ -632,7 +632,7 @@ defineExpose({
             :key="key"
           >
             <el-col
-              v-if="!curConceal.includes(prop)"
+              v-show="!curConceal.includes(prop)"
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
