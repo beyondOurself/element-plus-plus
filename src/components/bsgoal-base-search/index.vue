@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-13 10:57:49
+ * @LastEditTime: 2023-09-20 10:29:42
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -506,7 +506,7 @@ defineExpose({
                     <template v-if="[ComponentTypeEnums.CASCADER].includes(type)">
                       <BsgoalBaseCascader
                         v-model="model[prop]"
-                        :data-options="range"
+                        :options="range"
                         :placeholder="placeholderSet(type, label, placeholder)"
                         @on-change="triggerValueChange(type, prop)"
                       />

@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-27 11:47:51
- * @FilePath: \common\src\components\bsgoal-base-tree\index.vue
+ * @LastEditTime: 2023-09-20 09:46:49
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
 -->
@@ -199,7 +199,7 @@ const handleItemAdd = (node = null, data = {}) => {
                   <span v-if="node.label.length && node.label.length > 10">
                     <el-tooltip :content="node.label" placement="right" effect="dark">
                       <div class="base_tree_node_label_tooltip base_tree_node_label">
-                        {{ node.label.substring(0,10) + '......'}}
+                        {{ node.label.substring(0,10) + '...'}}
                       </div>
                     </el-tooltip>
                   </span>
