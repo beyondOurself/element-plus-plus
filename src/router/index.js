@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-11 11:52:33
+ * @LastEditTime: 2023-09-20 16:42:11
  * @FilePath: \v3_basic_component\src\router\index.js
  * @Description: 路由配置
  * 
@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: 'bsgoal-base-overview-demo',
+          name: '数据概览',
+          component: import('@/components/bsgoal-base-overview/demo.vue')
+        },
         {
           path: 'bsgoal-base-tree-table-demo',
           name: '树 + 表格',
