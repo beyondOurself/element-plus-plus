@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-20 16:37:46
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-20 17:32:50
+ * @LastEditTime: 2023-09-21 09:06:38
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-overview\index.vue
  * @Description: 数据概率
  * 
@@ -11,6 +11,8 @@
 /* setup模板
 ---------------------------------------------------------------- */
 import { ref, shallowRef } from 'vue'
+import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
+
 defineOptions({
   name: 'BsgoalBaseOverview'
 })
@@ -50,6 +52,9 @@ const props = defineProps({
         <div class="base_overview_item_gap" v-if="key !== options.length - 1"></div>
       </template>
     </div>
+     <!-- / 分割线 -->
+     <BsgoalBaseLine />
+    <!-- / 分割线 -->
   </div>
 </template>
 <style lang="scss">

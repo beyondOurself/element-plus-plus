@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-13 10:58:35
+ * @LastEditTime: 2023-09-21 09:24:07
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref } from 'vue'
+import { ref, unref, shallowRef } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import BsgoalBaseSearchTable from './index.vue'
 import BsgoalBaseButton from '../bsgoal-base-button/index.vue'
@@ -29,7 +29,7 @@ const configOptions = ref([
     prop: 'prop1',
     type: ComponentTypeEnums.INPUT,
     minWidth: 200,
-    id: 1,
+    id: 1
   },
   {
     label: 'prop2',
@@ -86,10 +86,10 @@ const configOptions = ref([
   },
   {
     label: 'prop5-1',
-     value: 'radio1',
+    value: 'radio1',
     type: ComponentTypeEnums.RADIO,
     prop: 'prop5-1',
-    mode:'button',
+    mode: 'button',
     range: [
       {
         label: 'radio1',
@@ -107,7 +107,7 @@ const configOptions = ref([
     type: ComponentTypeEnums.CHECKBOX,
     prop: 'prop6',
     range: [
-    {
+      {
         label: 'checkbox1',
         value: 'checkbox1'
       },
@@ -483,7 +483,7 @@ const configOptions2 = ref([
 
 const tableData = ref([
   {
-    id:3,
+    id: 3,
     prop1: 'row1value',
     prop2: 'row1value',
     prop3: 'row1value',
@@ -500,10 +500,10 @@ const tableData = ref([
     prop14: 'row1value',
     prop15: 'row1value',
     prop16: 'row1value',
-    hasChildren:false,
+    hasChildren: false,
     children: [
       {
-        id:31,
+        id: 31,
         prop1: 'row1-1value',
         prop2: 'row1-1value',
         prop3: 'row1-1value',
@@ -1000,6 +1000,33 @@ const task = (done = () => {}, rows = {}) => {
     done()
   }, 3000)
 }
+
+const overviewOptions = shallowRef([
+  
+])
+
+setTimeout(() => {
+  overviewOptions.value = [{
+    title: '事件总数',
+    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_event.svg',
+    data: 3423
+  },
+  {
+    title: '今天',
+    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_today.svg',
+    data: 546
+  },
+  {
+    title: '昨天 ',
+    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_yesterday.svg',
+    data: 243
+  },
+  {
+    title: '环比昨日 ',
+    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_ring%20ratio.svg',
+    data: '0.00%'
+  }]
+}, 3000);
 </script>
 <template>
   <div class="bsgoal-search-table-demo">
@@ -1010,6 +1037,8 @@ const task = (done = () => {}, rows = {}) => {
         selection
         operation
         auto-layout-menu
+        hasOverview
+        :overview-options="overviewOptions"
         :operation-width="400"
         :show-summary="true"
         :call="call"

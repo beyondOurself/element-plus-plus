@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 10:40:06
+ * @LastEditTime: 2023-09-21 09:23:01
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -14,6 +14,7 @@
 import { ref, computed, unref, provide, useSlots, watchEffect } from 'vue'
 import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 import BsgoalBaseTable from '../bsgoal-base-table/index.vue'
+import BsgoalBaseOverview from '../bsgoal-base-overview/index.vue'
 
 defineOptions({
   name: 'BsgoalBaseSearchTable'
@@ -166,10 +167,10 @@ const props = defineProps({
     type: [Boolean],
     default: false
   },
-   /**
+  /**
    * 加载子节点数据的函数
    */
-   load: {
+  load: {
     type: [Function],
     default: () => {}
   },
@@ -198,6 +199,20 @@ const props = defineProps({
    * 默认展开所有扩展
    */
   defaultExpandAll: {
+    type: [Boolean],
+    default: false
+  },
+  /**
+   * 数据概览 配置项
+   */
+  overviewOptions: {
+    type: [Array],
+    default: () => []
+  },
+  /**
+   * 是否显示数据概览
+   */
+  hasOverview: {
     type: [Boolean],
     default: false
   }
@@ -318,6 +333,10 @@ defineExpose({
 <template>
   <div class="bsgoal-base-search-table">
     <div class="base_search_table">
+      <!-- S 数据概览 -->
+      <BsgoalBaseOverview v-if="hasOverview" :options="overviewOptions"> </BsgoalBaseOverview>
+      <!-- E 数据概览 -->
+
       <!-- S 查询 -->
       <BsgoalBaseSearch
         ref="BSGOAL_BASE_SEARCH_REF"
