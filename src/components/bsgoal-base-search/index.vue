@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 16:44:13
+ * @LastEditTime: 2023-09-21 18:24:56
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -89,7 +89,7 @@ watchEffect(() => {
   const options = unref(configOptions)
   options.forEach((fei) => {
     const { value, prop = '' } = fei
-    model.value[prop] = value || [0, false].includes(value) ? value : ''
+    model.value[prop] = value || [0,'0',false].includes(value) ? value : ''
   })
 })
 

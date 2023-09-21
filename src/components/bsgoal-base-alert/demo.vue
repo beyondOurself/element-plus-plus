@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 09:13:02
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-05-26 15:51:21
- * @FilePath: \common\src\components\bsgoal-base-alert\demo.vue
+ * @LastEditTime: 2023-09-21 17:39:03
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-alert\demo.vue
  * @Description: alert 提示演示
  * 
 -->

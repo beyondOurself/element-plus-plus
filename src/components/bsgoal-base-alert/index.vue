@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 09:12:54
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-09 10:13:57
+ * @LastEditTime: 2023-09-21 17:41:49
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-alert\index.vue
  * @Description: alert 提示组件
  * 
@@ -24,13 +24,13 @@ const props = defineProps({
   type: {
     type: [String],
     default: 'info',
-    validator: (v) => ['success', 'warning', 'info', 'error'].includes(v)
+    validator: (v) => [ 'success', 'warning', 'info', 'error'].includes(v)
   }
 })
 </script>
 <template>
   <div class="bsgoal-base-alert">
-    <el-alert class="base_alert" :type="type" show-icon>
+    <el-alert class="base_alert" :type="type" show-icon  >
       <template #title>
         <slot></slot>
       </template>
