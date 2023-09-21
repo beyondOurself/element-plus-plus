@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 14:02:19
+ * @LastEditTime: 2023-09-21 14:06:01
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -324,7 +324,7 @@ defineExpose({
                 multiple = false,
                 limit = 0,
                 mode='',
-                disabled= true
+                disabled= false
               } = {},
               index
             ) of configOptionsGet"
