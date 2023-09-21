@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 14:06:01
+ * @LastEditTime: 2023-09-21 16:44:13
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -190,17 +190,20 @@ const changeValue = (isSearch = false) => {
   for (const option of options) {
     const { type = '', range = [], prop = '', single = false } = option
     const value = modelValue[prop]
-    if ([ComponentTypeEnums.CASCADER].includes(type) && Array.isArray(value) && single) {
-      const rangeLength = value.length
-      if (rangeLength) {
-        shadowModel[prop] = value[rangeLength - 1]
+
+    if (!prop.startsWith('_')) {
+      if ([ComponentTypeEnums.CASCADER].includes(type) && Array.isArray(value) && single) {
+        const rangeLength = value.length
+        if (rangeLength) {
+          shadowModel[prop] = value[rangeLength - 1]
+        } else {
+          shadowModel[prop] = value
+        }
+      } else if (isProxy(value)) {
+        shadowModel[prop] = toRaw(value)
       } else {
         shadowModel[prop] = value
       }
-    } else if (isProxy(value)) {
-      shadowModel[prop] = toRaw(value)
-    } else {
-      shadowModel[prop] = value
     }
 
     if (
@@ -323,8 +326,8 @@ defineExpose({
                 md = '',
                 multiple = false,
                 limit = 0,
-                mode='',
-                disabled= false
+                mode = '',
+                disabled = false
               } = {},
               index
             ) of configOptionsGet"
@@ -338,7 +341,7 @@ defineExpose({
               :sm="12"
               :md="md || medium"
             >
-              <el-form-item :label="label" :prop="prop" >
+              <el-form-item :label="label" :prop="prop">
                 <!-- S 内容组件 -->
 
                 <template v-if="!readonly">
@@ -385,8 +388,10 @@ defineExpose({
                         @change="triggerValueChange(type, prop)"
                       >
                         <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                          <el-radio-button v-if="mode === 'button'" :label="item.value">{{ item.label }}</el-radio-button>
-                          <el-radio  v-else :label="item.value">{{ item.label }}</el-radio>
+                          <el-radio-button v-if="mode === 'button'" :label="item.value">{{
+                            item.label
+                          }}</el-radio-button>
+                          <el-radio v-else :label="item.value">{{ item.label }}</el-radio>
                         </template>
                       </el-radio-group>
                     </template>
