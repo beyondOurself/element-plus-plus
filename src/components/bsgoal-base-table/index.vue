@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-18 11:52:59
+ * @LastEditTime: 2023-09-21 10:33:01
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -447,7 +447,8 @@ defineExpose({
                 tooltip = false,
                 limit = 0,
                 minWidth = '',
-                sortable = false
+                sortable = false,
+                desensitize = false
               } = {},
               index
             ) of configOptionsGet"
@@ -463,7 +464,7 @@ defineExpose({
             >
               <template v-slot:default="{ row, column, $index }">
                 <slot :name="prop" :row="row" :column="column" :index="$index">
-                  <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" />
+                  <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" :option="{prop,label,desensitize}" />
                 </slot>
               </template>
             </el-table-column>

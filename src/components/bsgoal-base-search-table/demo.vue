@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 09:24:07
+ * @LastEditTime: 2023-09-21 10:10:18
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -32,7 +32,7 @@ const configOptions = ref([
     id: 1
   },
   {
-    label: 'prop2',
+    label: '手机号',
     value: 'select2',
     type: ComponentTypeEnums.SELECT,
     filterable: true,
@@ -57,7 +57,7 @@ const configOptions = ref([
     ]
   },
   {
-    label: 'prop3',
+    label: '身份证号',
     // value: '111',
     type: ComponentTypeEnums.SLIDER,
     prop: 'prop3'
@@ -525,8 +525,8 @@ const tableData = ref([
   },
   {
     prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
+    prop2: 15099836861,
+    prop3: '445122199601045935',
     prop4: 'row2value',
     prop5: 'row2value',
     prop6: 'row2value',
