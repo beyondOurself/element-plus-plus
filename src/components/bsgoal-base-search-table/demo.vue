@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 10:10:18
+ * @LastEditTime: 2023-09-21 16:15:03
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -987,11 +987,11 @@ const fetch = (params) => {
 
 const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
 const test = () => {
-  // const searchParams = BSGOAL_BASE_SEARCH_TABLE_REF.value.getSearchParams()
-  // console.log('searchParams', searchParams)
+  const searchParams = BSGOAL_BASE_SEARCH_TABLE_REF.value.getSearchParams()
+  console.log('searchParams', searchParams)
   // configOptions.value =  configOptions2.value
 
-  BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()
+  // BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()
 }
 
 const task = (done = () => {}, rows = {}) => {

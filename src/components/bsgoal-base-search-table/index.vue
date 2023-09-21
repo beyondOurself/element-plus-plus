@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 09:23:01
+ * @LastEditTime: 2023-09-21 16:12:49
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -270,7 +270,9 @@ const triggerClear = (searchParams) => {
 }
 
 const getSearchParams = () => {
-  return BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch(false)
+  const searchParamsValue = BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch(false)
+  const totalValue = curTotal.value
+  return { total: totalValue  , ...searchParamsValue }
 }
 
 // ---> S 计算expression <---
@@ -303,8 +305,9 @@ const triggerSelectAll = (selection) => {
 const triggerSelectionChange = (selection) => {
   emits('selection-change', selection)
 }
-
+const curTotal = ref(0)
 const triggerTotalChange = (total = 0) => {
+  curTotal.value = total
   emits('on-total-change', total)
 }
 const triggerChange = (changer = {}) => {
