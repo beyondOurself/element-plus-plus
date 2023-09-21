@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-25 15:29:27
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-15 11:49:05
+ * @LastEditTime: 2023-09-21 14:03:37
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-cascader\index.vue
  * @Description: 级联选择 公共组件
  * 
@@ -51,6 +51,13 @@ const props = defineProps({
   checkStrictly: {
     type: [Boolean],
     default: true
+  },
+  /**
+   * 是否无效
+   */
+  disabled: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -81,7 +88,7 @@ const change = (value) => {
   const { data = {} } = option
 
   emits('update:model-value', value)
-  emits('on-change', value, {value, data, option, node})
+  emits('on-change', value, { value, data, option, node })
 }
 
 const optionsGet = computed(() => {
@@ -97,6 +104,7 @@ const optionsGet = computed(() => {
       clearable
       class="base_cascader"
       ref="EL_CASCADER_REF"
+      :disabled="disabled"
       :show-all-levels="false"
       :model-value="modelValue"
       :options="optionsGet"
