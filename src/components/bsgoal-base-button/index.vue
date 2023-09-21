@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 11:05:15
+ * @LastEditTime: 2023-09-21 17:09:16
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref, computed, nextTick } from 'vue'
+import { ref, unref, computed, nextTick, toValue } from 'vue'
 import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
 import iconMap from './assets/map-icon.js'
 import BsgoalBaseIcon from '../bsgoal-base-icon/index.vue'
@@ -130,6 +130,13 @@ const props = defineProps({
 // ---> S 触发按钮 <---
 const loading = ref(false)
 const triggerClick = () => {
+
+  const {disabled = false } = props
+  const disabledValue = toValue(disabled)
+  if(disabledValue){
+      return 
+  }
+
   // 默认 loading 是打开的
   if (props.hasLoading) {
     loading.value = true
