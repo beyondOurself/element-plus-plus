@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-22 11:37:58
+ * @LastEditTime: 2023-09-22 16:31:05
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -298,7 +298,7 @@ const triggerOperationFold = (status = false) => {
  * @default:
  * @return {*}
  */
-const triggerValueChange = (type) => {
+const triggerValueChange = (type , prop) => {
   // 触发查询
   triggerOperationSearch()
   const emitValue = {
