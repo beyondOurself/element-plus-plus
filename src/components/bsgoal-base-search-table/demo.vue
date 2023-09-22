@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 16:15:03
+ * @LastEditTime: 2023-09-22 09:33:06
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -138,9 +138,9 @@ const configOptions = ref([
   },
   {
     label: 'prop11',
-    // value: '111',
+    value: [],
     type: ComponentTypeEnums.DATE_RANGE,
-    // prop: '_prop11',
+    prop: '_start_end',
     range: ['startDate', 'endDate']
   },
   {
@@ -1001,32 +1001,32 @@ const task = (done = () => {}, rows = {}) => {
   }, 3000)
 }
 
-const overviewOptions = shallowRef([
-  
-])
+const overviewOptions = shallowRef([])
 
 setTimeout(() => {
-  overviewOptions.value = [{
-    title: '事件总数',
-    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_event.svg',
-    data: 3423
-  },
-  {
-    title: '今天',
-    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_today.svg',
-    data: 546
-  },
-  {
-    title: '昨天 ',
-    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_yesterday.svg',
-    data: 243
-  },
-  {
-    title: '环比昨日 ',
-    icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_ring%20ratio.svg',
-    data: '0.00%'
-  }]
-}, 3000);
+  overviewOptions.value = [
+    {
+      title: '事件总数',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_event.svg',
+      data: 3423
+    },
+    {
+      title: '今天',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_today.svg',
+      data: 546
+    },
+    {
+      title: '昨天 ',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_yesterday.svg',
+      data: 243
+    },
+    {
+      title: '环比昨日 ',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_ring%20ratio.svg',
+      data: '0.00%'
+    }
+  ]
+}, 3000)
 </script>
 <template>
   <div class="bsgoal-search-table-demo">

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 18:24:56
+ * @LastEditTime: 2023-09-22 09:39:17
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -89,7 +89,7 @@ watchEffect(() => {
   const options = unref(configOptions)
   options.forEach((fei) => {
     const { value, prop = '' } = fei
-    model.value[prop] = value || [0,'0',false].includes(value) ? value : ''
+    model.value[prop] = value || [0, '0', false].includes(value) ? value : ''
   })
 })
 
@@ -182,7 +182,7 @@ const formatSet = (type = '', format = '') => {
 
   return format
 }
-const changeValue = (isSearch = false) => {
+const changeValue = (isSearch = false, isClear = false) => {
   const { configOptions } = props
   const modelValue = unref(model)
   const options = unref(configOptions)
@@ -190,6 +190,20 @@ const changeValue = (isSearch = false) => {
   for (const option of options) {
     const { type = '', range = [], prop = '', single = false } = option
     const value = modelValue[prop]
+
+    if (
+      isClear &&
+      [
+        ComponentTypeEnums.DATE_RANGE,
+        ComponentTypeEnums.TIME_RANGE,
+        ComponentTypeEnums.DATE_TIME_RANGE
+      ].includes(type) &&
+      range.length === 2
+    ) {
+      range.forEach((rangeItem) => {
+        shadowModel[rangeItem] = ''
+      })
+    }
 
     if (!prop.startsWith('_')) {
       if ([ComponentTypeEnums.CASCADER].includes(type) && Array.isArray(value) && single) {
@@ -247,7 +261,7 @@ nextTick(() => {
  */
 const triggerOperationClear = () => {
   EL_FORM_REF.value.resetFields()
-  const searcher = changeValue()
+  const searcher = changeValue(false, true)
   emits('on-clear', searcher)
 }
 
