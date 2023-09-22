@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-22 09:39:17
+ * @LastEditTime: 2023-09-22 11:37:58
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, watchEffect, inject, nextTick, toRaw, isProxy } from 'vue'
+import { ref, computed, unref, watchEffect, inject, nextTick, toRaw, isProxy, toValue } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import baseDirective from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
@@ -192,7 +192,6 @@ const changeValue = (isSearch = false, isClear = false) => {
     const value = modelValue[prop]
 
     if (
-      isClear &&
       [
         ComponentTypeEnums.DATE_RANGE,
         ComponentTypeEnums.TIME_RANGE,
@@ -200,9 +199,18 @@ const changeValue = (isSearch = false, isClear = false) => {
       ].includes(type) &&
       range.length === 2
     ) {
-      range.forEach((rangeItem) => {
-        shadowModel[rangeItem] = ''
-      })
+      if (isClear) {
+        range.forEach((rangeItem) => {
+          shadowModel[rangeItem] = ''
+        })
+      }else{
+        range.forEach((rangeItem) => {
+          if(!modelValue[rangeItem]){
+          shadowModel[rangeItem] = ''
+          }
+        })
+
+      }
     }
 
     if (!prop.startsWith('_')) {
@@ -290,7 +298,7 @@ const triggerOperationFold = (status = false) => {
  * @default:
  * @return {*}
  */
-const triggerValueChange = (type, prop) => {
+const triggerValueChange = (type) => {
   // 触发查询
   triggerOperationSearch()
   const emitValue = {
@@ -492,7 +500,7 @@ defineExpose({
                         :start-placeholder="placeholderSet(type, label, placeholder)[0]"
                         :end-placeholder="placeholderSet(type, label, placeholder)[1]"
                         :default-time="defaultTime"
-                        @change="triggerValueChange(type, prop)"
+                        @change="triggerValueChange(type, prop, (range = []))"
                       />
                     </template>
                     <!-- / 日期时间区域选择器 -->
