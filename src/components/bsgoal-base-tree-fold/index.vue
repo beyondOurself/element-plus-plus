@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 14:30:43
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-25 17:29:58
- * @FilePath: \common\src\components\bsgoal-base-tree-fold\index.vue
+ * @LastEditTime: 2023-09-23 10:18:35
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-fold\index.vue
  * @Description:  树结构折叠按钮
  * 
 -->
@@ -26,6 +26,10 @@ const triggerFold = () => {
   status.value = !status.value
   emits('update:modelValue', status.value)
 }
+
+defineExpose({
+  triggerFold
+});
 </script>
 <template>
   <div class="bsgoal-base-tree-fold">

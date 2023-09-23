@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 16:12:49
+ * @LastEditTime: 2023-09-22 18:26:38
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -316,13 +316,9 @@ const triggerChange = (changer = {}) => {
 
 // ---> E 触发事件 <---
 
-// ---> S 暴露事件 <---
-
 const clearSelection = () => {
   BSGOAL_BASE_TABLE_REF.value.clearSelection()
 }
-
-// ---> E 暴露事件 <---
 
 // ---> S 暴露 <---
 

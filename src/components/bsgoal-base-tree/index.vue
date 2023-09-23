@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-20 09:46:49
+ * @LastEditTime: 2023-09-23 10:20:54
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -10,7 +10,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, watch, watchEffect, computed } from 'vue'
+import { ref, watch, watchEffect, computed, nextTick } from 'vue'
 import directiveBase from '../../directives/directiveBase.js'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import BsgoalBaseTreeFold from '../bsgoal-base-tree-fold/index.vue'
@@ -80,6 +80,13 @@ const props = defineProps({
   expandedKeys: {
     type: [Array],
     default: () => []
+  },
+  /**
+   * 初始化显示状态
+   */
+  initShow: {
+    type: [Boolean],
+    default: false
   }
 })
 
@@ -109,6 +116,16 @@ const filterNode = (value, data) => {
 }
 // 折叠的状态
 const foldStatus = ref(true)
+
+const BSGOAL_BASE_TREE_FOLD_REF = ref(null)
+
+nextTick(() => {
+  const { initShow = true } = props
+  if (!initShow) {
+    BSGOAL_BASE_TREE_FOLD_REF.value.triggerFold()
+  }
+})
+
 /**
  * @Author: canlong.shen
  * @description: 当节点被点击的时候触发
@@ -193,13 +210,13 @@ const handleItemAdd = (node = null, data = {}) => {
               <div class="base_tree_node">
                 <div>
                   <!-- S 节点前图标 -->
-                  <span v-if="$slots.prefix"><slot name="prefix" :data="data" ></slot></span>
+                  <span v-if="$slots.prefix"><slot name="prefix" :data="data"></slot></span>
                   <!-- E 节点前图标 -->
                   <!-- S 节点名称 -->
                   <span v-if="node.label.length && node.label.length > 10">
                     <el-tooltip :content="node.label" placement="right" effect="dark">
                       <div class="base_tree_node_label_tooltip base_tree_node_label">
-                        {{ node.label.substring(0,10) + '...'}}
+                        {{ node.label.substring(0, 10) + '...' }}
                       </div>
                     </el-tooltip>
                   </span>
@@ -223,7 +240,7 @@ const handleItemAdd = (node = null, data = {}) => {
       <BsgoalBaseLine vertical v-show="foldStatus" />
       <!-- E 横线 -->
       <!-- S 折叠按钮 -->
-      <BsgoalBaseTreeFold v-model="foldStatus" />
+      <BsgoalBaseTreeFold ref="BSGOAL_BASE_TREE_FOLD_REF" v-model="foldStatus" />
       <!-- E 折叠按钮 -->
     </div>
   </div>
@@ -287,7 +304,7 @@ const handleItemAdd = (node = null, data = {}) => {
     font-size: 14px;
     padding-right: 8px;
   }
-  .base_tree_node_label_tooltip{
+  .base_tree_node_label_tooltip {
     overflow: hidden;
     text-overflow: ellipsis;
   }

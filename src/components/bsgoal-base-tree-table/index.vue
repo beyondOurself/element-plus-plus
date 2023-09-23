@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-18 14:37:00
+ * @LastEditTime: 2023-09-23 10:21:57
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -240,6 +240,13 @@ const props = defineProps({
   defaultExpandAll: {
     type: [Boolean],
     default: false
+  },
+   /**
+   * 初始树面板状态
+   */
+   initTreeShow: {
+    type: [Boolean],
+    default: true
   }
 })
 
@@ -251,7 +258,8 @@ const emits = defineEmits([
   'on-select-all-table',
   'on-selection-change-table',
   'on-total-change-table',
-  'on-change-table-search'
+  'on-change-table-search',
+  'on-clear-table-search'
 ])
 
 // ---> S 注入插槽 <---
@@ -315,6 +323,9 @@ const triggerTotalChange = (total = 0) => {
 const triggerTableChange = (values = {}) => {
   emits('on-change-table-search', values)
 }
+const triggerTableSearchClear = (values = {}) => {
+  emits('on-clear-table-search', values)
+}
 
 // ---> E 触发事件 <---
 
@@ -360,6 +371,7 @@ const mapPropsGet = computed(() => {
           v-bind="$props"
           class="base_tree_table--tree"
           :tree-props="treeProps"
+          :initShow="initTreeShow"
           @on-switch="triggerTreeSwitch"
           @on-add="triggerTreeAdd"
           @on-click="triggerTreeClick"
@@ -391,6 +403,7 @@ const mapPropsGet = computed(() => {
           @selection-change="triggerSelectionChange"
           @on-total-change="triggerTotalChange"
           @on-change="triggerTableChange"
+          @on-clear="triggerTableSearchClear"
         >
           <template
             v-for="slotName of slotNames"

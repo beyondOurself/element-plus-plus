@@ -2,10 +2,10 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-20 16:42:11
+ * @LastEditTime: 2023-09-22 18:17:43
  * @FilePath: \v3_basic_component\src\router\index.js
  * @Description: 路由配置
- * 
+ *
  */
 
 import { createRouter, createWebHistory } from 'vue-router'
@@ -18,6 +18,12 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: 'bsgoal-base-list-demo',
+          name: '列表',
+          component: import('@/components/bsgoal-base-list/demo.vue')
+        },
+
         {
           path: 'bsgoal-base-overview-demo',
           name: '数据概览',
@@ -197,7 +203,7 @@ const router = createRouter({
           path: 'bsgoal-base-tree-table-demo',
           name: '树 + 查询 + 表格',
           component: import('@/components/bsgoal-base-tree-table/demo.vue')
-        },
+        }
       ]
     }
   ]
