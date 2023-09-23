@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-23 10:21:57
+ * @LastEditTime: 2023-09-23 17:33:44
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -10,9 +10,10 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, useSlots, computed, provide, unref } from 'vue'
+import { ref, useSlots, computed, provide, unref, toRaw, toValue } from 'vue'
 import BsgoalBaseTree from '../bsgoal-base-tree/index.vue'
 import BsgoalBaseSearchTable from '../bsgoal-base-search-table/index.vue'
+import { deepClone } from '@/utils/common.js'
 
 defineOptions({
   name: 'BsgoalBaseTreeTable'
@@ -241,10 +242,10 @@ const props = defineProps({
     type: [Boolean],
     default: false
   },
-   /**
+  /**
    * 初始树面板状态
    */
-   initTreeShow: {
+  initTreeShow: {
     type: [Boolean],
     default: true
   }
@@ -282,7 +283,9 @@ provide('TREE_SWITCH_STATUS', switchStatus)
  * @return {*}
  */
 const triggerTreeAdd = ({ node, data } = {}) => {
-  emits('on-add-tree', { node, data })
+  const nodeValue = deepClone(toRaw(toValue(node)))
+  const dataValue = deepClone(toRaw(toValue(data)))
+  emits('on-add-tree', { node: nodeValue, data: dataValue })
 }
 /**
  * @Author: canlong.shen
