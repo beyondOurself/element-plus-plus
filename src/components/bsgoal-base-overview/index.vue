@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-20 16:37:46
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 09:06:38
+ * @LastEditTime: 2023-09-25 18:04:33
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-overview\index.vue
  * @Description: 数据概率
  * 
@@ -12,6 +12,7 @@
 ---------------------------------------------------------------- */
 import { ref, shallowRef } from 'vue'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
+import { tagEmits } from 'element-plus'
 
 defineOptions({
   name: 'BsgoalBaseOverview'
@@ -25,12 +26,17 @@ const props = defineProps({
     default: () => []
   }
 })
+
+const emits = defineEmits(['on-click-item'])
+const handleItem = (option) => {
+  emits('on-click-item', option)
+}
 </script>
 <template>
   <div class="bsgoal-base-overview">
     <div class="base_overview">
       <template v-for="(option, key) of options" :key="key">
-        <div class="base_overview_item">
+        <div class="base_overview_item" @click="handleItem(option)">
           <!-- S 图标 -->
           <div class="overview_item_icon">
             <img :src="option.icon" />
@@ -52,8 +58,8 @@ const props = defineProps({
         <div class="base_overview_item_gap" v-if="key !== options.length - 1"></div>
       </template>
     </div>
-     <!-- / 分割线 -->
-     <BsgoalBaseLine />
+    <!-- / 分割线 -->
+    <BsgoalBaseLine />
     <!-- / 分割线 -->
   </div>
 </template>

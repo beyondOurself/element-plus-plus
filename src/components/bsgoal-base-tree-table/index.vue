@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 17:54:40
+ * @LastEditTime: 2023-09-25 18:08:22
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -282,7 +282,8 @@ const emits = defineEmits([
   'on-selection-change-table',
   'on-total-change-table',
   'on-change-table-search',
-  'on-clear-table-search'
+  'on-clear-table-search',
+  'on-click-overview'
 ])
 
 // ---> S 注入插槽 <---
@@ -350,6 +351,10 @@ const triggerTableChange = (values = {}) => {
 }
 const triggerTableSearchClear = (values = {}) => {
   emits('on-clear-table-search', values)
+}
+
+const clickOverview = (option = {}) => {
+  emits('on-click-overview', option)
 }
 
 // ---> E 触发事件 <---
@@ -423,6 +428,7 @@ const mapPropsGet = computed(() => {
           :rowKey="rowKey"
           :defaultExpandAll="defaultExpandAll"
           :map-props="mapPropsGet"
+          @on-click-overview="clickOverview"
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"

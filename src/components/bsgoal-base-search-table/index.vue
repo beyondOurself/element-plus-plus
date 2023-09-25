@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 10:14:54
+ * @LastEditTime: 2023-09-25 18:04:46
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -231,7 +231,8 @@ const emits = defineEmits([
   'selection-change',
   'on-total-change',
   'on-change',
-  'on-clear'
+  'on-clear',
+  'on-click-overview'
 ])
 
 const transferFoldStatus = ref(false)
@@ -335,6 +336,13 @@ const clearSelection = () => {
   BSGOAL_BASE_TABLE_REF.value.clearSelection()
 }
 
+// ---> S 数据概览 <---
+            const handleOverviewItem = (option = {}) => {
+               
+              emits('on-click-overview', option)
+            }   
+// ---> E 数据概览 <---
+
 // ---> S 暴露 <---
 
 defineExpose({
@@ -348,7 +356,7 @@ defineExpose({
   <div class="bsgoal-base-search-table">
     <div class="base_search_table">
       <!-- S 数据概览 -->
-      <BsgoalBaseOverview v-if="hasOverview" :options="overviewOptions"> </BsgoalBaseOverview>
+      <BsgoalBaseOverview v-if="hasOverview" :options="overviewOptions" @on-click-item="handleOverviewItem"> </BsgoalBaseOverview>
       <!-- E 数据概览 -->
 
       <!-- S 查询 -->

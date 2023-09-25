@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 10:37:14
+ * @LastEditTime: 2023-09-25 18:09:02
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -10,7 +10,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref } from 'vue'
+import { ref, unref, shallowRef } from 'vue'
 import BsgoalBaseTreeTable from './index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 
@@ -873,17 +873,43 @@ const changeTableSearch = (values = {}) => {
   console.log('values', values)
 }
 
-const clearTableSearch  = () => {
-  
-
+const clearTableSearch = () => {
   console.log('清空了~')
 }
 
 // ---> E 列表 <---
 
 const sortFields = ref(['prop2'])
+const overviewOptions = shallowRef([])
 
+setTimeout(() => {
+  overviewOptions.value = [
+    {
+      title: '事件总数',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_event.svg',
+      data: 3423
+    },
+    {
+      title: '今天',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_today.svg',
+      data: 546
+    },
+    {
+      title: '昨天 ',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_yesterday.svg',
+      data: 243
+    },
+    {
+      title: '环比昨日 ',
+      icon: 'https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/overview/icon_ring%20ratio.svg',
+      data: '0.00%'
+    }
+  ]
+}, 3000)
 
+const clickOverview = (option = {}) => {
+  console.log('option', option)
+}
 </script>
 <template>
   <!-- <el-button type="primary" @click="clearSelection">清空选择</el-button> -->
@@ -892,17 +918,18 @@ const sortFields = ref(['prop2'])
     <div class="base_tree_table_demo">
       <!-- <div @click="test">点击</div> -->
       <BsgoalBaseTreeTable
-        
         ref="BSGOAL_BASE_TREE_TABLE_REF"
         serial
         operation
+        hasOverview
+        :overview-options="overviewOptions"
         :sortFields="sortFields"
         :initTreeShow="false"
         :expandedKeys="expandedKeys"
         :tree-data="treeData"
         :page-size="40"
         :table-props="{
-          'rows':'list'
+          rows: 'list'
         }"
         :fetch="fetch"
         :config-options="configOptions"
@@ -916,6 +943,7 @@ const sortFields = ref(['prop2'])
         @on-total-change-table="triggerTableTotalChange"
         @on-change-table-search="changeTableSearch"
         @on-clear-table-search="clearTableSearch"
+        @on-click-overview="clickOverview"
       >
         <!-- <template #tree="{data}">
          <div>{{ data }}</div>
