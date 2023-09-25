@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-23 10:20:54
+ * @LastEditTime: 2023-09-25 15:24:03
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -274,17 +274,10 @@ const handleItemAdd = (node = null, data = {}) => {
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-      // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
       background: rgba(0, 0, 0, 0.2);
       width: 20px;
     }
     &::-webkit-scrollbar-track {
-      // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-      // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-      // border-radius: 0;
-      // background: rgba(0, 0, 0, 0.1);
-      // opacity: 0.1;
       background-color: #fff;
     }
   }

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-23 17:25:07
+ * @LastEditTime: 2023-09-25 16:35:38
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -11,35 +11,13 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref } from 'vue'
+import { ref, computed, nextTick } from 'vue'
+import directiveBase from '../../directives/directiveBase.js'
+import BsgoalBaseSearch from '../bsgoal-base-search/index.vue'
 defineOptions({
   name: 'BsgoalBaseList'
 })
 const props = defineProps({
-  /**
-   * >----------props----------<
-   * {
-   *
-   *  label: '' // 列名
-   *  prop : '' // 绑定字段
-   *
-   *
-   *  value: '' // 初始值 (查询)
-   *  type : '' // 查询组件的类型 (查询)
-   *  item : false // 只为查询项
-   *  single : false // 机构选择器配置为单个值输出
-   *
-   *
-   *  width: 0  // 列宽度 (表格)
-   *
-   * }
-   *
-   * >----------slots----------<
-   *
-   *  menu: 顶部操作区域
-   *  operation: 列表右侧操作区域
-   *
-   */
   configOptions: {
     type: [Array],
     default: () => []
@@ -84,6 +62,41 @@ const props = defineProps({
   medium: {
     type: [Number, String],
     default: 6
+  },
+  /**
+   * 列表项间隔
+   */
+  gutter: {
+    type: [Number],
+    default: 10
+  },
+  /**
+   * 列表的 中屏设备宽度的比例
+   */
+  listMd: {
+    type: [Number],
+    default: 6
+  },
+  /**
+   * 底边距
+   */
+  bottom: {
+    type: [Number],
+    default: 20
+  },
+  /**
+   * 节流时延迟
+   */
+  delay: {
+    type: [Number],
+    default: 200
+  },
+  /**
+   * 分页数
+   */
+  pageSize: {
+    type: [Number],
+    default: 20
   }
 })
 
@@ -95,15 +108,20 @@ const BSGOAL_BASE_SEARCH_REF = ref(null)
 const refresh = () => {
   BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
 }
-
 const getSearchParams = () => {
   const searchParamsValue = BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch(false)
   return { ...searchParamsValue }
 }
-
-const triggerSearch = (searchParams) => {}
+const triggerSearch = (searchParams) => {
+  curPage.value = 1
+  curList.value = []
+  loadData(searchParams)
+}
 
 const triggerClear = (searchParams) => {
+  curPage.value = 1
+  curList.value = []
+  loadData(searchParams)
   emits('on-clear', searchParams)
 }
 
@@ -114,7 +132,54 @@ const triggerChange = (changer = {}) => {
 // ---> E 查询 <---
 
 // ---> S 列表 <---
-const curList = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+// 计算高度的指令
+const vHeight = directiveBase.height
+
+const itemStylerGet = computed(() => {
+  const styler = {}
+  const { gutter = 0 } = props
+  if (gutter) {
+    styler.marginBottom = `${gutter}px`
+  }
+  return styler
+})
+
+const curScrollDisabled = ref(false)
+const curList = ref([])
+const curTotal = ref(0)
+const curPage = ref(1)
+const noneGet = computed(() => {
+  return !curList.value.length
+})
+
+
+const loadData = (searchParams = {} ) => {
+  const { mapProps = {}, pageSize = 20, fetch = null } = props
+  const pageParams = {}
+  pageParams[mapProps['currentPage']] = curPage.value
+  pageParams[mapProps['pageSize']] = pageSize
+  if (!fetch) {
+    return
+  }
+  fetch({ ...searchParams, ...pageParams }).then((data = {}) => {
+    const rows = data[mapProps['rows']]
+    if (Array.isArray(rows) && rows.length) {
+      curList.value.push(...rows)
+      curTotal.value = curList.value.length
+      curPage.value += 1
+    }
+  })
+}
+
+const loadScroll = () => {
+  const loadParams =   getSearchParams()
+  loadData(loadParams)
+}
+
+
+
+
 // ---> E 列表 <---
 
 defineExpose({
@@ -129,7 +194,7 @@ defineExpose({
       <BsgoalBaseSearch
         ref="BSGOAL_BASE_SEARCH_REF"
         v-show="hasSearch"
-        :config-options="searchOptions"
+        :config-options="configOptions"
         :medium="medium"
         @on-search="triggerSearch"
         @on-clear="triggerClear"
@@ -138,15 +203,35 @@ defineExpose({
       <!-- E 查询 -->
 
       <!-- S 列表 -->
-      <ul class="base_list_container" v-infinite-scroll="load">
-        <template v-for="(item, index) of curList" :key="index">
-          <li>
-            <slot name="item" :data="item">
-              {{ index }}
-            </slot>
-          </li>
-        </template>
-      </ul>
+      <div>
+        <div
+          v-height="bottom"
+          v-infinite-scroll="loadScroll"
+          :infinite-scroll-immediate="false"
+          :infinite-scroll-disabled="curScrollDisabled"
+          :infinite-scroll-delay="delay"
+          class="base_list_container"
+        >
+          <el-row :gutter="gutter" style="margin: 0px">
+            <template v-for="(item, index) of curList" :key="index">
+              <el-col :xs="24" :sm="24" :md="listMd" :lg="listMd">
+                <div class="base_list_item" :style="itemStylerGet">
+                  <slot name="item" :data="item">
+                    {{ index }}
+                  </slot>
+                </div>
+              </el-col>
+            </template>
+          </el-row>
+        </div>
+        <div class="base_list_item_none" v-show="noneGet">
+          <img
+            src="https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/pc-asstes/estate/common/no_content_.svg"
+            alt=""
+          />
+          <div>暂无数据</div>
+        </div>
+      </div>
       <!-- E 列表 -->
     </div>
   </div>
@@ -155,16 +240,38 @@ defineExpose({
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-list {
-  ul,
-  li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .base_list_container {
+    background-color: #f0f2f5;
+    // 隐藏掉滚动条
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    overflow-x: hidden;
+    overflow-y: auto;
+    /*滚动条样式*/
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      width: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #fff;
+    }
   }
 
-  .base_list_container {
-    overflow: auto;
-    height: 300px;
+  .base_list_item_none {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    bottom: 0;
+    margin: auto;
+    width: 300px;
+    color: #909399;
+    text-align: center;
   }
 }
 </style>
