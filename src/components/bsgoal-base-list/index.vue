@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 18:21:24
+ * @LastEditTime: 2023-09-25 18:26:51
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -169,6 +169,9 @@ const loadData = (searchParams = {}) => {
      console.log( 'fetch res', res);
     if (code === 0) {
       const rows = data[mapProps['rows']]
+      console.log('rows',rows);
+      console.log('Array.isArray(rows)',Array.isArray(rows) );
+      console.log('rows.length',rows.length );
       if (Array.isArray(rows) && rows.length) {
         curList.value.push(...rows)
         curTotal.value = curList.value.length
