@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 18:26:51
+ * @LastEditTime: 2023-09-25 18:33:04
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -154,24 +154,32 @@ const noneGet = computed(() => {
   return !curList.value.length
 })
 
+const mapPropsGet = computed(() => {
+  const intProps = {
+    currentPage: 'currentPage',
+    pageSize: 'pageSize',
+    rows: 'rows',
+    total: 'total'
+  }
+  const { mapProps = {} } = props
+
+  return { ...intProps, ...mapProps }
+})
+
 const loadData = (searchParams = {}) => {
   curLoading.value = true
-  const { mapProps = {}, pageSize = 20, fetch = null } = props
+  const {  pageSize = 20, fetch = null } = props
   const pageParams = {}
-  pageParams[mapProps['currentPage']] = curPage.value
-  pageParams[mapProps['pageSize']] = pageSize
+  pageParams[mapPropsGet.value['currentPage']] = curPage.value
+  pageParams[mapPropsGet.value['pageSize']] = pageSize
   if (!fetch) {
     curLoading.value = false
     return
   }
   fetch({ ...searchParams, ...pageParams }).then((res = {}) => {
     const { code = 0, data = [] } = res
-     console.log( 'fetch res', res);
     if (code === 0) {
-      const rows = data[mapProps['rows']]
-      console.log('rows',rows);
-      console.log('Array.isArray(rows)',Array.isArray(rows) );
-      console.log('rows.length',rows.length );
+      const rows = data[mapPropsGet.value['rows']]
       if (Array.isArray(rows) && rows.length) {
         curList.value.push(...rows)
         curTotal.value = curList.value.length
@@ -236,7 +244,6 @@ defineExpose({
           :infinite-scroll-delay="delay"
           class="base_list_container"
         >
-        {{ curList }}
           <el-row :gutter="gutter" style="margin: 0px">
             <template v-for="(item, index) of curList" :key="index">
               <el-col :xs="24" :sm="24" :md="listMd" :lg="listMd">
