@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-22 16:31:05
+ * @LastEditTime: 2023-09-25 09:50:02
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -62,7 +62,7 @@ const props = defineProps({
   modelValue: {
     type: [Object],
     default: () => ({})
-  }
+  },
 })
 
 // emits

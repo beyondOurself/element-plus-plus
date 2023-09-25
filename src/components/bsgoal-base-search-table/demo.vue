@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-22 09:33:06
+ * @LastEditTime: 2023-09-25 09:54:15
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -1027,6 +1027,8 @@ setTimeout(() => {
     }
   ]
 }, 3000)
+
+const sortFields = ref(['prop4'])
 </script>
 <template>
   <div class="bsgoal-search-table-demo">
@@ -1038,6 +1040,7 @@ setTimeout(() => {
         operation
         auto-layout-menu
         hasOverview
+        :sortFields="sortFields"
         :overview-options="overviewOptions"
         :operation-width="400"
         :show-summary="true"

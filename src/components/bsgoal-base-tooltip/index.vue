@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-04 10:59:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-08-21 11:27:59
+ * @LastEditTime: 2023-09-23 11:27:10
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tooltip\index.vue
  * @Description:  文字提示公共组件 
  * 
@@ -95,6 +95,7 @@ const disabledGet = computed(() => {
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-tooltip {
+  display: inline-block;
 }
 
 .base_tooltip_popper {

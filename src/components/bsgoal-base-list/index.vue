@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-22 18:53:30
+ * @LastEditTime: 2023-09-23 17:25:07
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -89,11 +89,8 @@ const props = defineProps({
 
 const emits = defineEmits(['on-change', 'on-clear'])
 
+// ---> S 查询 <---
 
-
-// ---> E 触发事件 <---
-
-// ---> S 查询事件 <---
 const BSGOAL_BASE_SEARCH_REF = ref(null)
 const refresh = () => {
   BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch()
@@ -104,21 +101,21 @@ const getSearchParams = () => {
   return { ...searchParamsValue }
 }
 
-const triggerSearch = (searchParams) => {
-    
-}
-
+const triggerSearch = (searchParams) => {}
 
 const triggerClear = (searchParams) => {
   emits('on-clear', searchParams)
 }
 
-
 const triggerChange = (changer = {}) => {
   emits('on-change', changer)
 }
 
-// ---> E 查询事件 <---
+// ---> E 查询 <---
+
+// ---> S 列表 <---
+const curList = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+// ---> E 列表 <---
 
 defineExpose({
   refresh,
@@ -139,6 +136,18 @@ defineExpose({
         @on-change="triggerChange"
       />
       <!-- E 查询 -->
+
+      <!-- S 列表 -->
+      <ul class="base_list_container" v-infinite-scroll="load">
+        <template v-for="(item, index) of curList" :key="index">
+          <li>
+            <slot name="item" :data="item">
+              {{ index }}
+            </slot>
+          </li>
+        </template>
+      </ul>
+      <!-- E 列表 -->
     </div>
   </div>
 </template>
@@ -146,5 +155,16 @@ defineExpose({
 /* 覆盖样式
 ---------------------------------------------------------------- */
 .bsgoal-base-list {
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .base_list_container {
+    overflow: auto;
+    height: 300px;
+  }
 }
 </style>

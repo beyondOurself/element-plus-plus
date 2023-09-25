@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-23 17:33:44
+ * @LastEditTime: 2023-09-25 10:27:53
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -248,6 +248,13 @@ const props = defineProps({
   initTreeShow: {
     type: [Boolean],
     default: true
+  },
+   /**
+   * 排序字段
+   */
+   sortFields: {
+    type: [Array],
+    default: () => []
   }
 })
 

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-23 10:23:06
+ * @LastEditTime: 2023-09-25 10:37:14
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -878,7 +878,12 @@ const clearTableSearch  = () => {
 
   console.log('清空了~')
 }
+
 // ---> E 列表 <---
+
+const sortFields = ref(['prop2'])
+
+
 </script>
 <template>
   <!-- <el-button type="primary" @click="clearSelection">清空选择</el-button> -->
@@ -891,6 +896,7 @@ const clearTableSearch  = () => {
         ref="BSGOAL_BASE_TREE_TABLE_REF"
         serial
         operation
+        :sortFields="sortFields"
         :initTreeShow="false"
         :expandedKeys="expandedKeys"
         :tree-data="treeData"

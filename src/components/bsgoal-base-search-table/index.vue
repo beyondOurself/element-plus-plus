@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-22 18:26:38
+ * @LastEditTime: 2023-09-25 10:14:54
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -215,6 +215,13 @@ const props = defineProps({
   hasOverview: {
     type: [Boolean],
     default: false
+  },
+   /**
+   * 排序字段
+   */
+   sortFields: {
+    type: [Array],
+    default: () => []
   }
 })
 
@@ -295,6 +302,12 @@ const refresh = () => {
 }
 // ---> E 刷新 <---
 
+// ---> S 排序 <---
+   const changeSort = ({ column, prop, order }) => {
+    refresh()
+   }            
+// ---> E 排序 <---
+
 // ---> S 触发事件 <---
 const triggerSelect = (selection, row) => {
   emits('select', selection, row)
@@ -313,6 +326,8 @@ const triggerTotalChange = (total = 0) => {
 const triggerChange = (changer = {}) => {
   emits('on-change', changer)
 }
+
+
 
 // ---> E 触发事件 <---
 
@@ -370,6 +385,7 @@ defineExpose({
         @select-all="triggerSelectAll"
         @selection-change="triggerSelectionChange"
         @on-total-change="triggerTotalChange"
+        @on-sort-change="changeSort"
       >
         <!-- S 顶部菜单 -->
 

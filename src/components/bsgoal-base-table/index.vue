@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 10:33:01
+ * @LastEditTime: 2023-09-25 10:27:05
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -203,10 +203,23 @@ const props = defineProps({
   defaultExpandAll: {
     type: [Boolean],
     default: false
+  },
+  /**
+   * 排序字段
+   */
+  sortFields: {
+    type: [Array],
+    default: () => []
   }
 })
 
-const emits = defineEmits(['select', 'select-all', 'selection-change', 'on-total-change'])
+const emits = defineEmits([
+  'select',
+  'select-all',
+  'selection-change',
+  'on-total-change',
+  'on-sort-change'
+])
 
 /**
  * @Author: canlong.shen
@@ -253,6 +266,8 @@ const mapPropsFuse = {
   ...mapPropsVal
 }
 
+const sortField = ref('')
+const sortOrder = ref('')
 const currentPage = ref(1)
 const curPageSize = ref(props.pageSize)
 const total = ref(0)
@@ -265,6 +280,8 @@ const ping = () => {
   const searchParamsVal = searchParams.value
   const currentPageVal = currentPage.value
   const pageSizeVal = curPageSize.value
+  const sortFieldeVal = sortField.value
+  const sortOrderVal = sortOrder.value
   const fetchParams = {}
   for (const [prop, value] of Object.entries(searchParamsVal)) {
     if (!`${prop}`.startsWith('_')) {
@@ -275,6 +292,11 @@ const ping = () => {
   if (hasPage) {
     fetchParams[mapPropsFuse.currentPage] = currentPageVal
     fetchParams[mapPropsFuse.pageSize] = pageSizeVal
+  }
+   // 有排序值注入排序参数
+  if (sortFieldeVal && sortOrderVal) {
+    fetchParams.sortField = sortFieldeVal
+    fetchParams.sortOrder = sortOrderVal
   }
 
   useFetch(fetch(fetchParams), call, tableLoading, resData)
@@ -290,7 +312,7 @@ watch(resData, (data) => {
     tableData.value = data[mapPropsFuse.rows]
     total.value = data[mapPropsFuse.total]
   } else {
-    console.log('data',data);
+    console.log('data', data)
     tableData.value = data[mapPropsFuse.rows]
   }
 })
@@ -365,6 +387,21 @@ const summaryMethod = (columns = '') => {
 
 // ---> E 表格绑定的方法 <---
 
+// ---> S 排序 <---
+const getSortableMode = (prop = '', sortable = false) => {
+  const { sortFields = [] } = props
+  if (Array.isArray(sortFields) && sortFields.length && sortFields.includes(prop)) {
+    return 'custom'
+  }
+  return sortable
+}
+const changeSort = ({ column, prop, order }) => {
+  sortField.value = prop
+  sortOrder.value = order
+  emits('on-sort-change', { column, prop, order })
+}
+// ---> E 排序 <---
+
 // ---> S 兼容微前端 <---
 const isMicroApp = window.__MICRO_APP_ENVIRONMENT__
 // ---> E 兼容微前端 <---
@@ -420,6 +457,7 @@ defineExpose({
           @select="triggerSelect"
           @select-all="triggerSelectAll"
           @selection-change="triggerSelectionChange"
+          @sort-change="changeSort"
         >
           <!-- / 无数据展示内容 -->
           <template #empty>
@@ -455,7 +493,8 @@ defineExpose({
             :key="index"
           >
             <el-table-column
-              :sortable="sortable"
+              :prop="prop"
+              :sortable="getSortableMode(prop, sortable)"
               :label="label"
               :align="align"
               :width="width"
@@ -464,7 +503,12 @@ defineExpose({
             >
               <template v-slot:default="{ row, column, $index }">
                 <slot :name="prop" :row="row" :column="column" :index="$index">
-                  <BsgoalBaseTableContent :limit="limit" :tooltip="tooltip" :data="row[prop]" :option="{prop,label,desensitize}" />
+                  <BsgoalBaseTableContent
+                    :limit="limit"
+                    :tooltip="tooltip"
+                    :data="row[prop]"
+                    :option="{ prop, label, desensitize }"
+                  />
                 </slot>
               </template>
             </el-table-column>
