@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 16:35:38
+ * @LastEditTime: 2023-09-25 17:23:36
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -149,36 +149,51 @@ const curScrollDisabled = ref(false)
 const curList = ref([])
 const curTotal = ref(0)
 const curPage = ref(1)
+const curLoading = ref(false)
 const noneGet = computed(() => {
   return !curList.value.length
 })
 
-
-const loadData = (searchParams = {} ) => {
+const loadData = (searchParams = {}) => {
+  curLoading.value = true
   const { mapProps = {}, pageSize = 20, fetch = null } = props
   const pageParams = {}
   pageParams[mapProps['currentPage']] = curPage.value
   pageParams[mapProps['pageSize']] = pageSize
   if (!fetch) {
+    curLoading.value = false
     return
   }
-  fetch({ ...searchParams, ...pageParams }).then((data = {}) => {
-    const rows = data[mapProps['rows']]
-    if (Array.isArray(rows) && rows.length) {
-      curList.value.push(...rows)
-      curTotal.value = curList.value.length
-      curPage.value += 1
+  fetch({ ...searchParams, ...pageParams }).then((res = {}) => {
+    const { code = 0, data = [] } = res
+
+    if (code === 0) {
+      const rows = data[mapProps['rows']]
+      if (Array.isArray(rows) && rows.length) {
+        curList.value.push(...rows)
+        curTotal.value = curList.value.length
+        curPage.value += 1
+      }
     }
+    curLoading.value = false
   })
 }
 
 const loadScroll = () => {
-  const loadParams =   getSearchParams()
+  const loadParams = getSearchParams()
   loadData(loadParams)
 }
 
-
-
+const svg = `
+        <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
+      `
 
 // ---> E 列表 <---
 
@@ -203,7 +218,13 @@ defineExpose({
       <!-- E 查询 -->
 
       <!-- S 列表 -->
-      <div>
+      <div
+        v-loading="curLoading"
+        :element-loading-spinner="svg"
+        element-loading-text="加载中..."
+        element-loading-svg-view-box="-10, -10, 50, 50"
+        element-loading-background="rgba(122, 122, 122, 0.8)"
+      >
         <div
           v-height="bottom"
           v-infinite-scroll="loadScroll"

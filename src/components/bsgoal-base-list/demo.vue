@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 16:38:10
+ * @LastEditTime: 2023-09-25 17:17:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\demo.vue
  * @Description:  列表组件 - 演示
  * 
@@ -34,8 +34,11 @@ const fetch = (params = {}) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        rows: row,
-        total: 3
+        code: 0,
+        data: {
+          rows: row,
+          total: 3
+        }
       })
     }, 1000)
   })
