@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 17:23:36
+ * @LastEditTime: 2023-09-25 18:21:24
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -166,7 +166,7 @@ const loadData = (searchParams = {}) => {
   }
   fetch({ ...searchParams, ...pageParams }).then((res = {}) => {
     const { code = 0, data = [] } = res
-
+     console.log( 'fetch res', res);
     if (code === 0) {
       const rows = data[mapProps['rows']]
       if (Array.isArray(rows) && rows.length) {
@@ -233,6 +233,7 @@ defineExpose({
           :infinite-scroll-delay="delay"
           class="base_list_container"
         >
+        {{ curList }}
           <el-row :gutter="gutter" style="margin: 0px">
             <template v-for="(item, index) of curList" :key="index">
               <el-col :xs="24" :sm="24" :md="listMd" :lg="listMd">
