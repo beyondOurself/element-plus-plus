@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-26 09:41:38
+ * @LastEditTime: 2023-09-26 14:40:44
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -234,7 +234,7 @@ defineExpose({
         v-loading="curLoading"
         element-loading-text="加载中..."
         element-loading-svg-view-box="-10, -10, 50, 50"
-        element-loading-background="rgba(122, 122, 122, 0.8)"
+        element-loading-background="rgba(0,0,0,0)"
         :element-loading-spinner="svg"
 
       >
