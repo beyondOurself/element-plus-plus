@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-20 16:37:46
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-26 14:03:35
+ * @LastEditTime: 2023-09-26 15:12:06
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-overview\index.vue
  * @Description: 数据概率
  * 
@@ -98,6 +98,8 @@ const handleItem = (option) => {
   }
   .overview_item_icon {
     flex: auto;
+    display: flex;
+    margin-left: 20px;
   }
 
   .overview_item_gap {
