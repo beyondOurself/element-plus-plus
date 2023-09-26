@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-21 16:08:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-15 20:52:45
+ * @LastEditTime: 2023-09-26 14:18:04
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-viewer\index.vue
  * @Description: 图片 预览
  * 
@@ -38,6 +38,14 @@ const props = defineProps({
   src: {
     type: [String, Array],
     default: ''
+  },
+
+  /**
+   * 内容的 style
+   */
+  bodyStyle: {
+    type: [Object],
+    default: () => ({})
   }
 })
 
@@ -57,7 +65,7 @@ const handlePreview = () => {
 </script>
 <template>
   <div class="bsgoal-base-viewer">
-    <div class="base_viewer">
+    <div class="base_viewer" :style="bodyStyle">
       <img
         @click="handlePreview"
         :src="srcGet"
