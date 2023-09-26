@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:19
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 18:33:04
+ * @LastEditTime: 2023-09-26 09:41:38
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\index.vue
  * @Description: 列表组件 
  * 
@@ -126,6 +126,7 @@ const triggerClear = (searchParams) => {
 }
 
 const triggerChange = (changer = {}) => {
+  console.log('changer',changer);
   emits('on-change', changer)
 }
 
@@ -231,10 +232,11 @@ defineExpose({
       <!-- S 列表 -->
       <div
         v-loading="curLoading"
-        :element-loading-spinner="svg"
         element-loading-text="加载中..."
         element-loading-svg-view-box="-10, -10, 50, 50"
         element-loading-background="rgba(122, 122, 122, 0.8)"
+        :element-loading-spinner="svg"
+
       >
         <div
           v-height="bottom"

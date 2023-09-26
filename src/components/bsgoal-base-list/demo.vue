@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-22 17:51:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 17:17:32
+ * @LastEditTime: 2023-09-26 09:46:10
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-list\demo.vue
  * @Description:  列表组件 - 演示
  * 
@@ -24,6 +24,18 @@ const options = ref([
     label: 'prop1',
     prop: 'prop1',
     type: ComponentTypeEnums.INPUT,
+    placeholder: ''
+  },
+  {
+    label: 'prop2',
+    prop: 'prop2',
+    type: ComponentTypeEnums.SELECT,
+    range: [
+      {
+        label: 'label1',
+        value: 'Value1'
+      }
+    ],
     placeholder: ''
   }
 ])
