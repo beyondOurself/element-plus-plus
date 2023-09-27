@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-28 16:01:06
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-01 10:43:54
- * @FilePath: \common\src\components\bsgoal-base-tabs\index.vue
+ * @LastEditTime: 2023-09-27 11:37:10
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-tabs\index.vue
  * @Description: tabs 标签页公共组件
  * 
 -->
@@ -76,7 +76,9 @@ const modelValueGet = computed(() => {
 // ---> E modelValue Get <---
 
 // ---> S tab的切换 <---
+const activeTab = ref(modelValueGet.value)
 const changeTab = (activeValue = '') => {
+  activeTab.value = activeValue
   emits('update:modelValue', activeValue)
 }
 // ---> E tab的切换 <---
@@ -95,7 +97,7 @@ const changeTab = (activeValue = '') => {
     >
       <template v-for="({ label, value }, key) of configOptions" :key="key">
         <el-tab-pane :label="label" :name="value">
-          <slot :name="value">{{ label }}</slot>
+          <slot :name="value" v-if="activeTab === value">{{ label }}</slot>
         </el-tab-pane>
       </template>
     </el-tabs>
