@@ -64,7 +64,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue','on-change'])
 
 // ---> S modelValue Get <---
 const modelValueGet = computed(() => {
@@ -79,6 +79,7 @@ const modelValueGet = computed(() => {
 const activeTab = ref(modelValueGet.value)
 const changeTab = (activeValue = '') => {
   activeTab.value = activeValue
+  emits('on-change', activeValue)
   emits('update:modelValue', activeValue)
 }
 // ---> E tab的切换 <---

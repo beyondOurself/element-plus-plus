@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-04-28 16:01:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-06-01 11:03:24
- * @FilePath: \common\src\components\bsgoal-base-tabs\demo.vue
+ * @LastEditTime: 2023-09-27 15:03:33
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-tabs\demo.vue
  * @Description: tabs 标签切页 公共组件演示
 -->
 <script setup>
@@ -40,7 +40,7 @@ const config = ref([
 <template>
   <div class="bsgoal-base-tabs-demo">
     <div class="base_tabs_demo">
-      <BsgoalBaseTabs :config-options="config" stretch fill>
+      <BsgoalBaseTabs :config-options="config" stretch fill >
         <template #tab1>
           <div>这是 tab1</div>
         </template>

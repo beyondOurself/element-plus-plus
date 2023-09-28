@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 18:08:22
+ * @LastEditTime: 2023-09-28 09:45:47
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -462,6 +462,9 @@ const mapPropsGet = computed(() => {
   .base_tree_table--table {
     /* flex: 1; */
     overflow: hidden;
+  }
+  .base_table {
+    width: 100%;
   }
 }
 </style>

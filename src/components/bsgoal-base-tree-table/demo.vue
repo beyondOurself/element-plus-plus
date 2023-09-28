@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 18:09:02
+ * @LastEditTime: 2023-09-28 09:43:09
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -106,106 +106,106 @@ const configOptions = ref([
       }
     ]
   },
-  {
-    label: 'prop3',
-    // value: '111',
-    type: ComponentTypeEnums.SLIDER,
-    prop: 'prop3'
-  },
-  {
-    label: 'prop4',
-    // value: '111',
-    type: ComponentTypeEnums.SWITCH,
-    prop: 'prop4'
-  },
-  {
-    label: 'prop5',
-    // value: '111',
-    type: ComponentTypeEnums.RADIO,
-    prop: 'prop5',
-    range: [
-      {
-        label: 'radio1',
-        value: 'radio1'
-      },
-      {
-        label: 'radio2',
-        value: 'radio2'
-      }
-    ]
-  },
-  {
-    label: 'prop6',
-    value: [],
-    type: ComponentTypeEnums.CHECKBOX,
-    prop: 'prop6',
-    range: [
-      {
-        label: 'checkbox1',
-        value: 'checkbox1'
-      },
-      {
-        label: 'checkbox2',
-        value: 'checkbox2'
-      }
-    ]
-  },
-  {
-    label: 'prop7',
-    // value: '111',
-    type: ComponentTypeEnums.DATE,
-    prop: 'prop7',
-    format: 'YYYY-MM-DD'
-  },
-  {
-    label: 'prop9',
-    // value: '111',
-    type: ComponentTypeEnums.MONTH,
-    prop: 'prop9'
-  },
-  {
-    label: 'prop10',
-    // value: '111',
-    type: ComponentTypeEnums.YEAR,
-    prop: 'prop10'
-  },
-  {
-    label: 'prop11',
-    // value: '111',
-    type: ComponentTypeEnums.DATE_RANGE,
-    prop: 'prop11',
-    range: ['startDate', 'endDate']
-  },
-  {
-    label: 'prop12',
-    // value: '111',
-    type: ComponentTypeEnums.MONTH_RANGE,
-    prop: 'prop12'
-  },
-  {
-    label: 'prop13',
-    // value: '111',
-    type: ComponentTypeEnums.TIME,
-    prop: 'prop13'
-  },
-  {
-    label: 'prop14',
-    // value: '111',
-    type: ComponentTypeEnums.TIME_RANGE,
-    prop: 'prop14'
-  },
-  {
-    label: 'prop15',
-    // value: '111',
-    type: ComponentTypeEnums.DATE_TIME,
-    prop: 'prop15'
-  },
-  {
-    label: 'prop16',
-    // value: '111',
-    type: ComponentTypeEnums.DATE_TIME_RANGE,
-    prop: 'prop16'
-  },
+  // {
+  //   label: 'prop3',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.SLIDER,
+  //   prop: 'prop3'
+  // },
+  // {
+  //   label: 'prop4',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.SWITCH,
+  //   prop: 'prop4'
+  // },
+  // {
+  //   label: 'prop5',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.RADIO,
+  //   prop: 'prop5',
+  //   range: [
+  //     {
+  //       label: 'radio1',
+  //       value: 'radio1'
+  //     },
+  //     {
+  //       label: 'radio2',
+  //       value: 'radio2'
+  //     }
+  //   ]
+  // },
+  // {
+  //   label: 'prop6',
+  //   value: [],
+  //   type: ComponentTypeEnums.CHECKBOX,
+  //   prop: 'prop6',
+  //   range: [
+  //     {
+  //       label: 'checkbox1',
+  //       value: 'checkbox1'
+  //     },
+  //     {
+  //       label: 'checkbox2',
+  //       value: 'checkbox2'
+  //     }
+  //   ]
+  // },
+  // {
+  //   label: 'prop7',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.DATE,
+  //   prop: 'prop7',
+  //   format: 'YYYY-MM-DD'
+  // },
+  // {
+  //   label: 'prop9',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.MONTH,
+  //   prop: 'prop9'
+  // },
+  // {
+  //   label: 'prop10',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.YEAR,
+  //   prop: 'prop10'
+  // },
+  // {
+  //   label: 'prop11',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.DATE_RANGE,
+  //   prop: 'prop11',
+  //   range: ['startDate', 'endDate']
+  // },
+  // {
+  //   label: 'prop12',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.MONTH_RANGE,
+  //   prop: 'prop12'
+  // },
+  // {
+  //   label: 'prop13',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.TIME,
+  //   prop: 'prop13'
+  // },
+  // {
+  //   label: 'prop14',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.TIME_RANGE,
+  //   prop: 'prop14'
+  // },
+  // {
+  //   label: 'prop15',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.DATE_TIME,
+  //   prop: 'prop15'
+  // },
+  // {
+  //   label: 'prop16',
+  //   // value: '111',
+  //   type: ComponentTypeEnums.DATE_TIME_RANGE,
+  //   prop: 'prop16'
+  // },
   {
     label: 'prop17',
     // value: '111',
@@ -498,294 +498,294 @@ const tableData = ref([
     prop15: 'row2value',
     prop16: 'row2value'
   },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  },
-  {
-    prop1: 'row2value',
-    prop2: 'row2value',
-    prop3: 'row2value',
-    prop4: 'row2value',
-    prop5: 'row2value',
-    prop6: 'row2value',
-    prop7: 'row2value',
-    prop8: 'row2value',
-    prop9: 'row2value',
-    prop10: 'row2value',
-    prop11: 'row2value',
-    prop12: 'row2value',
-    prop13: 'row2value',
-    prop14: 'row2value',
-    prop15: 'row2value',
-    prop16: 'row2value'
-  }
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // },
+  // {
+  //   prop1: 'row2value',
+  //   prop2: 'row2value',
+  //   prop3: 'row2value',
+  //   prop4: 'row2value',
+  //   prop5: 'row2value',
+  //   prop6: 'row2value',
+  //   prop7: 'row2value',
+  //   prop8: 'row2value',
+  //   prop9: 'row2value',
+  //   prop10: 'row2value',
+  //   prop11: 'row2value',
+  //   prop12: 'row2value',
+  //   prop13: 'row2value',
+  //   prop14: 'row2value',
+  //   prop15: 'row2value',
+  //   prop16: 'row2value'
+  // }
 ])
 
 const tableDataVal = unref(tableData)
