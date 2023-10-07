@@ -2,8 +2,8 @@
  * @Author: canlong.shen
  * @Date: 2023-05-24 14:09:57
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-11 10:13:39
- * @FilePath: \common\src\components\bsgoal-base-time-range\index.vue
+ * @LastEditTime: 2023-10-07 17:50:16
+ * @FilePath: \v3_basic_component\src\components\bsgoal-base-time-range\index.vue
  * @Description: 时间选择 公共组件
  * 
 -->
@@ -108,9 +108,9 @@ watchEffect(() => {
  * @return {*}
  */
 const triggerChange = (range = []) => {
-  const { startTime = '', endTime = '' } = props
 
-  const { 0: startDate, 1: endDate } = range
+  const { startTime = '', endTime = '' } = props
+  const { 0: startDate, 1: endDate } = range || []
   const startDateFormat = dateToString(startDate)
   const endDateFormat = dateToString(endDate)
   if (unref(startTime) && unref(endTime)) {
