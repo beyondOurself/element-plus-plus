@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-28 09:43:09
+ * @LastEditTime: 2023-10-07 11:58:35
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -497,7 +497,7 @@ const tableData = ref([
     prop14: 'row2value',
     prop15: 'row2value',
     prop16: 'row2value'
-  },
+  }
   // {
   //   prop1: 'row2value',
   //   prop2: 'row2value',
@@ -826,9 +826,11 @@ setTimeout(() => {
       label: '深圳市博思高高高高科技有限公司',
       isLeaf: true,
       hasIcon: true,
+      key: 'label1-1',
       children: [
         {
-          label: 'label2-2-1'
+          key: 'label1-2-1',
+          label: 'label1-2-1'
         }
       ]
     },
@@ -837,11 +839,13 @@ setTimeout(() => {
       label: '深圳市博思高高高高科技有限公司',
       children: [
         {
+          key: 'label2-2-1',
           label: 'label2-2-1'
         }
       ]
     },
     {
+      key: 'label2-3',
       label: 'label2-3'
     }
   ])
@@ -922,6 +926,7 @@ const clickOverview = (option = {}) => {
         serial
         operation
         hasOverview
+        treeClearable
         :overview-options="overviewOptions"
         :sortFields="sortFields"
         :initTreeShow="false"
@@ -962,4 +967,5 @@ const clickOverview = (option = {}) => {
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
+
 </style>

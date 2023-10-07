@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-28 09:45:47
+ * @LastEditTime: 2023-10-07 12:00:37
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -26,6 +26,13 @@ const props = defineProps({
   gasket: {
     type: [String, Number],
     default: 10
+  },
+  /**
+   * 清空树
+   */
+  treeClearable: {
+    type: [Boolean],
+    default: false
   },
   /**
    * 数据
@@ -324,6 +331,15 @@ const triggerTreeClick = (value, node, treeNode, event) => {
   emits('on-click-tree', value, node, treeNode, event)
 }
 
+const BSGOAL_BASE_TREE = ref(null)
+
+const resetTreeChecked = () => {
+  console.log(props.treeClearable)
+  if (props.treeClearable) {
+    BSGOAL_BASE_TREE.value.resetChecked()
+  }
+}
+
 // ---> E 树 <---
 
 // ---> S 表 <---
@@ -350,6 +366,7 @@ const triggerTableChange = (values = {}) => {
   emits('on-change-table-search', values)
 }
 const triggerTableSearchClear = (values = {}) => {
+  resetTreeChecked()
   emits('on-clear-table-search', values)
 }
 
@@ -398,6 +415,7 @@ const mapPropsGet = computed(() => {
       <div class="base_tree_table--tree">
         <!-- S 树 -->
         <BsgoalBaseTree
+          ref="BSGOAL_BASE_TREE"
           v-bind="$props"
           class="base_tree_table--tree"
           :tree-props="treeProps"

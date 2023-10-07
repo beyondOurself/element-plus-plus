@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-21 08:43:33
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 15:24:03
+ * @LastEditTime: 2023-10-07 11:59:27
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree\index.vue
  * @Description: 虚拟化树型结构 公共组件
  * 
@@ -181,10 +181,32 @@ const lazyGet = computed(() => {
 const handleItemAdd = (node = null, data = {}) => {
   emits('on-add', { node, data })
 }
+
+// 清除掉选中效果
+const BASE_TREE_EL = ref(null)
+const clearActiveEffects = () => {
+  nextTick(() => {
+    const treeEL = BASE_TREE_EL.value
+    const currentEl = treeEL.querySelector('.el-tree-node.is-current')
+    if (currentEl) {
+      currentEl.classList.remove('is-current')
+    }
+  })
+}
+
+// 重置选择
+const resetChecked = () => {
+  clearActiveEffects()
+  EL_TREE_REF.value.setCheckedKeys([], false)
+}
+
+defineExpose({
+  resetChecked
+})
 </script>
 <template>
   <div class="bsgoal-base-tree">
-    <div class="base_tree" v-height="gasket">
+    <div class="base_tree" v-height="gasket" ref="BASE_TREE_EL">
       <div v-show="foldStatus" class="base_tree_main">
         <!-- S 查询 -->
         <el-input v-model="filterText" class="base_tree_main_input" placeholder="输入关键字过滤" />
@@ -306,6 +328,10 @@ const handleItemAdd = (node = null, data = {}) => {
   }
   .base_tree_node_icon {
     flex: none;
+  }
+
+  .el-tree-node.is-current > .el-tree-node__content {
+    color: var(--el-color-primary);
   }
 }
 </style>
