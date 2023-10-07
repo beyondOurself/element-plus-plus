@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 16:24:12
+ * @LastEditTime: 2023-10-07 16:30:51
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -482,7 +482,7 @@ const changeCascader = (type, prop, values) => {
 const filterSlotProps = (model = {}, isParseInt) => {
   const rebuildModel = {}
   for (const prop of Object.keys(model)) {
-    if (!prop.startsWith('_') && !!prop) {
+    if (!prop.startsWith('_') && !prop.endsWith('_') && !!prop) {
       const value = model[prop]
       if (isParseInt) {
         const valueInt = Number.parseFloat(value)
@@ -830,7 +830,6 @@ defineExpose({
                         <!-- / 时间选择器 -->
                         <!-- / 时间区域选择器 -->
                         <template v-if="[ComponentTypeEnums.TIME_RANGE].includes(type)">
-                          {{ model[prop] }}
                           <el-time-picker
                             v-model="model[prop]"
                             is-range
