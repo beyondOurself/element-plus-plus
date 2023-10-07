@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 16:09:52
+ * @LastEditTime: 2023-10-07 16:25:05
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -338,7 +338,8 @@ const configOptions = ref([
     label: 'prop13',
     // value: '111',
     type: ComponentTypeEnums.TIME,
-    prop: 'prop13'
+    prop: 'prop13',
+    format:'HH:mm'
   },
   {
     label: 'prop14',

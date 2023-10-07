@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 16:11:02
+ * @LastEditTime: 2023-10-07 16:24:12
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -820,7 +820,7 @@ defineExpose({
                           <el-time-picker
                             v-model="model[prop]"
                             v-bind="attribute"
-                            arrow-control
+                            :format="formatSet(type, format)"
                             :disabled="itemDisabled"
                             :value-format="formatSet(type, format)"
                             :placeholder="placeholderSet(type, label, placeholder)"
