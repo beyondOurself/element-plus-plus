@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 12:00:37
+ * @LastEditTime: 2023-10-07 13:40:31
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -334,7 +334,6 @@ const triggerTreeClick = (value, node, treeNode, event) => {
 const BSGOAL_BASE_TREE = ref(null)
 
 const resetTreeChecked = () => {
-  console.log(props.treeClearable)
   if (props.treeClearable) {
     BSGOAL_BASE_TREE.value.resetChecked()
   }

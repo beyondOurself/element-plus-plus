@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-19 14:09:32
+ * @LastEditTime: 2023-10-07 15:17:20
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -718,9 +718,9 @@ defineExpose({
                             @change="triggerValueChange(type, prop)"
                           >
                             <template v-for="(item, itemIndex) of range" :key="itemIndex">
-                              <el-radio v-if="mode === 'button'" :label="item.value">{{
+                              <el-radio-button v-if="mode === 'button'" :label="item.value">{{
                                 item.label
-                              }}</el-radio>
+                              }}</el-radio-button>
                               <el-radio v-else :label="item.value">{{ item.label }}</el-radio>
                             </template>
                           </el-radio-group>
