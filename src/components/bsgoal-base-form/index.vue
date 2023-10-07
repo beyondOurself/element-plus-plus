@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 15:17:20
+ * @LastEditTime: 2023-10-07 16:11:02
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -830,11 +830,13 @@ defineExpose({
                         <!-- / 时间选择器 -->
                         <!-- / 时间区域选择器 -->
                         <template v-if="[ComponentTypeEnums.TIME_RANGE].includes(type)">
+                          {{ model[prop] }}
                           <el-time-picker
                             v-model="model[prop]"
                             is-range
                             v-bind="attribute"
                             :disabled="itemDisabled"
+                            :format="formatSet(type, format)"
                             :value-format="formatSet(type, format)"
                             :start-placeholder="placeholderSet(type, label, placeholder)[0]"
                             :end-placeholder="placeholderSet(type, label, placeholder)[1]"
