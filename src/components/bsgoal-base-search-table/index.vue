@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 18:04:46
+ * @LastEditTime: 2023-10-07 09:54:53
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -216,10 +216,10 @@ const props = defineProps({
     type: [Boolean],
     default: false
   },
-   /**
+  /**
    * 排序字段
    */
-   sortFields: {
+  sortFields: {
     type: [Array],
     default: () => []
   }
@@ -272,15 +272,16 @@ const BSGOAL_BASE_TABLE_REF = ref(null)
 const triggerSearch = (searchParams) => {
   BSGOAL_BASE_TABLE_REF.value.refreshList(searchParams)
 }
-const triggerClear = (searchParams) => {
+const triggerClear = (searchParams = {}) => {
   emits('on-clear', searchParams)
+  BSGOAL_BASE_TABLE_REF.value.clearSortFields()
   BSGOAL_BASE_TABLE_REF.value.refreshList(searchParams)
 }
 
 const getSearchParams = () => {
   const searchParamsValue = BSGOAL_BASE_SEARCH_REF.value.triggerOperationSearch(false)
   const totalValue = curTotal.value
-  return { total: totalValue  , ...searchParamsValue }
+  return { total: totalValue, ...searchParamsValue }
 }
 
 // ---> S 计算expression <---
@@ -304,9 +305,9 @@ const refresh = () => {
 // ---> E 刷新 <---
 
 // ---> S 排序 <---
-   const changeSort = ({ column, prop, order }) => {
-    refresh()
-   }            
+const changeSort = ({ column, prop, order }) => {
+  refresh()
+}
 // ---> E 排序 <---
 
 // ---> S 触发事件 <---
@@ -328,8 +329,6 @@ const triggerChange = (changer = {}) => {
   emits('on-change', changer)
 }
 
-
-
 // ---> E 触发事件 <---
 
 const clearSelection = () => {
@@ -337,10 +336,9 @@ const clearSelection = () => {
 }
 
 // ---> S 数据概览 <---
-            const handleOverviewItem = (option = {}) => {
-               
-              emits('on-click-overview', option)
-            }   
+const handleOverviewItem = (option = {}) => {
+  emits('on-click-overview', option)
+}
 // ---> E 数据概览 <---
 
 // ---> S 暴露 <---
@@ -356,7 +354,12 @@ defineExpose({
   <div class="bsgoal-base-search-table">
     <div class="base_search_table">
       <!-- S 数据概览 -->
-      <BsgoalBaseOverview v-if="hasOverview" :options="overviewOptions" @on-click-item="handleOverviewItem"> </BsgoalBaseOverview>
+      <BsgoalBaseOverview
+        v-if="hasOverview"
+        :options="overviewOptions"
+        @on-click-item="handleOverviewItem"
+      >
+      </BsgoalBaseOverview>
       <!-- E 数据概览 -->
 
       <!-- S 查询 -->

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 10:27:05
+ * @LastEditTime: 2023-10-07 09:54:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -293,7 +293,7 @@ const ping = () => {
     fetchParams[mapPropsFuse.currentPage] = currentPageVal
     fetchParams[mapPropsFuse.pageSize] = pageSizeVal
   }
-   // 有排序值注入排序参数
+  // 有排序值注入排序参数
   if (sortFieldeVal && sortOrderVal) {
     fetchParams.sortField = sortFieldeVal
     fetchParams.sortOrder = sortOrderVal
@@ -312,7 +312,6 @@ watch(resData, (data) => {
     tableData.value = data[mapPropsFuse.rows]
     total.value = data[mapPropsFuse.total]
   } else {
-    console.log('data', data)
     tableData.value = data[mapPropsFuse.rows]
   }
 })
@@ -320,6 +319,12 @@ watch(resData, (data) => {
 watchEffect(() => {
   emits('on-total-change', total.value)
 })
+
+// 清空排序
+const clearSortFields = () => {
+  sortField.value = ''
+  sortOrder.value = ''
+}
 
 // 查询
 const refreshList = (params = {}) => {
@@ -409,7 +414,8 @@ const isMicroApp = window.__MICRO_APP_ENVIRONMENT__
 // 暴露的属性
 defineExpose({
   refreshList,
-  clearSelection
+  clearSelection,
+  clearSortFields
 })
 </script>
 
