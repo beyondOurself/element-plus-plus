@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 16:30:51
+ * @LastEditTime: 2023-10-07 17:27:31
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -643,7 +643,7 @@ defineExpose({
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
-              :md="gap ? 24 : md || medium"
+              :md="md || medium"
               :style="colStyle"
             >
               <template v-if="gap">
