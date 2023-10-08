@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-10-07 18:05:10
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-08 09:49:55
+ * @LastEditTime: 2023-10-08 09:51:29
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tag\index.vue
  * @Description: 标签
  * 
@@ -85,9 +85,7 @@ const handleCheckTag = (key = false, option = {}) => {
 </script>
 <template>
   <div class="bsgoal-base-tag">
-    {{ values }}
     <template v-if="isCheckTagGet">
-      {{ curOptions }}
       <template v-for="(option, key) of curOptions" :key="key">
         <el-check-tag
           v-model:checked="option.checked"
