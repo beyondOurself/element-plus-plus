@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 13:40:31
+ * @LastEditTime: 2023-10-08 11:14:19
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -482,6 +482,7 @@ const mapPropsGet = computed(() => {
   }
   .base_table {
     width: 100%;
+    box-sizing: border-box;
   }
 }
 </style>
