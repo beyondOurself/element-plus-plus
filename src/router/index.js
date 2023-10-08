@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 10:41:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-27 10:10:06
+ * @LastEditTime: 2023-10-08 08:49:52
  * @FilePath: \v3_basic_component\src\router\index.js
  * @Description: 路由配置
  *
@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'home',
       component: LayoutHome,
       children: [
+        {
+          path: 'bsgoal-base-tag-demo',
+          name: '标签',
+          component: import('@/components/bsgoal-base-tag/demo.vue')
+        },
         {
           path: 'bsgoal-base-gap-demo',
           name: '分割',
