@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 17:30:01
+ * @LastEditTime: 2023-10-09 14:47:20
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -18,10 +18,11 @@ import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
 import BsgoalBaseCascaderMultipl from '../bsgoal-base-cascader-multiple/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 import { ElMessage } from 'element-plus'
-import { isObject, deepClone } from '../../utils/common.js'
+import { isObject, deepClone ,isFunction} from '../../utils/common.js'
 import { isBoolean } from 'lodash'
 import { autoAlign } from '@/directives/directiveBase.js'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+
 
 defineOptions({
   name: 'BsgoalBaseForm'
@@ -627,6 +628,11 @@ defineExpose({
                 mode = '',
                 gap = false,
                 gapStyle = {},
+                display = () => {
+                  return computed(() => {
+                    return true
+                  })
+                },
                 formatter = (v) => {
                   return v
                 },
@@ -639,11 +645,11 @@ defineExpose({
             :key="key"
           >
             <el-col
-              v-if="!curConceal.includes(prop)"
+              v-if="!curConceal.includes(prop) && display().value"
               :class="{ 'base_form--visible': !visible }"
               :xs="24"
               :sm="24"
-              :md="gap ? md || 24 : md || medium"
+              :md="gap ? md || 24 : isFunction(md) ? md().value : md || medium"
               :style="colStyle"
             >
               <template v-if="gap">

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 16:25:05
+ * @LastEditTime: 2023-10-09 14:48:07
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -48,6 +48,20 @@ const configOptions = ref([
   {
     label: 'prop105',
     prop: 'prop105',
+    display: () => {
+      return computed(() => {
+        console.log('values.value.prop100', values.value.prop100)
+        return !!values.value.prop100
+      })
+    },
+
+    md: () => {
+      return computed(() => {
+        console.log('values.value.prop100', values.value.prop100)
+        return values.value.prop100 ? 24 : 12
+      })
+    },
+
     value: [],
     attribute: {
       rootDisabled: true,
@@ -274,7 +288,7 @@ const configOptions = ref([
     // value: '111',
     type: ComponentTypeEnums.RADIO,
     prop: 'prop5',
-    mode:'button',
+    mode: 'button',
     range: [
       {
         label: 'radio1',
@@ -339,14 +353,14 @@ const configOptions = ref([
     // value: '111',
     type: ComponentTypeEnums.TIME,
     prop: 'prop13',
-    format:'HH:mm'
+    format: 'HH:mm'
   },
   {
     label: 'prop14',
     // value: '111',
     type: ComponentTypeEnums.TIME_RANGE,
     prop: 'prop14',
-    format:'HH:mm'
+    format: 'HH:mm'
   },
   {
     label: 'prop15',
