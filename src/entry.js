@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-11 18:31:55
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-08 08:50:56
+ * @LastEditTime: 2023-10-09 18:22:20
  * @FilePath: \v3_basic_component\src\entry.js
  * @Description: 打包 入口文件
  * 
@@ -41,7 +41,7 @@ import BsgoalBaseIcon from '@/components/bsgoal-base-icon/index.vue'
 import BsgoalBaseOverview from '@/components/bsgoal-base-overview/index.vue'
 import BsgoalBaseList from '@/components/bsgoal-base-list/index.vue'
 import BsgoalBaseGap from '@/components/bsgoal-base-gap/index.vue'
-import BsgoalBaseTag from '@/components/bsgoal-base-gap/index.vue'
+import BsgoalBaseTag from '@/components/bsgoal-base-tag/index.vue'
 
 import componentTypeEnums from '@/enums/componentTypeEnums.js'
 import { useFetch } from '@/combines/useFetchs.js'
