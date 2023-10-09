@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-19 14:21:14
+ * @LastEditTime: 2023-10-09 15:59:08
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import BsgoalBaseDialogForm from './index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 
@@ -35,13 +35,15 @@ const showDialog1 = () => {
   console.log('model1', model1)
   formModel.value = model1
 }
+
+const model2 = ref({})
 const showDialog2 = () => {
   const model = ref({
     prop1: '221',
     prop2: '222',
     prop3: '223'
   })
-  BSGOAL_BASE_DIALOG_FORM_REF.value.show(model)
+  model2.value = BSGOAL_BASE_DIALOG_FORM_REF.value.show(model)
 }
 const showDialog3 = () => {
   BSGOAL_BASE_DIALOG_FORM_REF.value.show()
@@ -79,7 +81,12 @@ const configOptionsForm = ref([
   {
     label: '字段5',
     prop: 'prop5',
-    type: ComponentTypeEnums.INPUT
+    type: ComponentTypeEnums.INPUT, 
+    display:() => {
+       return computed(() => {
+        return  !!model2.value.prop4
+       })
+    }
   },
   {
     label: '字段6666',

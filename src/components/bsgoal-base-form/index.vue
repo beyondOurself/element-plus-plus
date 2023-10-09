@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-09 14:47:20
+ * @LastEditTime: 2023-10-09 16:39:21
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -18,11 +18,10 @@ import BsgoalBaseTooltip from '../bsgoal-base-tooltip/index.vue'
 import BsgoalBaseCascaderMultipl from '../bsgoal-base-cascader-multiple/index.vue'
 import BsgoalBaseCascader from '../bsgoal-base-cascader/index.vue'
 import { ElMessage } from 'element-plus'
-import { isObject, deepClone ,isFunction} from '../../utils/common.js'
+import { isObject, deepClone, isFunction } from '../../utils/common.js'
 import { isBoolean } from 'lodash'
 import { autoAlign } from '@/directives/directiveBase.js'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-
 
 defineOptions({
   name: 'BsgoalBaseForm'
@@ -278,10 +277,27 @@ const getValidator = (label = '') => {
  */
 
 const curOptions = ref([])
+let watchStop = null
 watch(
   () => props.configOptions,
   () => {
     const { configOptions } = props
+
+    const displayList = configOptions.filter((fi) => isFunction(fi.display))
+    if (displayList && displayList.length) {
+      const displayComputedList = displayList.map((mi) => {
+        return mi.display()
+      })
+      if (watchStop) {
+        watchStop()
+      }
+      watchStop = watch(displayComputedList, (result = []) => {
+        nextTick(() => {
+          autoAlign(BASE_FORM_WRAP_REF.value)
+        })
+      })
+    }
+
     const options = deepClone(toRaw(toValue(configOptions)))
     curOptions.value = options.map((option) => {
       let { rules = [], label = '', prop = '', type = '', validation = false } = option
@@ -579,6 +595,10 @@ const itemStyle = computed(() => {
 })
 
 // ---> E styles <---
+
+const load = () => {
+  console.log('渲染了~')
+}
 
 defineExpose({
   triggerOperationClear,
