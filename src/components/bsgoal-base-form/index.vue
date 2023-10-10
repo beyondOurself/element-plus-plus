@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-10 10:00:07
+ * @LastEditTime: 2023-10-10 14:02:45
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -458,7 +458,7 @@ const triggerValueChange = (type, prop, range = [], event = '') => {
 
   if (ComponentTypeEnums.TIME_RANGE.includes(type) && range.length) {
     range.forEach((prop, index) => {
-      model.value[prop] = event[index]
+      model.value[prop] = event ? event[index] : ''
     })
   }
 
