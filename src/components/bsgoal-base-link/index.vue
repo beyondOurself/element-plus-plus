@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-10 13:40:36
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-07-15 19:35:49
+ * @LastEditTime: 2023-10-10 16:27:42
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-link\index.vue
  * @Description: 链接 公共组件
  * 
@@ -76,6 +76,9 @@ const clickLink = () => {
 <style lang="scss" scoped>
 /* 自定义样式
 ---------------------------------------------------------------- */
+.bsgoal-base-link {
+  display: inline-block;
+}
 </style>
 <style lang="scss">
 /* 覆盖样式
