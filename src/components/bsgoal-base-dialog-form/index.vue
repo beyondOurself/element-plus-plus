@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 09:41:06
+ * @LastEditTime: 2023-10-10 10:48:56
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -54,14 +54,14 @@ const props = defineProps({
   /**
    * 隐藏项
    */
-   conceal: {
+  conceal: {
     type: [Array],
     default: () => []
   },
-    /**
+  /**
    * 弹窗的上边距
    */
-   top: {
+  top: {
     type: [String],
     default: '10vh'
   }
@@ -113,7 +113,20 @@ const changeFormItem = (values = {}) => {
 const BSGOAL_BASE_DIALOG_REF = ref(null)
 
 const show = (raw = {}, mode = '') => {
-  model.value = deepClone(toRaw(toValue(raw)))
+  const cloneRaw = deepClone(toRaw(toValue(raw)))
+  const optionsValue = configOptionsGet.value
+
+  optionsValue.forEach((fi) => {
+    const { range = [] } = fi
+    if (Array.isArray(range) && range.length) {
+      for (const prop of range) {
+        const { [prop]: propValue = '' } = cloneRaw
+        cloneRaw[prop] = propValue
+      }
+    }
+  })
+
+  model.value = deepClone(toRaw(toValue(cloneRaw)))
   if (mode) {
     curMode.value = mode
   } else {
