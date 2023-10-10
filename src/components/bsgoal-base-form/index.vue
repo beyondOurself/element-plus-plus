@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-09 16:39:21
+ * @LastEditTime: 2023-10-10 10:00:07
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -449,11 +449,18 @@ const triggerOperationClear = () => {
  * @default:
  * @return {*}
  */
-const triggerValueChange = (type, prop, range = []) => {
+const triggerValueChange = (type, prop, range = [], event = '') => {
   const value = model.value[prop] || ''
   let option = {}
 
-  console.log('range', range)
+  // console.log('range', range)
+  // console.log('event', event)
+
+  if (ComponentTypeEnums.TIME_RANGE.includes(type) && range.length) {
+    range.forEach((prop, index) => {
+      model.value[prop] = event[index]
+    })
+  }
 
   if ([ComponentTypeEnums.SELECT].includes(type) && range.length) {
     let hitList = value
@@ -865,7 +872,7 @@ defineExpose({
                             :value-format="formatSet(type, format)"
                             :start-placeholder="placeholderSet(type, label, placeholder)[0]"
                             :end-placeholder="placeholderSet(type, label, placeholder)[1]"
-                            @change="triggerValueChange(type, prop)"
+                            @change="triggerValueChange(type, prop, range, $event)"
                           />
                         </template>
                         <!-- / 时间区域选择器 -->

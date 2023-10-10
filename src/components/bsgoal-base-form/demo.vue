@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 15:00:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-09 14:48:07
+ * @LastEditTime: 2023-10-10 09:50:21
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\demo.vue
  * @Description: 表单公共组件演示组件
  * 
@@ -360,7 +360,8 @@ const configOptions = ref([
     // value: '111',
     type: ComponentTypeEnums.TIME_RANGE,
     prop: 'prop14',
-    format: 'HH:mm'
+    format: 'HH:mm',
+    range:['prop141','prop142']
   },
   {
     label: 'prop15',
