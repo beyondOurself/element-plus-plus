@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-10 10:48:56
+ * @LastEditTime: 2023-10-10 11:03:03
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -15,6 +15,8 @@ import { ref, computed, toValue, useSlots, toRaw, watchEffect, onUnmounted } fro
 import BsgoalBaseDialog from '../bsgoal-base-dialog/index.vue'
 import BsgoalBaseForm from '../bsgoal-base-form/index.vue'
 import { deepClone } from '../../utils/common.js'
+import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
+
 
 defineOptions({
   name: 'BsgoalBaseDialogForm'
@@ -117,8 +119,8 @@ const show = (raw = {}, mode = '') => {
   const optionsValue = configOptionsGet.value
 
   optionsValue.forEach((fi) => {
-    const { range = [] } = fi
-    if (Array.isArray(range) && range.length) {
+    const { range = [] , type = '' } = fi
+    if (Array.isArray(range) && range.length && [ComponentTypeEnums.TIME_RANGE,ComponentTypeEnums.DATE_RANGE , ComponentTypeEnums.DATE_TIME_RANGE ].includes(type)) {
       for (const prop of range) {
         const { [prop]: propValue = '' } = cloneRaw
         cloneRaw[prop] = propValue
