@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-11 10:17:08
+ * @LastEditTime: 2023-10-11 15:30:25
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -218,7 +218,7 @@ const changeValue = (isSearch = false, isClear = false) => {
       }
     }
 
-    if (!prop.startsWith('_')) {
+    if (!prop.startsWith('_') && !prop.endsWith('_') ) {
       if ([ComponentTypeEnums.CASCADER].includes(type) && Array.isArray(value) && single) {
         const rangeLength = value.length
         if (rangeLength) {
