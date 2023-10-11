@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 11:58:35
+ * @LastEditTime: 2023-10-11 10:25:16
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\demo.vue
  * @Description:  树 + 列表 + 演示
  * 
@@ -10,7 +10,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref, shallowRef } from 'vue'
+import { ref, unref, shallowRef, nextTick } from 'vue'
 import BsgoalBaseTreeTable from './index.vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 
@@ -881,6 +881,15 @@ const clearTableSearch = () => {
   console.log('清空了~')
 }
 
+const searchModel = ref({})
+nextTick(() => {
+  searchModel.value = BSGOAL_BASE_TREE_TABLE_REF.value.getSearchModel()
+})
+
+const test2 = () => {
+  searchModel.value.prop1 = ''
+}
+
 // ---> E 列表 <---
 
 const sortFields = ref(['prop2'])
@@ -927,6 +936,7 @@ const clickOverview = (option = {}) => {
         operation
         hasOverview
         treeClearable
+        auto-layout-menu
         :overview-options="overviewOptions"
         :sortFields="sortFields"
         :initTreeShow="false"
@@ -950,6 +960,12 @@ const clickOverview = (option = {}) => {
         @on-clear-table-search="clearTableSearch"
         @on-click-overview="clickOverview"
       >
+        <template #menu="{ data }">
+          <div>
+            <el-button type="primary" @click="test2">测试按钮</el-button>
+          </div>
+        </template>
+
         <!-- <template #tree="{data}">
          <div>{{ data }}</div>
       </template> -->
@@ -967,5 +983,4 @@ const clickOverview = (option = {}) => {
 <style lang="scss">
 /* 覆盖样式
 ---------------------------------------------------------------- */
-
 </style>

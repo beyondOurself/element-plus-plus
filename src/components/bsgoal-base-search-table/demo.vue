@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 09:54:15
+ * @LastEditTime: 2023-10-11 10:17:21
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, unref, shallowRef } from 'vue'
+import { ref, unref, shallowRef, nextTick } from 'vue'
 import ComponentTypeEnums from '../../enums/componentTypeEnums.js'
 import BsgoalBaseSearchTable from './index.vue'
 import BsgoalBaseButton from '../bsgoal-base-button/index.vue'
@@ -986,9 +986,18 @@ const fetch = (params) => {
 }
 
 const BSGOAL_BASE_SEARCH_TABLE_REF = ref(null)
+
+let curSearchModel = ref({})
+
+nextTick(() => {
+  curSearchModel.value = BSGOAL_BASE_SEARCH_TABLE_REF.value.getSearchModel()
+  console.log('curSearchModel', curSearchModel)
+})
+
 const test = () => {
   const searchParams = BSGOAL_BASE_SEARCH_TABLE_REF.value.getSearchParams()
   console.log('searchParams', searchParams)
+  curSearchModel.value.prop1 = ''
   // configOptions.value =  configOptions2.value
 
   // BSGOAL_BASE_SEARCH_TABLE_REF.value.refresh()

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-08 11:14:19
+ * @LastEditTime: 2023-10-11 10:25:44
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -381,12 +381,17 @@ const clearSelection = () => {
   BSGOAL_BASE_SEARCH_TABLE_REF.value.clearSelection()
 }
 
+const getSearchModel = () => {
+  return BSGOAL_BASE_SEARCH_TABLE_REF.value.getSearchModel()
+}
+
 // ---> E 暴露事件 <---
 
 // 暴露的属性
 defineExpose({
   refreshList,
-  clearSelection
+  clearSelection,
+  getSearchModel
 })
 
 // ---> E 表 <---

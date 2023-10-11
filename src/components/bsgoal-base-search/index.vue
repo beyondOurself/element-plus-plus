@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-25 09:50:02
+ * @LastEditTime: 2023-10-11 10:17:08
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -76,6 +76,11 @@ const vAlign = baseDirective.align
 
 const model = ref({})
 // const watchPropList = []
+
+const getModel = () => {
+  return  toValue(model) 
+}
+
 
 /**
  * @Author: canlong.shen
@@ -320,7 +325,8 @@ const defaultTime = ref([startDefaultTime, endDefaultTime])
 
 // ---> S 暴露 <---
 defineExpose({
-  triggerOperationSearch
+  triggerOperationSearch,
+  getModel
 })
 // ---> E 暴露 <---
 </script>

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 09:54:53
+ * @LastEditTime: 2023-10-11 10:06:56
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -284,6 +284,10 @@ const getSearchParams = () => {
   return { total: totalValue, ...searchParamsValue }
 }
 
+const getSearchModel = () => {
+  return BSGOAL_BASE_SEARCH_REF.value.getModel()
+}
+
 // ---> S 计算expression <---
 const expresionGet = computed(() => {
   const { expression, hasPage } = props
@@ -346,7 +350,8 @@ const handleOverviewItem = (option = {}) => {
 defineExpose({
   refresh,
   clearSelection,
-  getSearchParams
+  getSearchParams,
+  getSearchModel
 })
 // ---> E 暴露 <---
 </script>
