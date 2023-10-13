@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-21 17:09:16
+ * @LastEditTime: 2023-10-13 15:16:33
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -68,6 +68,13 @@ const props = defineProps({
     type: [Boolean],
     default: false
   },
+  /**
+   * circle
+   */
+  circle: {
+    type: [Boolean],
+    default: false
+  },
 
   /**
    *  确认
@@ -122,7 +129,7 @@ const props = defineProps({
    * 气泡确认框内容的宽度
    */
   confirmWidth: {
-    type: [String,Number],
+    type: [String, Number],
     default: ''
   }
 })
@@ -130,11 +137,10 @@ const props = defineProps({
 // ---> S 触发按钮 <---
 const loading = ref(false)
 const triggerClick = () => {
-
-  const {disabled = false } = props
+  const { disabled = false } = props
   const disabledValue = toValue(disabled)
-  if(disabledValue){
-      return 
+  if (disabledValue) {
+    return
   }
 
   // 默认 loading 是打开的
@@ -196,6 +202,7 @@ const iconGet = computed(() => {
 })
 const contentGet = computed(() => {
   const { mode = '', content = '' } = props
+
   if (content) {
     return content
   }
@@ -280,7 +287,9 @@ const tooltipStyleGet = computed(() => {
                   :loading="loading"
                   :plain="plain"
                   :disabled="disabled"
-                  >{{ contentGet }}
+                  :circle="circle"
+                >
+                  {{ contentGet }}
                   <template #icon v-if="iconUrlGet">
                     <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
                   </template>
@@ -297,6 +306,7 @@ const tooltipStyleGet = computed(() => {
             :disabled="!tooltip"
             :content="tooltip"
             :placement="tooltipPlacement"
+            :circle="circle"
           >
             <template #content>
               <div class="base_button_tooltip" :style="tooltipStyleGet">
@@ -306,6 +316,7 @@ const tooltipStyleGet = computed(() => {
 
             <slot :loading="loading">
               <el-button
+                :class="{ base_button_body: circle }"
                 :link="link"
                 :type="typeGet"
                 :icon="iconGet"
@@ -313,12 +324,18 @@ const tooltipStyleGet = computed(() => {
                 :plain="plain"
                 :disabled="disabled"
                 :url="url"
+                :circle="circle"
                 @mouseenter="mouseenter"
                 @mouseleave="mouseleave"
-                >{{ contentGet }}
-
+              >
+                {{ contentGet }}
                 <template #icon v-if="iconUrlGet">
-                  <BsgoalBaseIcon width="1.2em" :src="iconUrlGet" :color="curIconColor" />
+                  <BsgoalBaseIcon
+                    style="font-size: 0"
+                    width="1.2em"
+                    :src="iconUrlGet"
+                    :color="curIconColor"
+                  />
                 </template>
               </el-button>
             </slot>
@@ -339,6 +356,9 @@ const tooltipStyleGet = computed(() => {
   .base_button_tooltip {
     word-wrap: break-word;
     word-break: break-all;
+  }
+  .base_button_body > span {
+    display: none;
   }
 }
 </style>

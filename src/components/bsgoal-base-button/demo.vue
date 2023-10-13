@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-14 11:05:42
+ * @LastEditTime: 2023-10-13 15:14:06
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\demo.vue
  * @Description:  按钮 演示
  * 
@@ -41,7 +41,7 @@ const tooltip = `{"data":{"areaId":0,"areaSerialNumber":"","baseFloor":"2","buil
 
     <BsgoalBaseButton :task="task"  mode="add" plain  content="取消"> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="add"> </BsgoalBaseButton>
-    <BsgoalBaseButton :task="task" mode="delete"> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="delete" circle > </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" #default="{ loading }">
       <div>
         {{ loading }}

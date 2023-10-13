@@ -147,6 +147,7 @@ watchEffect(() => {
       ref="BSGOAL_BASE_DIALOG_FORM_REF"
       :options="configOptionsForm"
       :conceal="curConceal"
+      :has-footer="false"
       @on-confirm="confirm"
       @on-change="changeFormItem"
       @on-hide="hide"
