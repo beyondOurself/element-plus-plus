@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-11 10:25:44
+ * @LastEditTime: 2023-10-16 21:04:32
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -399,12 +399,13 @@ defineExpose({
 const tableStyler = computed(() => {
   const styler = {}
   const switchStatusValue = switchStatus.value
-  if (switchStatusValue) {
-    styler.maxWidth = 'calc(100% - 250px)'
-  } else {
-    styler.maxWidth = 'calc(100%)'
-  }
 
+  styler.width = '100%'
+  // if (switchStatusValue) {
+  //   styler.maxWidth = 'calc(100% - 250px)'
+  // } else {
+  //   styler.maxWidth = 'calc(100%)'
+  // }
   return styler
 })
 
