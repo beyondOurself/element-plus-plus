@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-20 16:37:46
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-26 15:12:06
+ * @LastEditTime: 2023-10-16 19:06:03
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-overview\index.vue
  * @Description: 数据概率
  * 
@@ -10,7 +10,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, shallowRef } from 'vue'
+import { ref, shallowRef, nextTick, onUnmounted } from 'vue'
 import BsgoalBaseLine from '../bsgoal-base-line/index.vue'
 import { tagEmits } from 'element-plus'
 
@@ -27,6 +27,27 @@ const props = defineProps({
   }
 })
 
+const isMin = ref(false)
+
+const calcSize = () => {
+  nextTick(() => {
+    const innerWidthValue = window.innerWidth
+    if (innerWidthValue < 1500) {
+      isMin.value = true
+    } else {
+      isMin.value = false
+    }
+  })
+}
+
+calcSize()
+
+window.addEventListener('resize',  calcSize)
+
+onUnmounted(() => {
+  window.removeEventListener('resize',calcSize)
+})
+
 const emits = defineEmits(['on-click-item'])
 const handleItem = (option) => {
   emits('on-click-item', option)
@@ -39,19 +60,36 @@ const handleItem = (option) => {
         <div class="base_overview_item" @click="handleItem(option)">
           <!-- S 图标 -->
           <div class="overview_item_icon">
-            <img :src="option.icon" />
+            <img :src="option.icon" style="width: 52rem" />
           </div>
           <!-- E 图标 -->
-          <!-- S 数据  -->
-          <div class="overview_item_data">
-            {{ option.data }}
-          </div>
-          <!-- E 数据  -->
-          <div class="overview_item_gap">  </div>
-          <!-- S 标题 -->
-          <div class="overview_item_title">
-            {{ option.title }}
-          </div>
+
+          <template v-if="isMin">
+            <div style="margin-right: 20rem">
+              <!-- S 数据  -->
+              <div class="overview_item_data">
+                {{ option.data }}
+              </div>
+              <!-- E 数据  -->
+              <div class="overview_item_gap"></div>
+              <!-- S 标题 -->
+              <div class="overview_item_title">
+                {{ option.title }}
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <!-- S 数据  -->
+            <div class="overview_item_data">
+              {{ option.data }}
+            </div>
+            <!-- E 数据  -->
+            <div class="overview_item_gap"></div>
+            <!-- S 标题 -->
+            <div class="overview_item_title">
+              {{ option.title }}
+            </div>
+          </template>
 
           <!-- E 标题 -->
         </div>
@@ -69,16 +107,16 @@ const handleItem = (option) => {
 .bsgoal-base-overview {
   .base_overview {
     display: flex;
-    padding: 6px 16px;
+    padding: 6rem 16rem;
     background-color: #fff;
   }
 
   .base_overview_item_gap {
-    width: 16px;
+    width: 16rem;
   }
 
   .base_overview_item {
-    height: 88px;
+    height: 88rem;
 
     display: flex;
     justify-content: space-between;
@@ -86,12 +124,12 @@ const handleItem = (option) => {
     align-items: center;
 
     background: #fafafa;
-    border-radius: 8px;
+    border-radius: 8rem;
 
     text-align: right;
   }
   .overview_item_data {
-    font-size: 32px;
+    font-size: 32rem;
     font-weight: 500;
     color: #303133;
     flex: 18;
@@ -99,7 +137,7 @@ const handleItem = (option) => {
   .overview_item_icon {
     flex: auto;
     display: flex;
-    margin-left: 20px;
+    margin-left: 20rem;
   }
 
   .overview_item_gap {
@@ -107,9 +145,9 @@ const handleItem = (option) => {
   }
 
   .overview_item_title {
-    margin-right: 20px;
+    margin-right: 20rem;
     color: #909399;
-    font-size: 13px;
+    font-size: 13rem;
     flex: auto;
   }
 }
