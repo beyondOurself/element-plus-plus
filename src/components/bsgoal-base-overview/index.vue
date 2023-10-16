@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-20 16:37:46
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-16 19:06:03
+ * @LastEditTime: 2023-10-16 19:49:39
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-overview\index.vue
  * @Description: 数据概率
  * 
@@ -73,7 +73,7 @@ const handleItem = (option) => {
               <!-- E 数据  -->
               <div class="overview_item_gap"></div>
               <!-- S 标题 -->
-              <div class="overview_item_title">
+              <div class="overview_item_title" style="margin-right: 0px;">
                 {{ option.title }}
               </div>
             </div>
@@ -116,7 +116,7 @@ const handleItem = (option) => {
   }
 
   .base_overview_item {
-    height: 88rem;
+    height: 88px;
 
     display: flex;
     justify-content: space-between;
