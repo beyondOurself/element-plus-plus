@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-20 16:37:46
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-16 19:49:39
+ * @LastEditTime: 2023-10-18 19:29:44
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-overview\index.vue
  * @Description: 数据概率
  * 
@@ -60,12 +60,12 @@ const handleItem = (option) => {
         <div class="base_overview_item" @click="handleItem(option)">
           <!-- S 图标 -->
           <div class="overview_item_icon">
-            <img :src="option.icon" style="width: 52rem" />
+            <img :src="option.icon" style="width: 52px" />
           </div>
           <!-- E 图标 -->
 
           <template v-if="isMin">
-            <div style="margin-right: 20rem">
+            <div style="margin-right: 20px">
               <!-- S 数据  -->
               <div class="overview_item_data">
                 {{ option.data }}
@@ -107,12 +107,12 @@ const handleItem = (option) => {
 .bsgoal-base-overview {
   .base_overview {
     display: flex;
-    padding: 6rem 16rem;
+    padding: 6px 16px;
     background-color: #fff;
   }
 
   .base_overview_item_gap {
-    width: 16rem;
+    width: 16px;
   }
 
   .base_overview_item {
@@ -124,12 +124,12 @@ const handleItem = (option) => {
     align-items: center;
 
     background: #fafafa;
-    border-radius: 8rem;
+    border-radius: 8px;
 
     text-align: right;
   }
   .overview_item_data {
-    font-size: 32rem;
+    font-size: 32px;
     font-weight: 500;
     color: #303133;
     flex: 18;
@@ -137,7 +137,7 @@ const handleItem = (option) => {
   .overview_item_icon {
     flex: auto;
     display: flex;
-    margin-left: 20rem;
+    margin-left: 20px;
   }
 
   .overview_item_gap {
@@ -145,9 +145,9 @@ const handleItem = (option) => {
   }
 
   .overview_item_title {
-    margin-right: 20rem;
+    margin-right: 20px;
     color: #909399;
-    font-size: 13rem;
+    font-size: 13px;
     flex: auto;
   }
 }
