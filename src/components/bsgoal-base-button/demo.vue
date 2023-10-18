@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:31
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-13 15:14:06
+ * @LastEditTime: 2023-10-18 16:53:52
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\demo.vue
  * @Description:  按钮 演示
  * 
@@ -20,6 +20,7 @@ defineOptions({
 
 const props = defineProps({})
 const task = (done) => {
+  console.log('执行了~');
   setTimeout(() => {
     done()
   }, 3000)
@@ -28,20 +29,37 @@ const tooltip = `{"data":{"areaId":0,"areaSerialNumber":"","baseFloor":"2","buil
 </script>
 <template>
   <div class="bsgoal-base-button-demo">
-    <BsgoalBaseButton :task="task"  mode="release"  > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="release"> </BsgoalBaseButton>
 
-    <BsgoalBaseButton :task="task"  mode="detail" hasConfirm  confirmWidth="200"> </BsgoalBaseButton>
-    <BsgoalBaseButton :task="task"   type="primary" plain content="测试" url="https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/button/icon_take%20notes.svg" > </BsgoalBaseButton>
-    <BsgoalBaseButton :task="task"  link type="primary" :tooltip="tooltip" tooltipPlacement="left-start" plain content="测试"> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="detail" hasConfirm confirmWidth="200" content="弹窗">
+    </BsgoalBaseButton>
+    <BsgoalBaseButton
+      :task="task"
+      type="primary"
+      plain
+      content="测试"
+      url="https://bsgoalsmartcloud.oss-cn-shenzhen.aliyuncs.com/estate-web/button/icon_take%20notes.svg"
+    >
+    </BsgoalBaseButton>
+    <BsgoalBaseButton
+      :task="task"
+      link
+      type="primary"
+      :tooltip="tooltip"
+      tooltipPlacement="left-start"
+      plain
+      content="测试"
+    >
+    </BsgoalBaseButton>
 
-    <BsgoalBaseButton :task="task" mode="edit" plain > </BsgoalBaseButton>
-    <BsgoalBaseButton :task="task" mode="delete" plain > </BsgoalBaseButton>
-    <BsgoalBaseButton :task="task" mode="cancel" > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="edit" plain> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="delete" plain> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="cancel"> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="confirm" content="取消"> </BsgoalBaseButton>
 
-    <BsgoalBaseButton :task="task"  mode="add" plain  content="取消"> </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="add" plain content="取消"> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" mode="add"> </BsgoalBaseButton>
-    <BsgoalBaseButton :task="task" mode="delete" circle > </BsgoalBaseButton>
+    <BsgoalBaseButton :task="task" mode="delete" circle> </BsgoalBaseButton>
     <BsgoalBaseButton :task="task" #default="{ loading }">
       <div>
         {{ loading }}

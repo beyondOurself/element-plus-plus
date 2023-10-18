@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-13 15:16:33
+ * @LastEditTime: 2023-10-18 16:55:06
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -16,6 +16,7 @@ import { Delete, Plus, CloseBold, Select } from '@element-plus/icons-vue'
 import iconMap from './assets/map-icon.js'
 import BsgoalBaseIcon from '../bsgoal-base-icon/index.vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import { ElMessageBox } from 'element-plus'
 
 defineOptions({
   name: 'BsgoalBaseButton'
@@ -131,13 +132,40 @@ const props = defineProps({
   confirmWidth: {
     type: [String, Number],
     default: ''
+  },
+  /**
+   * confirm  模式
+   */
+  confirmMode: {
+    type: [String],
+    default: 'global',
+    validator: (v) => ['global', 'bubble'].includes(v)
   }
 })
 
 // ---> S 触发按钮 <---
 const loading = ref(false)
+const triggerStatus = ref(false)
 const triggerClick = () => {
-  const { disabled = false } = props
+  const { disabled = false, confirmMode = '', hasConfirm = false } = props
+  if (hasConfirm && confirmMode === 'global' && !triggerStatus.value) {
+    ElMessageBox.confirm(props.title, '操作提示', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(() => {
+        triggerStatus.value = true
+        triggerClick(true)
+      })
+      .catch(() => {
+        loading.value = false
+        triggerStatus.value = false
+      })
+
+    return
+  }
+
   const disabledValue = toValue(disabled)
   if (disabledValue) {
     return
@@ -275,7 +303,7 @@ const tooltipStyleGet = computed(() => {
 <template>
   <div class="bsgoal-base-button">
     <el-config-provider :locale="zhCn">
-      <template v-if="hasConfirm && !disabled">
+      <template v-if="hasConfirm && confirmMode === 'bubble' && !disabled">
         <div class="base_button">
           <el-popconfirm :title="title" :width="confirmWidth" @confirm="triggerClick">
             <template #reference>
