@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:47
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-11 10:06:56
+ * @LastEditTime: 2023-10-19 20:11:31
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\index.vue
  * @Description: 查询+表格 基础组件
  * 
@@ -193,7 +193,7 @@ const props = defineProps({
    */
   rowKey: {
     type: [String, Function],
-    default: 'id'
+    default: ''
   },
   /**
    * 默认展开所有扩展

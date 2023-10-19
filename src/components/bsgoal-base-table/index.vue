@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-07 09:54:32
+ * @LastEditTime: 2023-10-19 20:11:07
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -11,7 +11,7 @@
 <script setup>
 /* setup模板
 ---------------------------------------------------------------- */
-import { ref, computed, unref, inject, watchEffect, watch } from 'vue'
+import { ref, computed, unref, inject, watchEffect, watch, shallowRef } from 'vue'
 import BsgoalBaseTableContent from '../bsgoal-base-table-content/index.vue'
 import BsgoalBaseTablePagination from '../bsgoal-base-table-pagination/index.vue'
 import BsgoalBaseTableEmpty from '../bsgoal-base-table-empty/index.vue'
@@ -195,7 +195,7 @@ const props = defineProps({
    */
   rowKey: {
     type: [String, Function],
-    default: 'id'
+    default: ''
   },
   /**
    * 默认展开所有扩展
@@ -349,6 +349,8 @@ watch([currentPage, curPageSize], () => {
 const TREE_SWITCH_STATUS = inject('TREE_SWITCH_STATUS')
 // ---> E 左侧机构树折叠状态 <---
 
+const curSelectionList = shallowRef([])
+
 // ---> S 触发事件 <---
 const triggerSelect = (selection, row) => {
   emits('select', selection, row)
@@ -357,6 +359,7 @@ const triggerSelectAll = (selection) => {
   emits('select-all', selection)
 }
 const triggerSelectionChange = (selection) => {
+  curSelectionList.value = selection
   emits('selection-change', selection)
 }
 // ---> E 触发事件 <---
@@ -427,12 +430,18 @@ defineExpose({
       :style="bodyStyle"
     >
       <!-- S 表头操作区域 -->
-      <div
-        class="base_table_menu"
-        v-if="$slots.menu"
-        :class="{ 'base_table_menu--auto': autoLayoutMenu }"
-      >
-        <slot name="menu"></slot>
+      <div class="base_table_menu" v-if="$slots.menu">
+        <div :class="{ 'base_table_menu--auto': autoLayoutMenu }">
+          <slot name="menu"></slot>
+        </div>
+
+        <!-- S 多选 -->
+        <div class="base_table_menu_selection" v-if="!!rowKey">
+          当前表格已选择
+          <span class="table_menu_selection_light"> {{ curSelectionList.length }} </span> 项
+          <span class="table_menu_selection_light" @click="clearSelection">清除</span>
+        </div>
+        <!-- E 多选 -->
       </div>
       <!-- E 表头操作区域 -->
       <!-- S 表格区域 -->
@@ -474,7 +483,13 @@ defineExpose({
           <el-table-column v-if="serial" type="index" width="55" label="序号" align="center" />
           <!-- / 序号 -->
           <!-- / 多选 -->
-          <el-table-column v-if="selection" fixed="left" type="selection" width="40" />
+          <el-table-column
+            v-if="selection"
+            fixed="left"
+            type="selection"
+            width="40"
+            :reserve-selection="!!rowKey"
+          />
           <!-- / 多选 -->
           <!-- / 多选 -->
           <!-- <el-table-column   type="expand"   /> -->
@@ -547,12 +562,23 @@ defineExpose({
   }
 
   .base_table_menu {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
   }
 
   .base_table_menu--auto {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+  }
+
+  .base_table_menu_selection {
+    margin-left: 8px;
+    font-size: 14px;
+  }
+
+  .table_menu_selection_light {
+    color: var(--el-color-primary);
   }
 
   .el-table__body-wrapper {

@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-18 17:04:53
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-11 10:17:21
+ * @LastEditTime: 2023-10-19 20:13:25
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search-table\demo.vue
  * @Description: 查询 + 表格 组合公共组件
  * 
@@ -28,8 +28,7 @@ const configOptions = ref([
     value: '111',
     prop: 'prop1',
     type: ComponentTypeEnums.INPUT,
-    minWidth: 200,
-    id: 1
+    minWidth: 200
   },
   {
     label: '手机号',
@@ -483,7 +482,7 @@ const configOptions2 = ref([
 
 const tableData = ref([
   {
-    id: 3,
+    id: 1,
     prop1: 'row1value',
     prop2: 'row1value',
     prop3: 'row1value',
@@ -524,6 +523,7 @@ const tableData = ref([
     ]
   },
   {
+    id: 2,
     prop1: 'row2value',
     prop2: 15099836861,
     prop3: '445122199601045935',
@@ -542,6 +542,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 3,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -560,6 +562,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 4,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -578,6 +582,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 5,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -596,6 +602,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 6,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -614,6 +622,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 7,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -632,6 +642,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 8,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -650,6 +662,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 9,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -668,6 +682,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 10,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -686,6 +702,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 11,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -704,6 +722,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 12,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -722,6 +742,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 13,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -740,6 +762,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 14,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -758,6 +782,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 15,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -776,6 +802,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 16,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -794,6 +822,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 17,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -812,6 +842,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 18,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -830,6 +862,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 19,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -848,6 +882,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 20,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -866,6 +902,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 21,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -884,6 +922,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 22,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -902,6 +942,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 23,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -920,6 +962,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 24,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -938,6 +982,8 @@ const tableData = ref([
     prop16: 'row2value'
   },
   {
+    id: 25,
+
     prop1: 'row2value',
     prop2: 'row2value',
     prop3: 'row2value',
@@ -964,15 +1010,44 @@ const call = (state, data) => {
 
 const tableDataVal = unref(tableData)
 
+const testList = shallowRef([])
+
+for (let i = 0; i < 100; i++) {
+  testList.value.push({
+    id:i,
+    prop1: i,
+    prop2: i,
+    prop3: i,
+    prop4: i,
+    prop5: i,
+    prop6: i,
+    prop7: i,
+    prop8: i,
+    prop9: i,
+    prop10: i,
+    prop11: i,
+    prop12: i,
+    prop13: i,
+    prop14: i,
+    prop15: i,
+    prop16: i
+  })
+}
+
+console.log('testList', testList.value)
+
 const fetch = (params) => {
   console.log('params >>>', params)
+  const { pageSize = 20, currentPage = 0 } = params
+
+  const spliceList = testList.value.slice(pageSize * (currentPage - 1), pageSize * currentPage)
   return new Promise((resolve) => {
     setTimeout(() => {
       // 存在分页
       resolve({
         data: {
-          rows: tableDataVal,
-          total: tableDataVal.length
+          rows: spliceList,
+          total: testList.value.length
         },
         message: '获取数据成功'
       })
@@ -1038,6 +1113,10 @@ setTimeout(() => {
 }, 3000)
 
 const sortFields = ref(['prop4'])
+
+const changeSelection = (selection = []) => {
+  console.log('selection', selection)
+}
 </script>
 <template>
   <div class="bsgoal-search-table-demo">
@@ -1045,6 +1124,7 @@ const sortFields = ref(['prop4'])
       <!-- <DemoTable /> -->
       <BsgoalBaseSearchTable
         ref="BSGOAL_BASE_SEARCH_TABLE_REF"
+        row-key="id"
         selection
         operation
         auto-layout-menu
@@ -1058,6 +1138,7 @@ const sortFields = ref(['prop4'])
         :config-options="configOptions"
         :expression="75"
         @on-search="triggerSearch"
+        @selection-change="changeSelection"
       >
         <!-- 
         <BsgoalBaseSearchTable

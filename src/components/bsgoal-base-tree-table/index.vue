@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-06-20 09:20:44
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-16 21:04:32
+ * @LastEditTime: 2023-10-19 20:12:13
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-tree-table\index.vue
  * @Description: 树结构  + 列表
  * 
@@ -240,7 +240,7 @@ const props = defineProps({
    */
   rowKey: {
     type: [String, Function],
-    default: 'id'
+    default: ''
   },
   /**
    * 默认展开所有扩展
