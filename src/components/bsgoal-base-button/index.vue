@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-05-18 16:24:25
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-18 16:55:06
+ * @LastEditTime: 2023-10-19 21:01:02
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-button\index.vue
  * @Description: 统一按钮 
  * 
@@ -359,7 +359,6 @@ const tooltipStyleGet = computed(() => {
                 {{ contentGet }}
                 <template #icon v-if="iconUrlGet">
                   <BsgoalBaseIcon
-                    style="font-size: 0"
                     width="1.2em"
                     :src="iconUrlGet"
                     :color="curIconColor"
