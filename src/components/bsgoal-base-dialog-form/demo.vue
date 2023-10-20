@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:52:00
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-10 10:50:10
+ * @LastEditTime: 2023-10-20 13:55:22
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\demo.vue
  * @Description:  弹窗表单 演示
  * 
@@ -148,6 +148,7 @@ watchEffect(() => {
       :options="configOptionsForm"
       :conceal="curConceal"
       :has-footer="false"
+      title="自定义标题_"
       @on-confirm="confirm"
       @on-change="changeFormItem"
       @on-hide="hide"

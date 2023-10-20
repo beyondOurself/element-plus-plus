@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-08-17 13:51:51
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-13 13:52:58
+ * @LastEditTime: 2023-10-20 13:55:09
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-dialog-form\index.vue
  * @Description: 弹窗 + 表单
  * 
@@ -28,7 +28,7 @@ const props = defineProps({
   mode: {
     type: [String],
     default: 'add',
-    validator: (v) => ['add', 'edit', 'detail'].includes(v)
+    validator: (v) => ['add', 'edit', 'detail', 'manual'].includes(v)
   },
   /**
    * 标题
@@ -166,8 +166,14 @@ const hideDialog = () => {
 const titleGet = computed(() => {
   const { title = '' } = props
   const mode = toValue(curMode)
+
+  if (title.endsWith('_')) {
+    return title.substring(0, title.length - 1)
+  }
+
   let titlePrefix = ''
   let titleSuffix = ''
+
   switch (mode) {
     case 'add':
       titlePrefix = '新增'
