@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-09-06 17:27:52
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-09-12 14:29:44
+ * @LastEditTime: 2023-10-19 21:12:10
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-icon\index.vue
  * @Description: 图标 
  * 
@@ -47,8 +47,6 @@ const props = defineProps({
 })
 
 const iconMapping = inject('ICON_MAPPING')
-
-console.log('iconMapping', iconMapping)
 
 const srcGet = computed(() => {
   const { src = '' } = props

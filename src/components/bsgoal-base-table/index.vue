@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-10 11:29:04
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-19 20:11:07
+ * @LastEditTime: 2023-10-19 21:15:00
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-table\index.vue
  * @Description: 
  * 
@@ -439,7 +439,7 @@ defineExpose({
         <div class="base_table_menu_selection" v-if="!!rowKey">
           当前表格已选择
           <span class="table_menu_selection_light"> {{ curSelectionList.length }} </span> 项
-          <span class="table_menu_selection_light" @click="clearSelection">清除</span>
+          <span class="table_menu_selection_light" style="cursor: pointer;" @click="clearSelection">清除</span>
         </div>
         <!-- E 多选 -->
       </div>
