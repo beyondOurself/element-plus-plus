@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-17 11:44:29
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-10 14:02:45
+ * @LastEditTime: 2023-10-21 15:52:29
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-form\index.vue
  * @Description:  表单公共组件 
  * 
@@ -150,6 +150,8 @@ const vAlign = baseDirective.align
 
 const model = ref()
 const watchPropList = []
+
+const isMicroApp = window.__MICRO_APP_ENVIRONMENT__
 
 // ---> S 初始值 <---
 
@@ -851,6 +853,7 @@ defineExpose({
                         <!-- / 时间选择器 -->
                         <template v-if="[ComponentTypeEnums.TIME].includes(type)">
                           <el-time-picker
+                            :class="{ base_form_time_picker: isMicroApp }"
                             v-model="model[prop]"
                             v-bind="attribute"
                             :format="formatSet(type, format)"
@@ -1005,6 +1008,12 @@ defineExpose({
   }
   .form_item_gap:first-child {
     margin-top: 0px;
+  }
+
+  .base_form_time_picker {
+    .el-input__inner {
+      margin-left: 16px;
+    }
   }
 }
 </style>
