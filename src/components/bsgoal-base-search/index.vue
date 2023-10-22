@@ -2,7 +2,7 @@
  * @Author: canlong.shen
  * @Date: 2023-04-13 09:38:11
  * @LastEditors: canlong.shen
- * @LastEditTime: 2023-10-11 15:30:25
+ * @LastEditTime: 2023-10-22 17:42:23
  * @FilePath: \v3_basic_component\src\components\bsgoal-base-search\index.vue
  * @Description: 表格查询 公共组件
  * 
@@ -62,7 +62,7 @@ const props = defineProps({
   modelValue: {
     type: [Object],
     default: () => ({})
-  },
+  }
 })
 
 // emits
@@ -78,9 +78,10 @@ const model = ref({})
 // const watchPropList = []
 
 const getModel = () => {
-  return  toValue(model) 
+  return toValue(model)
 }
 
+const isMicroApp = window.__MICRO_APP_ENVIRONMENT__
 
 /**
  * @Author: canlong.shen
@@ -208,17 +209,16 @@ const changeValue = (isSearch = false, isClear = false) => {
         range.forEach((rangeItem) => {
           shadowModel[rangeItem] = ''
         })
-      }else{
+      } else {
         range.forEach((rangeItem) => {
-          if(!modelValue[rangeItem]){
-          shadowModel[rangeItem] = ''
+          if (!modelValue[rangeItem]) {
+            shadowModel[rangeItem] = ''
           }
         })
-
       }
     }
 
-    if (!prop.startsWith('_') && !prop.endsWith('_') ) {
+    if (!prop.startsWith('_') && !prop.endsWith('_')) {
       if ([ComponentTypeEnums.CASCADER].includes(type) && Array.isArray(value) && single) {
         const rangeLength = value.length
         if (rangeLength) {
@@ -303,7 +303,7 @@ const triggerOperationFold = (status = false) => {
  * @default:
  * @return {*}
  */
-const triggerValueChange = (type , prop) => {
+const triggerValueChange = (type, prop) => {
   // 触发查询
   triggerOperationSearch()
   const emitValue = {
@@ -478,6 +478,7 @@ defineExpose({
                       "
                     >
                       <el-date-picker
+                        :class="{ base_form_time_date_picker: isMicroApp }"
                         v-model="model[prop]"
                         :disabled="disabled"
                         :format="formatSet(type, format)"
@@ -615,6 +616,12 @@ defineExpose({
   }
   .el-col {
     margin-bottom: 0px !important;
+  }
+
+  .base_form_time_date_picker {
+    .el-input__inner {
+      margin-left: 16px;
+    }
   }
 }
 </style>
